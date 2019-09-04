@@ -26,21 +26,6 @@ yarn-error.log*
 # Created by https://www.gitignore.io/api/vim,linux,macos,nanoc,windows,sublimetext,webstorm+all,visualstudiocode,archlinuxpackages
 # Edit at https://www.gitignore.io/?templates=vim,linux,macos,nanoc,windows,sublimetext,webstorm+all,visualstudiocode,archlinuxpackages
 
-### ArchLinuxPackages ###
-*.tar
-*.tar.*
-*.jar
-*.exe
-*.msi
-*.zip
-*.tgz
-*.log
-*.log.*
-*.sig
-
-pkg/
-src/
-
 ### Linux ###
 *~
 
