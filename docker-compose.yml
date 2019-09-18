@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  intern-nginx:
+    container_name: intern-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    labels:
+      - traefik.http.routers.my-container.rule=Host('api.nikzy.no')
+networks:
+  traefik:
+    external: true
+    name: traefik
+
