@@ -8,10 +8,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - '80:80'
+    networks:
+      - traefik
     labels:
+      - traefik.port = 80
       - traefik.http.routers.my-container.rule=Host('api.nikzy.no')
 networks:
   traefik:
     external: true
-    name: traefik
 
