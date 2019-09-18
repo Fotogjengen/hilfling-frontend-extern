@@ -2,6 +2,9 @@ version: '2'
 
 services:
   intern-nginx:
+    environment:
+      - PUID=1000
+      - PGID=1000
     container_name: intern-nginx
     build:
       context: .
