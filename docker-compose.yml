@@ -16,6 +16,7 @@ services:
     labels:
       - traefik.port = 80
       - traefik.http.routers.intern-nginx.rule=Host("api.nikzy.no")
+      - traefik.http.routers.registry.service=intern-nginx
 networks:
   traefik:
     external: true
