@@ -1,11 +1,11 @@
 version: '2'
 
 services:
-  extern-nginx:
+  frontend-extern:
     environment:
       - PUID=1000
       - PGID=1000
-    container_name: extern-nginx
+    container_name: frontend-extern
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,8 +15,8 @@ services:
       - traefik
     labels:
       - traefik.port = 80
-      - traefik.http.routers.extern-nginx.rule=Host('fg.carosa.no')
-      - traefik.http.routers.registry.service=extern-nginx
+      - traefik.http.routers.frontend-extern.rule=Host("fg.carosa.no")
+      - traefik.http.routers.registry.service=frontend-extern
 networks:
   traefik:
     external: true
