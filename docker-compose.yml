@@ -2,17 +2,21 @@ version: '2'
 
 services:
   extern-nginx:
+    environment:
+      - PUID=1000
+      - PGID=1000
     container_name: extern-nginx
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '80:80'
+      - '8181:80'
     networks:
       - traefik
     labels:
       - traefik.port = 80
       - traefik.http.routers.extern-nginx.rule=Host('fg.carosa.no')
+      - traefik.http.routers.registry.service=extern-nginx
 networks:
   traefik:
     external: true

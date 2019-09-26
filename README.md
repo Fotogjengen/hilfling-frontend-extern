@@ -1,3 +1,5 @@
+![Master tests](https://travis-ci.org/Fotogjengen/hilfling-frontend-extern.svg?branch=master) Master
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
