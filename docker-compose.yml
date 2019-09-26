@@ -1,8 +1,8 @@
 version: '2'
 
 services:
-  intern-nginx:
-    container_name: intern-nginx
+  extern-nginx:
+    container_name: extern-nginx
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
       - traefik
     labels:
       - traefik.port = 80
-      - traefik.http.routers.my-container.rule=Host('api.nikzy.no')
+      - traefik.http.routers.extern-nginx.rule=Host('fg.carosa.no')
 networks:
   traefik:
     external: true
