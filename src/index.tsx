@@ -9,7 +9,9 @@ const store = configureStore();
 
 const Root = () => (
   <Provider store={store}>
-    <Routes />
+    <div>
+      <Routes />
+    </div>
   </Provider>
 );
 
