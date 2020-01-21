@@ -1,18 +1,29 @@
 import React, { FC } from "react";
-import styles from "hilfling-gui/lib/styles/utilities.module.css";
+import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
 import Header from "../../components/Header/Header";
+import Carousel from "../../components/Frontpage/Carousel/Carousel";
+import CardInformationSection from "../../components/Frontpage/CardInformationSection/CardInformationSection";
+import styles from "./App.module.css";
+import { Footer } from "hilfling-gui/lib";
 
 const App: FC<{}> = () => {
   return (
-    <div className={styles.container}>
-      <Header></Header>
-      <div className="content-container">
-        <div className="left-side">
-          <div className="slideshow"></div>
-          <div className="arrangements"></div>
+    <div>
+      <div className={guistyles.container}>
+        <Header></Header>
+        <div className={styles.contentContainer}>
+          <div className={styles.leftSide}>
+            <div className="slideshow">
+              <Carousel></Carousel>
+            </div>
+            <div className="arrangements"></div>
+          </div>
+          <div className={styles.rightSide}>
+            <CardInformationSection />
+          </div>
         </div>
-        <div className="right-side"></div>
       </div>
+      <Footer />
     </div>
   );
 };
