@@ -2,4 +2,3 @@
 
 echo "test"
 npm run test
-echo "test done"
