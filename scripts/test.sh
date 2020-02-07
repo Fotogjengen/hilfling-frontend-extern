@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
 echo "test"
-#npm run test
-npm run jest
+npm run test

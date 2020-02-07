@@ -1,0 +1,11 @@
+.contentContainer {
+  display: flex;
+}
+
+.card {
+  margin-bottom: 2rem;
+}
+
+.test {
+  margin: 4rem;
+}
