@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Carousel as CarouselComponent, CarouselItems } from "hilfling-gui/lib";
 import { BaseCarouselItem } from "hilfling-gui/lib/types";
+import styles from "./Carousel.module.css";
 
 const Carousel: FC<{}> = () => {
   const [items, setItems] = useState<BaseCarouselItem[]>([]);
@@ -20,7 +21,7 @@ const Carousel: FC<{}> = () => {
     ]);
   }, []);
   return (
-    <div>
+    <div className={styles.fitToCard}>
       <CarouselComponent delay={5000} height={600} width={900}>
         {CarouselItems({ width: 900, height: 600, items })}
       </CarouselComponent>
