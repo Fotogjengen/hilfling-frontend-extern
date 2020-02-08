@@ -22,8 +22,8 @@ const Carousel: FC<{}> = () => {
   }, []);
   return (
     <div className={styles.fitToCard}>
-      <CarouselComponent delay={5000} height={600} width={900}>
-        {CarouselItems({ width: 900, height: 600, items })}
+      <CarouselComponent delay={5000} height={500} width={900}>
+        {CarouselItems({ width: 900, height: 500, items })}
       </CarouselComponent>
     </div>
   );
