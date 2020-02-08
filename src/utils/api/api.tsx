@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_BASE_URL = "http://www.mocky.io/v2/5d701f983100003ed3660abe";
+const API_BASE_URL = process.env.BASE_URL;
 
 const HEADERS = {
-  Accept: "application/json",
-  "Content-Type": "application/json"
+  Accept: 'application/json',
+  'Content-Type': 'application/json'
 };
 
 const api = axios.create({
@@ -14,7 +14,7 @@ const api = axios.create({
 
 export async function getTest(): Promise<string> {
   return api
-    .get("/")
-    .then(res => res.data["test"])
+    .get('/')
+    .then(res => res.data['test'])
     .catch(e => console.error(e));
 }
