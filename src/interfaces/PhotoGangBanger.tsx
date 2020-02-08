@@ -1,7 +1,7 @@
 import { BaseInterface } from './BaseInterface';
 
 export interface PhotoGangBanger extends BaseInterface {
-  relationshipAdvice: string;
+  relationshipStatus: string;
   semesterStart: string;
   active: boolean;
   pang: boolean;

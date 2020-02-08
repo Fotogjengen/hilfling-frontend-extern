@@ -1,5 +1,5 @@
 import { BaseInterface } from './BaseInterface';
 
-export interface Album extends BaseInterface {
+export interface Gang extends BaseInterface {
   name: string;
 }
