@@ -4,8 +4,8 @@ import { activePhotoGangBangers, retiredPhotoGangBangers } from "./mockdata";
 import styles from "./About.module.css";
 
 const About: FC<{}> = () => {
-  const activeUsers = activePhotoGangBangers;
-  const retiredUsers = retiredPhotoGangBangers;
+  const activeUsers = activePhotoGangBangers; //[TODO]: fetch from API
+  const retiredUsers = retiredPhotoGangBangers; //[TODO]: fetch from API
 
   const activeGangBangers = () =>
     activeUsers.map(user => (
