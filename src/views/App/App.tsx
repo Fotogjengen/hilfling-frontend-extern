@@ -1,24 +1,30 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
 import Header from "../../components/Header/Header";
 import Carousel from "../../components/Frontpage/Carousel/Carousel";
 import CardInformationSection from "../../components/Frontpage/CardInformationSection/CardInformationSection";
 import styles from "./App.module.css";
 import { Footer } from "hilfling-gui/lib";
-// import { withAuth } from "@okta/okta-react";
-// import { useAuth } from "../../utils/auth";
+import { withAuth } from "@okta/okta-react";
+import { useAuth } from "../../utils/auth";
+import { PhotoTagApi } from "../../utils/api/PhotoTagApi";
 
-const App: FC<{}> = () => {
-  //const App: FC<{}> = ({ auth }: any) => {
-  //   const { authenticated } = useAuth(auth);
+const App: FC<{}> = ({ auth }: any) => {
+  const { authenticated } = useAuth(auth);
 
-  //   const login = async () => {
-  //     auth.login("/");
-  //   };
+  // Example call to backend
+  // TODO: Remove this
+  PhotoTagApi.getAll()
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err));
 
-  //   const logout = async () => {
-  //     auth.logout("/");
-  //   };
+  const login = async () => {
+    auth.login("/");
+  };
+
+  const logout = async () => {
+    auth.logout("/");
+  };
 
   return (
     <div className={styles.contentContainer}>
@@ -35,5 +41,4 @@ const App: FC<{}> = () => {
   );
 };
 
-// export default withAuth(App);
-export default App;
+export default withAuth(App);
