@@ -5,6 +5,10 @@ import styles from "./App.module.css";
 import { PhotoTagApi } from "../../utils/api/PhotoTagApi";
 import { withAuth } from "@okta/okta-react";
 import { PhotoTag } from "../../interfaces/PhotoTag";
+import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
+import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/EventCardsDisplayer";
+// import { withAuth } from "@okta/okta-react";
+// import { useAuth } from "../../utils/auth";
 
 const App: FC<{}> = ({ auth }: any) => {
   // Example call to backend
@@ -17,7 +21,7 @@ const App: FC<{}> = ({ auth }: any) => {
     .then(res => console.log(res))
     .catch(err => console.log(err));
 
-  let phototag: PhotoTag = {
+  const phototag: PhotoTag = {
     tag: "TagMadeFromFrontend2"
   };
   PhotoTagApi.create(phototag)
@@ -38,7 +42,9 @@ const App: FC<{}> = ({ auth }: any) => {
         <div className="slideshow">
           <Carousel></Carousel>
         </div>
-        <div className="arrangements"></div>
+        <div className="events">
+          <EventCardsDisplayer></EventCardsDisplayer>
+        </div>
       </div>
       <div className={styles.rightSide}>
         <CardInformationSection />
