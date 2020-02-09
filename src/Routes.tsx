@@ -12,14 +12,13 @@ const config = {
 };
 
 const Routes = () => {
-  // const Routes = ({ auth }: any) => {}
   return (
     <Router>
-      {/* <Security {...config}> */}
-      <Route exact path="/" component={App} />
-      <Route exact path="/about" component={About} />
-      {/* <Route path="/implicit/callback" component={ImplicitCallback} /> */}
-      {/* </Security> */}
+      <Security {...config}>
+        <Route exact path="/" component={App} />
+        <Route exact path="/about" component={About} />
+        <Route path="/implicit/callback" component={ImplicitCallback} />
+      </Security>
     </Router>
   );
 };
