@@ -1,6 +1,6 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface PhotographyRequest extends BaseInterface {
+export interface PhotographyRequest extends BaseModel {
   startTime: string;
   endTime: string;
   place: string;

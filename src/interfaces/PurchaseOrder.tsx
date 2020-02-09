@@ -1,6 +1,6 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface PurchaseOrder extends BaseInterface {
+export interface PurchaseOrder extends BaseModel {
   name: string;
   email: string;
   address: string;

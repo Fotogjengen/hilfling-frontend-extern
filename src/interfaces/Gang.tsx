@@ -1,5 +1,5 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface Gang extends BaseInterface {
+export interface Gang extends BaseModel {
   name: string;
 }

@@ -1,5 +1,5 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface PhotoTag extends BaseInterface {
+export interface PhotoTag extends BaseModel {
   tag: string;
 }

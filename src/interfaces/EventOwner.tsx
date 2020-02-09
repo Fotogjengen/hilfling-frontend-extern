@@ -1,5 +1,5 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface EventOwner extends BaseInterface {
+export interface EventOwner extends BaseModel {
   owner: string;
 }

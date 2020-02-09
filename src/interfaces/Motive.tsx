@@ -1,8 +1,8 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 import { Category } from './Category';
 import { EventOwner } from './EventOwner';
 
-export interface Motive extends BaseInterface {
+export interface Motive extends BaseModel {
   title: string;
   dateTaken: string;
   category: Category;

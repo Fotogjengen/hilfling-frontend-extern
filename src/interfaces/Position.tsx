@@ -1,6 +1,6 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface Position extends BaseInterface {
+export interface Position extends BaseModel {
   title: string;
   email: string;
 }

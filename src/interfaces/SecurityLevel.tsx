@@ -1,5 +1,5 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface SecurityLevel extends BaseInterface {
+export interface SecurityLevel extends BaseModel {
   type: string;
 }

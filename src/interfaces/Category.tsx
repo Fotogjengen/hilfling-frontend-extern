@@ -1,5 +1,5 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface Category extends BaseInterface {
+export interface Category extends BaseModel {
   title: string;
 }

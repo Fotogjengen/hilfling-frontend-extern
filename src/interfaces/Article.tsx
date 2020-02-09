@@ -1,8 +1,8 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 import { SecurityLevel } from './SecurityLevel';
 import { PhotoGangBanger } from './PhotoGangBanger';
 
-export interface Article extends BaseInterface {
+export interface Article extends BaseModel {
   tag: string;
   title: string;
   content: string;

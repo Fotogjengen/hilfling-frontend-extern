@@ -1,6 +1,6 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface PhotoGangBanger extends BaseInterface {
+export interface PhotoGangBanger extends BaseModel {
   relationshipStatus: string;
   semesterStart: string;
   active: boolean;

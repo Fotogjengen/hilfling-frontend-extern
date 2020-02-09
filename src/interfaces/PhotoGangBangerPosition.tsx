@@ -1,7 +1,7 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 import { Position } from './Position';
 
-export interface PhotoGangBangerPosition extends BaseInterface {
+export interface PhotoGangBangerPosition extends BaseModel {
   position: Position;
   current: boolean;
 }

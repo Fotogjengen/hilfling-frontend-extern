@@ -1,6 +1,6 @@
-import { BaseInterface } from './BaseInterface';
+import { BaseModel } from './BaseModel';
 
-export interface Album extends BaseInterface {
+export interface Album extends BaseModel {
   title: string;
   dateCreated: string;
   analog: boolean;
