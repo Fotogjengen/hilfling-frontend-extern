@@ -27,26 +27,16 @@ const App: FC<{}> = ({ auth }: any) => {
   };
 
   return (
-    <div>
-      <div className={guistyles.container}>
-        <Header
-          authenticated={authenticated}
-          login={login}
-          logout={logout}
-        ></Header>
-        <div className={styles.contentContainer}>
-          <div className={styles.leftSide}>
-            <div className="slideshow">
-              <Carousel></Carousel>
-            </div>
-            <div className="arrangements"></div>
-          </div>
-          <div className={styles.rightSide}>
-            <CardInformationSection />
-          </div>
+    <div className={styles.contentContainer}>
+      <div className={styles.leftSide}>
+        <div className="slideshow">
+          <Carousel></Carousel>
         </div>
+        <div className="arrangements"></div>
       </div>
-      <Footer />
+      <div className={styles.rightSide}>
+        <CardInformationSection />
+      </div>
     </div>
   );
 };
