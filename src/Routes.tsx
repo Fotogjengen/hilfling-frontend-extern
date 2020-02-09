@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
-import MyProfile from "./views/MyProfile/MyProfile";
 // import { Security, ImplicitCallback, SecureRoute } from "@okta/okta-react";
 
 // const config = {
@@ -19,7 +18,6 @@ const Routes = () => {
       {/* <Security {...config}> */}
       <Route exact path="/" component={App} />
       <Route exact path="/about" component={About} />
-      <Route exact path="/myprofile" component={MyProfile} />
       {/* <Route path="/implicit/callback" component={ImplicitCallback} /> */}
       {/* </Security> */}
     </Router>
