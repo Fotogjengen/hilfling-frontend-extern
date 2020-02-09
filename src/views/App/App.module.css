@@ -1,21 +1,21 @@
 .contentContainer {
   margin: 0 auto;
   display: flex;
-  min-width: 1000px;
+  min-width: 300px;
   max-width: 1500px;
   flex-wrap: wrap;
 }
 
 .leftSide {
   margin: 0 auto;
+  padding: 0rem 2rem 0rem 2rem;
 }
 
 .rightSide {
-  max-width: 900px; /*TODO: FIX max-width SAME AS CAROUSEL; */
+  max-width: 900px;
   min-width: 300px;
   flex-basis: 400px;
   flex-grow: 1;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0rem 0rem 0rem 1rem;
 }
