@@ -16,15 +16,18 @@ const App: FC<{}> = ({ auth }: any) => {
   PhotoTagApi.getById(1)
     .then(res => console.log(res))
     .catch(err => console.log(err));
-  const login = async () => {
-    auth.login("/");
+
+  let phototag: PhotoTag = {
+    tag: "TagMadeFromFrontend2"
   };
-  let phototag: PhotoTag = { tag: "TagMadeFromFrontend" };
   PhotoTagApi.create(phototag)
     .then(res => console.log(res))
     .catch(err => console.log(err.response.data));
   // -----API Example done-----
 
+  const login = async () => {
+    auth.login("/");
+  };
   const logout = async () => {
     auth.logout("/");
   };

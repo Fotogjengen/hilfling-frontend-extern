@@ -10,5 +10,8 @@ export const PhotoTagApi = {
   },
   create: (phototag: PhotoTag): Promise<any> => {
     return api.post("/photo_tags/", phototag);
+  },
+  update: (phototag: PhotoTag): Promise<any> => {
+    return api.put("/photo_tags/", phototag);
   }
 };
