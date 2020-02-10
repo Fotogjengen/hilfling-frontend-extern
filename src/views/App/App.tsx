@@ -4,6 +4,7 @@ import CardInformationSection from "../../components/Frontpage/CardInformationSe
 import styles from "./App.module.css";
 import { PhotoTagApi } from "../../utils/api/PhotoTagApi";
 import { withAuth } from "@okta/okta-react";
+import { PhotoTag } from "../../interfaces/PhotoTag";
 
 const App: FC<{}> = ({ auth }: any) => {
   // Example call to backend
@@ -12,9 +13,17 @@ const App: FC<{}> = ({ auth }: any) => {
     .then(res => console.log(res))
     .catch(err => console.log(err));
 
+  PhotoTagApi.getById(1)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   const login = async () => {
     auth.login("/");
   };
+  let phototag: PhotoTag = { tag: "TagMadeFromFrontend" };
+  PhotoTagApi.create(phototag)
+    .then(res => console.log(res))
+    .catch(err => console.log(err.response.data));
+  // -----API Example done-----
 
   const logout = async () => {
     auth.logout("/");

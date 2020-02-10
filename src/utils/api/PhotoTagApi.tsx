@@ -7,5 +7,8 @@ export const PhotoTagApi = {
   getById: function(id: number): Promise<any> {
     console.log("/photo_tags/" + id);
     return api.get("/photo_tags/" + id);
+  },
+  create: (phototag: PhotoTag): Promise<any> => {
+    return api.post("/photo_tags/", phototag);
   }
 };
