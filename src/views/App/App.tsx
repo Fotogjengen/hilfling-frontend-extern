@@ -9,7 +9,7 @@ const App: FC<{}> = ({ auth }: any) => {
   // Example call to backend
   // TODO: Remove this
   PhotoTagApi.getAll()
-    .then(res => console.log(res.data))
+    .then(res => console.log(res))
     .catch(err => console.log(err));
 
   const login = async () => {
