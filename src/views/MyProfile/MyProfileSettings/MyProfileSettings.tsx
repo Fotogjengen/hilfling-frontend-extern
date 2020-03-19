@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
 // import ProfileTags from "../../components/MyProfile/ProfileTags/ProfileTags";
 import { mockUser } from "./mockdata";
@@ -16,8 +16,10 @@ import {
 } from "hilfling-gui/lib";
 import { User } from "../../../interfaces/User";
 import { PhotoGangBanger } from "../../../interfaces/PhotoGangBanger";
+import { PhotoGangBangerApi } from "../../../utils/api/PhotoGangBangerApi";
 
 const MyProfileSetting: FC<{}> = () => {
+  const userId = 1; // TODO: Endre dette til prop, eller state
   // Form
   const { register, errors, handleSubmit, watch, control } = useForm();
 
@@ -30,10 +32,22 @@ const MyProfileSetting: FC<{}> = () => {
   };
 
   //TODO: FETCH FROM API
-  const user: PhotoGangBanger = mockUser;
+  //const user: PhotoGangBanger = mockUser;
   const fgPositions: Array<string> = ["Web-sjef", "Scrub"];
   const semesters: Array<string> = ["V2019", "H2020"];
   const sexes = ["Mann", "Kvinne"];
+  // User
+  const [user, setUser] = useState<PhotoGangBanger | undefined>(mockUser);
+
+  useEffect(() => {
+    PhotoGangBangerApi.getAll()
+      .then(res => {
+        console.log(res);
+        return res;
+      })
+      .then(res => setUser(res.data[0]))
+      .catch(err => console.log(err));
+  }, [userId]);
 
   return (
     <div className={cx(guistyles.contentContainer, styles.profileContainer)}>
@@ -54,14 +68,14 @@ const MyProfileSetting: FC<{}> = () => {
           <h2>Fornavn</h2>
           <Input
             name="firstName"
-            placeholder={user.firstName}
+            placeholder={user!.firstName}
             inputRef={register({ required: true })}
           ></Input>
 
           <h2>Etternavn</h2>
           <Input
             name="lastName"
-            placeholder={user.lastName}
+            placeholder={user!.lastName}
             inputRef={register}
           ></Input>
 
@@ -71,28 +85,28 @@ const MyProfileSetting: FC<{}> = () => {
           <h2>Telefonnummer</h2>
           <Input
             name="phoneNumber"
-            placeholder={user.phoneNumber}
+            placeholder={user!.phoneNumber}
             inputRef={register}
           ></Input>
 
           <h2>Adresse</h2>
           <Input
             name="address"
-            placeholder={user.address}
+            placeholder={user!.address}
             inputRef={register}
           ></Input>
 
           <h2>By</h2>
           <Input
             name="city"
-            placeholder={user.city}
+            placeholder={user!.city}
             inputRef={register}
           ></Input>
 
           <h2>Zip-kode</h2>
           <Input
             name="zipCode"
-            placeholder={user.zipCode.toString()}
+            placeholder={user!.zipCode.toString()}
             inputRef={register}
           ></Input>
 
@@ -100,13 +114,13 @@ const MyProfileSetting: FC<{}> = () => {
           <RadioButton
             label="Aktiv"
             name="aktiv"
-            checked={user.active}
+            checked={user!.active}
             inputRef={register}
           ></RadioButton>
           <RadioButton
             label="Pang"
             name="pang"
-            checked={user.pang}
+            checked={user!.pang}
             inputRef={register}
           ></RadioButton>
 
@@ -129,7 +143,7 @@ const MyProfileSetting: FC<{}> = () => {
           <h2>Sivilstatus</h2>
           <Input
             name="relatioshipStatus"
-            placeholder={user.relationshipStatus}
+            placeholder={user!.relationshipStatus}
             inputRef={register}
           ></Input>
 
