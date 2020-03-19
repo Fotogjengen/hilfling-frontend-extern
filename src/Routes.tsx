@@ -5,16 +5,16 @@ import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
 import MyProfileSetting from "./views/MyProfile/MyProfileSettings/MyProfileSettings";
 // import { Security, ImplicitCallback, SecureRoute } from "@okta/okta-react";
+import { Security, ImplicitCallback, SecureRoute } from "@okta/okta-react";
 
-// const config = {
-//   issuer: "https://dev-812828.okta.com/oauth2/default",
-//   redirectUri: window.location.origin + "/implicit/callback",
-//   clientId: "0oa2lxbl9mygTznZy357",
-//   pkce: true
-// };
+const config = {
+  issuer: "https://dev-812828.okta.com/oauth2/default",
+  redirectUri: window.location.origin + "/implicit/callback",
+  clientId: "0oa2lxbl9mygTznZy357",
+  pkce: true
+};
 
 const Routes = () => {
-  // const Routes = ({ auth }: any) => {}
   return (
     <Router>
       {/* <Security {...config}> */}
@@ -24,6 +24,11 @@ const Routes = () => {
       <Route exact path="/myprofile/settings" component={MyProfileSetting} />
       {/* <Route path="/implicit/callback" component={ImplicitCallback} /> */}
       {/* </Security> */}
+      <Security {...config}>
+        <Route exact path="/" component={App} />
+        <Route exact path="/about" component={About} />
+        <Route path="/implicit/callback" component={ImplicitCallback} />
+      </Security>
     </Router>
   );
 };

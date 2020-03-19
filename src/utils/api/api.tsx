@@ -1,20 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_BASE_URL = process.env.BASE_URL;
-
+const API_BASE_URL = "http://localhost:8080/api/v1"; //process.env.BASE_URL;
 const HEADERS = {
-  Accept: 'application/json',
-  'Content-Type': 'application/json'
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*"
 };
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: HEADERS
 });
 
 export async function getTest(): Promise<string> {
   return api
-    .get('/')
-    .then(res => res.data['test'])
+    .get("/")
+    .then(res => res.data["test"])
     .catch(e => console.error(e));
 }
