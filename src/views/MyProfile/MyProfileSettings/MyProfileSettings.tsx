@@ -17,7 +17,6 @@ import {
 import { User } from "../../../interfaces/User";
 import { PhotoGangBanger } from "../../../interfaces/PhotoGangBanger";
 import { Position } from "../../../interfaces/Position";
-import { PhotoGangBangerApi } from "../../../utils/api/PhotoGangBangerApi";
 import { ErrorBoundary } from "../../../utils/error/ErrorBoundary";
 import { useAsyncError } from "../../../utils/error/useAsyncError";
 import { apiCalls } from "./apiCalls";
@@ -26,14 +25,6 @@ const MyProfileSetting: FC<{}> = () => {
   const userId = 1; // TODO: Endre dette til prop, eller state
   // Form
   const { register, errors, handleSubmit, watch, control } = useForm();
-
-  const onSubmit: any = (formData: any) => {
-    function mergeCustomizer(objValue: any, srcValue: any): any {
-      if (srcValue == "") return objValue;
-    }
-    // update user object with formdata
-    mergeWith(user, formData, mergeCustomizer);
-  };
 
   //TODO: FETCH FROM API
   //const user: PhotoGangBanger = mockUser;
@@ -54,6 +45,18 @@ const MyProfileSetting: FC<{}> = () => {
       console.log(err); //TODO: Fikse universal error message
     }
   }, [userId]);
+
+  const onSubmit: any = (formData: any) => {
+    function mergeCustomizer(objValue: any, srcValue: any): any {
+      if (srcValue == "") return objValue;
+    }
+    // update user object with formdata
+    mergeWith(formData, user, mergeCustomizer);
+    apiCalls
+      .updateUser(formData)
+      .then(res => alert(res))
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className={cx(guistyles.contentContainer, styles.profileContainer)}>

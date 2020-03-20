@@ -1,13 +1,13 @@
-import { api, baseApi } from "./api";
+import { api, BaseApi } from "./api";
 import { Position } from "../../interfaces/Position";
-const baseUrl = "/positions/";
+const prefixUrl = "/positions/";
 
-class PositionApiClass extends baseApi<Position> {
-  constructor(baseUrl: string) {
-    super(baseUrl);
+class PositionApiClass extends BaseApi<Position> {
+  constructor(prefixUrl: string) {
+    super(prefixUrl);
   }
 }
-export const PositionApiObject = new PositionApiClass(baseUrl);
+export const PositionApiObject = new PositionApiClass(prefixUrl);
 // export const PhotoGangBangerApi = {
 //   getAll: async function(): Promise<any> {
 //     return api.get(baseUrl);

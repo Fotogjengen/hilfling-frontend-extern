@@ -13,28 +13,21 @@ export const api = axios.create({
   headers: HEADERS
 });
 
-export async function getTest(): Promise<string> {
-  return api
-    .get("/")
-    .then(res => res.data["test"])
-    .catch(e => console.error(e));
-}
-
-export class baseApi<T> {
-  baseUrl: string;
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
+export class BaseApi<T> {
+  prefixUrl: string;
+  constructor(prefix: string) {
+    this.prefixUrl = prefix;
   }
   getAll(): Promise<any> {
-    return api.get(this.baseUrl);
+    return api.get(this.prefixUrl);
   }
   getById(id: number): Promise<any> {
-    return api.get(this.baseUrl + id);
+    return api.get(this.prefixUrl + id);
   }
   update(object: T): Promise<any> {
-    return api.put(this.baseUrl, object);
+    return api.put(this.prefixUrl, object);
   }
   create(object: T): Promise<any> {
-    return api.post(this.baseUrl, object);
+    return api.post(this.prefixUrl, object);
   }
 }
