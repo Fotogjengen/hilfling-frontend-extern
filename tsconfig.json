@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "types": ["reflect-metadata", "jest"],
+    "types": ["jest"],
     "typeRoots": ["./types", "./node_modules/@types"]
   },
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],

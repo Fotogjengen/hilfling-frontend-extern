@@ -4,6 +4,6 @@ import { shallow } from "enzyme";
 describe("App does load", () => {
   it("Testing if testing is working", () => {
     const component = shallow(<App></App>);
-    expect(true).toEqual(true);
+    expect(component.find("div")).toBeDefined();
   });
 });

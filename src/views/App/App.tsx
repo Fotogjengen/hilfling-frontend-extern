@@ -22,7 +22,7 @@ const App: FC<{}> = ({ auth }: any) => {
   };
   PhotoTagApi.create(phototag)
     .then(res => console.log(res))
-    .catch(err => console.log(err.response.data));
+    .catch(err => console.log(err.data));
   // -----API Example done-----
 
   const login = async () => {
