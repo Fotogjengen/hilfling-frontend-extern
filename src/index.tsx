@@ -12,7 +12,7 @@ import { ErrorBoundary } from "./utils/error/ErrorBoundary";
 
 const store = configureStore();
 
-const Root = () => (
+export const Root = () => (
   <Provider store={store}>
     <div>
       <div className={guistyles.container}>
