@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Interface } from "readline";
 
-const API_BASE_URL = "http://localhost:8080/api/v1"; //process.env.BASE_URL;
+// const API_BASE_URL = "http://localhost:8080/api/v1"; //process.env.BASE_URL;
+const API_BASE_URL = process.env.BASE_URL;
+const frontendOffline = process.env.FRONTEND_OFFLINE;
 const HEADERS = {
   Accept: "application/json",
   "Content-Type": "application/json",
