@@ -1,25 +1,26 @@
-import React, { FC, useState, useEffect } from "react";
-import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
+import React, { FC, useState, useEffect } from 'react';
+import guistyles from 'hilfling-gui/lib/styles/utilities.module.css';
 // import ProfileTags from "../../components/MyProfile/ProfileTags/ProfileTags";
-import { mockUser } from "./mockdata";
-import { ProfileImage, Checkbox, Button } from "hilfling-gui/lib";
-import styles from "./MyProfileSettings.module.css";
-import cx from "classnames";
-import { useForm, Controller } from "react-hook-form";
-import { mergeWith } from "lodash";
+import { mockUser } from './mockdata';
+import { ProfileImage, Checkbox, Button } from 'hilfling-gui/lib';
+import styles from './MyProfileSettings.module.css';
+import cx from 'classnames';
+import { useForm, Controller } from 'react-hook-form';
+import { mergeWith } from 'lodash';
 
 import {
   ChildPageHeader,
   Input,
   DropDown,
   RadioButton
-} from "hilfling-gui/lib";
-import { User } from "../../../interfaces/User";
-import { PhotoGangBanger } from "../../../interfaces/PhotoGangBanger";
-import { Position } from "../../../interfaces/Position";
-import { ErrorBoundary } from "../../../utils/error/ErrorBoundary";
-import { useAsyncError } from "../../../utils/error/useAsyncError";
-import { apiCalls } from "./apiCalls";
+} from 'hilfling-gui/lib';
+import { User } from '../../../interfaces/User';
+import { PhotoGangBanger } from '../../../interfaces/PhotoGangBanger';
+import { Position } from '../../../interfaces/Position';
+import { ErrorBoundary } from '../../../utils/error/ErrorBoundary';
+import { useAsyncError } from '../../../utils/error/useAsyncError';
+import { apiCalls } from './apiCalls';
+import { api } from '../../../utils/api/api';
 
 const MyProfileSetting: FC<{}> = () => {
   const userId = 1; // TODO: Endre dette til prop, eller state
@@ -28,9 +29,9 @@ const MyProfileSetting: FC<{}> = () => {
 
   //TODO: FETCH FROM API
   //const user: PhotoGangBanger = mockUser;
-  const fgPositions: Array<string> = ["Web-sjef", "Scrub"];
-  const semesters: Array<string> = ["V2019", "H2020"];
-  const sexes = ["Mann", "Kvinne"];
+  const fgPositions: Array<string> = ['Web-sjef', 'Scrub'];
+  const semesters: Array<string> = ['V2019', 'H2020'];
+  const sexes = ['Mann', 'Kvinne'];
   // User
   const [user, setUser] = useState<PhotoGangBanger | null>();
   const [positions, setPositions] = useState<Array<Position> | null>();
@@ -41,6 +42,7 @@ const MyProfileSetting: FC<{}> = () => {
         setPositions(positions);
         setUser(user);
       });
+      console.log(user);
     } catch (err) {
       console.log(err); //TODO: Fikse universal error message
     }
@@ -48,7 +50,7 @@ const MyProfileSetting: FC<{}> = () => {
 
   const onSubmit: any = (formData: any) => {
     function mergeCustomizer(objValue: any, srcValue: any): any {
-      if (srcValue == "") return objValue;
+      if (srcValue == '') return objValue;
     }
     // update user object with formdata
     mergeWith(formData, user, mergeCustomizer);
@@ -59,19 +61,21 @@ const MyProfileSetting: FC<{}> = () => {
   };
 
   return (
-    <div className={cx(guistyles.contentContainer, styles.profileContainer)}>
+    <div
+      data-testid="component"
+      className={cx(guistyles.contentContainer, styles.profileContainer)}
+    >
+      {user?.firstName}
       <ChildPageHeader
         title="INSTILLINGER"
         className={styles.titleContainer}
       ></ChildPageHeader>
-
       <ProfileImage
         className={styles.profileImageContainer}
         onClick={function() {}}
         alt="ProfileImage"
         src="https://avatars0.githubusercontent.com/u/5860069?s=220&v=4"
       ></ProfileImage>
-
       {user != null && positions ? (
         <div className={styles.settingsContainer}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -138,7 +142,7 @@ const MyProfileSetting: FC<{}> = () => {
             <DropDown
               name="fgPosition"
               options={positions.map(x => x.title)}
-              whenSelected={() => alert("JAJA")}
+              whenSelected={() => alert('JAJA')}
               inputRef={register}
             ></DropDown>
 
@@ -146,7 +150,7 @@ const MyProfileSetting: FC<{}> = () => {
             <DropDown
               name="semesters"
               options={semesters}
-              whenSelected={() => alert("JAJA")}
+              whenSelected={() => alert('JAJA')}
               inputRef={register}
             ></DropDown>
 
@@ -163,7 +167,7 @@ const MyProfileSetting: FC<{}> = () => {
           </form>
         </div>
       ) : (
-        <h1>Failed to fetch data from server</h1>
+        <h1 data-testid="errorMessage">Failed to fetch data from server</h1>
       )}
     </div>
   );

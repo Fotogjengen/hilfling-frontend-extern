@@ -1,6 +1,6 @@
-import { PhotoGangBangerApiObject } from "../../../utils/api/PhotoGangBangerApi";
-import { PositionApiObject } from "../../../utils/api/PositionApi";
-import { PhotoGangBanger } from "../../../interfaces/PhotoGangBanger";
+import { PhotoGangBangerApiObject } from '../../../utils/api/PhotoGangBangerApi';
+import { PositionApiObject } from '../../../utils/api/PositionApi';
+import { PhotoGangBanger } from '../../../interfaces/PhotoGangBanger';
 export const apiCalls = {
   getData: async (setState: any) => {
     const users = await PhotoGangBangerApiObject.getAll();
