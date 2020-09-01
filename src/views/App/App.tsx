@@ -44,7 +44,7 @@ const App: FC<{}> = ({ auth }: any) => {
         </div>
         <div className={styles.events}>
           <h2>BILDER FRA:</h2>
-          <EventCardsDisplayer></EventCardsDisplayer>
+          <EventCardsDisplayer/>
         </div>
       </div>
       <div className={styles.rightSide}>
