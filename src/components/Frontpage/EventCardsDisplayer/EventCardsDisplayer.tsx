@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styles from "./EventCardsDisplayer.module.css";
-import { Card, CardTitle, CardPreamble } from "hilfling-gui/lib";
+import { CardTitle, CardPreamble, ImageCard } from "hilfling-gui/lib";
 
 type UKA = "uka";
 type SAMFUNDET = "samfundet";
@@ -26,17 +26,11 @@ const EventCardsDisplayer: FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.container}>
-      <Card type="uka">
-        <CardTitle capitalized title={"Temafest: Halloween"} />
-        <CardPreamble
-          color="yellow"
-          date="12.10.2020"
-          images={123}
-          location={"Daglighallen"}
-          type={"EventCard"}
-        />
-      </Card>
-      <Card type="samfundet">
+      <ImageCard
+        placement={"left"}
+        type="samfundet"
+        image={"https://www.w3schools.com/css/img_lights.jpg"}
+      >
         <CardTitle capitalized title={"Temafest: Halloween"} />
         <CardPreamble
           color="red"
@@ -45,27 +39,49 @@ const EventCardsDisplayer: FC<Props> = ({
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </Card>
-      <Card type="isfit">
+      </ImageCard>
+      <ImageCard
+        placement={"left"}
+        type="samfundet"
+        image={"https://www.w3schools.com/css/img_lights.jpg"}
+      >
         <CardTitle capitalized title={"Temafest: Halloween"} />
         <CardPreamble
-          color="blue"
+          color="red"
           date="12.10.2020"
           images={123}
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </Card>
-      <Card type="annet">
+      </ImageCard>
+      <ImageCard
+        placement={"left"}
+        type={"samfundet"}
+        image={"https://www.w3schools.com/css/img_lights.jpg"}
+      >
         <CardTitle capitalized title={"Temafest: Halloween"} />
         <CardPreamble
-          color="orange"
+          color="red"
           date="12.10.2020"
           images={123}
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </Card>
+      </ImageCard>
+      <ImageCard
+        placement={"left"}
+        type="samfundet"
+        image={"https://www.w3schools.com/css/img_lights.jpg"}
+      >
+        <CardTitle capitalized title={"Temafest: Halloween"} />
+        <CardPreamble
+          color="red"
+          date="12.10.2020"
+          images={123}
+          location={"Daglighallen"}
+          type={"EventCard"}
+        />
+      </ImageCard>
     </div>
   );
 };

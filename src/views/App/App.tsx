@@ -13,21 +13,21 @@ import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/
 const App: FC<{}> = ({ auth }: any) => {
   // Example call to backend
   // TODO: Remove this
-  PhotoTagApi.getAll()
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+  //   PhotoTagApi.getAll()
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
 
-  PhotoTagApi.getById(1)
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+  //   PhotoTagApi.getById(1)
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err));
 
-  const phototag: PhotoTag = {
-    tag: "TagMadeFromFrontend2"
-  };
-  PhotoTagApi.create(phototag)
-    .then(res => console.log(res))
-    .catch(err => console.log(err.response.data));
-  // -----API Example done-----
+  //   const phototag: PhotoTag = {
+  //     tag: "TagMadeFromFrontend2"
+  //   };
+  //   PhotoTagApi.create(phototag)
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err.response.data));
+  //   // -----API Example done-----
 
   const login = async () => {
     auth.login("/");
@@ -42,7 +42,8 @@ const App: FC<{}> = ({ auth }: any) => {
         <div className="slideshow">
           <Carousel></Carousel>
         </div>
-        <div className="events">
+        <div className={styles.events}>
+          <h2>BILDER FRA:</h2>
           <EventCardsDisplayer></EventCardsDisplayer>
         </div>
       </div>
