@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Tab } from "hilfling-gui/lib";
+import { Tabs } from "hilfling-gui/lib";
 import { EventType } from "hilfling-gui/lib/types";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
   activeTab: string;
 }
 
-const Tabs: FC<Props> = ({
+const ContentTabs: FC<Props> = ({
   type,
   activeTab = "samfundet",
   onClick,
@@ -26,33 +26,12 @@ const Tabs: FC<Props> = ({
   }
   const [current, setCurrent] = useState<string>(activeTab);
   return (
-    <div>
-      <Tab
-        onClick={setCurrent}
-        type={"samfundet"}
-        active={current == "samfundet"}
-      >
-        SAMFUNDET
-      </Tab>
-      <Tab onClick={setCurrent} type={"uka"} active={current == "uka"}>
-        UKA
-      </Tab>
-      <Tab onClick={setCurrent} type={"isfit"} active={current == "isfit"}>
-        ISFIT
-      </Tab>
-      <Tab onClick={setCurrent} type={"annet"} active={current == "annet"}>
-        ANNET
-      </Tab>
-      {/*
-      <OtherTab
-        onClick={setCurrent}
-        active={current == "other"}
-        btnColor={"blue"}
-        btnBorderColor={"red"}
-      >
-        Other Tab!
-      </OtherTab>*/}
-    </div>
+    <Tabs
+      activeTab="other"
+      onClick={function noRefCheck() {}}
+      type="samfundet"
+    >
+    </Tabs>
   );
 };
 
