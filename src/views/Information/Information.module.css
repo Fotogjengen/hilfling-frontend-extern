@@ -1,0 +1,24 @@
+.header {
+	margin-bottom: 3rem;
+}
+
+.information {
+	display: flex;
+}
+
+.sidemenu {
+	width: 20%;
+	border-right: solid 0.001rem #213442;
+	margin-right: 1rem;
+}
+
+
+
+.content {
+	flex: 1;
+	margin-right: 3rem;
+}
+
+.subtitle {
+	margin-top: 2rem;
+}
