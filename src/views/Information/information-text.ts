@@ -26,5 +26,47 @@ export const TEXT = {
       text:
         "FG er som de andre gjengene en institusjon i evig runddans. Med en gjennomløpstid på 2,5 år for de faste gjengmedlemme vil gjengen holde seg evig ung. Det hevdes at gjengmedlemmene bruker ett år på å jobbe seg inn i gjengen, og ett år på å jobbe seg ut. Gjengens erfaringer og kunnskap er til enhver tid nær identisk med gjengmedlemmenes, da de fleste praktiske erfaringer blir dosert videre muntlig. Denne oscillerende tilstanden, inn og ut på 2,5 år, motvirker den konvensjonelle akkkumulering av erfaring og kunnskaper som tidsforløp vanligvis medfører. I vår rasjonelle tid hvor vi ukritisk identifiserer tidsforløp med framskritt gir denne 2,5-års oscillasjonen et nærmest middelaldersk verdensbilde, en befriende opplevelse av at tiden i virkeligheten går i ring. Noen pensjonister er faktisk blitt værende i byen etter studietida. Noen er til og med blitt tvunget til å ta seg arbeid. Fra begynnelsen av 70-årene kom også NLHT (nå AVH)-studenter og annen ikke definerbar materie seg til å søke FG. De har bidratt til en utvidelse av horisonten og til et større pensjonistmiljø som i heldige øyeblikk kan gi de faste inspirasjon, endog direkte hjelp. FG er for noen ikke bare en fritidsaktivitet, men et sted å være og et fast holdepunkt; en eksistensiell størrelse. «Gjengen» er et begrep som også benyttes om selve hybelen, og som tydelig viser at et miljø skapes av et sted å være. Sleng på endel faste arbeidsoppaver, gi ungdommen en nøkkel, knytt dem til en tradisjon og se: det blir folk av dem. «Etter noen år i FG blir folk rent sagt hyggelige» sier FGs husdiktere. I sine beste perioder (Spesielt i UKE-semestre) er FG et godt tilbud til selvrealisering, et brytningssted mellom ungdommer som har behov for både sosial omgang og kreative/tekniske oppgaver. Samtidig er gjengmiljøet en smertefull, men befriende opplevelse av å tape illusjoner; ånden berikes. Denne forhåpentligvis positive utvikling av personligheten skjer med sympatisk støtte fra likesinnede, der alle angriper tilværelse med sine ressurser og med økende erkjennelse av at det skal ulike mennesketyper til for å stimulere denne tilstanden. Hvert år tas 4-5 nye funksjonærer opp og sikrer dynamikken i systemet."
     }
+  },
+  kreditering: {
+    title: "kreditering",
+    paragraph1: "Alle bilder tatt av Fotogjengen skal krediteres med:",
+    outline: "Foto: foto.samfundet.no",
+    paragraph2:
+      "Ved manglende kreditering kan det bli krevet kompensasjon. For spørsmål rundt bruk av våre bilder og kreditering, ta kontakt med oss på e-post."
+  },
+  services: {
+    title: "tjenester og priser",
+    paragraph1: {
+      title: "bilder på papir",
+      text1:
+        "Bestilling av bilder på papir foregår via e-post. Send en e-post til fg-salg@samfundet.no med følgende opplysninger:",
+      text2:
+        "MERK Bestillinger som gjøres etter 15.11 om høsten og 15.04 om våren kan ikke garanteres levering før ferien på grunn av eksamensperiode."
+    },
+    paragraph2: {
+      title: "priser",
+      text:
+        "Størrelsene er veiledende. Ved spesielle formatønsker, kontakt oss på epost. Vi kan også levere større format enn vist i tabellen ved digitale utskrifer: 60cm x ubegrenset lengde. Private bilder kan bestilles til samme pris. Alle bilder hentes i LUKA ved Søndre Side på Studentersamfundet i Trondhjem, eller sendes i posten, forsvarlig innpakket i harde papphylser, mot kr 80,- i porto og ekspedering. Leveringstid for bildene varierer avhengig av vår arbeidsbelastning, men man kan regne med ca. en måned fra betalingsdato i travle perioder."
+    },
+    paragraph3: {
+      title: "Bruk av digitale bildefiler",
+      text:
+        "Ta kontakt på e-post til fg-salg@samfundet.no for bruk av digitale bildefiler til internett, trykk og lignende."
+    },
+    paragraph4: {
+      title: "Eksterne oppdrag",
+      text:
+        "Dersom vi har ledig kapasitet påtar vi oss eksterne fotooppdrag til en hyggelig pris. Vi tar de fleste typer oppdrag, ta kontakt på e-post til fg-salg@samfundet.no dersom du har en forespørsel. Eksempler på oppdrag vi utfører mye av er klassebilder og fotokurs.",
+      subparagraph1: {
+        title: "Klassebilder",
+        text:
+          "Vi har lang erfaring med klassefotografering. Med våre helprofesjonelle kameraer og fotoskrivere foreviger vi de gode studieminnene. Pris er kr 100 per bestilte papirkopi. Ta kontakt på epost for bestilling."
+      },
+      subparagraph2: {
+        title: "Fotokurs",
+        text:
+          "Fotokurset er en workshop i komposisjon og bruk av kamera som skal gi inspirasjon og grunnlag for å ta bedre bilder. Kurset består av en teknisk del, en komposisjonsdel og en praktisk del. Kurset passer for nybegynnere og de som har fotografert litt allerede. Det er en fordel å ha eget kamera, men ikke et krav."
+      }
+    }
   }
 };
