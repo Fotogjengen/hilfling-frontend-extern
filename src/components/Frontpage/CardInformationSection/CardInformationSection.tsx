@@ -1,5 +1,7 @@
 import React, { FC } from "react";
-import { Card, CardTitle } from "hilfling-gui/lib";
+import { Card, CardTitle, Button } from "hilfling-gui/lib";
+import TestImageUpload from "../../Test/TestImageUpload";
+import styles from "./CardInformationSection/CardInformationSection.module.css";
 
 const CardInformationSection: FC<{}> = () => {
   return (
@@ -25,6 +27,7 @@ const CardInformationSection: FC<{}> = () => {
           oss her!
         </p>
       </Card>
+      <TestImageUpload></TestImageUpload>
     </div>
   );
 };
