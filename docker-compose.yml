@@ -1,23 +1,22 @@
-version: '2'
-
+version: "3"
 services:
-  frontend-extern:
-    environment:
-      - PUID=1000
-      - PGID=1000
-    container_name: frontend-extern
+  frontend:
+    container_name: hilfling-frontend
+    image: fotogjengen/hilfling-frontend
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8181:80'
+      - "8181:80"
     networks:
       - traefik
     labels:
-      - traefik.port = 80
-      - traefik.http.routers.frontend-extern.rule=Host("fg.carosa.no")
-      - traefik.http.routers.registry.service=frontend-extern
+      - traefik.enable=true
+      - traefik.http.routers.hilfling-frontend.entrypoints=web # <== Defining the entrypoint for http, **ref: line 30
+      - traefik.http.routers.hilfling-frontend.entrypoints=websecure # <== Defining the entrypoint for http, **ref: line 30
+      - traefik.http.routers.hilfling-frontend.rule=Host(`fg.nikzy.no`) # <== Your Domain Name goes here for the http rule
+      - traefik.http.routers.hilfling-frontend.tls.certresolver=lets-encr # Adds SSL to App
+
 networks:
   traefik:
     external: true
-
