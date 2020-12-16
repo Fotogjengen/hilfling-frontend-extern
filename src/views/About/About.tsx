@@ -1,14 +1,14 @@
-import React, { FC } from "react";
-import PhotoGangBanger from "../../components/About/PhotoGangBanger";
-import { activePhotoGangBangers, retiredPhotoGangBangers } from "./mockdata";
-import styles from "./About.module.css";
+import React, { FC } from 'react';
+import PhotoGangBanger from '../../components/About/PhotoGangBanger';
+import { activePhotoGangBangers, retiredPhotoGangBangers } from './mockdata';
+import styles from './About.module.css';
 
 const About: FC<{}> = () => {
   const activeUsers = activePhotoGangBangers; //[TODO]: fetch from API
   const retiredUsers = retiredPhotoGangBangers; //[TODO]: fetch from API
 
   const activeGangBangers = () =>
-    activeUsers.map(user => (
+    activeUsers.map((user) => (
       <PhotoGangBanger
         name={user.name}
         image={user.image}
@@ -19,7 +19,7 @@ const About: FC<{}> = () => {
     ));
 
   const retiredGangBangers = () =>
-    retiredUsers.map(user => (
+    retiredUsers.map((user) => (
       <PhotoGangBanger
         name={user.name}
         image={user.image}

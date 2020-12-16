@@ -1,5 +1,5 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { logger } from "redux-logger";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
 
 const rootReducer = combineReducers({});
 
@@ -8,7 +8,7 @@ export type AppState = ReturnType<typeof rootReducer>;
 export default function configureStore() {
   const middleWares = [];
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     middleWares.push(logger);
   }
 

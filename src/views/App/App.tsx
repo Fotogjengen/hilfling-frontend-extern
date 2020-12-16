@@ -1,12 +1,12 @@
-import React, { FC } from "react";
-import Carousel from "../../components/Frontpage/Carousel/Carousel";
-import CardInformationSection from "../../components/Frontpage/CardInformationSection/CardInformationSection";
-import styles from "./App.module.css";
-import { PhotoTagApi } from "../../utils/api/PhotoTagApi";
-import { withAuth } from "@okta/okta-react";
-import { PhotoTag } from "../../interfaces/PhotoTag";
-import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
-import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/EventCardsDisplayer";
+import React, { FC } from 'react';
+import Carousel from '../../components/Frontpage/Carousel/Carousel';
+import CardInformationSection from '../../components/Frontpage/CardInformationSection/CardInformationSection';
+import styles from './App.module.css';
+import { PhotoTagApi } from '../../utils/api/PhotoTagApi';
+import { withAuth } from '@okta/okta-react';
+import { PhotoTag } from '../../interfaces/PhotoTag';
+import guistyles from 'hilfling-gui/lib/styles/utilities.module.css';
+import EventCardsDisplayer from '../../components/Frontpage/EventCardsDisplayer/EventCardsDisplayer';
 // import { withAuth } from "@okta/okta-react";
 // import { useAuth } from "../../utils/auth";
 
@@ -30,21 +30,21 @@ const App: FC<{}> = ({ auth }: any) => {
   //   // -----API Example done-----
 
   const login = async () => {
-    auth.login("/");
+    auth.login('/');
   };
   const logout = async () => {
-    auth.logout("/");
+    auth.logout('/');
   };
 
   return (
     <div className={styles.contentContainer}>
       <div className={styles.leftSide}>
         <div className="slideshow">
-          <Carousel></Carousel>
+          <Carousel />
         </div>
         <div className={styles.events}>
           <h2>BILDER FRA:</h2>
-          <EventCardsDisplayer/>
+          <EventCardsDisplayer />
         </div>
       </div>
       <div className={styles.rightSide}>

@@ -1,12 +1,12 @@
-import React, { FC } from "react";
-import { Card, CardTitle, Button } from "hilfling-gui/lib";
-import styles from "./CardInformationSection/CardInformationSection.module.css";
+import React, { FC } from 'react';
+import { Card, CardTitle, Button } from 'hilfling-gui/lib';
+import styles from './CardInformationSection/CardInformationSection.module.css';
 
 const CardInformationSection: FC<{}> = () => {
   return (
     <div>
       <Card>
-        <CardTitle title={"Fotogjengen"} capitalized={true} />
+        <CardTitle title={'Fotogjengen'} capitalized={true} />
         <p>
           Fotogjengen er en gjeng på Samfundet. Vi har ansvar for å dokumentere
           alt som skjer på huset. Alle bilder vi tar legges ut på denne
@@ -20,7 +20,7 @@ const CardInformationSection: FC<{}> = () => {
         </p>
       </Card>
       <Card>
-        <CardTitle title={"Anmodning"} capitalized={true} />
+        <CardTitle title={'Anmodning'} capitalized={true} />
         <p>
           Trenger du en fotogreaf? Fotogjengen kan hjelpe deg! Les mer og anmod
           oss her!

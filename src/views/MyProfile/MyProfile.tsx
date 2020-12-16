@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
-import { tags, User } from "./mockdata";
-import ProfileTags from "../../components/MyProfile/ProfileTags/ProfileTags";
-import { ProfileImage } from "hilfling-gui/lib";
-import styles from "./MyProfile.module.css";
-import cx from "classnames";
-import ProfileCard from "../../components/MyProfile/ProfileCard/ProfileCard";
+import React, { FC } from 'react';
+import guistyles from 'hilfling-gui/lib/styles/utilities.module.css';
+import { tags, User } from './mockdata';
+import ProfileTags from '../../components/MyProfile/ProfileTags/ProfileTags';
+import { ProfileImage } from 'hilfling-gui/lib';
+import styles from './MyProfile.module.css';
+import cx from 'classnames';
+import ProfileCard from '../../components/MyProfile/ProfileCard/ProfileCard';
 
 const MyProfile: FC<{}> = () => {
   const myTags = tags; //TODO: FETCH FROM API
@@ -17,7 +17,7 @@ const MyProfile: FC<{}> = () => {
           <ProfileImage
             alt={user[0].name}
             src={user[0].image}
-            onClick={() => console.log("hei")}
+            onClick={() => console.log('hei')}
           />
         </div>
         <div className={styles.profileCard}>
@@ -25,14 +25,14 @@ const MyProfile: FC<{}> = () => {
             username={user[0].username}
             email={user[0].email}
             fgEmail={user[0].fgEmail}
-          ></ProfileCard>
+          />
         </div>
       </div>
       <div className={styles.nameAndTagContainer}>
         <div>
           <h1 className={styles.profileName}>{user[0].name}</h1>
         </div>
-        <ProfileTags tags={myTags}></ProfileTags>
+        <ProfileTags tags={myTags} />
       </div>
     </div>
   );

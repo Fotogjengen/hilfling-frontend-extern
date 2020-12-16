@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
-import { Carousel as CarouselComponent, CarouselItems } from "hilfling-gui/lib";
-import { BaseCarouselItem } from "hilfling-gui/lib/types";
-import styles from "./Carousel.module.css";
+import React, { FC, useEffect, useState } from 'react';
+import { Carousel as CarouselComponent, CarouselItems } from 'hilfling-gui/lib';
+import { BaseCarouselItem } from 'hilfling-gui/lib/types';
+import styles from './Carousel.module.css';
 
 const Carousel: FC<{}> = () => {
   const [items, setItems] = useState<BaseCarouselItem[]>([]);
@@ -9,15 +9,15 @@ const Carousel: FC<{}> = () => {
   useEffect(() => {
     setItems([
       {
-        title: "hei",
+        title: 'hei',
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgGfL49kTB0zjHmH-pV8rK8-QWcRawdK7qASmj32j1BnWZl2UO&s"
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgGfL49kTB0zjHmH-pV8rK8-QWcRawdK7qASmj32j1BnWZl2UO&s',
       },
       {
-        title: "hei2",
+        title: 'hei2',
         image:
-          "http://images6.fanpop.com/image/photos/39900000/IMG-6250-PNG-kion-39961687-1024-577.png"
-      }
+          'http://images6.fanpop.com/image/photos/39900000/IMG-6250-PNG-kion-39961687-1024-577.png',
+      },
     ]);
   }, []);
   return (

@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import styles from "./Header.module.css";
-import { Header, HeaderLink } from "hilfling-gui/lib";
+import React, { FC } from 'react';
+import styles from './Header.module.css';
+import { Header, HeaderLink } from 'hilfling-gui/lib';
 
 // interface Props {
 //   login: () => void;

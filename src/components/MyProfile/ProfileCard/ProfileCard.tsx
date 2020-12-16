@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { Card } from "hilfling-gui/lib";
+import React, { FC } from 'react';
+import { Card } from 'hilfling-gui/lib';
 
 interface Props {
   username: string;

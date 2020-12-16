@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 // Okta gives no type definitions for its library, hence any types
 export const useAuth = (auth: any) => {

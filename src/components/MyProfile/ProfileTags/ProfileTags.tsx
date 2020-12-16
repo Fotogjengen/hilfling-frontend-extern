@@ -1,10 +1,10 @@
-import React, { FC, useState, useMemo } from "react";
-import { PhotographerTag } from "hilfling-gui/lib";
-import styles from "./ProfileTags.module.css";
+import React, { FC, useState, useMemo } from 'react';
+import { PhotographerTag } from 'hilfling-gui/lib';
+import styles from './ProfileTags.module.css';
 
-type ColorType = "red" | "blue" | "purple" | "green" | "yellow";
+type ColorType = 'red' | 'blue' | 'purple' | 'green' | 'yellow';
 
-const colorList: ColorType[] = ["red", "blue", "purple", "green", "yellow"];
+const colorList: ColorType[] = ['red', 'blue', 'purple', 'green', 'yellow'];
 
 interface Props {
   tags: string[];
