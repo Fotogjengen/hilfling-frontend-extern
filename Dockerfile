@@ -1,12 +1,13 @@
 # build environment
-FROM node:12.2.0-alpine as build
+FROM node:15.4.0-alpine as build
 LABEL maintainer="fg-web@samfundet.no"
 
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json /app/package.json
-RUN npm install --silent
+RUN npm i npm -g
+RUN npm install
 # Fixes "could not get uid/guid error (https://stackoverflow.com/questions/52196518/could-not-get-uid-gid-when-building-node-docker)
 RUN npm config set unsafe-perm true
 RUN npm install react-scripts@3.0.1 -g --silent
