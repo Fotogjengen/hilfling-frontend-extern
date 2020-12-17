@@ -39,12 +39,13 @@ const App: FC<{}> = ({ auth }: any) => {
   return (
     <div className={styles.contentContainer}>
       <div className={styles.leftSide}>
+        <h1>Test deploy</h1>
         <div className="slideshow">
           <Carousel></Carousel>
         </div>
         <div className={styles.events}>
           <h2>BILDER FRA:</h2>
-          <EventCardsDisplayer/>
+          <EventCardsDisplayer />
         </div>
       </div>
       <div className={styles.rightSide}>
