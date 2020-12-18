@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import { Card, CardTitle, Button } from "hilfling-gui/lib";
-import styles from "./CardInformationSection/CardInformationSection.module.css";
+import { Card, CardTitle } from "hilfling-gui/lib";
 
 const CardInformationSection: FC<{}> = () => {
   return (

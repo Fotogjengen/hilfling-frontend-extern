@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo } from "react";
+import React, { FC } from "react";
 import { PhotographerTag } from "hilfling-gui/lib";
 import styles from "./ProfileTags.module.css";
 
