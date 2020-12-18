@@ -7,7 +7,7 @@ import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/
 // import { withAuth } from "@okta/okta-react";
 // import { useAuth } from "../../utils/auth";
 
-const App: FC = ({ auth }) => {
+const App: FC = (/* { auth } */) => {
   // Example call to backend
   // TODO: Remove this
   //   PhotoTagApi.getAll()
@@ -26,12 +26,14 @@ const App: FC = ({ auth }) => {
   //     .catch(err => console.log(err.response.data));
   //   // -----API Example done-----
 
+  /*
   const login = async () => {
     auth.login("/");
   };
   const logout = async () => {
     auth.logout("/");
   };
+  */
 
   return (
     <div className={styles.contentContainer}>

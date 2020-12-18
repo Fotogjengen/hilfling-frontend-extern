@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
@@ -9,10 +9,10 @@ const config = {
   issuer: "https://dev-812828.okta.com/oauth2/default",
   redirectUri: window.location.origin + "/implicit/callback",
   clientId: "0oa2lxbl9mygTznZy357",
-  pkce: true
+  pkce: true,
 };
 
-const Routes = () => {
+const Routes: FC = () => {
   return (
     <Router>
       <Security {...config}>

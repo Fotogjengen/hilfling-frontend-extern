@@ -17,7 +17,7 @@ const MyProfile: FC<{}> = () => {
           <ProfileImage
             alt={user[0].name}
             src={user[0].image}
-            onClick={() => console.log("hei")}
+            onClick={(): void => console.log("hei")}
           />
         </div>
         <div className={styles.profileCard}>
@@ -25,14 +25,14 @@ const MyProfile: FC<{}> = () => {
             username={user[0].username}
             email={user[0].email}
             fgEmail={user[0].fgEmail}
-          ></ProfileCard>
+          />
         </div>
       </div>
       <div className={styles.nameAndTagContainer}>
         <div>
           <h1 className={styles.profileName}>{user[0].name}</h1>
         </div>
-        <ProfileTags tags={myTags}></ProfileTags>
+        <ProfileTags tags={myTags} />
       </div>
     </div>
   );
