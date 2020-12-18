@@ -38,7 +38,6 @@ const App: FC = (/* { auth } */) => {
   return (
     <div className={styles.contentContainer}>
       <div className={styles.leftSide}>
-        <h1>Test deploy</h1>
         <div className="slideshow">
           <Carousel />
         </div>
