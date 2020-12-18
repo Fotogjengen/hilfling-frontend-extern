@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "0.21.0",
     "classnames": "2.2.6",
+    "hilfling-gui": "1.2.9",
     "node-sass": "5.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -38,12 +39,13 @@
   "devDependencies": {
     "@babel/types": "7.12.11",
     "@okta/okta-react": "1.4.1",
+    "@types/classnames": "2.2.11",
+    "@types/node": "14.14.14",
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "@types/react-redux": "7.1.12",
     "@types/react-router-dom": "5.1.6",
     "@types/redux-logger": "3.0.8",
-    "@types/node": "14.14.14",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "eslint-config-prettier": "6.15.0",

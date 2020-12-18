@@ -11,7 +11,7 @@ import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
 
 const store = configureStore();
 
-const Root = () => (
+const Root: React.FC = () => (
   <Provider store={store}>
     <div>
       <div className={guistyles.container}>

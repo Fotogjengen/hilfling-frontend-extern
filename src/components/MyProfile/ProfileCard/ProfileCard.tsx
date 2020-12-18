@@ -16,7 +16,7 @@ const ProfileCard: FC<Props> = ({ username, email, fgEmail }: Props) => {
           <b>E-post:</b> {email} <br />
           <b>Fotogjengen e-post:</b>
           <br /> {fgEmail} <br />
-          <a>Endre instillinger</a>
+          <a href="">Endre instillinger</a>
         </p>
       </Card>
     </div>

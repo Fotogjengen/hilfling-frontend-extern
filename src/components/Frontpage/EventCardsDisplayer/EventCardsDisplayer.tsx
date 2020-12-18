@@ -22,7 +22,7 @@ const EventCardsDisplayer: FC<Props> = ({
   images,
   date,
   location,
-  image
+  image,
 }: Props) => {
   return (
     <div className={styles.container}>

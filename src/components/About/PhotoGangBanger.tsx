@@ -13,7 +13,7 @@ const PhotoGangBanger: FC<Props> = ({
   image,
   name,
   position,
-  email
+  email,
 }: Props) => {
   const mailTo = "mailto:" + email;
   return (
