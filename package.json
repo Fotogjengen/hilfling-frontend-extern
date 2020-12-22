@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "axios": "0.21.0",
+    "axios": "0.21.1",
     "classnames": "2.2.6",
     "hilfling-gui": "1.2.15",
     "node-sass": "5.0.0",
