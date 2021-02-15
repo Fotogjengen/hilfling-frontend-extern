@@ -40,7 +40,7 @@
     "@babel/types": "7.12.12",
     "@okta/okta-react": "1.4.1",
     "@types/classnames": "2.2.11",
-    "@types/node": "14.14.22",
+    "@types/node": "14.14.28",
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "@types/react-redux": "7.1.16",
