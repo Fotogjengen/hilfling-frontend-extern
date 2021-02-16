@@ -3,12 +3,12 @@ import Carousel from "../../components/Frontpage/Carousel/Carousel";
 import CardInformationSection from "../../components/Frontpage/CardInformationSection/CardInformationSection";
 import styles from "./App.module.css";
 import { PhotoTagApi } from "../../utils/api/PhotoTagApi";
-import { withAuth } from "@okta/okta-react";
 import { PhotoTag } from "../../interfaces/PhotoTag";
 
 const App: FC<{}> = ({ auth }: any) => {
   // Example call to backend
   // TODO: Remove this
+  /*
   PhotoTagApi.getAll()
     .then(res => console.log(res))
     .catch(err => console.log(err));
@@ -22,7 +22,7 @@ const App: FC<{}> = ({ auth }: any) => {
   };
   PhotoTagApi.create(phototag)
     .then(res => console.log(res))
-    .catch(err => console.log(err.response.data));
+    .catch(err => console.log(err.response.data));*/
   // -----API Example done-----
 
   const login = async () => {
@@ -47,4 +47,4 @@ const App: FC<{}> = ({ auth }: any) => {
   );
 };
 
-export default withAuth(App);
+export default App;
