@@ -14,7 +14,7 @@ interface Props {
   image?: string;
 }
 
-const EventCardsDisplayer: FC<Props> = ({}: Props) => {
+const EventCardsDisplayer: FC<Props> = () => {
   return (
     <div className={styles.container}>
       <GuiImageCard
