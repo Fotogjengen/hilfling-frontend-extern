@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import Carousel from "../../components/Frontpage/Carousel/Carousel";
 import CardInformationSection from "../../components/Frontpage/CardInformationSection/CardInformationSection";
 import styles from "./App.module.css";
-import { withAuth } from "@okta/okta-react";
 import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/EventCardsDisplayer";
 // import { withAuth } from "@okta/okta-react";
 // import { useAuth } from "../../utils/auth";
@@ -53,4 +52,4 @@ const App: FC = (/* { auth } */) => {
   );
 };
 
-export default withAuth(App);
+export default App;

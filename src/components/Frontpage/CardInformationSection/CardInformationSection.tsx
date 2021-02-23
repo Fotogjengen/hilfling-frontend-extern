@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { Card, CardTitle } from "hilfling-gui/lib";
+import { GuiCard, GuiCardTitle } from "../../../gui-components";
 
-const CardInformationSection: FC<{}> = () => {
+const CardInformationSection: FC = () => {
   return (
     <div>
-      <Card>
-        <CardTitle title={"Fotogjengen"} capitalized={true} />
+      <GuiCard>
+        <GuiCardTitle title={"Fotogjengen"} capitalized={true} />
         <p>
           Fotogjengen er en gjeng på Samfundet. Vi har ansvar for å dokumentere
           alt som skjer på huset. Alle bilder vi tar legges ut på denne
@@ -17,14 +17,14 @@ const CardInformationSection: FC<{}> = () => {
             Les mer om oss her.
           </a>
         </p>
-      </Card>
-      <Card>
-        <CardTitle title={"Anmodning"} capitalized={true} />
+      </GuiCard>
+      <GuiCard>
+        <GuiCardTitle title={"Anmodning"} capitalized={true} />
         <p>
           Trenger du en fotogreaf? Fotogjengen kan hjelpe deg! Les mer og anmod
           oss her!
         </p>
-      </Card>
+      </GuiCard>
     </div>
   );
 };

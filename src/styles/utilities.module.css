@@ -1,0 +1,14 @@
+@import "./variables.css";
+
+.container {
+  max-width: var(--hilfling-max-width);
+  margin: 0 auto;
+}
+.contentContainer {
+  composes: container;
+  background: var(--color-white);
+  padding: 20px;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  min-height: 100%;
+}

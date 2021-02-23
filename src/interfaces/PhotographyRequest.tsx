@@ -1,4 +1,4 @@
-import { BaseModel } from './BaseModel';
+import { BaseModel } from "./BaseModel";
 
 export interface PhotographyRequest extends BaseModel {
   startTime: string;

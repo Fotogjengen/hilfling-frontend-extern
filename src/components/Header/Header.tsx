@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styles from "./Header.module.css";
-import { Header, HeaderLink } from "hilfling-gui/lib";
+import { GuiHeader, GuiHeaderLink } from "../../gui-components";
 
 // interface Props {
 //   login: () => void;
@@ -8,19 +8,19 @@ import { Header, HeaderLink } from "hilfling-gui/lib";
 //   authenticated: boolean | null;
 // }
 
-const HeaderComponent: FC<{}> = () => {
+const HeaderComponent: FC = () => {
   return (
     <div className={styles.header}>
-      <Header>
-        <HeaderLink>BILDER</HeaderLink>
-        <HeaderLink>OM OSS</HeaderLink>
-        <HeaderLink>LOGG INN</HeaderLink>
+      <GuiHeader>
+        <GuiHeaderLink>BILDER</GuiHeaderLink>
+        <GuiHeaderLink>OM OSS</GuiHeaderLink>
+        <GuiHeaderLink>LOGG INN</GuiHeaderLink>
         {/* {authenticated ? (
-          <HeaderLink onClick={logout}>LOGG UT</HeaderLink>
+          <GuiHeaderLink onClick={logout}>LOGG UT</GuiHeaderLink>
         ) : (
-          <HeaderLink onClick={login}>LOGG INN</HeaderLink>
+          <GuiHeaderLink onClick={login}>LOGG INN</GuiHeaderLink>
         )} */}
-      </Header>
+      </GuiHeader>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import PhotoGangBanger from "../../components/About/PhotoGangBanger";
 import { activePhotoGangBangers, retiredPhotoGangBangers } from "./mockdata";
 import styles from "./About.module.css";
 
-const About: FC<{}> = () => {
+const About: FC = () => {
   const activeUsers = activePhotoGangBangers; //[TODO]: fetch from API
   const retiredUsers = retiredPhotoGangBangers; //[TODO]: fetch from API
 

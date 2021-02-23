@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { ProfileImage } from "hilfling-gui/lib";
 import styles from "./PhotoGangBanger.module.css";
+import { GuiProfileImage } from "../../gui-components";
 
 interface Props {
   image: string;
@@ -19,7 +19,7 @@ const PhotoGangBanger: FC<Props> = ({
   return (
     <div className={styles.profile}>
       <div className={styles.profileImage}>
-        <ProfileImage alt={name} src={image} onClick={() => alert("hei")} />
+        <GuiProfileImage alt={name} src={image} onClick={() => alert("hei")} />
       </div>
       <div>
         <p className={styles.profileInformation}>
