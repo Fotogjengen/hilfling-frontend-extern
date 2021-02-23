@@ -1,4 +1,4 @@
-import React, { FC, ForwardedRef, forwardRef } from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import styles from "./GuiHeaderLink.module.css";
 import cx from "classnames";
 import { DefaultProps } from "../../types";
