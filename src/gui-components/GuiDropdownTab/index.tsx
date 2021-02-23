@@ -72,10 +72,10 @@ const GuiDropdownTab: FC<Props> = ({ color, name, className }) => {
         <DropDownArrow clicked={clickedArrow} />
       </div>
       <GuiContentTab contentTabClass={content} name={name}>
-        {mock.map((name) => (
-          <div className={styles.column} key={name}>
+        {mock.map((mockedName) => (
+          <div className={styles.column} key={mockedName}>
             <ThreeDotsMenu />
-            {name}
+            {mockedName}
           </div>
         ))}
       </GuiContentTab>

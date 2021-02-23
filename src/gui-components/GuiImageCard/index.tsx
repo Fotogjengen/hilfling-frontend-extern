@@ -1,7 +1,6 @@
 import React, { FC } from "react";
-import GuiCard from "../GuiCard";
+import GuiCard, { Props as CardProps } from "../GuiCard";
 import { DefaultProps } from "../../types";
-import { Props as CardProps } from "../GuiCard";
 import styles from "./GuiImageCard.module.css";
 import cx from "classnames";
 
