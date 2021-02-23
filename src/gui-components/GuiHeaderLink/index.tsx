@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ForwardedRef, forwardRef } from "react";
 import styles from "./GuiHeaderLink.module.css";
 import cx from "classnames";
 import { DefaultProps } from "../../types";
+import { LinkProps } from "react-router-dom";
 
 export interface Props extends DefaultProps {
   /** Content inside tags */
@@ -10,21 +11,15 @@ export interface Props extends DefaultProps {
   onClick?: () => void;
 }
 
-const GuiHeaderLink: FC<Props> = ({
-  children,
-  onClick,
-  className,
-  ...rest
-}: Props) => (
-  <div className={styles.container}>
-    <p
-      className={cx(styles.headerTextElement, className)}
-      onClick={onClick}
-      {...rest}
-    >
-      {children}
-    </p>
-  </div>
+const GuiHeaderLink = forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref: ForwardedRef<HTMLAnchorElement>) => (
+    <div className={styles.container}>
+      <a ref={ref} {...props} className={cx(styles.headerTextElement)}>
+        {props.children}
+      </a>
+    </div>
+  ),
 );
+GuiHeaderLink.displayName = "GuiHeaderLink";
 
 export default GuiHeaderLink;
