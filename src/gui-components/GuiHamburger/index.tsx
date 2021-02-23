@@ -21,7 +21,7 @@ const GuiHamburger: FC<HamburgerMenuProps & DefaultProps> = ({
   const handleClick = () => {
     setDisplayCross(!displayCross);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    menuClicked(); // TODO: Can't fix because of 3rd party library
+    menuClicked(); // Can't fix because of 3rd party library
   };
   return (
     <div className={cx(styles.container, className)} {...rest}>

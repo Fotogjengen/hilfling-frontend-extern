@@ -4,13 +4,6 @@ import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
 
-/*const config = { // TODO: Can probably use something similar for Caro-FG-Auth
-  issuer: "https://dev-812828.okta.com/oauth2/default",
-  redirectUri: window.location.origin + "/implicit/callback",
-  clientId: "0oa2lxbl9mygTznZy357",
-  pkce: true,
-};*/
-
 const Routes: FC = () => {
   return (
     <Router>

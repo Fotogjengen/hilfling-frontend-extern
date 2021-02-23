@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import styles from "./GuiHeader.module.css";
 import GuiLogo from "../GuiLogo";
 import GuiHamburger from "../GuiHamburger";

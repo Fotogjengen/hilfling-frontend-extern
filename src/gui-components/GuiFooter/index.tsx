@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import styles from "./GuiFooter.module.css";
 import Facebook from "../Guiicons/Facebook";
 import Instagram from "../Guiicons/Instagram";
-import cx from "classnames";
 
 const GuiFooter: FC = () => {
   return (

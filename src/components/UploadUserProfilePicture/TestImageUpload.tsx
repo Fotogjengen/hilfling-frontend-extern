@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState, ChangeEvent, FormEvent } from "react";
+import React, { FC, useState, ChangeEvent, FormEvent } from "react";
 import FormData from "form-data";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 //GuiImage uploader for profile pictures
 const TestImageUpload: FC = () => {
-  const { register, handleSubmit } = useForm();
+  const { register } = useForm();
   const [file, setFile] = useState<File>();
 
   function onChange(e: ChangeEvent<HTMLInputElement>) {

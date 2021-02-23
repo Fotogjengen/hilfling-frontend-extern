@@ -1,3 +1,3 @@
-export { default as CheckboxSvg } from "./Checkbox";
-export { default as LogoSvg } from "./Logo";
-export { default as RadioButtonSvg } from "./RadioButton";
+export { default as CheckboxSvg } from "./CheckboxSvg";
+export { default as LogoSvg } from "./LogoSvg";
+export { default as RadioButtonSvg } from "./RadioButtonSvg";

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import cx from "classnames";
 import styles from "./GuiOverflow.module.css";
 import { DefaultProps } from "../../../types";
@@ -8,7 +8,7 @@ interface Props extends DefaultProps {
   overflowTabClass: string;
 }
 
-const GuiOverflowMenu2: React.FC<Props> = ({
+const GuiOverflowMenu2: FC<Props> = ({
   overflowTabClass,
   children,
   className,

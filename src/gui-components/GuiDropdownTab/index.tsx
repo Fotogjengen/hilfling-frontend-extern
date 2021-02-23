@@ -4,12 +4,7 @@ import styles from "./GuiDropdownTab.module.css";
 import { DefaultProps } from "../../types";
 import GuiContentTab from "../GuiContentTab";
 import DropDownArrow from "../Guiicons/DropDownArrow";
-import OverflowMenuIcon from "../Guiicons/OverflowMenuIcon";
-import OverflowItem from "../GuiOverflowMenu/GuiOverflowTab/OverflowItem";
-import GuiOverflowMenuItem from "../GuiOverflowMenu/GuiOverflowTab/OverflowItem";
 import ThreeDotsMenu from "../GuiOverflowMenu";
-
-//type ColorType = "green" | "blue" | "purple" | "red" | "yellow";
 
 interface Props extends DefaultProps {
   color: string;
@@ -20,7 +15,7 @@ interface Props extends DefaultProps {
 
 //må vel få laget en funksjon som kan brukes til å endre isOpen til true dersom den blir trykket på
 
-const GuiDropdownTab: React.FC<Props> = ({ color, name, className }: Props) => {
+const GuiDropdownTab: FC<Props> = ({ color, name, className }) => {
   const [toggle, setToggle] = useState(false);
   const [clickedArrow, setClickedArrow] = useState(false);
   const mock = [
@@ -49,12 +44,12 @@ const GuiDropdownTab: React.FC<Props> = ({ color, name, className }: Props) => {
     "hei",
   ];
 
-  let Content = "";
+  let content = "";
 
   if (toggle) {
-    Content = "showContent";
+    content = "showContent";
   } else {
-    Content = "hideContent";
+    content = "hideContent";
   }
 
   function handleClick() {
@@ -76,7 +71,7 @@ const GuiDropdownTab: React.FC<Props> = ({ color, name, className }: Props) => {
         {name}
         <DropDownArrow clicked={clickedArrow} />
       </div>
-      <GuiContentTab contentTabClass={Content} name={name}>
+      <GuiContentTab contentTabClass={content} name={name}>
         {mock.map((name) => (
           <div className={styles.column} key={name}>
             <ThreeDotsMenu />

@@ -1,9 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import cx from "classnames";
 import styles from "./GuiContentTab.module.css";
 import { DefaultProps } from "../../types";
-
-//type ColorType = "green" | "blue" | "purple" | "red" | "yellow";
 
 interface Props extends DefaultProps {
   contentTabClass: string;
@@ -12,7 +10,7 @@ interface Props extends DefaultProps {
   children?: any;
 }
 
-const GuiContentTab: React.FC<Props> = ({
+const GuiContentTab: FC<Props> = ({
   contentTabClass,
   name,
   children,
@@ -22,7 +20,6 @@ const GuiContentTab: React.FC<Props> = ({
     [styles.hide]: contentTabClass == "hideContent",
     [styles.ContentTab]: contentTabClass == "ContentTab",
   });
-  const newname = name.toLowerCase();
 
   return <div className={ContentTabClass}>{children}</div>;
 };

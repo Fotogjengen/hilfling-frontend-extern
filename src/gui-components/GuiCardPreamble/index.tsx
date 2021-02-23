@@ -1,9 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import GuiDotDivider, { ColorType } from "../GuiDotDivider";
 import cx from "classnames";
 import styles from "./GuiCardPreamble.module.css";
-import { DefaultProps } from "../../types";
-import { CardType } from "../../types";
+import { DefaultProps, CardType } from "../../types";
 
 interface Props extends DefaultProps {
   /** Number of images in event album */

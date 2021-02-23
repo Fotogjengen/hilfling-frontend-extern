@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent } from "react";
+import React, { FC } from "react";
 import styles from "./GuiLogo.module.css";
 import { LogoSvg } from "../Guiicons";
 import { DefaultProps } from "../../types";
