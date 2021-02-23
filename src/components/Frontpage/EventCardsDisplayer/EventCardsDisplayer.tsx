@@ -6,13 +6,6 @@ import {
   GuiImageCard,
 } from "../../../gui-components";
 
-type UKA = "uka";
-type SAMFUNDET = "samfundet";
-type ISFIT = "isfit";
-type ANNET = "annet";
-
-type EventType = UKA | SAMFUNDET | ISFIT | ANNET;
-
 interface Props {
   title?: string;
   images?: number;
@@ -21,13 +14,7 @@ interface Props {
   image?: string;
 }
 
-const EventCardsDisplayer: FC<Props> = ({
-  title,
-  images,
-  date,
-  location,
-  image,
-}: Props) => {
+const EventCardsDisplayer: FC<Props> = ({}: Props) => {
   return (
     <div className={styles.container}>
       <GuiImageCard
@@ -40,7 +27,7 @@ const EventCardsDisplayer: FC<Props> = ({
           color="red"
           date="12.10.2020"
           images={123}
-          location={"Daglighallen"}
+          location={"Edgar"}
           type={"EventCard"}
         />
       </GuiImageCard>
@@ -68,7 +55,7 @@ const EventCardsDisplayer: FC<Props> = ({
           color="red"
           date="12.10.2020"
           images={123}
-          location={"Daglighallen"}
+          location={"Daglighallen2"}
           type={"EventCard"}
         />
       </GuiImageCard>
@@ -82,7 +69,7 @@ const EventCardsDisplayer: FC<Props> = ({
           color="red"
           date="12.10.2020"
           images={123}
-          location={"Daglighallen"}
+          location={"Daglighallen3"}
           type={"EventCard"}
         />
       </GuiImageCard>
