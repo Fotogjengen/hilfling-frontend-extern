@@ -1,5 +1,4 @@
-import React, { FC, useRef } from "react";
-import DropDownArrow from "../Guiicons/DropDownArrow";
+import React, { FC } from "react";
 import styles from "./GuiDropdown.module.css";
 import cx from "classnames";
 
