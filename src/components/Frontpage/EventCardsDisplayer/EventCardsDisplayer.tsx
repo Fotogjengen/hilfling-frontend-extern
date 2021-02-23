@@ -1,6 +1,10 @@
 import React, { FC } from "react";
 import styles from "./EventCardsDisplayer.module.css";
-import { CardTitle, CardPreamble, ImageCard } from "hilfling-gui/lib";
+import {
+  GuiCardPreamble,
+  GuiCardTitle,
+  GuiImageCard,
+} from "../../../gui-components";
 
 type UKA = "uka";
 type SAMFUNDET = "samfundet";
@@ -26,62 +30,62 @@ const EventCardsDisplayer: FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.container}>
-      <ImageCard
+      <GuiImageCard
         placement={"left"}
         type="samfundet"
         image={"https://www.w3schools.com/css/img_lights.jpg"}
       >
-        <CardTitle capitalized title={"Temafest: Halloween"} />
-        <CardPreamble
+        <GuiCardTitle capitalized title={"Temafest: Halloween"} />
+        <GuiCardPreamble
           color="red"
           date="12.10.2020"
           images={123}
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </ImageCard>
-      <ImageCard
+      </GuiImageCard>
+      <GuiImageCard
         placement={"left"}
         type="samfundet"
         image={"https://www.w3schools.com/css/img_lights.jpg"}
       >
-        <CardTitle capitalized title={"Temafest: Halloween"} />
-        <CardPreamble
+        <GuiCardTitle capitalized title={"Temafest: Halloween"} />
+        <GuiCardPreamble
           color="red"
           date="12.10.2020"
           images={123}
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </ImageCard>
-      <ImageCard
+      </GuiImageCard>
+      <GuiImageCard
         placement={"left"}
         type={"samfundet"}
         image={"https://www.w3schools.com/css/img_lights.jpg"}
       >
-        <CardTitle capitalized title={"Temafest: Halloween"} />
-        <CardPreamble
+        <GuiCardTitle capitalized title={"Temafest: Halloween"} />
+        <GuiCardPreamble
           color="red"
           date="12.10.2020"
           images={123}
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </ImageCard>
-      <ImageCard
+      </GuiImageCard>
+      <GuiImageCard
         placement={"left"}
         type="samfundet"
         image={"https://www.w3schools.com/css/img_lights.jpg"}
       >
-        <CardTitle capitalized title={"Temafest: Halloween"} />
-        <CardPreamble
+        <GuiCardTitle capitalized title={"Temafest: Halloween"} />
+        <GuiCardPreamble
           color="red"
           date="12.10.2020"
           images={123}
           location={"Daglighallen"}
           type={"EventCard"}
         />
-      </ImageCard>
+      </GuiImageCard>
     </div>
   );
 };

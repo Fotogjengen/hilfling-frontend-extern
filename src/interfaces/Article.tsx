@@ -1,6 +1,6 @@
-import { BaseModel } from './BaseModel';
-import { SecurityLevel } from './SecurityLevel';
-import { PhotoGangBanger } from './PhotoGangBanger';
+import { BaseModel } from "./BaseModel";
+import { SecurityLevel } from "./SecurityLevel";
+import { PhotoGangBanger } from "./PhotoGangBanger";
 
 export interface Article extends BaseModel {
   tag: string;

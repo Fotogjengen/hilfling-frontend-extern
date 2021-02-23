@@ -1,9 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
-import { Carousel as CarouselComponent, CarouselItems } from "hilfling-gui/lib";
-import { BaseCarouselItem } from "hilfling-gui/lib/types";
 import styles from "./Carousel.module.css";
+import {
+  GuiCarouselItems,
+  GuiCarousel as CarouselComponent,
+} from "../../../gui-components";
+import { BaseCarouselItem } from "../../../types";
 
-const Carousel: FC<{}> = () => {
+const Carousel: FC<Record<string, never>> = () => {
   const [items, setItems] = useState<BaseCarouselItem[]>([]);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ const Carousel: FC<{}> = () => {
   return (
     <div className={styles.fitToCard}>
       <CarouselComponent delay={5000} height={500} width={900}>
-        {CarouselItems({ width: 900, height: 500, items })}
+        {GuiCarouselItems({ width: 900, height: 500, items })}
       </CarouselComponent>
     </div>
   );

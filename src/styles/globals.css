@@ -1,0 +1,96 @@
+@import "./variables.css";
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  font-size: 1rem;
+}
+
+body {
+  background: var(--hilfling-background-color);
+  color: var(--hilfling-font-color);
+  position: relative;
+  font-family: "Raleway", Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--hilfling-link-color);
+  cursor: pointer;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: initial;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* h1,
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+h5 {
+}
+
+h6 {
+}
+
+img {
+}
+
+table {
+}
+
+th {
+}
+
+th,
+td {
+}
+
+thead {
+}
+
+a:hover {
+}
+
+form {
+}
+
+p {
+}
+
+ul {
+}
+
+i {
+}
+
+label {
+} */
