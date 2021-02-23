@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import configureStore from "./store/index";
 import "./index.css";
 import Routes from "./Routes";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import guistyles from "./styles/utilities.module.css";
 import { GuiFooter } from "./gui-components";
@@ -16,8 +17,10 @@ const Root: React.FC = () => (
     <div>
       <div className={guistyles.container}>
         <div className={"container"}>
-          <HeaderComponent />
-          <Routes />
+          <Router>
+            <HeaderComponent />
+            <Routes />
+          </Router>
         </div>
       </div>
       <GuiFooter />
