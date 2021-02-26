@@ -19,6 +19,9 @@ const HeaderComponent: FC = () => {
         <Link component={GuiHeaderLink} to="/about">
           OM OSS
         </Link>
+        <Link component={GuiHeaderLink} to="/fotogjengen">
+          FOTOGJENGEN
+        </Link>
         <Link component={GuiHeaderLink} to="/login">
           LOGG INN
         </Link>

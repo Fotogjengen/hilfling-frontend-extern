@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import PhotoGangBanger from "../../components/About/PhotoGangBanger";
+import PhotoGangBanger from "../../components/PhotoGangBanger/PhotoGangBanger";
 import { activePhotoGangBangers, retiredPhotoGangBangers } from "./mockdata";
-import styles from "./About.module.css";
+import styles from "./PhotoGangBangers.module.css";
 
-const About: FC = () => {
+const PhotoGangBangers: FC = () => {
   const activeUsers = activePhotoGangBangers; //[TODO]: fetch from API
   const retiredUsers = retiredPhotoGangBangers; //[TODO]: fetch from API
 
@@ -39,4 +39,4 @@ const About: FC = () => {
   );
 };
 
-export default About;
+export default PhotoGangBangers;
