@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styles from "./Header.module.css";
 import { GuiHeader, GuiHeaderLink } from "../../gui-components";
+import { Link } from "react-router-dom";
 
 // interface Props {
 //   login: () => void;
@@ -12,9 +13,15 @@ const HeaderComponent: FC = () => {
   return (
     <div className={styles.header}>
       <GuiHeader>
-        <GuiHeaderLink>BILDER</GuiHeaderLink>
-        <GuiHeaderLink>OM OSS</GuiHeaderLink>
-        <GuiHeaderLink>LOGG INN</GuiHeaderLink>
+        <Link component={GuiHeaderLink} to="/photos">
+          BILDER
+        </Link>
+        <Link component={GuiHeaderLink} to="/about">
+          OM OSS
+        </Link>
+        <Link component={GuiHeaderLink} to="/login">
+          LOGG INN
+        </Link>
         {/* {authenticated ? (
           <GuiHeaderLink onClick={logout}>LOGG UT</GuiHeaderLink>
         ) : (
