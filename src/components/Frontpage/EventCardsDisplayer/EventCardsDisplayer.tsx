@@ -102,7 +102,7 @@ const EventCardsDisplayer: FC<Props> = () => {
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"
-          aria-label="full width tabs example"
+          aria-label="event card tabs"
         >
           <Tab label="SAMFUNDET" />
           <Tab label="ISFIT" />

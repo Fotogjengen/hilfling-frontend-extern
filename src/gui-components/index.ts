@@ -22,8 +22,6 @@ import GuiLogo from "./GuiLogo";
 import GuiOverflowMenu from "./GuiOverflowMenu";
 import GuiPhotographerTag from "./GuiPhotographerTag";
 import GuiRadioButton from "./GuiRadioButton";
-import GuiTab from "./GuiTab";
-import GuiTabs from "./GuiTabs";
 
 export {
   GuiButton,
@@ -51,6 +49,4 @@ export {
   GuiOverflowMenu,
   GuiPhotographerTag,
   GuiRadioButton,
-  GuiTab,
-  GuiTabs,
 };
