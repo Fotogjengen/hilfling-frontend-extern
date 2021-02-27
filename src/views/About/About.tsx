@@ -9,45 +9,15 @@ import {
   Typography,
   Box,
   Paper,
-  makeStyles,
   Grid,
   List,
   ListItem,
   ListItemText,
-  Avatar,
-  createStyles,
-  Theme,
 } from "@material-ui/core";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      width: "400px",
-      padding: "18px",
-    },
-    redBackground: {
-      background: "#DA7777",
-    },
-    blueBackground: {
-      background: "#7793DA",
-    },
-    avatarRoot: {
-      display: "flex",
-      "& > *": {
-        margin: theme.spacing(1),
-      },
-    },
-    avatar: {
-      width: theme.spacing(15),
-      height: theme.spacing(15),
-    },
-  }),
-);
-
 const About: FC = () => {
-  const classes = useStyles();
   const [tabValue, setTabValue] = useState<number>(0);
 
   const activeUsers = activePhotoGangBangers; //[TODO]: fetch from API
@@ -112,7 +82,7 @@ const About: FC = () => {
           <Typography paragraph>
             Alle bilder tatt av fotogjengen skal krediteres med:
           </Typography>
-          <Paper className={cn(classes.paper, classes.redBackground)}>
+          <Paper className={cn(styles.paper, styles.redBackground)}>
             <Typography>Foto: foto.samfundet.no</Typography>
           </Paper>
         </Box>
@@ -127,7 +97,7 @@ const About: FC = () => {
             Bestilling av bilder på papir foregår via e-post. Send en e-post til
             fg-salg@samfundet.no med følgende opplysninger:
           </Typography>
-          <Paper className={cn(classes.paper, classes.blueBackground)}>
+          <Paper className={cn(styles.paper, styles.blueBackground)}>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <div>
