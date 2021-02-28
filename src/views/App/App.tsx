@@ -7,33 +7,6 @@ import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/
 // import { useAuth } from "../../utils/auth";
 
 const App: FC = (/* { auth } */) => {
-  // Example call to backend
-  // TODO: Remove this
-  //   PhotoTagApi.getAll()
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-
-  //   PhotoTagApi.getById(1)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-
-  //   const phototag: PhotoTag = {
-  //     tag: "TagMadeFromFrontend2"
-  //   };
-  //   PhotoTagApi.create(phototag)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err.response.data));
-  //   // -----API Example done-----
-
-  /*
-  const login = async () => {
-    auth.login("/");
-  };
-  const logout = async () => {
-    auth.logout("/");
-  };
-  */
-
   return (
     <div className={styles.contentContainer}>
       <div className={styles.leftSide}>
