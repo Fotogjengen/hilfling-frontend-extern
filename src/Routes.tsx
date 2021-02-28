@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
+import DigitalPhotoUpload from "./views/PhotoUpload/DigitalPhotoUpload";
 
 const Routes: FC = () => {
   return (
@@ -10,6 +11,8 @@ const Routes: FC = () => {
       <Route exact path="/" component={App} />
       <Route exact path="/about" component={About} />
       <Route exact path="/myprofile" component={MyProfile} />
+
+      <Route exact path="/intern/last-opp" component={DigitalPhotoUpload} />
     </>
   );
 };
