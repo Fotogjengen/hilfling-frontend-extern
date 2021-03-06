@@ -1,0 +1,46 @@
+@import "../../styles/variables.css";
+@import "../../styles/utilities.module.css";
+
+.footer {
+  width: 100%;
+  background: var(--hilfling-color-black);
+  color: white;
+  margin-top: 50px;
+}
+
+.footerContent {
+  display: flex;
+  padding: 20px 0;
+  width: 100%;
+  max-width: var(--hilfling-max-width);
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.section {
+  flex: 1;
+  text-align: center;
+  padding: 20px 60px 20px 60px;
+}
+
+.follow {
+  display: flex;
+  margin-left: 30%;
+}
+
+.media {
+  padding-left: 10px;
+  margin-top: 7px;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+a {
+  font-size: 1.2rem;
+}

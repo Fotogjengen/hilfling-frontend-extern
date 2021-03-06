@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Card } from "hilfling-gui/lib";
+import { GuiCard } from "../../../gui-components";
 
 interface Props {
   username: string;
@@ -10,7 +10,7 @@ interface Props {
 const ProfileCard: FC<Props> = ({ username, email, fgEmail }: Props) => {
   return (
     <div>
-      <Card rounded>
+      <GuiCard rounded>
         <p>
           <b>Brukernavn:</b> {username} <br />
           <b>E-post:</b> {email} <br />
@@ -19,7 +19,7 @@ const ProfileCard: FC<Props> = ({ username, email, fgEmail }: Props) => {
           {/* TODO: Fix a tag under */}
           {/* <a href="">Endre instillinger</a> */}
         </p>
-      </Card>
+      </GuiCard>
     </div>
   );
 };

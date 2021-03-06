@@ -12,9 +12,9 @@ export const api = axios.create({
   headers: HEADERS,
 });
 
-export async function getTest(): Promise<string> {
+export async function getTest(): Promise<unknown> {
   return api
     .get("/")
-    .then((res) => res.data["test"])
+    .then((res) => res.data[""])
     .catch((e) => console.error(e));
 }

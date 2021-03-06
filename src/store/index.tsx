@@ -5,7 +5,7 @@ const rootReducer = combineReducers({});
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export default function configureStore() {
+export default function configureStore(): unknown {
   const middleWares = [];
 
   if (process.env.NODE_ENV !== "production") {

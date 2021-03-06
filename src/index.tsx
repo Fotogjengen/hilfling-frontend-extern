@@ -4,10 +4,11 @@ import { Provider } from "react-redux";
 import configureStore from "./store/index";
 import "./index.css";
 import Routes from "./Routes";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import Header from "./components/Header/Header";
-import { Footer } from "hilfling-gui/lib";
-import guistyles from "hilfling-gui/lib/styles/utilities.module.css";
+import guistyles from "./styles/utilities.module.css";
+import { GuiFooter } from "./gui-components";
+import HeaderComponent from "./components/Header/Header";
 
 const store = configureStore();
 
@@ -16,11 +17,13 @@ const Root: React.FC = () => (
     <div>
       <div className={guistyles.container}>
         <div className={"container"}>
-          <Header />
-          <Routes />
+          <Router>
+            <HeaderComponent />
+            <Routes />
+          </Router>
         </div>
       </div>
-      <Footer />
+      <GuiFooter />
     </div>
   </Provider>
 );

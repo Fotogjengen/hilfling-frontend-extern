@@ -1,0 +1,17 @@
+.container {
+  width: fit-content;
+  height: fit-content;
+}
+
+.headerTextElement {
+  padding: 2rem;
+  user-select: none;
+  font-size: 1.7rem;
+  margin: 0;
+  color: black;
+}
+
+.headerTextElement:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

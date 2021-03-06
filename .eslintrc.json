@@ -6,7 +6,6 @@
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
-    "plugin:jsx-a11y/recommended",
     "plugin:import/errors",
     //"plugin:cypress/recommended",
     "plugin:import/typescript"
@@ -31,6 +30,7 @@
     "react/self-closing-comp": "error",
     "deprecation/deprecation": "error",
     "import/no-unresolved": "error",
-    "@typescript-eslint/unbound-method": "error"
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off" // TODO: want this on
   }
 }

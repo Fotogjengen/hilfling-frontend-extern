@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { PhotographerTag } from "hilfling-gui/lib";
+import React, { FC, ReactNode } from "react";
 import styles from "./ProfileTags.module.css";
+import { GuiPhotographerTag } from "../../../gui-components";
 
 type ColorType = "red" | "blue" | "purple" | "green" | "yellow";
 
@@ -11,15 +11,15 @@ interface Props {
 }
 
 const ProfileTags: FC<Props> = ({ tags }: Props) => {
-  const PhotographerTags = () =>
+  const PhotographerTags = (): ReactNode =>
     tags.map((tag, i) => (
-      <PhotographerTag
+      <GuiPhotographerTag
         className={styles.tag}
         color={colorList[i % colorList.length]}
         key={tag}
       >
         {tag}
-      </PhotographerTag>
+      </GuiPhotographerTag>
     ));
 
   return <div>{PhotographerTags()}</div>;
