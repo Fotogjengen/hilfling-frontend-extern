@@ -1,11 +1,25 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  $CombinedState,
+  AnyAction,
+  Store,
+} from "redux";
 import { logger } from "redux-logger";
 
 const rootReducer = combineReducers({});
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export default function configureStore(): unknown {
+export default function configureStore(): Store<
+  {
+    readonly [$CombinedState]?: unknown;
+  },
+  AnyAction
+> & {
+  dispatch: unknown;
+} {
   const middleWares = [];
 
   if (process.env.NODE_ENV !== "production") {
