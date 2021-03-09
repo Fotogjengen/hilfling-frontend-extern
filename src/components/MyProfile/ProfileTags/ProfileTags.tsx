@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { FC, ReactNode } from "react";
-=======
-import React, { FC } from "react";
->>>>>>> origin/master
 import styles from "./ProfileTags.module.css";
 import { GuiPhotographerTag } from "../../../gui-components";
 
