@@ -15,41 +15,6 @@ const ShowMotive: FC = ({}) => {
         image:
           "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
       },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
     ],
   });
 
@@ -72,7 +37,7 @@ const ShowMotive: FC = ({}) => {
       </div>
       <div className="filterAndImages">
         <div className="imageFilter">
-          <h2 className="filterText">______FILTER______</h2>
+          <h2 className="filterText">FILTER</h2>
           <div className="vl" />
         </div>
         <div className="flex">
