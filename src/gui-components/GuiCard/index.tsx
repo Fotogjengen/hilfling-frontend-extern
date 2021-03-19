@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import cx from "classnames";
 import styles from "./GuiCard.module.css";
 import { DefaultProps, EventType } from "../../types";
 
 export interface Props extends DefaultProps {
   /** Children components */
-  children?: any;
+  children?: ReactNode;
   /** Specifies type of event card */
   type?: EventType;
   /** Rounded corners */
@@ -23,7 +23,6 @@ const GuiCard: FC<Props> = ({
   className,
   shadow = true,
   onClick,
-  ...rest
 }: Props) => {
   console.log(type);
   return (

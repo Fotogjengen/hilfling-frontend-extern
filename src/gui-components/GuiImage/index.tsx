@@ -8,7 +8,7 @@ interface Props extends DefaultProps {
   alt: string;
 }
 
-const GuiImage: FC<Props> = ({ src, alt, className, ...rest }: Props) => {
+const GuiImage: FC<Props> = ({ src, alt, ...rest }: Props) => {
   return <img className={cx(styles.image)} src={src} alt={alt} {...rest} />;
 };
 

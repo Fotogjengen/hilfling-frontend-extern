@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/api/v1"; //process.env.BASE_URL;
@@ -12,9 +14,10 @@ export const api = axios.create({
   headers: HEADERS,
 });
 
-export async function getTest(): Promise<string> {
+export async function getTest(): Promise<unknown> {
+  // TODO: Fix the ignored eslint error here
   return api
     .get("/")
-    .then((res) => res.data["test"])
+    .then((res) => res.data[""])
     .catch((e) => console.error(e));
 }

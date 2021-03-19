@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import styles from "./GuiHeader.module.css";
 import GuiLogo from "../GuiLogo";
 import GuiHamburger from "../GuiHamburger";
@@ -7,7 +7,7 @@ import cx from "classnames";
 
 interface Props extends DefaultProps {
   /** Elements in the header, after hamburger meny */
-  children?: any;
+  children?: ReactNode;
 }
 
 const GuiHeader: FC<Props> = ({ children, className, ...rest }: Props) => (

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-const OverflowMenuIcon: FC<{}> = () => {
+const OverflowMenuIcon: FC = () => {
   return (
     <div>
       <svg

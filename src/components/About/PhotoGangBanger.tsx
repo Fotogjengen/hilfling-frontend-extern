@@ -15,11 +15,15 @@ const PhotoGangBanger: FC<Props> = ({
   position,
   email,
 }: Props) => {
+  const onClick = (): void => {
+    alert("Hei");
+  };
+
   const mailTo = "mailto:" + email;
   return (
     <div className={styles.profile}>
       <div className={styles.profileImage}>
-        <GuiProfileImage alt={name} src={image} onClick={() => alert("hei")} />
+        <GuiProfileImage alt={name} src={image} onClick={onClick} />
       </div>
       <div>
         <p className={styles.profileInformation}>

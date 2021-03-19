@@ -1,7 +1,7 @@
-import React, { FC, useState, ChangeEvent, FormEvent } from "react";
+import React, { FC, useState, ChangeEvent } from "react";
 import FormData from "form-data";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 //GuiImage uploader for profile pictures
 const TestImageUpload: FC = () => {
@@ -15,7 +15,7 @@ const TestImageUpload: FC = () => {
     }
   }
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  function onSubmit() {
     const formData = new FormData();
     formData.append("file", file);
     axios
@@ -24,10 +24,10 @@ const TestImageUpload: FC = () => {
           "Content-Type": `multipart/form-data;`,
         },
       })
-      .then((result: any) =>
+      .then((result: AxiosResponse<string>) =>
         console.log("Files successfully uploaded!", result),
       )
-      .catch((error: any) => console.log(error));
+      .catch((error: AxiosResponse<string>) => console.log(error));
 
     console.log(formData);
   }

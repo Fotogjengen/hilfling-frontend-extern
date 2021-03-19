@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import cx from "classnames";
 import styles from "./GuiDropdownTab.module.css";
 import { DefaultProps } from "../../types";
@@ -10,7 +10,7 @@ interface Props extends DefaultProps {
   color: string;
   name: string;
   //hva skal dukke opp dersom man trykker på
-  child?: any;
+  child?: ReactNode;
 }
 
 //må vel få laget en funksjon som kan brukes til å endre isOpen til true dersom den blir trykket på

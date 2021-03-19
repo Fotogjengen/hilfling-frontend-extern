@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import cx from "classnames";
 import styles from "./GuiPhotographerTag.module.css";
 import { DefaultProps } from "../../types";
@@ -7,7 +7,7 @@ type ColorType = "green" | "blue" | "purple" | "red" | "yellow";
 
 interface Props extends DefaultProps {
   /** Text inside tag */
-  children?: any;
+  children?: ReactNode;
   /** Color of tag */
   color: ColorType;
 }

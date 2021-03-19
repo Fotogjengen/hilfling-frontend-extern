@@ -1,18 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import cx from "classnames";
 import styles from "./GuiOverflowTab.module.css";
 import { DefaultProps } from "../../../types";
 
 interface Props extends DefaultProps {
-  children?: any;
+  children?: ReactNode;
   overflowTabClass: string;
 }
 
-const OverflowMenu2: FC<Props> = ({
-  overflowTabClass,
-  children,
-  className,
-}: Props) => {
+const OverflowMenu2: FC<Props> = ({ overflowTabClass, children }: Props) => {
   const OverflowTabClass = cx(styles.OverflowTab, {
     [styles.OverflowMenu]: overflowTabClass == "showContent",
   });

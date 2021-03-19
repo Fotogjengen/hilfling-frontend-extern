@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from "react";
+import React, { ForwardedRef, forwardRef, ReactNode } from "react";
 import styles from "./GuiHeaderLink.module.css";
 import cx from "classnames";
 import { DefaultProps } from "../../types";
@@ -6,7 +6,7 @@ import { LinkProps } from "react-router-dom";
 
 export interface Props extends DefaultProps {
   /** Content inside tags */
-  children: any;
+  children: ReactNode;
   /** Function that gets called when clicked */
   onClick?: () => void;
 }
