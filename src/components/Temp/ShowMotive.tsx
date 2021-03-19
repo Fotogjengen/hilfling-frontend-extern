@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import "./style.css";
 import MotiveImage from "./MotiveImage";
 
-const ShowMotive: FC = ({}) => {
+const ShowMotive: FC = () => {
   const [images] = useState({
     imageList: [
       {
