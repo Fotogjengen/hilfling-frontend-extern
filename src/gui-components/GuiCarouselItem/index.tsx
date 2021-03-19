@@ -1,4 +1,4 @@
-import React, { FC, ReactNodeArray } from "react";
+import React, { FC, ReactNode, ReactNodeArray } from "react";
 import cx from "classnames";
 import styles from "./GuiCarouselItem.module.css";
 import { BaseCarouselItem } from "../../types";
@@ -34,11 +34,7 @@ const GuiCarouselItem: FC<GuiCarouselItemProps> = ({
   );
 };
 
-const GuiCarouselItems = ({
-  items,
-  height,
-  width,
-}: GuiCarouselItemsProps): ReactNodeArray => {
+const GuiCarouselItems = ({ items, height, width }: GuiCarouselItemsProps) => {
   return items.map((item, index) => (
     <GuiCarouselItem
       image={item.image}
