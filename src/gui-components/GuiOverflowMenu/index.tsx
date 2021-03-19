@@ -1,4 +1,4 @@
-import React, { FC, KeyboardEvent } from "react";
+import React, { FC, KeyboardEvent, ReactNode } from "react";
 import styles from "./GuiOverflowMenu.module.css";
 import { DefaultProps } from "../../types";
 import ThreeDots from "../Guiicons/ThreeDots";
@@ -13,11 +13,11 @@ interface ThreeDotsItem {
 }
 
 interface Props extends DefaultProps {
-  children?: any;
+  children?: ReactNode;
   items?: [ThreeDotsItem];
 }
 
-const GuiOverflowMenu: FC<Props> = ({ className, items, children }: Props) => {
+const GuiOverflowMenu: FC<Props> = () => {
   const { ref, isVisible, setIsVisible } = useVisible(false);
   const content = "showContent";
   const mock: [ThreeDotsItem] = [

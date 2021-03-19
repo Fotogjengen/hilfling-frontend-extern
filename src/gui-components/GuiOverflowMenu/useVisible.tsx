@@ -1,6 +1,19 @@
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  RefObject,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-function useVisible(initialIsVisible: boolean) {
+interface IObject {
+  ref: RefObject<HTMLDivElement>;
+  isVisible: boolean;
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+function useVisible(initialIsVisible: boolean): IObject {
   const [isVisible, setIsVisible] = useState(initialIsVisible);
   const ref = useRef<HTMLDivElement>(null);
 

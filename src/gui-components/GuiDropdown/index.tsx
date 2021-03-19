@@ -5,7 +5,7 @@ import cx from "classnames";
 interface Props {
   options: Array<string>;
   whenSelected: () => void;
-  className?: any;
+  className?: string;
   inputRef?: React.Ref<HTMLSelectElement>;
 }
 

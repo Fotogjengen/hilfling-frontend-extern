@@ -16,8 +16,6 @@ interface Props extends DefaultProps, CardProps {
   image: string;
   /** onClick method */
   onClick?: () => void;
-  /** what is to be displayed on the card */
-  children?: any;
 }
 
 const GuiImageCard: FC<Props> = ({

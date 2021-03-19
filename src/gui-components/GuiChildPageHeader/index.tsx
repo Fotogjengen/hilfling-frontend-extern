@@ -7,11 +7,7 @@ interface Props extends DefaultProps {
   title: string;
 }
 
-const GuiChildPageHeader: FC<Props> = ({
-  title,
-  className,
-  ...rest
-}: Props) => {
+const GuiChildPageHeader: FC<Props> = ({ title, className }: Props) => {
   const style = cx(styles.header, className);
   return (
     <div>

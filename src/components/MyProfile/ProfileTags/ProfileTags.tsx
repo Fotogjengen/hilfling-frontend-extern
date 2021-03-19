@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import styles from "./ProfileTags.module.css";
 import { GuiPhotographerTag } from "../../../gui-components";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const ProfileTags: FC<Props> = ({ tags }: Props) => {
-  const PhotographerTags = () =>
+  const PhotographerTags = (): ReactNode =>
     tags.map((tag, i) => (
       <GuiPhotographerTag
         className={styles.tag}

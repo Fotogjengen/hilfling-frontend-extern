@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, ReactChildren } from "react";
 import cx from "classnames";
 import styles from "./GuiButton.module.css";
 import { DefaultProps } from "../../types";
 
 interface Props extends DefaultProps {
   /** Content inside */
-  children?: any;
+  children?: ReactChildren;
   /** Primary button styling */
   primary?: boolean;
   /** Danger button styling (red button) */
@@ -24,7 +24,6 @@ const GuiButton: FC<Props> = ({
   warning,
   onClick,
   disabled = false,
-  submit,
   className,
   ...rest
 }: Props) => {

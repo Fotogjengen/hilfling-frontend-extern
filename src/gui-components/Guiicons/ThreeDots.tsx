@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 
 interface Props {
   size: number;
-  children?: any;
+  children?: ReactNode;
 }
 
 const ThreeDots: FC<Props> = ({ size }) => {

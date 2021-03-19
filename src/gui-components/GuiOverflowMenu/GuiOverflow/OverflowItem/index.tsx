@@ -4,7 +4,7 @@ import styles from "./GuiOverflowItem.module.css";
 
 interface Props extends DefaultProps {
   text: string;
-  icon: any;
+  icon: FC;
 }
 
 const GuiOverflowMenuItem: FC<Props> = ({ text, icon }: Props) => {
