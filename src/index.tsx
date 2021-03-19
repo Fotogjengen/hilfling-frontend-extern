@@ -9,7 +9,7 @@ import { GuiFooter } from "./gui-components";
 import HeaderComponent from "./components/Header/Header";
 
 const Root: React.FC = () => (
-  <div>
+  <>
     <div className={guistyles.container}>
       <div className={"container"}>
         <Router>
@@ -19,7 +19,7 @@ const Root: React.FC = () => (
       </div>
     </div>
     <GuiFooter />
-  </div>
+  </>
 );
 
 render(<Root />, document.getElementById("root"));

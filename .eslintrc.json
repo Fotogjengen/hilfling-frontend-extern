@@ -32,5 +32,6 @@
     "import/no-unresolved": "error",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/no-unsafe-assignment": "off" // TODO: want this on
+    //"@typescript-eslint/no-explicit-any": "error"
   }
 }
