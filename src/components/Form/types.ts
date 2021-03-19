@@ -8,6 +8,6 @@ export interface FormContext {
 
 export interface FormProps {
   initialValues: Record<string, unknown>;
-  validate: Validate<Record<string, unknown>>;
+  validate: Validate<any>;
   onSubmit: (values: unknown) => void;
 }
