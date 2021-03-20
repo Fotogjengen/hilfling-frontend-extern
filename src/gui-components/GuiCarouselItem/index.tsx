@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, ReactNodeArray } from "react";
+import React, { FC, ReactNodeArray } from "react";
 import cx from "classnames";
 import styles from "./GuiCarouselItem.module.css";
 import { BaseCarouselItem } from "../../types";
