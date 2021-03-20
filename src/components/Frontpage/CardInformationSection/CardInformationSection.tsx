@@ -21,7 +21,7 @@ const CardInformationSection: FC = () => {
       <GuiCard>
         <GuiCardTitle title={"Anmodning"} capitalized={true} />
         <p>
-          Trenger du en fotogreaf? Fotogjengen kan hjelpe deg! Les mer og anmod
+          Trenger du en fotograf? Fotogjengen kan hjelpe deg! Les mer og anmod
           oss her!
         </p>
       </GuiCard>
