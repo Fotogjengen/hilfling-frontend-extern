@@ -2,44 +2,9 @@ import React, { FC, useState } from "react";
 import "./style.css";
 import MotiveImage from "./MotiveImage";
 
-const ShowMotive: FC = ({}) => {
+const ShowMotive: FC = () => {
   const [images] = useState({
     imageList: [
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
       {
         _id: 1,
         image:
@@ -72,7 +37,7 @@ const ShowMotive: FC = ({}) => {
       </div>
       <div className="filterAndImages">
         <div className="imageFilter">
-          <h2 className="filterText">______FILTER______</h2>
+          <h2 className="filterText">FILTER</h2>
           <div className="vl" />
         </div>
         <div className="flex">

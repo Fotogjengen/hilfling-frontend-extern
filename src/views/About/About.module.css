@@ -10,3 +10,16 @@ h2 {
   font-size: 1.8rem;
   margin-top: 0; /*denne skal ikke i gui*/
 }
+
+.paper {
+  width: 400px;
+  padding: 18px;
+}
+
+.redBackground {
+  background-color: #da7777 !important;
+}
+
+.blueBackground {
+  background: #7793da !important;
+}
