@@ -26,12 +26,11 @@ const GuiCard: FC<Props> = ({
 }: Props) => {
   console.log(type);
   return (
-    <span
+    <div
       className={cx(
         {
           [styles.shadow]: shadow,
         },
-        styles.div,
         styles.card,
         className,
         type ? cx(styles[type]) : cx(rounded && styles.rounded),
@@ -39,7 +38,7 @@ const GuiCard: FC<Props> = ({
       onClick={onClick}
     >
       {children}
-    </span>
+    </div>
   );
 };
 
