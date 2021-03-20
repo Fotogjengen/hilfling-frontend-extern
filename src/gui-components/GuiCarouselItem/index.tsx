@@ -34,7 +34,11 @@ const GuiCarouselItem: FC<GuiCarouselItemProps> = ({
   );
 };
 
-const GuiCarouselItems = ({ items, height, width }: GuiCarouselItemsProps) => {
+const GuiCarouselItems = ({
+  items,
+  height,
+  width,
+}: GuiCarouselItemsProps): ReactNodeArray => {
   return items.map((item, index) => (
     <GuiCarouselItem
       image={item.image}
