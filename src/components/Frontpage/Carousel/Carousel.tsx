@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./Carousel.module.css";
 import {
   GuiCarouselItems,
@@ -26,10 +26,7 @@ const Carousel: FC<Record<string, never>> = () => {
   return (
     <div className={styles.fitToCard}>
       <CarouselComponent delay={5000} height={500} width={900}>
-        <Fragment>
-          {GuiCarouselItems({ width: 900, height: 500, items })}
-        </Fragment>
-        <Fragment>{items}</Fragment>
+        {GuiCarouselItems({ width: 900, height: 500, items })}
       </CarouselComponent>
     </div>
   );
