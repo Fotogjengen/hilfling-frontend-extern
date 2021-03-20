@@ -16,7 +16,7 @@ interface Props extends DefaultProps {
 
 const GuiDotDivider: FC<Props> = ({ color, className, ...rest }: Props) => {
   return (
-    <div
+    <span
       className={cx(styles.dotdivider, styles[color], className)}
       {...rest}
     />

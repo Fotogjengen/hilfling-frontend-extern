@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import cx from "classnames";
 import styles from "./GuiCardTitle.module.css";
 import { DefaultProps } from "../../types";
+import { Typography } from "@material-ui/core";
 
 interface Props extends DefaultProps {
   /** Title */
@@ -26,9 +27,9 @@ const GuiCardTitle: FC<Props> = ({
     className,
   );
   return (
-    <h2 className={classname} {...rest}>
+    <Typography component="span" variant="h5" className={classname} {...rest}>
       {title}
-    </h2>
+    </Typography>
   );
 };
 

@@ -33,21 +33,21 @@ const GuiCardPreamble: FC<Props> = ({
   switch (type) {
     case "EventCard":
       return (
-        <div className={cx(centeredText, className)} {...rest}>
+        <span className={cx(centeredText, className, styles.div)} {...rest}>
           {images} bilder
           <GuiDotDivider color={color} />
           {date}
           <GuiDotDivider color={color} />
           {location}
-        </div>
+        </span>
       );
     case "GjengfotoCard":
       return (
-        <div className={cx(centeredText)} {...rest}>
+        <span className={cx(centeredText, styles.div)} {...rest}>
           {images} bilder
           <GuiDotDivider color={color} />
           {date}
-        </div>
+        </span>
       );
     default:
       return <div>error</div>;

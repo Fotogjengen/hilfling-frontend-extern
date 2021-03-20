@@ -1,10 +1,4 @@
-import React, {
-  FC,
-  useEffect,
-  useState,
-  ReactNodeArray,
-  ReactNode,
-} from "react";
+import React, { FC, useEffect, useState, ReactNodeArray } from "react";
 import styles from "./GuiCarousel.module.css";
 import cx from "classnames";
 import { DefaultProps } from "../../types";

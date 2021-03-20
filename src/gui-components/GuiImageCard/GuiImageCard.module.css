@@ -29,3 +29,7 @@
 .card {
   height: auto;
 }
+
+.div {
+  display: block;
+}
