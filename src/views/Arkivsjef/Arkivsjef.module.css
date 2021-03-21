@@ -1,0 +1,17 @@
+.archiveBoss{
+    background-color: white;
+    padding: 2rem;
+}
+.archiveBoss h2{
+    text-align: center;
+    border-bottom: 0.1rem solid #000000;
+    text-transform: uppercase;
+    padding-top: 0.8rem;
+    padding-bottom: 1rem;
+    color: #1b1b1b;
+}
+.items {
+    margin-top: 0.8rem;
+    flex-grow: 1;
+    width: 33%;
+}
