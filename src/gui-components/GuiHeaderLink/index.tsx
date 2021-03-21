@@ -14,7 +14,7 @@ export interface Props extends DefaultProps {
 const GuiHeaderLink = forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref: ForwardedRef<HTMLAnchorElement>) => (
     <div className={styles.container}>
-      <a ref={ref} {...props} className={cx(styles.headerTextElement)}>
+      <a ref={ref} href={props.href} className={cx(styles.headerTextElement)}>
         {props.children}
       </a>
     </div>

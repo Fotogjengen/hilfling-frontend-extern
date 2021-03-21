@@ -24,7 +24,6 @@ const GuiCard: FC<Props> = ({
   shadow = true,
   onClick,
 }: Props) => {
-  console.log(type);
   return (
     <div
       className={cx(

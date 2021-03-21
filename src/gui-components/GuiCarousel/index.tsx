@@ -35,7 +35,9 @@ const GuiCarousel: FC<GuiCarouselProps> = ({
       setActiveItem(clicked);
       return;
     }
-    setActiveItem(activeItem + 1 < children.length ? activeItem + 1 : 0);
+    if (children) {
+      setActiveItem(activeItem + 1 < children.length ? activeItem + 1 : 0);
+    }
   };
 
   useEffect(() => {
@@ -43,13 +45,11 @@ const GuiCarousel: FC<GuiCarouselProps> = ({
     return () => clearTimeout(timeoutID);
   }, [activeItem]);
 
-  const renderCarouselItem = () => {
-    return children.map((child, i) => (
-      <div className={cx(styles.carouselItemWrapper, styles.size1)} key={i}>
-        {child}
-      </div>
-    ));
-  };
+  const renderCarouselItem = children.map((child, i) => (
+    <div className={cx(styles.carouselItemWrapper, styles.size1)} key={i}>
+      {child}
+    </div>
+  ));
 
   const renderCarouselButtons = () => {
     const originLeft = 50 - children.length;
@@ -84,7 +84,7 @@ const GuiCarousel: FC<GuiCarouselProps> = ({
         }}
         className={styles.container}
       >
-        {renderCarouselItem()}
+        {renderCarouselItem}
       </div>
       {bottomNavigation && renderCarouselButtons()}
     </div>
