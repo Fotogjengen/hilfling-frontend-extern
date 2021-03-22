@@ -15,11 +15,7 @@ function ArchiveBoss() {
   const place = arkivsjefSted;
 
   const mapAlbums = () =>
-    album.map((Album) => (
-      <div className={styles.items} key={Album.key}>
-        - {Album.name}
-      </div>
-    ));
+    album.map((Album) => <div key={Album.key}>{Album.name}</div>);
 
   const mapCategory = () =>
     category.map((Category) => <div key={Category.key}> {Category.name} </div>);
