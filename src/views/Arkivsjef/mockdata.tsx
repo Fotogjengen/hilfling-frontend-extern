@@ -1,7 +1,3 @@
-import { Place } from "../../interfaces/Place";
-import { Album } from "../../interfaces/Album";
-import { Category } from "../../interfaces/Category";
-
 interface ArkivsjefAlbum {
   key: string;
   name: string;
