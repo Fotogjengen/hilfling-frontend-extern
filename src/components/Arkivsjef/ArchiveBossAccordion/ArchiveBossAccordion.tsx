@@ -18,7 +18,7 @@ const AccordionSummary = withStyles({
 interface Props extends DefaultProps {
   color: string;
   name: string;
-  contents: () => JSX.Element[];
+  contents?: () => JSX.Element[];
 }
 
 const ArchiveBossAccordion: FC<Props> = ({ color, name, contents }) => {
