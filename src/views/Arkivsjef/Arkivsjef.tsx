@@ -33,26 +33,10 @@ function ArchiveBoss() {
   return (
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
-      <ArchiveBossAccordion
-        color={styles.red}
-        name="Album"
-        contents={mapAlbums}
-      />
-      <ArchiveBossAccordion
-        color={styles.red}
-        name="Sted"
-        contents={mapPlace}
-      />
-      <ArchiveBossAccordion
-        color={styles.red}
-        name="Kategori"
-        contents={mapCategory}
-      />
-      <ArchiveBossAccordion
-        color={styles.red}
-        name="Medium"
-        contents={mapMedium}
-      />
+      <ArchiveBossAccordion color="red" name="Album" />
+      <ArchiveBossAccordion color="yellow" name="Sted" />
+      <ArchiveBossAccordion color="purple" name="Kategori" />
+      <ArchiveBossAccordion color="blue" name="Medium" />
     </div>
   );
 }
