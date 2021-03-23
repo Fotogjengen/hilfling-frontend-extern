@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   arkivsjefAlbum,
   arkivsjefKategori,
@@ -8,7 +8,7 @@ import {
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 
-function ArchiveBoss() {
+const ArchiveBoss: FC = () => {
   const album = arkivsjefAlbum;
   const category = arkivsjefKategori;
   const medium = arkivsjefMedium;
@@ -29,12 +29,12 @@ function ArchiveBoss() {
   return (
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
-      <ArchiveBossAccordion color="red" name="Album" />
-      <ArchiveBossAccordion color="yellow" name="Sted" />
+      <ArchiveBossAccordion color="red" name="Album" content={mapAlbums} />
+      <ArchiveBossAccordion color="yellow" name="Sted" content={mapPlace} />
       <ArchiveBossAccordion color="purple" name="Kategori" />
       <ArchiveBossAccordion color="blue" name="Medium" />
     </div>
   );
-}
+};
 
 export default ArchiveBoss;

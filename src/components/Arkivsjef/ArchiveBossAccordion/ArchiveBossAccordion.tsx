@@ -11,10 +11,10 @@ import cx from "classnames";
 interface Props extends DefaultProps {
   color: string;
   name: string;
-  contents?: () => JSX.Element[];
+  content?: () => JSX.Element[];
 }
 
-const ArchiveBossAccordion: FC<Props> = ({ color, name, contents }) => {
+const ArchiveBossAccordion: FC<Props> = ({ color, name, content }) => {
   const ArchiveBossAccordionClass = cx(styles.archiveBossAccordion, {
     [styles.red]: color == "red",
     [styles.yellow]: color == "yellow",
@@ -32,7 +32,7 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, contents }) => {
         >
           <Typography> {name} </Typography>
         </AccordionSummary>
-        <AccordionDetails>{contents}</AccordionDetails>
+        <AccordionDetails>{content}</AccordionDetails>
       </Accordion>
     </div>
   );
