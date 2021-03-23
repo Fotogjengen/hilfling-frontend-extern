@@ -86,9 +86,19 @@
 .leftArrow {
     -webkit-filter: invert(1);
     filter: invert(1);
-    margin: 30px;
+    margin: 0px;
 }
 
 .leftArrow:hover{
+    cursor: pointer;
+}
+
+.rightArrow {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+    margin: 0px;
+}
+
+.rightArrow:hover{
     cursor: pointer;
 }

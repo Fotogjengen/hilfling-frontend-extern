@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, SyntheticEvent } from "react";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -57,6 +57,14 @@ const ShowMotive: FC = () => {
     setImageIndex(newIndex);
   };
 
+  function handleKeyPress(event: { key: string }) {
+    if (event.key === "y") {
+      alert("The sky is your starting point!");
+    } else if (event.key === "n") {
+      alert("The sky is your limit👀");
+    }
+  }
+
   const imageItems = images.imageList.map((image, index) => (
     <MotiveImage
       id={image._id}
@@ -69,7 +77,7 @@ const ShowMotive: FC = () => {
   ));
 
   return (
-    <>
+    <div onKeyPress={handleKeyPress}>
       <div className="backgroundFlex">
         <div className="imageHeader">
           <p className="headerText">GJENGFOTO</p>
@@ -118,10 +126,15 @@ const ShowMotive: FC = () => {
                 setImageIndex(imageIndex - 1);
               }
             }}
+            rightArrow={() => {
+              if (imageIndex < images.imageList.length) {
+                setImageIndex(imageIndex + 1);
+              }
+            }}
           />
         </Fade>
       </Modal>
-    </>
+    </div>
   );
 };
 
