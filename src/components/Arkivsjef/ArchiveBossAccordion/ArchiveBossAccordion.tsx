@@ -1,12 +1,12 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import styles from "./ArchiveBossAccordion.module.css";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DefaultProps } from "../../../types";
-import cx from "classnames";
 
 interface Props extends DefaultProps {
   color: string;
@@ -15,24 +15,20 @@ interface Props extends DefaultProps {
 }
 
 const ArchiveBossAccordion: FC<Props> = ({ color, name, content }) => {
-  const ArchiveBossAccordionClass = cx(styles.archiveBossAccordion, {
-    [styles.red]: color == "red",
-    [styles.yellow]: color == "yellow",
-    [styles.blue]: color == "blue",
-    [styles.green]: color == "green",
-    [styles.purple]: color == "purple",
-  });
+  const AccordionSummary = withStyles({
+    root: {
+      backgroundColor: color,
+      padding: "1rem",
+    },
+  })(MuiAccordionSummary);
 
   return (
     <div className={styles.archiveBossAccordion}>
       <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          className={ArchiveBossAccordionClass}
-        >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography> {name} </Typography>
         </AccordionSummary>
-        <AccordionDetails>{content}</AccordionDetails>
+        <AccordionDetails> {content} </AccordionDetails>
       </Accordion>
     </div>
   );

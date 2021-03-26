@@ -29,10 +29,10 @@ const ArchiveBoss: FC = () => {
   return (
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
-      <ArchiveBossAccordion color="red" name="Album" content={mapAlbums} />
-      <ArchiveBossAccordion color="yellow" name="Sted" content={mapPlace} />
-      <ArchiveBossAccordion color="purple" name="Kategori" />
-      <ArchiveBossAccordion color="blue" name="Medium" />
+      <ArchiveBossAccordion color="#da7777" name="Album" />
+      <ArchiveBossAccordion color="#f3ee78" name="Sted" />
+      <ArchiveBossAccordion color="#9c77da" name="Kategori" />
+      <ArchiveBossAccordion color="#7793da" name="Medium" />
     </div>
   );
 };
