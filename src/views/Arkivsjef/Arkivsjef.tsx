@@ -8,15 +8,29 @@ import {
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import Grid from "@material-ui/core/Grid";
-import { Paper } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
 const ArchiveBoss: FC = () => {
   const album = arkivsjefAlbum;
   const category = arkivsjefKategori;
   const medium = arkivsjefMedium;
   const place = arkivsjefSted;
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+  }));
+
+  const classes = useStyles();
 
   const mapAlbums = () =>
     album.map((Album) => (
@@ -50,18 +64,20 @@ const ArchiveBoss: FC = () => {
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
       <div className={styles.description}>
-        <Grid container spacing={5}>
-          <Grid item xs={6} sm={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={2} className={classes.paper}>
             <IconButton aria-label="add">
               <AddCircleIcon fontSize="large" />
             </IconButton>
           </Grid>
 
-          <Grid item xs={6} sm={3}>
-            Denne siden er for fotogjengens Arkivsjef. Her kan du legge til,
-            slette, eller endre Album, Kategorier, Steder eller Medium. Vær
-            meget forsiktig med å forandre albumnavn dersom albumet har bilder
-            liggende i seg - det ødelegger mappestrukturen til bildene.
+          <Grid item xs={10}>
+            <Typography>
+              Denne siden er for fotogjengens Arkivsjef. Her kan du legge til,
+              slette, eller endre Album, Kategorier, Steder eller Medium. Vær
+              meget forsiktig med å forandre albumnavn dersom albumet har bilder
+              liggende i seg - det ødelegger mappestrukturen til bildene.
+            </Typography>
           </Grid>
         </Grid>
       </div>
