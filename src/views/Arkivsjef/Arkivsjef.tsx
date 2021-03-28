@@ -8,6 +8,9 @@ import {
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import Grid from "@material-ui/core/Grid";
+import { Paper } from "@material-ui/core";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import IconButton from "@material-ui/core/IconButton";
 
 const ArchiveBoss: FC = () => {
   const album = arkivsjefAlbum;
@@ -46,6 +49,15 @@ const ArchiveBoss: FC = () => {
   return (
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
+      <Paper elevation={0}>
+        <IconButton aria-label="add">
+          <AddCircleIcon fontSize="large" />
+        </IconButton>
+        Denne siden er for fotogjengens Arkivsjef. Her kan du legge til, slette,
+        eller endre Album, Kategorier, Steder eller Medium. Vær meget forsiktig
+        med å forandre albumnavn dersom albumet har bilder liggende i seg - det
+        ødelegger mappestrukturen til bildene.
+      </Paper>
       <ArchiveBossAccordion color="#da7777" name="Album">
         {mapAlbums()}
       </ArchiveBossAccordion>
