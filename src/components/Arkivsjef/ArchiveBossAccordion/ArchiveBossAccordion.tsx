@@ -14,7 +14,7 @@ interface Props extends DefaultProps {
   content?: () => JSX.Element[];
 }
 
-const ArchiveBossAccordion: FC<Props> = ({ color, name, content }) => {
+const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
   const AccordionSummary = withStyles({
     root: {
       backgroundColor: color,
@@ -28,7 +28,7 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, content }) => {
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography> {name} </Typography>
         </AccordionSummary>
-        <AccordionDetails> {content} </AccordionDetails>
+        <AccordionDetails> {children} </AccordionDetails>
       </Accordion>
     </div>
   );
