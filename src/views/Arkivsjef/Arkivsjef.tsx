@@ -64,7 +64,7 @@ const ArchiveBoss: FC = () => {
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
       <div className={styles.description}>
-        <Grid container spacing={3}>
+        <Grid container spacing={5}>
           <Grid item xs={2} className={classes.paper}>
             <IconButton aria-label="add">
               <AddCircleIcon className={styles.svgicon} />
