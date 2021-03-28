@@ -7,11 +7,11 @@ import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DefaultProps } from "../../../types";
+import Grid from "@material-ui/core/Grid";
 
 interface Props extends DefaultProps {
   color: string;
   name: string;
-  content?: () => JSX.Element[];
 }
 
 const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
@@ -28,7 +28,11 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography> {name} </Typography>
         </AccordionSummary>
-        <AccordionDetails> {children} </AccordionDetails>
+        <AccordionDetails>
+          <Grid container spacing={5}>
+            {children}
+          </Grid>
+        </AccordionDetails>
       </Accordion>
     </div>
   );

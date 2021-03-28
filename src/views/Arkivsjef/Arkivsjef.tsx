@@ -7,6 +7,7 @@ import {
 } from "./mockdata";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
+import Grid from "@material-ui/core/Grid";
 
 const ArchiveBoss: FC = () => {
   const album = arkivsjefAlbum;
@@ -15,16 +16,32 @@ const ArchiveBoss: FC = () => {
   const place = arkivsjefSted;
 
   const mapAlbums = () =>
-    album.map((Album) => <div key={Album.key}>{Album.name}</div>);
+    album.map((Album) => (
+      <Grid item xs={6} sm={3} key={Album.key}>
+        {Album.name}
+      </Grid>
+    ));
 
   const mapCategory = () =>
-    category.map((Category) => <div key={Category.key}> {Category.name} </div>);
+    category.map((Category) => (
+      <Grid item xs={6} sm={3} key={Category.key}>
+        {Category.name}
+      </Grid>
+    ));
 
   const mapPlace = () =>
-    place.map((Place) => <div key={Place.key}> {Place.name} </div>);
+    place.map((Place) => (
+      <Grid item xs={6} sm={3} key={Place.key}>
+        {Place.name}
+      </Grid>
+    ));
 
   const mapMedium = () =>
-    medium.map((Medium) => <div key={Medium.key}> {Medium.name} </div>);
+    medium.map((Medium) => (
+      <Grid item xs={6} sm={3} key={Medium.key}>
+        {Medium.name}
+      </Grid>
+    ));
 
   return (
     <div className={styles.archiveBoss}>
