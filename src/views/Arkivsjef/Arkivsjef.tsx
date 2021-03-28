@@ -67,7 +67,7 @@ const ArchiveBoss: FC = () => {
         <Grid container spacing={3}>
           <Grid item xs={2} className={classes.paper}>
             <IconButton aria-label="add">
-              <AddCircleIcon fontSize="large" />
+              <AddCircleIcon className={styles.svgicon} />
             </IconButton>
             <Typography>Legg til ny</Typography>
           </Grid>
