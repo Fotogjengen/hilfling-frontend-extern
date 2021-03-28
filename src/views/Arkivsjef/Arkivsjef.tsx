@@ -23,7 +23,7 @@ const ArchiveBoss: FC = () => {
     root: {
       flexGrow: 1,
     },
-    paper: {
+    grid: {
       padding: theme.spacing(2),
       textAlign: "center",
       color: theme.palette.text.secondary,
@@ -65,7 +65,7 @@ const ArchiveBoss: FC = () => {
       <h2> Arkivsjef </h2>
       <div className={styles.description}>
         <Grid container spacing={5}>
-          <Grid item xs={2} className={classes.paper}>
+          <Grid item xs={2} className={classes.grid}>
             <IconButton aria-label="add">
               <AddCircleIcon className={styles.svgicon} />
             </IconButton>
