@@ -49,15 +49,22 @@ const ArchiveBoss: FC = () => {
   return (
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
-      <Paper elevation={0}>
-        <IconButton aria-label="add">
-          <AddCircleIcon fontSize="large" />
-        </IconButton>
-        Denne siden er for fotogjengens Arkivsjef. Her kan du legge til, slette,
-        eller endre Album, Kategorier, Steder eller Medium. Vær meget forsiktig
-        med å forandre albumnavn dersom albumet har bilder liggende i seg - det
-        ødelegger mappestrukturen til bildene.
-      </Paper>
+      <div className={styles.description}>
+        <Grid container spacing={5}>
+          <Grid item xs={6} sm={3}>
+            <IconButton aria-label="add">
+              <AddCircleIcon fontSize="large" />
+            </IconButton>
+          </Grid>
+
+          <Grid item xs={6} sm={3}>
+            Denne siden er for fotogjengens Arkivsjef. Her kan du legge til,
+            slette, eller endre Album, Kategorier, Steder eller Medium. Vær
+            meget forsiktig med å forandre albumnavn dersom albumet har bilder
+            liggende i seg - det ødelegger mappestrukturen til bildene.
+          </Grid>
+        </Grid>
+      </div>
       <ArchiveBossAccordion color="#da7777" name="Album">
         {mapAlbums()}
       </ArchiveBossAccordion>
