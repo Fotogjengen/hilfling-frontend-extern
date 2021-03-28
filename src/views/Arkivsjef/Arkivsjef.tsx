@@ -69,6 +69,7 @@ const ArchiveBoss: FC = () => {
             <IconButton aria-label="add">
               <AddCircleIcon fontSize="large" />
             </IconButton>
+            <Typography>Legg til ny</Typography>
           </Grid>
 
           <Grid item xs={10}>
