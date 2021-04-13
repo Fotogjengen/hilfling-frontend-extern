@@ -1,9 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { FC } from "react";
 import { DefaultProps } from "../../../types";
 
 //https://codesandbox.io/s/um1t0?file=/demo.js
