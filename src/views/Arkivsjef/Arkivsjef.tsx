@@ -36,11 +36,16 @@ const ArchiveBoss: FC = () => {
   const mapAlbums = () =>
     album.map((Album) => (
       <Grid item xs={6} sm={3} key={Album.key}>
-        <Grid container>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
           <Grid item xs={6} sm={4}>
             <ArchiveBossOverflow />
           </Grid>
-          <Grid item xs={6} sm={4} alignContent="space-around">
+          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
             {Album.name}
           </Grid>
         </Grid>
@@ -50,21 +55,57 @@ const ArchiveBoss: FC = () => {
   const mapCategory = () =>
     category.map((Category) => (
       <Grid item xs={6} sm={3} key={Category.key}>
-        {Category.name}
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item xs={6} sm={4}>
+            <ArchiveBossOverflow />
+          </Grid>
+          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
+            {Category.name}
+          </Grid>
+        </Grid>
       </Grid>
     ));
 
   const mapPlace = () =>
     place.map((Place) => (
       <Grid item xs={6} sm={3} key={Place.key}>
-        {Place.name}
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item xs={6} sm={4}>
+            <ArchiveBossOverflow />
+          </Grid>
+          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
+            {Place.name}
+          </Grid>
+        </Grid>
       </Grid>
     ));
 
   const mapMedium = () =>
     medium.map((Medium) => (
       <Grid item xs={6} sm={3} key={Medium.key}>
-        {Medium.name}
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item xs={6} sm={4}>
+            <ArchiveBossOverflow />
+          </Grid>
+          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
+            {Medium.name}
+          </Grid>
+        </Grid>
       </Grid>
     ));
 
