@@ -1,4 +1,4 @@
-import React, { KeyboardEvent } from "react";
+import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -12,7 +12,7 @@ const options = ["Rediger", "Slett"];
 
 type Props = DefaultProps;
 
-const ArchiveBossAccordion: FC<Props> = () => {
+const ArchiveBossOverflow: FC<Props> = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
