@@ -1,5 +1,5 @@
-import React, { FC, ReactNode } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import React, { FC } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import styles from "./ArchiveBossAccordion.module.css";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";

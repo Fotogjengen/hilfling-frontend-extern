@@ -12,6 +12,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import ArchiveBossOverflow from "../../components/Arkivsjef/ArchiveBossOverflow/ArchiveBossOverflow";
 
 const ArchiveBoss: FC = () => {
   const album = arkivsjefAlbum;
@@ -24,9 +25,9 @@ const ArchiveBoss: FC = () => {
       flexGrow: 1,
     },
     grid: {
-      padding: theme.spacing(2),
-      textAlign: "center",
+      padding: theme.spacing(3),
       color: theme.palette.text.secondary,
+      justifyContent: "center",
     },
   }));
 
@@ -35,7 +36,14 @@ const ArchiveBoss: FC = () => {
   const mapAlbums = () =>
     album.map((Album) => (
       <Grid item xs={6} sm={3} key={Album.key}>
-        {Album.name}
+        <Grid container>
+          <Grid item xs={6} sm={4}>
+            <ArchiveBossOverflow />
+          </Grid>
+          <Grid item xs={6} sm={4} alignContent="space-around">
+            {Album.name}
+          </Grid>
+        </Grid>
       </Grid>
     ));
 
