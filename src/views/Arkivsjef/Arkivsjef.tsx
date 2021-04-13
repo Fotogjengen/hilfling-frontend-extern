@@ -25,7 +25,6 @@ const ArchiveBoss: FC = () => {
       flexGrow: 1,
     },
     grid: {
-      padding: theme.spacing(3),
       color: theme.palette.text.secondary,
       justifyContent: "center",
     },
@@ -97,7 +96,7 @@ const ArchiveBoss: FC = () => {
           container
           direction="row"
           justify="flex-start"
-          alignItems="stretch"
+          alignItems="center"
         >
           <Grid item xs={6} sm={4}>
             <ArchiveBossOverflow />
@@ -121,10 +120,17 @@ const ArchiveBoss: FC = () => {
             alignContent="center"
             direction="row"
           >
-            <IconButton aria-label="add">
-              <AddCircleIcon className={styles.svgicon} />
-            </IconButton>
-            <Typography>Legg til ny</Typography>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <IconButton aria-label="add">
+                <AddCircleIcon className={styles.svgicon} />
+              </IconButton>
+              <Typography>Legg til ny</Typography>
+            </Grid>
           </Grid>
 
           <Grid item xs={10}>
