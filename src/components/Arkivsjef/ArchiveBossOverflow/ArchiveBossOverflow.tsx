@@ -13,11 +13,10 @@ const options = ["Rediger", "Slett"];
 type Props = DefaultProps;
 
 const ArchiveBossAccordion: FC<Props> = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
