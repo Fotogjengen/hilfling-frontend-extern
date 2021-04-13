@@ -97,7 +97,7 @@ const ArchiveBoss: FC = () => {
           container
           direction="row"
           justify="flex-start"
-          alignItems="center"
+          alignItems="stretch"
         >
           <Grid item xs={6} sm={4}>
             <ArchiveBossOverflow />
@@ -113,8 +113,14 @@ const ArchiveBoss: FC = () => {
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
       <div className={styles.description}>
-        <Grid container spacing={5}>
-          <Grid item xs={2} className={classes.grid}>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <Grid
+            item
+            xs={2}
+            className={classes.grid}
+            alignContent="center"
+            direction="row"
+          >
             <IconButton aria-label="add">
               <AddCircleIcon className={styles.svgicon} />
             </IconButton>
