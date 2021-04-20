@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ValidationErrors } from "final-form";
 import { Grid } from "@material-ui/core";
 import PhotoUploadForm from "../../../forms/PhotoUploadForm";
@@ -33,18 +33,31 @@ const PhotoUpload: FC = () => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: ".jpg,.jpeg,.png",
   });
+  const [files, setFiles] = useState<DragNDropFile[]>([]);
+  useEffect(() => {
+    setFiles(acceptedFiles as DragNDropFile[]);
+  }, [acceptedFiles]);
 
-  const files = (acceptedFiles as DragNDropFile[]).map(
-    (file: DragNDropFile, index: number) => (
-      <li className={styles.fileList} key={file.path}>
-        <PhotoUploadPreview file={file} />
-      </li>
-    ),
-  );
+  const handleGoodPictureChange = (index: number) => {
+    const newFiles = files;
+    newFiles[index].isGoodPicture = !newFiles[index].isGoodPicture;
+    setFiles(newFiles);
+  };
+
+  const renderFilePreview = files.map((file: DragNDropFile, index: number) => (
+    <li className={styles.fileList} key={file.path}>
+      <PhotoUploadPreview
+        file={file}
+        handleChange={() => handleGoodPictureChange(index)}
+      />
+    </li>
+  ));
 
   const onSubmit = (values: Record<string, unknown>) => {
     console.log("submit");
-    /*console.log(values);*/
+    files.forEach((file) => {
+      console.log(file);
+    });
   };
   const validate = (values: Record<string, unknown>): ValidationErrors => {
     /*console.log("validate");
@@ -65,13 +78,10 @@ const PhotoUpload: FC = () => {
               className={cx(styles.dropzone)}
             >
               <input {...getInputProps()} />
-              <p>
-                Drag &apos;n&apos; drop some files here, or click to select
-                files
-              </p>
+              <p>Dra og slipp filer her, eller klikk for å velge filer.</p>
             </div>
             <aside>
-              <ul className={styles.noStyleUl}>{files}</ul>
+              <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
         </Grid>

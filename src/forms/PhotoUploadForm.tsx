@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import {
+  Button,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -118,20 +119,9 @@ const PhotoUploadForm: FC<Props> = ({ onSubmit, validate }) => {
               </Field>
             </Grid>
             <Grid item xs={12}>
-              <FormControl component="fieldset">
-                <FormGroup>
-                  <FormControlLabel
-                    label="Bra bilde"
-                    control={
-                      <Field
-                        name="goodPicture"
-                        component={Checkbox}
-                        type="checkbox"
-                      />
-                    }
-                  />
-                </FormGroup>
-              </FormControl>
+              <Button variant="contained" color="primary" type="submit">
+                Last opp
+              </Button>
             </Grid>
           </Grid>
         </form>

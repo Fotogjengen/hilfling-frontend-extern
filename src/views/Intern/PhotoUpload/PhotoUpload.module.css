@@ -26,4 +26,5 @@
   color: #3c3c3c;
   outline: none;
   transition: border 0.24s ease-in-out;
+  cursor: pointer;
 }
