@@ -4,6 +4,7 @@ import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
 import showMotive from "./components/Temp/ShowMotive";
+import NotFound from "./views/NotFound/NotFound";
 
 const Routes: FC = () => {
   return (
@@ -12,6 +13,7 @@ const Routes: FC = () => {
       <Route exact path="/motive" component={showMotive} />
       <Route exact path="/about" component={About} />
       <Route exact path="/myprofile" component={MyProfile} />
+      <Route component={NotFound} />
     </>
   );
 };
