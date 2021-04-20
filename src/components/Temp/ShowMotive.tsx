@@ -1,4 +1,4 @@
-import React, { FC, useState, SyntheticEvent } from "react";
+import React, { FC, useState, useEffect } from "react";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -6,10 +6,105 @@ import Image from "./Image";
 import { makeStyles } from "@material-ui/core/styles";
 import "./style.css";
 import MotiveImage from "./MotiveImage";
+import axios from "axios";
 
 export interface IImageList {
   _id: number;
   image: string;
+}
+
+export interface IResponseObject {
+  photoId: {
+    id: number;
+  };
+  isGoodPicture: boolean;
+  smallUrl: string;
+  mediumUrl: string;
+  largeUrl: string;
+  motive: {
+    id: string;
+    dateCreated: string;
+    title: string;
+    category: {
+      id: string;
+      dateCreated: string;
+      name: string;
+    };
+    eventOwner: {
+      id: string;
+      dateCreated: string;
+      name: string;
+    };
+    album: {
+      id: string;
+      dateCreated: string;
+      title: string;
+      isAnalog: true;
+    };
+  };
+  placeDto: {
+    placeId: {
+      id: string;
+    };
+    name: string;
+  };
+  securityLevel: {
+    securityLevelId: {
+      id: string;
+    };
+    securityLevelType: string;
+  };
+  gang: {
+    gangId: {
+      id: string;
+    };
+    name: string;
+  };
+  photoGangBangerDto: {
+    photoGangBangerId: {
+      id: string;
+    };
+    relationShipStatus: string;
+    semesterStart: {
+      value: string;
+    };
+    isActive: true;
+    isPang: true;
+    address: string;
+    zipCode: string;
+    city: string;
+    samfundetUser: {
+      samfundetUserId: {
+        id: string;
+      };
+      firstName: string;
+      lastName: string;
+      username: string;
+      phoneNumber: {
+        value: string;
+      };
+      email: {
+        value: string;
+      };
+      profilePicturePath: string;
+      sex: string;
+      securituLevel: {
+        securityLevelId: {
+          id: string;
+        };
+        securityLevelType: string;
+      };
+    };
+    position: {
+      positionId: {
+        id: string;
+      };
+      title: string;
+      email: {
+        value: string;
+      };
+    };
+  };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -28,19 +123,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ShowMotive: FC = () => {
   const [imageIndex, setImageIndex] = useState(0);
-  const [images] = useState({
-    imageList: [
-      {
-        _id: 1,
-        image:
-          "https://www.itl.cat/pngfile/big/61-616481_lamborghini-huracan-performante-side-view-wallpaper-novitec-lamborghini.jpg",
-      },
-      {
-        _id: 2,
-        image: "https://wallpaperaccess.com/full/265570.jpg",
-      },
-    ],
-  });
+  const [photoResponse, setPhotoResponse] = useState<IResponseObject[]>([]);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -65,16 +148,30 @@ const ShowMotive: FC = () => {
     }
   }
 
-  const imageItems = images.imageList.map((image, index) => (
-    <MotiveImage
-      id={image._id}
-      image={image.image}
-      key={image._id}
-      imageListProp={images.imageList}
-      index={index}
-      updateIndex={() => updateIndex(index)}
-    />
-  ));
+  const imageItems = photoResponse.map(
+    (image: IResponseObject, index: number) => (
+      <MotiveImage
+        id={image.photoId.id}
+        image={image.largeUrl}
+        key={image.photoId.id}
+        imageListProp={photoResponse}
+        index={index}
+        updateIndex={() => updateIndex(index)}
+      />
+    ),
+  );
+
+  useEffect(() => {
+    try {
+      void axios.get(`http://localhost:8080/photos/`).then((res) => {
+        console.log(res.data);
+        setPhotoResponse(res.data);
+        //console.log(photoResponse[imageIndex].photoId.id);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   return (
     <div onKeyPress={handleKeyPress}>
@@ -118,8 +215,8 @@ const ShowMotive: FC = () => {
       >
         <Fade in={open}>
           <Image
-            _id={images.imageList[imageIndex]._id}
-            imageListProp={images.imageList}
+            _id={/*photoResponse[imageIndex].photoId.id*/ 0}
+            imageListProp={photoResponse}
             index={imageIndex}
             leftArrow={() => {
               if (imageIndex > 0) {
@@ -127,7 +224,7 @@ const ShowMotive: FC = () => {
               }
             }}
             rightArrow={() => {
-              if (imageIndex < images.imageList.length) {
+              if (imageIndex < photoResponse.length - 1) {
                 setImageIndex(imageIndex + 1);
               }
             }}

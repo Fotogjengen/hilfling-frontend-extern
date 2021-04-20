@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { IResponseObject } from "./ShowMotive";
 
 export interface IImageList {
   _id: number;
@@ -8,7 +9,7 @@ export interface IImageList {
 interface Props {
   id: number;
   image: string;
-  imageListProp: IImageList[];
+  imageListProp: IResponseObject[];
   index: number;
   updateIndex: (index: number) => void;
 }
