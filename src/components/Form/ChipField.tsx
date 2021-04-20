@@ -1,25 +1,83 @@
-import React, { FC, Fragment } from "react";
-import { FieldRenderProps } from "react-final-form";
-import { Chip, Input } from "@material-ui/core";
+import React, {
+  FC,
+  Fragment,
+  useState,
+  ReactElement,
+  KeyboardEvent,
+  ChangeEvent,
+} from "react";
+import {
+  Chip,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+} from "@material-ui/core";
+import { FormHelperTextWrapperProps } from "./types";
+import styles from "./ChipField.module.css";
 
-const ChipField: FC<FieldRenderProps<typeof Input>> = ({
-  input: { name, onChange, restInput, multiple, value },
+const ChipField: FC<FormHelperTextWrapperProps<typeof Input>> = ({
+  input: { name, onChange, restInput, value },
   meta,
+  formControlProps,
+  label,
   ...rest
 }) => {
-  const addChip = () => {
-    console.log("Add chip");
-    console.log(value);
+  const [chips, setChips] = useState<string[]>(["caro", "schmaro"]);
+  const [interimValue, setInterimValue] = useState<string>("");
+
+  const onChangeInterimValue = (event: ChangeEvent) => {
+    setInterimValue((event.target as HTMLTextAreaElement).value);
   };
+
+  const setValue = () => {
+    const newValue = chips.join(",");
+  };
+
+  const addChip = (event: KeyboardEvent) => {
+    console.log(value);
+    console.log(onChange);
+    if (event.key === "Enter" && !chips.includes(value.toString())) {
+      setChips([value.toString(), ...chips]);
+      setInterimValue("");
+      setValue();
+    }
+  };
+
+  const handleDelete = (chipToDelete: string) => {
+    const newChips = chips.filter((chip) => chip !== chipToDelete);
+    setChips(newChips);
+    setValue();
+  };
+
+  const chipRenderer: ReactElement[] = chips.map(
+    (chip: string, index: number) => {
+      return (
+        <Chip
+          key={`chip-${index}`}
+          label={chip}
+          onDelete={() => handleDelete(chip)}
+          size="small"
+        />
+      );
+    },
+  );
+
   return (
     <Fragment>
-      <Input
-        {...rest}
-        onChange={onChange}
-        name={name}
-        inputProps={restInput}
-        onKeyDown={addChip}
-      />
+      {chips && chipRenderer}
+      <FormControl {...formControlProps}>
+        <InputLabel htmlFor={name}>{label}</InputLabel>
+        <Input
+          {...rest}
+          onChange={onChangeInterimValue}
+          name={name}
+          inputProps={restInput}
+          onKeyDown={addChip}
+          value={interimValue}
+        />
+        {meta.error && <FormHelperText>{meta.error}</FormHelperText>}
+      </FormControl>
     </Fragment>
   );
 };

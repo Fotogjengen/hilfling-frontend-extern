@@ -8,6 +8,10 @@ export interface BaseCarouselItem {
   image: string;
 }
 
+export interface DragNDropFile extends File {
+  path: string;
+}
+
 export type UKA = "uka";
 export type SAMFUNDET = "samfundet";
 export type ISFIT = "isfit";

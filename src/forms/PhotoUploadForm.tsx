@@ -68,8 +68,9 @@ const PhotoUploadForm: FC<Props> = ({ onSubmit, validate }) => {
                 required
                 name="tags"
                 component={ChipField}
-                type="text"
+                type="array"
                 label="Tags"
+                formControlProps={{ fullWidth: true }}
               />
             </Grid>
 

@@ -7,6 +7,7 @@ import cx from "classnames";
 import styles from "./PhotoUpload.module.css";
 import { GuiImageCard } from "../../../gui-components";
 import PhotoUploadPreview from "../../../components/PhotoUploadPreview/PhotoUploadPreview";
+import { DragNDropFile } from "../../../types";
 
 interface Values {
   album: string;
@@ -16,10 +17,6 @@ interface Values {
   category: string;
   place: string;
   securityLevel: string;
-}
-
-interface DragNDropFile extends File {
-  path: string;
 }
 
 const initialValues: Values = {
@@ -39,8 +36,8 @@ const PhotoUpload: FC = () => {
 
   const files = (acceptedFiles as DragNDropFile[]).map(
     (file: DragNDropFile, index: number) => (
-      <li key={file.path}>
-        <PhotoUploadPreview />
+      <li className={styles.fileList} key={file.path}>
+        <PhotoUploadPreview file={file} />
       </li>
     ),
   );
