@@ -13,7 +13,7 @@ interface Props {
   handleChange: () => void;
 }
 
-const PhotoUploadPreview: FC<Props> = ({ file, handleChange }) => {
+const PhotoUploadPreview: FC<Props> = ({ file, handleChange }: Props) => {
   const fileSizeAsKb = Math.ceil(file.size / 1000);
 
   return (

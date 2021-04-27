@@ -28,7 +28,7 @@ const PhotoUpload: FC = () => {
   }, [acceptedFiles]);
 
   const handleGoodPictureChange = (index: number) => {
-    const newFiles = files;
+    const newFiles: DragNDropFile[] = files;
     newFiles[index].isGoodPicture = !newFiles[index].isGoodPicture;
     setFiles(newFiles);
   };
