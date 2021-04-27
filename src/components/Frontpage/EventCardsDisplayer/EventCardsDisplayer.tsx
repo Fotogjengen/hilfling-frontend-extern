@@ -6,6 +6,8 @@ import {
 } from "../../../gui-components";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import TabPanel from "../../TabPanel/TabPanel";
+import { useEffect } from "react";
+import axios from "axios";
 
 interface Props {
   title?: string;
@@ -15,16 +17,53 @@ interface Props {
   image?: string;
 }
 
-const EventCardsDisplayer: FC<Props> = () => {
-  const [value, setValue] = useState<number>(0);
+export interface IMotive {
+  id: string;
+  dateCreated: string;
+  title: string;
+  category: {
+    id: string;
+    dateCreated: string;
+    name: string;
+  };
+  eventOwner: {
+    id: string;
+    dateCreated: string;
+    name: string;
+  };
+  album: {
+    id: string;
+    dateCreated: string;
+    title: string;
+    isAnalog: boolean;
+  };
+}
 
-  const imageCardsSamf = [
+const EventCardsDisplayer: FC<Props> = () => {
+  /**
+   * imageCardsSamf = [
     "Edgar",
     "Daglighallen",
     "Strossa",
     "Rundhallen",
     "Storsalen",
-  ].map((placeName, index) => {
+  ]
+   */
+  useEffect(() => {
+    try {
+      void axios.get(`http://localhost:8080/motives/`).then((res) => {
+        console.log(res.data);
+        setMotiveResponse(res.data);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  const [value, setValue] = useState<number>(0);
+  const [motiveResponse, setMotiveResponse] = useState<IMotive[]>([]);
+
+  const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
     return (
       <GuiImageCard
         key={`image-card-${index}`}
@@ -32,12 +71,12 @@ const EventCardsDisplayer: FC<Props> = () => {
         type="samfundet"
         image={"https://www.w3schools.com/css/img_lights.jpg"}
       >
-        <GuiCardTitle capitalized title={"Temafest: Halloween"} />
+        <GuiCardTitle capitalized title={motiveObject.title} />
         <GuiCardPreamble
           color="red"
-          date="12.10.2020"
-          images={123}
-          location={placeName}
+          date={motiveObject.dateCreated}
+          images={69420}
+          location={"Blåfjell"}
           type={"EventCard"}
         />
       </GuiImageCard>
