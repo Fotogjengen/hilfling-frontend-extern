@@ -48,6 +48,7 @@
     "typescript": "4.2.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.16",
     "@babel/types": "7.13.0",
     "@okta/okta-react": "1.4.1",
     "@types/classnames": "2.2.11",
