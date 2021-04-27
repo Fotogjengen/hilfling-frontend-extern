@@ -43,12 +43,14 @@ const PhotoUpload: FC = () => {
   ));
 
   const onSubmit = (values: Record<string, unknown>) => {
+    // TODO: Send to backend
     console.log("submit", values);
     files.forEach((file) => {
       console.log(file);
     });
   };
   const validate = (values: Record<string, unknown>): ValidationErrors => {
+    // TODO: Do validation
     console.log("validate", values);
     const errors: ValidationErrors = {};
     return errors;
