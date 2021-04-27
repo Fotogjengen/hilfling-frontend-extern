@@ -5,7 +5,6 @@ import PhotoUploadForm from "../../../forms/PhotoUploadForm";
 import { useDropzone } from "react-dropzone";
 import cx from "classnames";
 import styles from "./PhotoUpload.module.css";
-import { GuiImageCard } from "../../../gui-components";
 import PhotoUploadPreview from "../../../components/PhotoUploadPreview/PhotoUploadPreview";
 import { DragNDropFile } from "../../../types";
 
@@ -18,16 +17,6 @@ interface Values {
   place: string;
   securityLevel: string;
 }
-
-const initialValues: Values = {
-  album: "",
-  date: new Date(),
-  motive: "",
-  tags: [],
-  category: "",
-  place: "",
-  securityLevel: "",
-};
 
 const PhotoUpload: FC = () => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
@@ -54,14 +43,13 @@ const PhotoUpload: FC = () => {
   ));
 
   const onSubmit = (values: Record<string, unknown>) => {
-    console.log("submit");
+    console.log("submit", values);
     files.forEach((file) => {
       console.log(file);
     });
   };
   const validate = (values: Record<string, unknown>): ValidationErrors => {
-    /*console.log("validate");
-    console.log(values);*/
+    console.log("validate", values);
     const errors: ValidationErrors = {};
     return errors;
   };

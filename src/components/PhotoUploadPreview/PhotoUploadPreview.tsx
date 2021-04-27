@@ -1,5 +1,5 @@
 import styles from "./PhotoUploadPreview.module.css";
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { FC } from "react";
 import { DragNDropFile } from "../../types";
 import {
   FormControlLabel,

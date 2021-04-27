@@ -14,7 +14,6 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { FormHelperTextWrapperProps } from "./types";
-import styles from "./ChipField.module.css";
 
 const ChipField: FC<FormHelperTextWrapperProps<typeof Input>> = ({
   input: { name, onChange, restInput, value },
@@ -30,24 +29,18 @@ const ChipField: FC<FormHelperTextWrapperProps<typeof Input>> = ({
     setInterimValue((event.target as HTMLTextAreaElement).value);
   };
 
-  const setValue = () => {
-    const newValue = chips.join(",");
-  };
-
   const addChip = (event: KeyboardEvent) => {
     console.log(value);
     console.log(onChange);
     if (event.key === "Enter" && !chips.includes(value.toString())) {
       setChips([value.toString(), ...chips]);
       setInterimValue("");
-      setValue();
     }
   };
 
   const handleDelete = (chipToDelete: string) => {
     const newChips = chips.filter((chip) => chip !== chipToDelete);
     setChips(newChips);
-    setValue();
   };
 
   const chipRenderer: ReactElement[] = chips.map(

@@ -4,7 +4,6 @@ import { Checkbox as MuiCheckbox } from "@material-ui/core";
 
 const Checkbox: FC<FieldRenderProps<typeof MuiCheckbox>> = ({
   input: { checked, name, onChange, restInput },
-  meta,
   ...rest
 }) => {
   return (

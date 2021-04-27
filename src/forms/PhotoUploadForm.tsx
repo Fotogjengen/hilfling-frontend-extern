@@ -11,7 +11,6 @@ import {
 import { Field, Form } from "react-final-form";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
-import Checkbox from "../components/Form/Checkbox";
 import { ValidationErrors } from "final-form";
 import ChipField from "../components/Form/ChipField";
 
@@ -25,7 +24,7 @@ const PhotoUploadForm: FC<Props> = ({ onSubmit, validate }) => {
     <Form
       onSubmit={onSubmit}
       validate={validate}
-      render={({ handleSubmit, submitting, pristine, values }) => (
+      render={({ handleSubmit /*submitting, pristine, values*/ }) => (
         <form onSubmit={handleSubmit} noValidate>
           <Grid container alignItems="flex-start" spacing={2}>
             <Grid item xs={12}>
