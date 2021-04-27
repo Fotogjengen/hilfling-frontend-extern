@@ -9,6 +9,7 @@ import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 import axios from "axios";
 
+// TODO: this should still be here for when data from database gets collected higher in the component tree.
 interface Props {
   title?: string;
   images?: number;
@@ -39,20 +40,11 @@ export interface IMotive {
   };
 }
 
+// TODO: Move to top of the page (component tree)
 const EventCardsDisplayer: FC<Props> = () => {
-  /**
-   * imageCardsSamf = [
-    "Edgar",
-    "Daglighallen",
-    "Strossa",
-    "Rundhallen",
-    "Storsalen",
-  ]
-   */
   useEffect(() => {
     try {
       void axios.get(`http://localhost:8080/motives/`).then((res) => {
-        console.log(res.data);
         setMotiveResponse(res.data);
       });
     } catch (e) {
@@ -65,19 +57,20 @@ const EventCardsDisplayer: FC<Props> = () => {
 
   const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
     return (
+      // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
       <GuiImageCard
         key={`image-card-${index}`}
-        placement={"left"}
+        placement="left"
         type="samfundet"
-        image={"https://www.w3schools.com/css/img_lights.jpg"}
+        image="https://www.w3schools.com/css/img_lights.jpg"
       >
         <GuiCardTitle capitalized title={motiveObject.title} />
         <GuiCardPreamble
           color="red"
           date={motiveObject.dateCreated}
           images={69420}
-          location={"Blåfjell"}
-          type={"EventCard"}
+          location="Blåfjell"
+          type="EventCard"
         />
       </GuiImageCard>
     );
