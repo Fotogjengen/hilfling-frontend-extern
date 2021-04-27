@@ -14,7 +14,7 @@ const Routes: FC = () => {
       <Route exact path="/about" component={About} />
       <Route exact path="/myprofile" component={MyProfile} />
 
-      {/*INTERN ROUTES -> NEED SECURING */}
+      {/* TODO: INTERN ROUTES -> NEED SECURING */}
       <Route exact path="/intern/upload" component={PhotoUpload} />
     </>
   );
