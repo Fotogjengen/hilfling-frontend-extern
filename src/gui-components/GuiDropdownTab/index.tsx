@@ -9,11 +9,8 @@ import ThreeDotsMenu from "../GuiOverflowMenu";
 interface Props extends DefaultProps {
   color: string;
   name: string;
-  //hva skal dukke opp dersom man trykker på
   child?: ReactNode;
 }
-
-//må vel få laget en funksjon som kan brukes til å endre isOpen til true dersom den blir trykket på
 
 const GuiDropdownTab: FC<Props> = ({ color, name, className }) => {
   const [toggle, setToggle] = useState(false);

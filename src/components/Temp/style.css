@@ -7,6 +7,10 @@
     background-color: #F3F3F3;
 }
 
+.motiveImage:hover {
+    cursor: pointer;
+}
+
 .flex {
     display: flex;
     flex-direction: row;
@@ -65,4 +69,36 @@
     width: 1px;
     background-color: #000000;
     justify-self: end;
+}
+
+.imageFlex {
+    display:flex;
+    align-content: middle;
+}
+
+.bigFlex {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftArrow {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+    margin: 0px;
+}
+
+.leftArrow:hover{
+    cursor: pointer;
+}
+
+.rightArrow {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+    margin: 0px;
+}
+
+.rightArrow:hover{
+    cursor: pointer;
 }

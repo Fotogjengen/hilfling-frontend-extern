@@ -1,16 +1,28 @@
 import React, { FC } from "react";
-import "./style.css";
-interface Props {
-  id: number;
+import { IResponseObject } from "./ShowMotive";
+
+export interface IImageList {
+  _id: number;
   image: string;
 }
 
-const MotiveImage: FC<Props> = ({ image }: Props) => {
+interface Props {
+  id: number;
+  image: string;
+  imageListProp: IResponseObject[];
+  index: number;
+  updateIndex: (index: number) => void;
+}
+
+const MotiveImage: FC<Props> = ({ image, index, updateIndex }: Props) => {
+  console.log(index);
   return (
-    <div className="motiveImage">
-      <img src={image} height="200px" width="300px" />
-      <p>Test</p>
-    </div>
+    <>
+      <div className="motiveImage" onClick={() => updateIndex(index)}>
+        <img src={image} height="200px" width="300px" />
+        <p>Test</p>
+      </div>
+    </>
   );
 };
 
