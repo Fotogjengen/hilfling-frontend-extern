@@ -12,15 +12,24 @@ interface Props {
   imageListProp: IResponseObject[];
   index: number;
   updateIndex: (index: number) => void;
+  title: string;
 }
 
-const MotiveImage: FC<Props> = ({ image, index, updateIndex }: Props) => {
+const MotiveImage: FC<Props> = ({
+  image,
+  index,
+  updateIndex,
+  title,
+}: Props) => {
   console.log(index);
   return (
     <>
       <div className="motiveImage" onClick={() => updateIndex(index)}>
         <img src={image} height="200px" width="300px" />
-        <p>Test</p>
+        <div className="imageContainer">
+          <p className={"imageTitle"}>{title}</p>
+          <p className={"imageTitle"}>31.08.21</p>
+        </div>
       </div>
     </>
   );

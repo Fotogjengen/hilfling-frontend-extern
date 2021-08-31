@@ -8,6 +8,7 @@ import { AppBar, Tabs, Tab } from "@material-ui/core";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 // TODO: this should still be here for when data from database gets collected higher in the component tree.
 interface Props {
@@ -58,21 +59,23 @@ const EventCardsDisplayer: FC<Props> = () => {
   const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
     return (
       // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
-      <GuiImageCard
-        key={`image-card-${index}`}
-        placement="left"
-        type="samfundet"
-        image="https://www.w3schools.com/css/img_lights.jpg"
-      >
-        <GuiCardTitle capitalized title={motiveObject.title} />
-        <GuiCardPreamble
-          color="red"
-          date={motiveObject.dateCreated}
-          images={69420}
-          location="Blåfjell"
-          type="EventCard"
-        />
-      </GuiImageCard>
+      <Link key={index} to={`/motive/${motiveObject.id}`}>
+        <GuiImageCard
+          key={`image-card-${index}`}
+          placement="left"
+          type="samfundet"
+          image="https://www.w3schools.com/css/img_lights.jpg"
+        >
+          <GuiCardTitle capitalized title={motiveObject.title} />
+          <GuiCardPreamble
+            color="red"
+            date={motiveObject.dateCreated}
+            images={69420}
+            location="Blåfjell"
+            type="EventCard"
+          />
+        </GuiImageCard>
+      </Link>
     );
   });
 

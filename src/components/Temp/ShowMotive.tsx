@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "./style.css";
 import MotiveImage from "./MotiveImage";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export interface IImageList {
   _id: number;
@@ -107,6 +108,28 @@ export interface IResponseObject {
   };
 }
 
+interface Motive {
+  id: string;
+  dateCreated: string;
+  title: string;
+  category: {
+    id: string;
+    dateCreated: string;
+    name: string;
+  };
+  eventOwner: {
+    id: string;
+    dateCreated: string;
+    name: string;
+  };
+  album: {
+    id: string;
+    dateCreated: string;
+    title: string;
+    isAnalog: boolean;
+  };
+}
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -124,8 +147,11 @@ const useStyles = makeStyles((theme) => ({
 const ShowMotive: FC = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const [photoResponse, setPhotoResponse] = useState<IResponseObject[]>([]);
+  const [motiveResponse, setMotiveResponse] = useState<Motive>({} as Motive);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const { id } = useParams<{ id: string }>();
 
   const handleOpen = () => {
     setOpen(true);
@@ -152,19 +178,33 @@ const ShowMotive: FC = () => {
     (image: IResponseObject, index: number) => (
       <MotiveImage
         id={image.photoId.id}
-        image={image.largeUrl}
+        image={`localhost:8080/${image.largeUrl}`}
         key={image.photoId.id}
         imageListProp={photoResponse}
         index={index}
         updateIndex={() => updateIndex(index)}
+        title={image.motive.title}
       />
     ),
   );
 
   useEffect(() => {
     try {
-      void axios.get(`http://localhost:8080/photos/`).then((res) => {
-        setPhotoResponse(res.data);
+      void axios
+        .get(`http://localhost:8080/photos/motive/${motiveResponse.id}`)
+        .then((res) => {
+          setPhotoResponse(res.data);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }, [motiveResponse]);
+
+  useEffect(() => {
+    //const { id } = useParams();
+    try {
+      void axios.get(`http://localhost:8080/motives/${id}`).then((res) => {
+        setMotiveResponse(res.data);
       });
     } catch (e) {
       console.log(e);
@@ -175,7 +215,7 @@ const ShowMotive: FC = () => {
     <div onKeyPress={handleKeyPress}>
       <div className="backgroundFlex">
         <div className="imageHeader">
-          <p className="headerText">GJENGFOTO</p>
+          <p className="headerText">{motiveResponse.title}</p>
           <hr
             style={{
               color: "#000000",
@@ -186,10 +226,6 @@ const ShowMotive: FC = () => {
           />
         </div>
         <div className="filterAndImages">
-          <div className="imageFilter">
-            <h2 className="filterText">FILTER</h2>
-            <div className="vl" />
-          </div>
           <div className="flex">
             {imageItems}
             {/*TODO: remove filling elements, this is a temp fix! This fix ensures that the first image in a row always is at the far left. FInd a better method for doing this  */}
