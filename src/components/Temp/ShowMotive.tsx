@@ -168,7 +168,7 @@ const ShowMotive: FC = () => {
       <MotiveImage
         id={image.photoId.id}
         //image={`localhost:8080/${image.largeUrl}`}
-        image={images[index]}
+        image={image.largeUrl}
         key={image.photoId.id}
         imageListProp={photoResponse}
         index={index}
@@ -227,15 +227,23 @@ const ShowMotive: FC = () => {
       </div>
       {isOpen && (
         <Lightbox
-          mainSrc={images[photoIndex]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          mainSrc={photoResponse[photoIndex].largeUrl}
+          nextSrc={
+            photoResponse[(photoIndex + 1) % photoResponse.length].largeUrl
+          }
+          prevSrc={
+            photoResponse[
+              (photoIndex + images.length - 1) % photoResponse.length
+            ].largeUrl
+          }
           onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
-            setPhotoIndex((photoIndex + images.length - 1) % images.length)
+            setPhotoIndex(
+              (photoIndex + photoResponse.length - 1) % photoResponse.length,
+            )
           }
           onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % images.length)
+            setPhotoIndex((photoIndex + 1) % photoResponse.length)
           }
         />
       )}
