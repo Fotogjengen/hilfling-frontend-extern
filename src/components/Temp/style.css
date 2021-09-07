@@ -72,8 +72,8 @@
 }
 
 .imageFlex {
-    display:flex;
-    align-content: middle;
+    position: relative;
+    max-width: 100%;
 }
 
 .bigFlex {

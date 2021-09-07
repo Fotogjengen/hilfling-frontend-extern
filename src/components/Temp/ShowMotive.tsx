@@ -1,13 +1,11 @@
 import React, { FC, useState, useEffect } from "react";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import Image from "./Image";
 import { makeStyles } from "@material-ui/core/styles";
 import "./style.css";
 import MotiveImage from "./MotiveImage";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 
 export interface IImageList {
   _id: number;
@@ -145,40 +143,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShowMotive: FC = () => {
-  const [imageIndex, setImageIndex] = useState(0);
   const [photoResponse, setPhotoResponse] = useState<IResponseObject[]>([]);
   const [motiveResponse, setMotiveResponse] = useState<Motive>({} as Motive);
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+
+  const images = [
+    "//placekitten.com/1500/500",
+    "//placekitten.com/4000/3000",
+    "//placekitten.com/800/1200",
+    "//placekitten.com/1500/1500",
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
 
   const { id } = useParams<{ id: string }>();
 
-  const handleOpen = () => {
-    setOpen(true);
+  const updateIndex = (index: number) => {
+    setPhotoIndex(index);
+    setIsOpen(true);
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const updateIndex = (newIndex: number) => {
-    handleOpen();
-    setImageIndex(newIndex);
-  };
-
-  function handleKeyPress(event: { key: string }) {
-    if (event.key === "y") {
-      alert("The sky is your starting point!");
-    } else if (event.key === "n") {
-      alert("The sky is your limit👀");
-    }
-  }
 
   const imageItems = photoResponse.map(
     (image: IResponseObject, index: number) => (
       <MotiveImage
         id={image.photoId.id}
-        image={`localhost:8080/${image.largeUrl}`}
+        //image={`localhost:8080/${image.largeUrl}`}
+        image={images[index]}
         key={image.photoId.id}
         imageListProp={photoResponse}
         index={index}
@@ -212,7 +202,7 @@ const ShowMotive: FC = () => {
   }, []);
 
   return (
-    <div onKeyPress={handleKeyPress}>
+    <>
       <div className="backgroundFlex">
         <div className="imageHeader">
           <p className="headerText">{motiveResponse.title}</p>
@@ -235,37 +225,21 @@ const ShowMotive: FC = () => {
           </div>
         </div>
       </div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Image
-            _id={/*photoResponse[imageIndex].photoId.id*/ 0}
-            imageListProp={photoResponse}
-            index={imageIndex}
-            leftArrow={() => {
-              if (imageIndex > 0) {
-                setImageIndex(imageIndex - 1);
-              }
-            }}
-            rightArrow={() => {
-              if (imageIndex < photoResponse.length - 1) {
-                setImageIndex(imageIndex + 1);
-              }
-            }}
-          />
-        </Fade>
-      </Modal>
-    </div>
+      {isOpen && (
+        <Lightbox
+          mainSrc={images[photoIndex]}
+          nextSrc={images[(photoIndex + 1) % images.length]}
+          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() =>
+            setPhotoIndex((photoIndex + images.length - 1) % images.length)
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((photoIndex + 1) % images.length)
+          }
+        />
+      )}
+    </>
   );
 };
 
