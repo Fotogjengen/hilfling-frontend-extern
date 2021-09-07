@@ -3,8 +3,7 @@ import { render } from "react-dom";
 import "./index.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createTheme } from "@material-ui/core/styles";
-import { MuiThemeProvider } from "@material-ui/core";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import guistyles from "./styles/utilities.module.css";
 import { GuiFooter } from "./gui-components";
 import HeaderComponent from "./components/Header/Header";
@@ -17,7 +16,7 @@ const THEME = createTheme({
 
 const Root: React.FC = () => (
   <>
-    <MuiThemeProvider theme={THEME}>
+    <ThemeProvider theme={THEME}>
       <div className={guistyles.container}>
         <div className={"container"}>
           <Router>
@@ -27,7 +26,7 @@ const Root: React.FC = () => (
         </div>
       </div>
       <GuiFooter />
-    </MuiThemeProvider>
+    </ThemeProvider>
   </>
 );
 
