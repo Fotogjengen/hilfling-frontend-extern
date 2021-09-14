@@ -7,6 +7,7 @@ import cx from "classnames";
 import styles from "./PhotoUpload.module.css";
 import PhotoUploadPreview from "../../../components/PhotoUploadPreview/PhotoUploadPreview";
 import { DragNDropFile } from "../../../types";
+import { Errors, Validate } from "../../../components/Form/types";
 
 interface Values {
   album: string;
@@ -17,6 +18,10 @@ interface Values {
   place: string;
   securityLevel: string;
 }
+
+const initialValues = {
+  album: "",
+};
 
 const PhotoUpload: FC = () => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
@@ -49,34 +54,36 @@ const PhotoUpload: FC = () => {
       console.log(file);
     });
   };
-  const validate = (values: Record<string, unknown>): ValidationErrors => {
+  const validate: Validate = (values: any): Errors => {
     // TODO: Do validation
     console.log("validate", values);
-    const errors: ValidationErrors = {};
+    const errors: Errors = {};
     return errors;
   };
   return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <PhotoUploadForm onSubmit={onSubmit} validate={validate} />
-        </Grid>
-        <Grid item xs={6}>
-          <section>
-            <div
-              {...getRootProps({ className: "dropzone" })}
-              className={cx(styles.dropzone)}
-            >
-              <input {...getInputProps()} />
-              <p>Dra og slipp filer her, eller klikk for å velge filer.</p>
-            </div>
-            <aside>
-              <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
-            </aside>
-          </section>
-        </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <PhotoUploadForm
+          onSubmit={onSubmit}
+          validate={validate}
+          initialValues={initialValues}
+        />
       </Grid>
-    </div>
+      <Grid item xs={6}>
+        <section>
+          <div
+            {...getRootProps({ className: "dropzone" })}
+            className={cx(styles.dropzone)}
+          >
+            <input {...getInputProps()} />
+            <p>Dra og slipp filer her, eller klikk for å velge filer.</p>
+          </div>
+          <aside>
+            <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
+          </aside>
+        </section>
+      </Grid>
+    </Grid>
   );
 };
 

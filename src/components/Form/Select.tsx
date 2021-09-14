@@ -1,34 +1,56 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
+  createStyles,
   FormControl,
   FormHelperText,
   InputLabel,
   Select as MuiSelect,
+  SelectProps,
+  withStyles,
+  WithStyles,
 } from "@material-ui/core";
 import cx from "classnames";
-import styles from "../../views/Intern/PhotoUpload/PhotoUpload.module.css";
-import { FormHelperTextWrapperProps } from "./types";
+import { FormFieldProps, FormHelperTextWrapperProps } from "./types";
+import { useForm } from "./Form";
 
-const Select: FC<FormHelperTextWrapperProps<typeof MuiSelect>> = ({
-  input: { name, value, onChange, ...restInput },
-  meta,
-  formControlProps,
+const styles = () =>
+  createStyles({
+    helperText: {
+      color: "red",
+    },
+    formControl: {
+      width: "100%",
+    },
+  });
+let idCount = 0;
+
+const Select: FC<FormFieldProps<SelectProps & WithStyles<typeof styles>>> = ({
+  name,
   label,
+  classes,
+  children,
   ...rest
 }) => {
+  const { values, errors, onChange } = useForm();
+  const [touched, setTouched] = useState<boolean>(false);
+  const id = `Select-${name}-${idCount++}`;
+  const error = touched && errors[name];
   return (
-    <FormControl {...formControlProps} className={cx(styles.rootFormControl)}>
+    <FormControl className={classes.formControl}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <MuiSelect
-        {...rest}
+        id={id}
         name={name}
-        onChange={onChange}
-        inputProps={restInput}
-        value={value}
-      />
-      {meta.error && <FormHelperText>{meta.error}</FormHelperText>}
+        onChange={(e) => onChange(name, e.target.value)}
+        value={values[name]}
+        fullWidth
+        {...rest}
+      >
+        {children}
+      </MuiSelect>
+      <FormHelperText className={classes.helperText}>{error}</FormHelperText>
     </FormControl>
   );
 };
 
-export default Select;
+export default withStyles(styles)(Select);

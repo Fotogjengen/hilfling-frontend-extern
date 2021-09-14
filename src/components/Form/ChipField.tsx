@@ -27,13 +27,21 @@ const ChipField: FC<FormHelperTextWrapperProps<typeof Input>> = ({
 
   const onChangeInterimValue = (event: ChangeEvent) => {
     setInterimValue((event.target as HTMLTextAreaElement).value);
+    console.log(onChange);
   };
 
   const addChip = (event: KeyboardEvent) => {
-    console.log(value);
-    console.log(onChange);
-    if (event.key === "Enter" && !chips.includes(value.toString())) {
-      setChips([value.toString(), ...chips]);
+    if (
+      event.key === " " &&
+      !chips.includes(interimValue.trim()) &&
+      interimValue.trim() !== ""
+    ) {
+      setChips([interimValue.trim(), ...chips]);
+      setInterimValue("");
+    } else if (
+      interimValue.trim() === "" ||
+      chips.includes(interimValue.trim())
+    ) {
       setInterimValue("");
     }
   };
