@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import { Box, Typography } from "@material-ui/core";
+import styles from "./TabPanel.module.css";
 
 interface Props {
   children: ReactNode;
@@ -10,6 +11,7 @@ interface Props {
 const TabPanel: FC<Props> = ({ children, value, index, ...rest }) => {
   return (
     <div
+      className={styles.TabPanel}
       role="tabpanel"
       hidden={value !== index}
       id={`wrapped-tabpanel-${index}`}
