@@ -12,7 +12,6 @@ const NotFound: FC = () => {
           Shoot! Her gikk noe galt... Denne siden ser ikke ut til å eksistere.
           Hvis det er noe du mener er feil kan du sende en mail til
           <a href={"mailto:fotogjengen@samfundet.no"}>
-            {" "}
             fotogjengen@samfundet.no
           </a>
           . Forsiden finner du <a href={"https://foto.samfundet.no/"}>her</a>.
