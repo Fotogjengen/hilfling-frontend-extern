@@ -117,3 +117,9 @@
     color: #ffffff;
     font-size: 14px;
 }
+
+.hr {
+    background-color: "#000000";
+    height: 2px;
+    width: 95%;
+}

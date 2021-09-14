@@ -82,13 +82,37 @@ const EventCardsDisplayer: FC<Props> = () => {
   const imageCardsIsfit = ["Et flott sted ISFiT liker"].map(
     (placeName, index) => {
       return (
+        <Link key={index} to={`/motive/${"isfit-motiv"}`}>
+          <GuiImageCard
+            key={`image-card-${index}`}
+            placement={"left"}
+            type="samfundet"
+            image={"https://www.w3schools.com/css/img_lights.jpg"}
+          >
+            <GuiCardTitle capitalized title={"Temafest: Gjøre verden bedre"} />
+            <GuiCardPreamble
+              color="red"
+              date="12.10.2020"
+              images={123}
+              location={placeName}
+              type={"EventCard"}
+            />
+          </GuiImageCard>
+        </Link>
+      );
+    },
+  );
+
+  const imageCardsUka = ["Fæffæs lommebok", "BI"].map((placeName, index) => {
+    return (
+      <Link key={index} to={`/motive/${"UKEN-motiv :)"}`}>
         <GuiImageCard
           key={`image-card-${index}`}
           placement={"left"}
           type="samfundet"
           image={"https://www.w3schools.com/css/img_lights.jpg"}
         >
-          <GuiCardTitle capitalized title={"Temafest: Gjøre verden bedre"} />
+          <GuiCardTitle capitalized title={"Temafest: Tjene $$$"} />
           <GuiCardPreamble
             color="red"
             date="12.10.2020"
@@ -97,27 +121,7 @@ const EventCardsDisplayer: FC<Props> = () => {
             type={"EventCard"}
           />
         </GuiImageCard>
-      );
-    },
-  );
-
-  const imageCardsUka = ["Fæffæs lommebok", "BI"].map((placeName, index) => {
-    return (
-      <GuiImageCard
-        key={`image-card-${index}`}
-        placement={"left"}
-        type="samfundet"
-        image={"https://www.w3schools.com/css/img_lights.jpg"}
-      >
-        <GuiCardTitle capitalized title={"Temafest: Tjene $$$"} />
-        <GuiCardPreamble
-          color="red"
-          date="12.10.2020"
-          images={123}
-          location={placeName}
-          type={"EventCard"}
-        />
-      </GuiImageCard>
+      </Link>
     );
   });
 

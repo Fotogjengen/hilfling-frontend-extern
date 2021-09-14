@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import "./style.css";
+import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -128,20 +127,6 @@ interface Motive {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
 const ShowMotive: FC = () => {
   const [photoResponse, setPhotoResponse] = useState<IResponseObject[]>([]);
   const [motiveResponse, setMotiveResponse] = useState<Motive>({} as Motive);
@@ -203,25 +188,18 @@ const ShowMotive: FC = () => {
 
   return (
     <>
-      <div className="backgroundFlex">
-        <div className="imageHeader">
-          <p className="headerText">{motiveResponse.title}</p>
-          <hr
-            style={{
-              color: "#000000",
-              backgroundColor: "#000000",
-              height: 2,
-              width: "95%",
-            }}
-          />
+      <div className={styles.backgroundFlex}>
+        <div className={styles.imageHeader}>
+          <p className={styles.headerText}>{motiveResponse.title}</p>
+          <hr className={styles.hr} />
         </div>
-        <div className="filterAndImages">
-          <div className="flex">
+        <div className={styles.filterAndImages}>
+          <div className={styles.flex}>
             {imageItems}
             {/*TODO: remove filling elements, this is a temp fix! This fix ensures that the first image in a row always is at the far left. FInd a better method for doing this  */}
-            <div className="filling-empty-space-childs" />
-            <div className="filling-empty-space-childs" />
-            <div className="filling-empty-space-childs" />
+            <div className={styles.fillingEmptySpaceChilds} />
+            <div className={styles.fillingEmptySpaceChilds} />
+            <div className={styles.fillingEmptySpaceChilds} />
           </div>
         </div>
       </div>

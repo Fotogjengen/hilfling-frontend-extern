@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { IResponseObject } from "./ShowMotive";
 
+import styles from "./imageStyle.module.css";
+
 export interface IImageList {
   _id: number;
   image: string;
@@ -21,14 +23,13 @@ const MotiveImage: FC<Props> = ({
   updateIndex,
   title,
 }: Props) => {
-  console.log(index);
   return (
     <>
-      <div className="motiveImage" onClick={() => updateIndex(index)}>
+      <div className={styles.motiveImage} onClick={() => updateIndex(index)}>
         <img src={image} height="200px" width="300px" />
-        <div className="imageContainer">
-          <p className={"imageTitle"}>{title}</p>
-          <p className={"imageTitle"}>31.08.21</p>
+        <div className={styles.imageContainer}>
+          <p className={styles.imageTitle}>{title}</p>
+          <p className={styles.imageTitle}>31.08.21</p>
         </div>
       </div>
     </>
