@@ -4,10 +4,10 @@
 }
 
 .headerTextElement {
-  padding: 2rem;
+  padding: 0rem;
   user-select: none;
   font-size: 1.7rem;
-  margin: 0;
+  margin: 2rem;
   color: black;
 }
 
