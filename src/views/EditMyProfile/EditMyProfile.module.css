@@ -23,3 +23,15 @@
 .profileCard {
   margin-top: 50px;
 }
+
+.header {
+  width: 100%;
+  min-height: 100px;
+  text-align: center;
+}
+
+.headerText {
+  font-size: 40px;
+  margin: 20px;
+  color: #7E7E7E;
+}

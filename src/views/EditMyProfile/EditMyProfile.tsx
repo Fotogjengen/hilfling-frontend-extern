@@ -11,28 +11,34 @@ const MyProfile: FC = () => {
   const myTags = tags; //TODO: FETCH FROM API
   const user = User; //TODO: FETCH FROM API
   return (
-    <div className={cx(guistyles.contentContainer, styles.profileContainer)}>
-      <div>
-        <div className={styles.profileImage}>
-          <GuiProfileImage
-            alt={user[0].name}
-            src={user[0].image}
-            onClick={(): void => console.log("hei")}
-          />
-        </div>
-        <div className={styles.profileCard}>
-          <ProfileCard
-            username={user[0].username}
-            email={user[0].email}
-            fgEmail={user[0].fgEmail}
-          />
-        </div>
+    <div className={cx(guistyles.contentContainer)}>
+      <div className={styles.header}>
+        <p className={styles.headerText}>Rediger profil</p>
+        <hr />
       </div>
-      <div className={styles.nameAndTagContainer}>
+      <div className={styles.profileContainer}>
         <div>
-          <h1 className={styles.profileName}>{user[0].name}</h1>
+          <div className={styles.profileImage}>
+            <GuiProfileImage
+              alt={user[0].name}
+              src={user[0].image}
+              onClick={(): void => console.log("hei")}
+            />
+          </div>
+          <div className={styles.profileCard}>
+            <ProfileCard
+              username={user[0].username}
+              email={user[0].email}
+              fgEmail={user[0].fgEmail}
+            />
+          </div>
         </div>
-        <ProfileTags tags={myTags} />
+        <div className={styles.nameAndTagContainer}>
+          <div>
+            <h1 className={styles.profileName}>{user[0].name}</h1>
+          </div>
+          <ProfileTags tags={myTags} />
+        </div>
       </div>
     </div>
   );
