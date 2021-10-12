@@ -7,7 +7,8 @@ import React, {
   useState,
 } from "react";
 import { FormContext, FormProps } from "./types";
-import { Box } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
+import SubmitButton from "./SubmitButton";
 
 const Context = createContext<FormContext>({
   values: {},
@@ -43,7 +44,7 @@ const Form: FC<FormProps> = ({
     }));
   };
 
-  const _onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const _onSubmit = (e: any) => {
     e.preventDefault();
     setValues(initialValues);
     onSubmit(values);
@@ -57,7 +58,12 @@ const Form: FC<FormProps> = ({
         onChange,
       }}
     >
-      <form onSubmit={_onSubmit}>{children}</form>
+      <form onKeyDown={(e) => e.key !== "Enter"}>
+        {children}
+        <Grid item xs={12}>
+          <SubmitButton onClick={(e) => _onSubmit(e)}>Last opp</SubmitButton>
+        </Grid>
+      </form>
     </Context.Provider>
   );
 };

@@ -1,9 +1,16 @@
 import React from "react";
-import { createStyles, WithStyles, Fab } from "@material-ui/core";
+import {
+  createStyles,
+  WithStyles,
+  Fab,
+  ButtonProps,
+  FabProps,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import cn from "classnames";
 import { useForm } from "./Form";
 import { isEmpty } from "lodash";
+import { FormFieldProps } from "./types";
 
 interface Props {
   children: string;
@@ -20,9 +27,9 @@ const styles = () =>
     },
   });
 
-const SubmitButton = (props: Props & WithStyles<typeof styles>) => {
-  const { classes, float, children, ...rest } = props;
-  const { errors } = useForm();
+const SubmitButton = (props: Props & FabProps & WithStyles<typeof styles>) => {
+  const { classes, float, children, onClick, ...rest } = props;
+  const { errors, values } = useForm();
   return (
     <Fab
       color="primary"
@@ -31,9 +38,10 @@ const SubmitButton = (props: Props & WithStyles<typeof styles>) => {
         [classes.floatLeft]: float === "left",
         [classes.floatRight]: float === "right",
       })}
-      type="submit"
+      type="button"
       {...rest}
       disabled={!isEmpty(errors)}
+      onClick={onClick}
     >
       {children}
     </Fab>

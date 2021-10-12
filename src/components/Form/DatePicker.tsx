@@ -1,11 +1,5 @@
 import React, { FC, useState } from "react";
-import {
-  createStyles,
-  TextField,
-  TextFieldProps,
-  withStyles,
-  WithStyles,
-} from "@material-ui/core";
+import { createStyles, withStyles, WithStyles } from "@material-ui/core";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 import {
@@ -28,26 +22,30 @@ let idCount = 0;
 
 const DatePicker: FC<
   FormFieldProps<KeyboardDatePickerProps> & WithStyles<typeof styles>
-> = ({ name, label, classes, children, ...rest }) => {
+> = ({ name, label, classes, children, fullWidth, ...rest }) => {
   const { values, errors, onChange } = useForm();
   const [touched, setTouched] = useState<boolean>(false);
   const id = `DatePicker-${name}-${idCount++}`;
   const error = touched && errors[name];
 
+  const handleDateChange = (date: any) => {
+    onChange(name, date);
+  };
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
-        disableToolbar
         variant="inline"
-        format="MM/dd/yyyy"
+        format="dd/MM/yyyy"
         margin="normal"
-        id={id}
+        id={"date-picker-inline"}
         label={label}
         value={values[name]}
-        onChange={(e) => onChange(name, e)}
+        onChange={handleDateChange}
         KeyboardButtonProps={{
           "aria-label": "change date",
         }}
+        fullWidth={fullWidth}
       />
     </MuiPickersUtilsProvider>
   );

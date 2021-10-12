@@ -1,5 +1,6 @@
 import { FieldRenderProps } from "react-final-form";
 import { FormControlProps } from "@material-ui/core";
+import {DragNDropFile} from "../../types";
 
 export interface FormHelperTextWrapperProps<T> extends FieldRenderProps<T> {
   label: string;
@@ -8,9 +9,10 @@ export interface FormHelperTextWrapperProps<T> extends FieldRenderProps<T> {
 
 export type FormFieldProps<T> = Omit<
   T,
-  "onChange" | "name" | "error" | "onBlur"
+  "onChange" | "name" | "error" | "onBlur" | "value"
 > & {
   name: string;
+  label: string;
 };
 
 export type OnChange<T = string> = (fieldName: string, value: T | null) => void;

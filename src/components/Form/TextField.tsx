@@ -3,14 +3,12 @@ import {
   createStyles,
   FormControl,
   FormHelperText,
-  InputLabel,
-  Select as MuiSelect,
-  SelectProps,
+  TextField as MuiTextField,
+  TextFieldProps,
   withStyles,
   WithStyles,
 } from "@material-ui/core";
-import cx from "classnames";
-import { FormFieldProps, FormHelperTextWrapperProps } from "./types";
+import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 
 const styles = () =>
@@ -19,35 +17,26 @@ const styles = () =>
       color: "red",
     },
   });
+
 let idCount = 0;
 
-const Select: FC<FormFieldProps<SelectProps & WithStyles<typeof styles>>> = ({
-  name,
-  label,
-  classes,
-  fullWidth,
-  children,
-  ...rest
-}) => {
+const TextField: FC<
+  FormFieldProps<TextFieldProps> & WithStyles<typeof styles>
+> = ({ name, label, classes, children, fullWidth, ...rest }) => {
   const { values, errors, onChange } = useForm();
   const [touched, setTouched] = useState<boolean>(false);
   const id = `Select-${name}-${idCount++}`;
   const error = touched && errors[name];
   return (
     <FormControl fullWidth={fullWidth}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
-      <MuiSelect
-        id={id}
-        name={name}
+      <MuiTextField
+        label={label}
         onChange={(e) => onChange(name, e.target.value)}
-        value={values[name]}
         {...rest}
-      >
-        {children}
-      </MuiSelect>
+      />
       <FormHelperText className={classes.helperText}>{error}</FormHelperText>
     </FormControl>
   );
 };
 
-export default withStyles(styles)(Select);
+export default withStyles(styles)(TextField);

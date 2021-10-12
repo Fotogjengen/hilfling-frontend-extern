@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from "react";
-import { ValidationErrors } from "final-form";
 import { Grid } from "@material-ui/core";
 import PhotoUploadForm from "../../../forms/PhotoUploadForm";
 import { useDropzone } from "react-dropzone";
@@ -21,46 +20,23 @@ interface Values {
 
 const initialValues = {
   album: "",
+  date: new Date(Date.now()),
+  motive: "",
+  tags: [],
+  category: "",
+  place: "",
+  securityLevel: "",
 };
 
 const PhotoUpload: FC = () => {
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: ".jpg,.jpeg,.png",
-  });
-  const [files, setFiles] = useState<DragNDropFile[]>([]);
-  useEffect(() => {
-    setFiles(acceptedFiles as DragNDropFile[]);
-  }, [acceptedFiles]);
-
-  const handleGoodPictureChange = (index: number) => {
-    const newFiles: DragNDropFile[] = files;
-    newFiles[index].isGoodPicture = !newFiles[index].isGoodPicture;
-    setFiles(newFiles);
-  };
-
-  const renderFilePreview = files.map((file: DragNDropFile, index: number) => (
-    <li className={styles.fileList} key={file.path}>
-      <PhotoUploadPreview
-        file={file}
-        handleChange={() => handleGoodPictureChange(index)}
-      />
-    </li>
-  ));
-
-  const onSubmit = (values: Record<string, unknown>) => {
-    // TODO: Send to backend
-    console.log("submit", values);
-    files.forEach((file) => {
-      console.log(file);
-    });
-  };
-  const validate: Validate = (values: any): Errors => {
-    // TODO: Do validation
-    console.log("validate", values);
-    const errors: Errors = {};
-    return errors;
-  };
   return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <PhotoUploadForm initialValues={initialValues} />
+      </Grid>
+    </Grid>
+  );
+  /*return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <PhotoUploadForm
@@ -84,7 +60,7 @@ const PhotoUpload: FC = () => {
         </section>
       </Grid>
     </Grid>
-  );
+  );*/
 };
 
 export default PhotoUpload;

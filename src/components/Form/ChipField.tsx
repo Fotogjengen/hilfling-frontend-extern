@@ -11,47 +11,62 @@ import {
   FormControl,
   FormHelperText,
   Input,
+  InputProps,
   InputLabel,
+  WithStyles,
+  createStyles,
+  withStyles,
 } from "@material-ui/core";
-import { FormHelperTextWrapperProps } from "./types";
+import { FormFieldProps } from "./types";
+import { useForm } from "./Form";
 
-const ChipField: FC<FormHelperTextWrapperProps<typeof Input>> = ({
-  input: { name, onChange, restInput, value },
-  meta,
-  formControlProps,
+const styles = () =>
+  createStyles({
+    helperText: {
+      color: "red",
+    },
+  });
+
+const ChipField: FC<FormFieldProps<InputProps> & WithStyles<typeof styles>> = ({
+  name,
   label,
+  fullWidth,
+  classes,
   ...rest
 }) => {
-  const [chips, setChips] = useState<string[]>(["caro", "schmaro"]);
+  const { values, errors, onChange } = useForm();
   const [interimValue, setInterimValue] = useState<string>("");
+  const [touched, setTouched] = useState<boolean>(false);
+  const error = touched && errors[name];
 
   const onChangeInterimValue = (event: ChangeEvent) => {
     setInterimValue((event.target as HTMLTextAreaElement).value);
-    console.log(onChange);
   };
 
   const addChip = (event: KeyboardEvent) => {
     if (
-      event.key === " " &&
-      !chips.includes(interimValue.trim()) &&
+      event.key === "Enter" &&
+      !values[name].includes(interimValue.trim()) &&
       interimValue.trim() !== ""
     ) {
-      setChips([interimValue.trim(), ...chips]);
+      onChange(name, [interimValue.trim(), ...values[name]]);
       setInterimValue("");
     } else if (
       interimValue.trim() === "" ||
-      chips.includes(interimValue.trim())
+      values[name].includes(interimValue.trim())
     ) {
       setInterimValue("");
     }
   };
 
   const handleDelete = (chipToDelete: string) => {
-    const newChips = chips.filter((chip) => chip !== chipToDelete);
-    setChips(newChips);
+    onChange(
+      name,
+      values[name].filter((chip: string) => chip !== chipToDelete),
+    );
   };
 
-  const chipRenderer: ReactElement[] = chips.map(
+  const chipRenderer: ReactElement[] = values[name].map(
     (chip: string, index: number) => {
       return (
         <Chip
@@ -66,21 +81,20 @@ const ChipField: FC<FormHelperTextWrapperProps<typeof Input>> = ({
 
   return (
     <Fragment>
-      {chips && chipRenderer}
-      <FormControl {...formControlProps}>
+      <div>{values[name] && chipRenderer}</div>
+      <FormControl fullWidth={fullWidth}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
         <Input
           {...rest}
           onChange={onChangeInterimValue}
           name={name}
-          inputProps={restInput}
           onKeyDown={addChip}
           value={interimValue}
         />
-        {meta.error && <FormHelperText>{meta.error}</FormHelperText>}
+        <FormHelperText className={classes.helperText}>{error}</FormHelperText>
       </FormControl>
     </Fragment>
   );
 };
 
-export default ChipField;
+export default withStyles(styles)(ChipField);

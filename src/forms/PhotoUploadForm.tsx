@@ -1,232 +1,131 @@
-import React, { FC } from "react";
-import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
-import { Field, Form as RffForm } from "react-final-form";
+import React, { FC, useEffect, useState } from "react";
+import { Button, Grid, MenuItem } from "@material-ui/core";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
-import Form from "../components/Form/Form";
+import TextField from "../components/Form/TextField";
+import Form, { useForm } from "../components/Form/Form";
 import SubmitButton from "../components/Form/SubmitButton";
-import { FormProps, Validate } from "../components/Form/types";
+import { Errors, FormProps, Validate } from "../components/Form/types";
+import { DragNDropFile } from "../types";
+import cx from "classnames";
+import styles from "../views/Intern/PhotoUpload/PhotoUpload.module.css";
+import { useDropzone } from "react-dropzone";
+import PhotoUploadPreview from "../components/PhotoUploadPreview/PhotoUploadPreview";
+import { PhotoApi } from "../utils/api/PhotoApi";
+import { Photo } from "../interfaces/Photo";
 
-const PhotoUploadForm: FC<FormProps> = ({
-  onSubmit,
-  validate,
-  initialValues,
-}) => {
+interface Props {
+  initialValues: any;
+}
+
+const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    accept: ".jpg,.jpeg,.png",
+  });
+  const [files, setFiles] = useState<DragNDropFile[]>([]);
+  useEffect(() => {
+    setFiles(acceptedFiles as DragNDropFile[]);
+  }, [acceptedFiles]);
+
+  const onSubmit = (values: Record<string, unknown>) => {
+    // TODO: Send to backend
+    console.log("submit", values);
+    files.forEach((file) => {
+      console.log("file", file);
+      // PhotoApi.post();
+    });
+  };
+  const validate: Validate = (values: any): Errors => {
+    // TODO: Do validation
+    //console.log("validate", values);
+    const errors: Errors = {};
+    return errors;
+  };
+
+  const handleGoodPictureChange = (index: number) => {
+    const newFiles: DragNDropFile[] = files;
+    newFiles[index].isGoodPicture = !newFiles[index].isGoodPicture;
+    setFiles(newFiles);
+  };
+
+  const renderFilePreview = files.map((file: DragNDropFile, index: number) => (
+    <li className={styles.fileList} key={file.path}>
+      <PhotoUploadPreview
+        file={file}
+        handleChange={() => handleGoodPictureChange(index)}
+      />
+    </li>
+  ));
+
   return (
     <Form onSubmit={onSubmit} initialValues={initialValues} validate={validate}>
-      <Grid container alignItems="flex-start" spacing={2}>
-        <Grid item xs={12}>
-          {/*<Field
-            fullWidth
-            required
-            name="album"
-            component={Select}
-            label="Album"
-            formControlProps={{ fullWidth: true }}
-          >
-            <MenuItem value="v2021">Vår 2021</MenuItem>
-          </Field>*/}
-          <Select name="album" label="Album" fullWidth required>
-            <MenuItem value="v2021">Vår 2021</MenuItem>
-            <MenuItem value="h2021">Høst 2021</MenuItem>
-          </Select>
-        </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Grid item xs={12}>
+            <Select name="album" label="Album" fullWidth required>
+              <MenuItem value="v2021">Vår 2021</MenuItem>
+              <MenuItem value="h2021">Høst 2021</MenuItem>
+            </Select>
+          </Grid>
 
-        <Grid item xs={12}>
-          {/*<Field
-            fullWidth
-            required
-            name="date"
-            component={DatePicker}
-            type="datetime-local"
-            label="Dato"
-          />*/}
-          <DatePicker name="date" label="Dato" value={Date.now()} />
-        </Grid>
+          <Grid item xs={12}>
+            <DatePicker name="date" label="Dato" fullWidth />
+          </Grid>
 
-        <Grid item xs={12}>
-          {/*<Field
-            fullWidth
-            required
-            name="motive"
-            component={TextField}
-            type="text"
-            label="Motiv"
-          />*/}
-        </Grid>
+          <Grid item xs={12}>
+            <TextField name="motive" label="Motiv" fullWidth required />
+          </Grid>
 
-        <Grid item xs={12}>
-          {/*<Field
-            fullWidth
-            required
-            name="tags"
-            component={ChipField}
-            type="array"
-            label="Tags"
-            formControlProps={{ fullWidth: true }}
-          />*/}
-        </Grid>
+          <Grid item xs={12}>
+            <ChipField name="tags" label="Tags" fullWidth />
+          </Grid>
 
-        <Grid item xs={12}>
-          {/*<Field
-            fullWidth
-            required
-            name="category"
-            component={Select}
-            label="Kategori"
-            formControlProps={{ fullWidth: true }}
-          >
-            <MenuItem value="INTERIØR">INTERIØR</MenuItem>
-            <MenuItem value="MILJØBILDE">MILJØBILDE</MenuItem>
-          </Field>*/}
-        </Grid>
+          <Grid item xs={12}>
+            <Select name="category" label="Kategori" fullWidth required>
+              <MenuItem value="INTERIØR">INTERIØR</MenuItem>
+              <MenuItem value="MILJØBILDE">MILJØBILDE</MenuItem>
+            </Select>
+          </Grid>
 
-        <Grid item xs={12}>
-          {/* <Field
-            fullWidth
-            required
-            name="place"
-            component={Select}
-            label="Place"
-            formControlProps={{ fullWidth: true }}
-          >
-            <MenuItem value="STORSALEN">STORSALEN</MenuItem>
-            <MenuItem value="INTERN">INTERN</MenuItem>
-            <MenuItem value="FG">FG</MenuItem>
-          </Field>*/}
-        </Grid>
+          <Grid item xs={12}>
+            <Select name="place" label="Sted" fullWidth required>
+              <MenuItem value="STORSALEN">Storsalen</MenuItem>
+              <MenuItem value="AQUA">Aqua</MenuItem>
+              <MenuItem value="RUNDHALLEN">Rundhallen</MenuItem>
+            </Select>
+          </Grid>
 
-        <Grid item xs={12}>
-          {/*<Field
-            fullWidth
-            required
-            name="securityLevel"
-            component={Select}
-            label="Sikkerhetsnivå"
-            formControlProps={{ fullWidth: true }}
-          >
-            <MenuItem value="ALLE">ALLE</MenuItem>
-            <MenuItem value="INTERN">INTERN</MenuItem>
-            <MenuItem value="FG">FG</MenuItem>
-          </Field>*/}
+          <Grid item xs={12}>
+            <Select
+              name="securityLevel"
+              label="Sikkerhetsnivå"
+              fullWidth
+              required
+            >
+              <MenuItem value="ALLE">ALLE</MenuItem>
+              <MenuItem value="INTERN">INTERN</MenuItem>
+              <MenuItem value="FG">FG</MenuItem>
+            </Select>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <SubmitButton>Hei</SubmitButton>
+        <Grid item xs={6}>
+          <section>
+            <div
+              {...getRootProps({ className: "dropzone" })}
+              className={cx(styles.dropzone)}
+            >
+              <input {...getInputProps()} />
+              <p>Dra og slipp filer her, eller klikk for å velge filer.</p>
+            </div>
+            <aside>
+              <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
+            </aside>
+          </section>
         </Grid>
       </Grid>
     </Form>
   );
 };
-
-/*const PhotoUploadForm2: FC<Props> = ({ onSubmit, validate }) => {
-  return (
-    <RffForm
-      onSubmit={onSubmit}
-      validate={validate}
-      render={({ handleSubmit /!*submitting, pristine, values*!/ }) => (
-        <form onSubmit={handleSubmit} noValidate>
-          <Grid container alignItems="flex-start" spacing={2}>
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="album"
-                component={Select}
-                label="Album"
-                formControlProps={{ fullWidth: true }}
-              >
-                <MenuItem value="v2021">Vår 2021</MenuItem>
-              </Field>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="date"
-                component={DatePicker}
-                type="datetime-local"
-                label="Dato"
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="motive"
-                component={TextField}
-                type="text"
-                label="Motiv"
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="tags"
-                component={ChipField}
-                type="array"
-                label="Tags"
-                formControlProps={{ fullWidth: true }}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="category"
-                component={Select}
-                label="Kategori"
-                formControlProps={{ fullWidth: true }}
-              >
-                <MenuItem value="INTERIØR">INTERIØR</MenuItem>
-                <MenuItem value="MILJØBILDE">MILJØBILDE</MenuItem>
-              </Field>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="place"
-                component={Select}
-                label="Place"
-                formControlProps={{ fullWidth: true }}
-              >
-                <MenuItem value="STORSALEN">STORSALEN</MenuItem>
-                <MenuItem value="INTERN">INTERN</MenuItem>
-                <MenuItem value="FG">FG</MenuItem>
-              </Field>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Field
-                fullWidth
-                required
-                name="securityLevel"
-                component={Select}
-                label="Sikkerhetsnivå"
-                formControlProps={{ fullWidth: true }}
-              >
-                <MenuItem value="ALLE">ALLE</MenuItem>
-                <MenuItem value="INTERN">INTERN</MenuItem>
-                <MenuItem value="FG">FG</MenuItem>
-              </Field>
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant="contained" color="primary" type="submit">
-                Last opp
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      )}
-    />
-  );
-};*/
 
 export default PhotoUploadForm;
