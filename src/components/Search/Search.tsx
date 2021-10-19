@@ -13,29 +13,42 @@ const Search: FC<Props> = ({ width, label }: Props) => {
   const [search_value, setSearchValue] = useState("");
   const [boxshadow, setboxshadow] = useState("");
   const handleClick = () => {
-    setSearchValue("");
     setboxshadow("0px 0px 0px 0px black");
   };
-  const prop_style = {
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const item = [
+    "Oktoberfest",
+    "Olympiade",
+    "Frisktisk",
+    "sssssss",
+    "ooola dola",
+    "woola da sa",
+  ];
+
+  const prop_width = {
     width: width,
-    boxshadow: boxshadow,
   };
 
   return (
-    <div className={styles.container}>
-      <input
-        onClick={handleClick}
-        type="text"
-        placeholder={label}
-        value={search_value}
-        className={styles.input}
-        style={prop_style}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      <div className={styles.search_symbol}>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
+    <div className={styles.container} style={prop_width}>
+      <div className={styles.inputbox} style={prop_width}>
+        <input
+          onClick={handleClick}
+          type="text"
+          placeholder={label}
+          value={search_value}
+          className={styles.input}
+          onChange={(e) => onChange(e)}
+        />
+        <div className={styles.search_symbol}>
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+        </div>
       </div>
     </div>
   );
