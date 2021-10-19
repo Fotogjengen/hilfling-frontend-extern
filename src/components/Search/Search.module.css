@@ -8,36 +8,36 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  border: 2px solid grey;
+  border-radius: 6px;
 }
 
 .input {
   width: 85%;
   height: var(--primary-height);
   font-size: 30px;
-  padding: 0 15px;
-  border: 2px solid grey;
-  border-right: 0px;
-  border-radius: 4px 0 0 4px;
+  margin: 0 15px;
+  border: 0px;
 }
 
 .inputbox {
   display: flex;
   flex-wrap: nowrap;
+  cursor: text;
+  width: 100%;
 }
 
 .input:focus {
   box-shadow: 0px 0px 0px black;
-  border-color: black;
 }
 
-.input:focus + .search_symbol {
+.input:focus + .container {
   border-color: black;
 }
 
 .search_symbol {
-  cursor: pointer;
-
-  width: 15%;
+  /*border-left: 2px solid rgba(128, 128, 128, 0.2); */
+  width: 20%;
   height: var(--primary-height);
   font-size: 40px;
 
@@ -45,8 +45,22 @@
   align-items: center;
   justify-content: center;
   position: relative;
+}
 
-  border: 2px solid grey;
-  border-radius: 0 4px 4px 0;
-  border-left: 0px;
+.remove {
+  display: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: white;
+}
+
+.remove * {
+  margin: 10px;
+}
+
+.remove:hover {
+  font-weight: 20px;
 }

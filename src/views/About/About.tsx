@@ -68,7 +68,7 @@ const About: FC = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={tabValue} index={0}>
-        <Search width={400} label="Search.." />
+        <Search width={"80%"} label="Search.." />
         <div>
           <h2>Aktive fotogjengere</h2>
           <div className={styles.gangBangers}>{activeGangBangers}</div>;

@@ -3,21 +3,45 @@ import styles from "./Search.module.css";
 import IconButton from "@material-ui/core/IconButton";
 
 import SearchIcon from "@material-ui/icons/Search";
+import ClearIcon from "@material-ui/icons/Clear";
 
 interface Props {
-  width: number;
+  width: string;
   label?: string;
 }
 
 const Search: FC<Props> = ({ width, label }: Props) => {
   const [search_value, setSearchValue] = useState("");
-  const [boxshadow, setboxshadow] = useState("");
-  const handleClick = () => {
-    setboxshadow("0px 0px 0px 0px black");
+  const [border_color, setBorderColor] = useState("");
+  const [display_clear, setDisplayClear] = useState(["", ""]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    displayClear(event);
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBorderColor("grey");
+    displayClear(event);
+  };
+
+  const handleFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBorderColor("black");
+    displayClear(event);
+  };
+
+  const displayClear = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    if (event.target.value == "") {
+      setDisplayClear(["white", "text"]);
+    } else {
+      setDisplayClear(["black", "pointer"]);
+    }
+  };
+
+  const remove = () => {
+    setSearchValue("");
+    setDisplayClear(["white", "text"]);
   };
 
   const item = [
@@ -29,22 +53,36 @@ const Search: FC<Props> = ({ width, label }: Props) => {
     "woola da sa",
   ];
 
-  const prop_width = {
+  const type1_prop = {
     width: width,
+    borderColor: border_color,
+  };
+
+  const type2_prop = {
+    borderColor: border_color,
+  };
+
+  const displayClear_prop = {
+    color: display_clear[0],
+    cursor: display_clear[1],
   };
 
   return (
-    <div className={styles.container} style={prop_width}>
-      <div className={styles.inputbox} style={prop_width}>
+    <div className={styles.container} style={type1_prop}>
+      <div className={styles.inputbox}>
         <input
-          onClick={handleClick}
+          onFocus={(e) => handleFocus(e)}
+          onBlur={(e) => handleBlur(e)}
           type="text"
           placeholder={label}
           value={search_value}
           className={styles.input}
-          onChange={(e) => onChange(e)}
+          onChange={(e) => handleChange(e)}
         />
-        <div className={styles.search_symbol}>
+        <div className={styles.remove} onClick={remove}>
+          <ClearIcon style={displayClear_prop} />
+        </div>
+        <div className={styles.search_symbol} style={type2_prop}>
           <IconButton>
             <SearchIcon />
           </IconButton>
