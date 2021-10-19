@@ -14,7 +14,6 @@ const Routes: FC = () => {
         <Route exact path="/" component={App} />
         <Route exact path="/intern/Arkivsjef" component={Arkivsjef} />
         <Route exact path="/motive" component={showMotive} />
-        <Route exact path="/motive/:id" component={showMotive} />
         <Route exact path="/about" component={About} />
         <Route exact path="/myprofile" component={MyProfile} />
         <Route component={NotFound} />
