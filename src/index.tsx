@@ -3,22 +3,30 @@ import { render } from "react-dom";
 import "./index.css";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import guistyles from "./styles/utilities.module.css";
 import { GuiFooter } from "./gui-components";
 import HeaderComponent from "./components/Header/Header";
 
+const THEME = createMuiTheme({
+  typography: {
+    fontFamily: `"Raleway", sans-serif`,
+  },
+});
+
 const Root: React.FC = () => (
   <>
-    <div className={guistyles.container}>
-      <div className={"container"}>
-        <Router>
-          <HeaderComponent />
-          <Routes />
-        </Router>
+    <MuiThemeProvider theme={THEME}>
+      <div className={guistyles.container}>
+        <div className={"container"}>
+          <Router>
+            <HeaderComponent />
+            <Routes />
+          </Router>
+        </div>
       </div>
-    </div>
-    <GuiFooter />
+      <GuiFooter />
+    </MuiThemeProvider>
   </>
 );
 
