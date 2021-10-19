@@ -6,11 +6,7 @@ import {
 } from "../../../gui-components";
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import TabPanel from "../../TabPanel/TabPanel";
-import { useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
 
-// TODO: this should still be here for when data from database gets collected higher in the component tree.
 interface Props {
   title?: string;
   images?: number;
@@ -19,100 +15,45 @@ interface Props {
   image?: string;
 }
 
-export interface IMotive {
-  id: string;
-  dateCreated: string;
-  title: string;
-  category: {
-    id: string;
-    dateCreated: string;
-    name: string;
-  };
-  eventOwner: {
-    id: string;
-    dateCreated: string;
-    name: string;
-  };
-  album: {
-    id: string;
-    dateCreated: string;
-    title: string;
-    isAnalog: boolean;
-  };
-}
-
-// TODO: Move to top of the page (component tree)
 const EventCardsDisplayer: FC<Props> = () => {
-  useEffect(() => {
-    try {
-      void axios.get(`http://localhost:8080/motives/`).then((res) => {
-        setMotiveResponse(res.data);
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
   const [value, setValue] = useState<number>(0);
-  const [motiveResponse, setMotiveResponse] = useState<IMotive[]>([]);
 
-  const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
+  const imageCardsSamf = [
+    "Edgar",
+    "Daglighallen",
+    "Strossa",
+    "Rundhallen",
+    "Storsalen",
+  ].map((placeName, index) => {
     return (
-      // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
-      <Link key={index} to={`/motive/${motiveObject.id}`}>
-        <GuiImageCard
-          key={`image-card-${index}`}
-          placement="left"
-          type="samfundet"
-          image="https://www.w3schools.com/css/img_lights.jpg"
-        >
-          <GuiCardTitle capitalized title={motiveObject.title} />
-          <GuiCardPreamble
-            color="red"
-            date={motiveObject.dateCreated}
-            images={69420}
-            location="Blåfjell"
-            type="EventCard"
-          />
-        </GuiImageCard>
-      </Link>
+      <GuiImageCard
+        key={`image-card-${index}`}
+        placement={"left"}
+        type="samfundet"
+        image={"https://www.w3schools.com/css/img_lights.jpg"}
+      >
+        <GuiCardTitle capitalized title={"Temafest: Halloween"} />
+        <GuiCardPreamble
+          color="red"
+          date="12.10.2020"
+          images={123}
+          location={placeName}
+          type={"EventCard"}
+        />
+      </GuiImageCard>
     );
   });
 
   const imageCardsIsfit = ["Et flott sted ISFiT liker"].map(
     (placeName, index) => {
       return (
-        <Link key={index} to={`/motive/${"isfit-motiv"}`}>
-          <GuiImageCard
-            key={`image-card-${index}`}
-            placement={"left"}
-            type="samfundet"
-            image={"https://www.w3schools.com/css/img_lights.jpg"}
-          >
-            <GuiCardTitle capitalized title={"Temafest: Gjøre verden bedre"} />
-            <GuiCardPreamble
-              color="red"
-              date="12.10.2020"
-              images={123}
-              location={placeName}
-              type={"EventCard"}
-            />
-          </GuiImageCard>
-        </Link>
-      );
-    },
-  );
-
-  const imageCardsUka = ["Fæffæs lommebok", "BI"].map((placeName, index) => {
-    return (
-      <Link key={index} to={`/motive/${"UKEN-motiv :)"}`}>
         <GuiImageCard
           key={`image-card-${index}`}
           placement={"left"}
           type="samfundet"
           image={"https://www.w3schools.com/css/img_lights.jpg"}
         >
-          <GuiCardTitle capitalized title={"Temafest: Tjene $$$"} />
+          <GuiCardTitle capitalized title={"Temafest: Gjøre verden bedre"} />
           <GuiCardPreamble
             color="red"
             date="12.10.2020"
@@ -121,7 +62,27 @@ const EventCardsDisplayer: FC<Props> = () => {
             type={"EventCard"}
           />
         </GuiImageCard>
-      </Link>
+      );
+    },
+  );
+
+  const imageCardsUka = ["Fæffæs lommebok", "BI"].map((placeName, index) => {
+    return (
+      <GuiImageCard
+        key={`image-card-${index}`}
+        placement={"left"}
+        type="samfundet"
+        image={"https://www.w3schools.com/css/img_lights.jpg"}
+      >
+        <GuiCardTitle capitalized title={"Temafest: Tjene $$$"} />
+        <GuiCardPreamble
+          color="red"
+          date="12.10.2020"
+          images={123}
+          location={placeName}
+          type={"EventCard"}
+        />
+      </GuiImageCard>
     );
   });
 
