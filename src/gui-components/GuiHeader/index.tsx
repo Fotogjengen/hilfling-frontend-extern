@@ -4,6 +4,7 @@ import GuiLogo from "../GuiLogo";
 import GuiHamburger from "../GuiHamburger";
 import { DefaultProps } from "../../types";
 import cx from "classnames";
+import { Link } from "react-router-dom";
 
 interface Props extends DefaultProps {
   /** Elements in the header, after hamburger meny */
@@ -12,7 +13,9 @@ interface Props extends DefaultProps {
 
 const GuiHeader: FC<Props> = ({ children, className, ...rest }: Props) => (
   <div className={styles.container}>
-    <GuiLogo size={60} />
+    <Link to="/">
+      <GuiLogo size={60} />
+    </Link>
     <div className={cx(styles.childrenContainer, className)} {...rest}>
       <GuiHamburger
         menuClicked={() => console.log("click")}
