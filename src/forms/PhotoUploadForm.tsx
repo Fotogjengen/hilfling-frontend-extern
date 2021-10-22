@@ -4,16 +4,15 @@ import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
 import TextField from "../components/Form/TextField";
-import Form, { useForm } from "../components/Form/Form";
-import SubmitButton from "../components/Form/SubmitButton";
-import { Errors, FormProps, Validate } from "../components/Form/types";
+import Form from "../components/Form/Form";
+import { Errors, Validate } from "../components/Form/types";
 import { DragNDropFile } from "../types";
 import cx from "classnames";
 import styles from "../views/Intern/PhotoUpload/PhotoUpload.module.css";
 import { useDropzone } from "react-dropzone";
 import PhotoUploadPreview from "../components/PhotoUploadPreview/PhotoUploadPreview";
-import { PhotoApi } from "../utils/api/PhotoApi";
-import { Photo } from "../interfaces/Photo";
+import { Category } from "../interfaces/Category";
+import { CategoryApi } from "../utils/api/CategoryApi";
 
 interface Props {
   initialValues: any;
@@ -24,6 +23,17 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
     accept: ".jpg,.jpeg,.png",
   });
   const [files, setFiles] = useState<DragNDropFile[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    CategoryApi.getAll()
+      .then((res) => res?.data?.currentList)
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   useEffect(() => {
     setFiles(acceptedFiles as DragNDropFile[]);
   }, [acceptedFiles]);
@@ -83,8 +93,9 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
           <Grid item xs={12}>
             <Select name="category" label="Kategori" fullWidth required>
-              <MenuItem value="INTERIØR">INTERIØR</MenuItem>
-              <MenuItem value="MILJØBILDE">MILJØBILDE</MenuItem>
+              {categories.map((category) => {
+                <MenuItem value={category.name}>{category.name}</MenuItem>;
+              })}
             </Select>
           </Grid>
 

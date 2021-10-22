@@ -9,8 +9,7 @@ import {
   withStyles,
   WithStyles,
 } from "@material-ui/core";
-import cx from "classnames";
-import { FormFieldProps, FormHelperTextWrapperProps } from "./types";
+import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 
 const styles = () =>
