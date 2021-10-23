@@ -24,10 +24,8 @@ const TestImageUpload: FC = () => {
           "Content-Type": `multipart/form-data;`,
         },
       })
-      .then((result: AxiosResponse<string>) =>
-        console.log("Files successfully uploaded!", result),
-      )
-      .catch((error: AxiosResponse<string>) => console.log(error));
+      .then((result) => console.log("Files successfully uploaded!", result))
+      .catch((error) => console.log(error));
 
     console.log(formData);
   }
@@ -36,7 +34,7 @@ const TestImageUpload: FC = () => {
     <div>
       <form onSubmit={onSubmit}>
         <input
-          ref={register}
+          // ref={register}
           type="file"
           name="image"
           onChange={(e) => onChange(e)}
