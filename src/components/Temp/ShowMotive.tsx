@@ -11,6 +11,7 @@ export interface IImageList {
   image: string;
 }
 
+// TODO: Extract interface to interface folder
 export interface IResponseObject {
   photoId: {
     id: number;
@@ -164,12 +165,13 @@ const ShowMotive: FC = () => {
   );
 
   useEffect(() => {
+    // TODO: Fix response type
     try {
-      void axios
+      /*       void axios
         .get(`http://localhost:8080/photos/motive/${motiveResponse.id}`)
         .then((res) => {
           setPhotoResponse(res.data);
-        });
+        }); */
     } catch (e) {
       console.log(e);
     }
@@ -178,9 +180,10 @@ const ShowMotive: FC = () => {
   useEffect(() => {
     //const { id } = useParams();
     try {
-      void axios.get(`http://localhost:8080/motives/${id}`).then((res) => {
+      // TODO: Fix response type
+      /*       void axios.get(`http://localhost:8080/motives/${id}`).then((res) => {
         setMotiveResponse(res.data);
-      });
+      }); */
     } catch (e) {
       console.log(e);
     }
