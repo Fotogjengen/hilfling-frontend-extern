@@ -1,12 +1,13 @@
 .profile {
-  width: 300px;
+  width: 13.75rem;
   margin: 2rem;
 }
 
 .profileImage {
-  height: 300px;
-  width: 300px;
+  height: 13.75rem;
+  width: 13.75rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .profileInformation {

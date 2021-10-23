@@ -14,12 +14,17 @@ const Carousel: FC<Record<string, never>> = () => {
       {
         title: "hei",
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgGfL49kTB0zjHmH-pV8rK8-QWcRawdK7qASmj32j1BnWZl2UO&s",
+          "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
       },
       {
         title: "hei2",
         image:
           "http://images6.fanpop.com/image/photos/39900000/IMG-6250-PNG-kion-39961687-1024-577.png",
+      },
+      {
+        title: "hei3",
+        image:
+          "https://s1.1zoom.me/big0/752/Starfish_Shells_Summer_Glasses_Sand_569727_1280x853.jpg",
       },
     ]);
   }, []);

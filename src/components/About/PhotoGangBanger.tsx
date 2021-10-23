@@ -4,14 +4,16 @@ import { GuiProfileImage } from "../../gui-components";
 
 interface Props {
   image: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   position: string;
   email: string;
 }
 
 const PhotoGangBanger: FC<Props> = ({
   image,
-  name,
+  firstName,
+  lastName,
   position,
   email,
 }: Props) => {
@@ -23,11 +25,12 @@ const PhotoGangBanger: FC<Props> = ({
   return (
     <div className={styles.profile}>
       <div className={styles.profileImage}>
-        <GuiProfileImage alt={name} src={image} onClick={onClick} />
+        <GuiProfileImage alt={firstName} src={image} onClick={onClick} />
       </div>
       <div>
         <p className={styles.profileInformation}>
-          {name} <br />
+          {firstName} {lastName}
+          <br />
           <i>{position}</i> <br />
           <a href={mailTo}>{email}</a> <br />
         </p>
