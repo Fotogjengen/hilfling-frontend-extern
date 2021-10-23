@@ -7,7 +7,6 @@ import {
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 // TODO: this should still be here for when data from database gets collected higher in the component tree.
@@ -55,7 +54,7 @@ const EventCardsDisplayer: FC<Props> = () => {
   }, []);
 
   const [value, setValue] = useState<number>(0);
-  const [motiveResponse, setMotiveResponse] = useState<IMotive[]>([]);
+  const [motiveResponse /*  setMotiveResponse */] = useState<IMotive[]>([]);
 
   const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
     return (
