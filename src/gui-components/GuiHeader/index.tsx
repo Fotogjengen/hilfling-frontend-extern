@@ -13,7 +13,7 @@ interface Props extends DefaultProps {
 
 const GuiHeader: FC<Props> = ({ children, className, ...rest }: Props) => (
   <div className={styles.container}>
-    <Link to="/">
+    <Link to="/" style={{color: "#1b1b1b"}}>
       <GuiLogo size={60} />
     </Link>
     <div className={cx(styles.childrenContainer, className)} {...rest}>

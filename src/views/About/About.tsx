@@ -62,6 +62,13 @@ const About: FC = () => {
         .catch((err)=> {
           console.log(err)
         });
+      void axios
+        .get<PhotoGangBangerInterface[]>(
+          "http://localhost:8080/photo_gang_bangers/inactive_pangs",
+        )
+        .then((res) => {
+          setInActivePangs(res.data);
+        });
     } catch (e) {
       console.log(e);
     }

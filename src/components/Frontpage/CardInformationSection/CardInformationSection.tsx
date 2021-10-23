@@ -13,7 +13,7 @@ const CardInformationSection: FC = () => {
           med foto: foto.samfundet.no.
         </p>
         <p>
-          <a href="https://foto.samfundet.no/informasjon/">
+          <a style={{color:'#ad2f33'}} href="https://foto.samfundet.no/informasjon/">
             Les mer om oss her.
           </a>
         </p>
@@ -21,7 +21,9 @@ const CardInformationSection: FC = () => {
       <GuiCard>
         <GuiCardTitle title={"Anmodning"} capitalized={true} />
         <p>
-          Trenger du en fotograf? Fotogjengen kan hjelpe deg! Les mer og anmod
+          Trenger du en fotograf? Fotogjengen kan hjelpe deg! <a style={{color:'#ad2f33'}} href="https://foto.samfundet.no/informasjon/">
+            Les mer om og anmod oss her.
+          </a>
           oss her!
         </p>
       </GuiCard>
