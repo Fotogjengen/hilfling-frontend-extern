@@ -40,6 +40,7 @@ const Select: FC<FormFieldProps<SelectProps & WithStyles<typeof styles>>> = ({
         name={name}
         onChange={(e) => onChange(name, e.target.value)}
         value={values[name]}
+        onBlur={() => setTouched(true)}
         {...rest}
       >
         {children}

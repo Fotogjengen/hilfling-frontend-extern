@@ -90,6 +90,7 @@ const ChipField: FC<FormFieldProps<InputProps> & WithStyles<typeof styles>> = ({
           name={name}
           onKeyDown={addChip}
           value={interimValue}
+          onBlur={() => setTouched(true)}
         />
         <FormHelperText className={classes.helperText}>{error}</FormHelperText>
       </FormControl>

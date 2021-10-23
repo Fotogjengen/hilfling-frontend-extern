@@ -3,14 +3,12 @@ import {
   createStyles,
   WithStyles,
   Fab,
-  ButtonProps,
   FabProps,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import cn from "classnames";
 import { useForm } from "./Form";
 import { isEmpty } from "lodash";
-import { FormFieldProps } from "./types";
 
 interface Props {
   children: string;
@@ -29,7 +27,7 @@ const styles = () =>
 
 const SubmitButton = (props: Props & FabProps & WithStyles<typeof styles>) => {
   const { classes, float, children, onClick, ...rest } = props;
-  const { errors, values } = useForm();
+  const { errors } = useForm();
   return (
     <Fab
       color="primary"

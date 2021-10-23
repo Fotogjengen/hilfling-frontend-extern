@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { createStyles, withStyles, WithStyles } from "@material-ui/core";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
@@ -8,6 +8,7 @@ import {
   KeyboardDatePickerProps,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
 
 const styles = () =>
   createStyles({
@@ -22,13 +23,13 @@ let idCount = 0;
 
 const DatePicker: FC<
   FormFieldProps<KeyboardDatePickerProps> & WithStyles<typeof styles>
-> = ({ name, label, classes, children, fullWidth, ...rest }) => {
-  const { values, errors, onChange } = useForm();
-  const [touched, setTouched] = useState<boolean>(false);
+> = ({ name, label, fullWidth, ...rest }) => {
+  const { values, onChange } = useForm();
+  // const [touched, setTouched] = useState<boolean>(false);
   const id = `DatePicker-${name}-${idCount++}`;
-  const error = touched && errors[name];
+  // const error = touched && errors[name];
 
-  const handleDateChange = (date: any) => {
+  const handleDateChange = (date: MaterialUiPickersDate) => {
     onChange(name, date);
   };
 
@@ -38,7 +39,7 @@ const DatePicker: FC<
         variant="inline"
         format="dd/MM/yyyy"
         margin="normal"
-        id={"date-picker-inline"}
+        id={id}
         label={label}
         value={values[name]}
         onChange={handleDateChange}
@@ -46,6 +47,7 @@ const DatePicker: FC<
           "aria-label": "change date",
         }}
         fullWidth={fullWidth}
+        {...rest}
       />
     </MuiPickersUtilsProvider>
   );

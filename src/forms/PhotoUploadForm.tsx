@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Button, Grid, MenuItem } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -48,7 +48,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   };
   const validate: Validate = (values: any): Errors => {
     // TODO: Do validation
-    //console.log("validate", values);
+    console.log("validate", values);
     const errors: Errors = {};
     return errors;
   };

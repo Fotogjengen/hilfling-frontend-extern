@@ -22,16 +22,17 @@ let idCount = 0;
 
 const TextField: FC<
   FormFieldProps<TextFieldProps> & WithStyles<typeof styles>
-> = ({ name, label, classes, children, fullWidth, ...rest }) => {
-  const { values, errors, onChange } = useForm();
+> = ({ name, label, classes, fullWidth, ...rest }) => {
+  const { errors, onChange } = useForm();
   const [touched, setTouched] = useState<boolean>(false);
   const id = `Select-${name}-${idCount++}`;
   const error = touched && errors[name];
   return (
-    <FormControl fullWidth={fullWidth}>
+    <FormControl fullWidth={fullWidth} id={id}>
       <MuiTextField
         label={label}
         onChange={(e) => onChange(name, e.target.value)}
+        onBlur={() => setTouched(true)}
         {...rest}
       />
       <FormHelperText className={classes.helperText}>{error}</FormHelperText>

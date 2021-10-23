@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { Grid } from "@material-ui/core";
 import PhotoUploadForm from "../../../forms/PhotoUploadForm";
 

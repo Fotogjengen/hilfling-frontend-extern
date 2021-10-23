@@ -1,19 +1,18 @@
 import React, {
   createContext,
   FC,
-  FormEvent,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { FormContext, FormProps } from "./types";
-import { Box, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import SubmitButton from "./SubmitButton";
 
 const Context = createContext<FormContext>({
   values: {},
   errors: {},
-  onChange: (_, __) => null,
+  onChange: () => null,
 });
 
 export const useForm = (): FormContext => useContext<FormContext>(Context);
