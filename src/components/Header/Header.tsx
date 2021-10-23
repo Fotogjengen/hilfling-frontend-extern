@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import styles from "./Header.module.css";
 import { GuiHeader, GuiHeaderLink } from "../../gui-components";
 import { Link } from "react-router-dom";
+import Search from "../Search/Search";
 
 // interface Props {
 //   login: () => void;
@@ -22,6 +23,8 @@ const HeaderComponent: FC = () => {
         <Link component={GuiHeaderLink} to="/login">
           LOGG INN
         </Link>
+        <Search width="400px" scale="1" label="Search.." />
+
         {/* {authenticated ? (
           <GuiHeaderLink onClick={logout}>LOGG UT</GuiHeaderLink>
         ) : (

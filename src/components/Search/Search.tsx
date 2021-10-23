@@ -10,75 +10,74 @@ interface Props {
 }
 
 const Search: FC<Props> = ({ width, scale = "1", label }: Props) => {
-  const [search_value, setSearchValue] = useState("");
-  const [standar_color, setStandarColor] = useState("");
-  const [display_clear, setDisplayClear] = useState("none");
-  const container_scale = scale;
+  const [searchValue, setSearchValue] = useState("");
+  const [standarColor, setStandarColor] = useState("");
+  const [clearDisplayValue, setClearDisplay] = useState("none");
+  const containerScale = scale;
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
-    displayClear(event);
+    changeClearVisibility(event);
   };
 
-  const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStandarColor("var(--primary-color)");
-    displayClear(event);
+    changeClearVisibility(event);
   };
 
-  const handleFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
     setStandarColor("var(--primary-focus-color)");
-    displayClear(event);
+    changeClearVisibility(event);
   };
 
-  const displayClear = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeClearVisibility = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     if (event.target.value == "") {
-      setDisplayClear("none");
+      setClearDisplay("none");
     } else {
-      setDisplayClear("flex");
+      setClearDisplay("flex");
     }
   };
 
   const remove = () => {
     setSearchValue("");
-    setDisplayClear("none");
+    setClearDisplay("none");
   };
 
-  const container_prop = {
+  const containerProp = {
     width: width,
-    borderColor: standar_color,
-    transform: "scale(" + container_scale + ")",
+    borderColor: standarColor,
+    transform: "scale(" + containerScale + ")",
   };
 
-  const displayClear_prop = {
-    display: display_clear,
-    color: standar_color,
+  const displayClearProp = {
+    display: clearDisplayValue,
+    color: standarColor,
   };
 
-  const search_icon_prop = {
-    color: standar_color,
+  const searchIconProp = {
+    color: standarColor,
   };
 
   return (
-    <div className={styles.container} style={container_prop}>
-      <div className={styles.inputbox}>
+    <div className={styles.container} style={containerProp}>
+      <div className={styles.inputBox}>
         <input
-          onFocus={(e) => handleFocus(e)}
-          onBlur={(e) => handleBlur(e)}
+          onFocus={(e) => handleInputFocus(e)}
+          onBlur={(e) => handleInputBlur(e)}
           type="text"
           placeholder={label}
-          value={search_value}
+          value={searchValue}
           className={styles.input}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleInputChange(e)}
         />
         <div className={styles.remove} onClick={remove}>
-          <ClearIcon style={displayClear_prop} />
+          <ClearIcon style={displayClearProp} />
         </div>
-        <div className={styles.search_box}>
+        <div className={styles.searchBox}>
           <div>
-            <SearchIcon
-              style={search_icon_prop}
-              className={styles.search_icon}
-            />
+            <SearchIcon style={searchIconProp} className={styles.searchIcon} />
           </div>
         </div>
       </div>

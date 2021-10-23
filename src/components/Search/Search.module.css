@@ -12,9 +12,10 @@
   flex-wrap: wrap;
   border: 2px solid var(--primary-color);
   border-radius: 6px;
+  height: 50px;
 }
 
-.inputbox {
+.inputBox {
   display: flex;
   flex-wrap: nowrap;
   cursor: text;
@@ -44,7 +45,7 @@
   color: var(--primary-focus-color);
 }
 
-.search_box {
+.searchBox {
   position: relative;
   border-radius: 50%;
   cursor: pointer;
@@ -53,7 +54,7 @@
   height: 50px;
 }
 
-.search_box div {
+.searchBox div {
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -69,16 +70,16 @@
   background-color: 0px 0px 0px 0px rgba(128, 128, 128, 0.2);
 }
 
-.search_box div:hover {
+.searchBox div:hover {
   box-shadow: 0px 0px 2px 20px rgba(168, 168, 168, 0.4);
 }
 
-.search_icon {
+.searchIcon {
   color: var(--primary-color);
   transform: scale(1.1);
 }
 
-.search_icon:active {
+.searchIcon:active {
   transform: scale(1.2);
 }
 
