@@ -8,28 +8,26 @@
   --primary-focus-color: rgba(17, 17, 17, 1);
 }
 .container {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  border: 2px solid var(--primary-color);
+  align-items: center;
+  border: 2px solid red;
   border-radius: 6px;
   height: 50px;
-}
-
-.inputBox {
-  display: flex;
-  flex-wrap: nowrap;
   cursor: text;
-  width: 100%;
+  transition: width 0.5s ease-out, border 0.2s ease-out;
 }
 
 .input {
+  opacity: 0;
   color: var(--primary-color);
   background-color: transparent;
-  width: calc(100% - 60px);
+  width: 100%;
   height: var(--primary-height);
   font-size: 30px;
   padding-left: 12px;
   border: 0px;
+  transition: opacity 0.1s ease-out, width 0.5s ease-out;
 }
 
 .input::placeholder {
@@ -46,7 +44,6 @@
 }
 
 .searchBox {
-  position: relative;
   border-radius: 50%;
   cursor: pointer;
 

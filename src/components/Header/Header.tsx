@@ -23,7 +23,7 @@ const HeaderComponent: FC = () => {
         <Link component={GuiHeaderLink} to="/login">
           LOGG INN
         </Link>
-        <Search width="400px" scale="1" label="Search.." />
+        <Search widthProp="400px" scale="1" label="Search.." />
 
         {/* {authenticated ? (
           <GuiHeaderLink onClick={logout}>LOGG UT</GuiHeaderLink>
