@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useState, useEffect } from "react";
 import PhotoGangBanger from "../../components/About/PhotoGangBanger";
-import { activePhotoGangBangers, retiredPhotoGangBangers } from "./mockdata";
 import styles from "./About.module.css";
+import axios from "axios";
 import {
   AppBar,
   Tab,
@@ -16,12 +16,37 @@ import {
 } from "@material-ui/core";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
+import { PhotoGangBanger as PhotoGangBangerInterface } from "../../interfaces/PhotoGangBanger";
 
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
+  const [activeGangBangers, setActiveGangBangers] = useState<
+    PhotoGangBangerInterface[]
+  >([]);
+  const [activePangs, setActivePangs] = useState<PhotoGangBangerInterface[]>(
+    [],
+  );
 
-  const activeUsers = activePhotoGangBangers; //[TODO]: fetch from API
-  const retiredUsers = retiredPhotoGangBangers; //[TODO]: fetch from API
+  useEffect(() => {
+    try {
+      void axios
+        .get<PhotoGangBangerInterface[]>(
+          "http://localhost:8080/photo_gang_bangers/active_pangs",
+        )
+        .then((res) => {
+          setActivePangs(res.data);
+        });
+      void axios
+        .get<PhotoGangBangerInterface[]>(
+          "http://localhost:8080/photo_gang_bangers/actives",
+        )
+        .then((res) => {
+          setActiveGangBangers(res.data);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   const handleTabChange = (
     event: ChangeEvent<Record<string, unknown>>,
@@ -30,25 +55,47 @@ const About: FC = () => {
     setTabValue(newTabValue);
   };
 
-  const activeGangBangers = activeUsers.map((user) => (
-    <PhotoGangBanger
-      name={user.name}
-      image={user.image}
-      position={user.position}
-      email={user.email}
-      key={user.name}
-    />
-  ));
+  // Make new PR
+  //DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+  /* const mapUsers = (users: PhotoGangBangerInterface[]) => {
+    return (users.map((user: PhotoGangBangerInterface) => (
+      <PhotoGangBanger
+        firstName={user.samfundetUser.firstName}
+        lastName={user.samfundetUser.lastName}
+        position={user.position.positionId.id}
+        email={user.samfundetUser.email.value}
+        image={user.samfundetUser.profilePicturePath}
+        key={user.photoGangBangerId.id}
+      />
+    )));
+  }; */
 
-  const retiredGangBangers = retiredUsers.map((user) => (
-    <PhotoGangBanger
-      name={user.name}
-      image={user.image}
-      position={user.position}
-      email={user.email}
-      key={user.name}
-    />
-  ));
+  // TODO: Make a function for this because this will turn uggglyyy
+  const activeUsersMap: JSX.Element[] = activeGangBangers.map(
+    (user: PhotoGangBangerInterface) => (
+      <PhotoGangBanger
+        firstName={user.samfundetUser.firstName}
+        lastName={user.samfundetUser.lastName}
+        position={user.position.positionId.id}
+        email={user.samfundetUser.email.value}
+        image={user.samfundetUser.profilePicturePath}
+        key={user.photoGangBangerId.id}
+      />
+    ),
+  );
+
+  const activePangsMap: JSX.Element[] = activePangs.map(
+    (user: PhotoGangBangerInterface) => (
+      <PhotoGangBanger
+        firstName={user.samfundetUser.firstName}
+        lastName={user.samfundetUser.lastName}
+        position={user.position.title}
+        email={user.samfundetUser.email.value}
+        image={user.samfundetUser.profilePicturePath}
+        key={user.photoGangBangerId.id}
+      />
+    ),
+  );
 
   return (
     <>
@@ -69,9 +116,11 @@ const About: FC = () => {
       <TabPanel value={tabValue} index={0}>
         <div>
           <h2>Aktive fotogjengere</h2>
-          <div className={styles.gangBangers}>{activeGangBangers}</div>;
+          <div className={styles.gangBangers}>{activeUsersMap}</div>
+          <h2>Aktive panger</h2>
+          <div className={styles.gangBangers}>{activePangsMap}</div>
           <h2>Pensjonerte fotogjenger</h2>
-          <div className={styles.gangBangers}>{retiredGangBangers}</div>;
+          {/* <div className={styles.gangBangers}>{retiredGangBangers}</div>; */}
         </div>
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
