@@ -19,6 +19,7 @@ const GuiFooter: FC = () => {
             href="https://github.com/Fotogjengen/hilfling-frontend/"
             target="_blank"
             rel="noreferrer"
+            style={{color:'#ad2f33'}}
           >
             HILFLING-FRONTEND
           </a>
@@ -27,6 +28,7 @@ const GuiFooter: FC = () => {
             href="https://github.com/Fotogjengen/hilfling-photo-backend"
             target="_blank"
             rel="noreferrer"
+            style={{color:'#ad2f33'}}
           >
             HILFLING-PHOTO-BACKEND
           </a>
