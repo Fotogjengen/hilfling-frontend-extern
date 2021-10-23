@@ -32,19 +32,25 @@ const About: FC = () => {
 
   useEffect(() => {
     try {
-      void axios
+      axios
         .get<PhotoGangBangerInterface[]>(
           "http://localhost:8080/photo_gang_bangers/active_pangs",
         )
         .then((res) => {
           setActivePangs(res.data);
+        })
+        .catch((err)=> {
+          console.log(err)
         });
-      void axios
+      axios
         .get<PhotoGangBangerInterface[]>(
           "http://localhost:8080/photo_gang_bangers/actives",
         )
         .then((res) => {
           setActiveGangBangers(res.data);
+        })
+        .catch((err)=> {
+          console.log(err)
         });
       void axios
         .get<PhotoGangBangerInterface[]>(
@@ -52,6 +58,9 @@ const About: FC = () => {
         )
         .then((res) => {
           setInActivePangs(res.data);
+        })
+        .catch((err)=> {
+          console.log(err)
         });
     } catch (e) {
       console.log(e);
