@@ -1,16 +1,20 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": [
+   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
+    // "prettier/@typescript-eslint",
+    // "plugin:prettier/recommended",
     "plugin:import/errors",
     //"plugin:cypress/recommended",
     "plugin:import/typescript"
+    //"prettier"
   ],
-  "plugins": ["deprecation"],
+  "plugins": [
+    //"deprecation"
+  ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"]
@@ -28,7 +32,6 @@
   "rules": {
     "react/prop-types": "off",
     "react/self-closing-comp": "error",
-    "deprecation/deprecation": "error",
     "import/no-unresolved": "error",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/no-unsafe-assignment": "off" // TODO: want this on
