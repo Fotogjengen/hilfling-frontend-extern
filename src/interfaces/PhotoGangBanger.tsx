@@ -2,11 +2,11 @@ import { BaseModel } from "./BaseModel";
 
 export interface PhotoGangBanger extends BaseModel {
   photoGangBangerId: {
-    id: string;
+    [id: string]: string;
   };
   relationShipStatus: string;
   semesterStart: {
-    value: string;
+    [key: string]: string;
   };
   address: string;
   zipCode: number;
