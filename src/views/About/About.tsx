@@ -26,22 +26,41 @@ const About: FC = () => {
   const [activePangs, setActivePangs] = useState<PhotoGangBangerInterface[]>(
     [],
   );
+  const [inActivePangs, setInActivePangs] = useState<PhotoGangBangerInterface[]>(
+    [],
+  );
 
   useEffect(() => {
     try {
-      void axios
+      axios
         .get<PhotoGangBangerInterface[]>(
           "http://localhost:8080/photo_gang_bangers/active_pangs",
         )
         .then((res) => {
           setActivePangs(res.data);
+        })
+        .catch((err)=> {
+          console.log(err)
         });
-      void axios
+      axios
         .get<PhotoGangBangerInterface[]>(
           "http://localhost:8080/photo_gang_bangers/actives",
         )
         .then((res) => {
           setActiveGangBangers(res.data);
+        })
+        .catch((err)=> {
+          console.log(err)
+        });
+      void axios
+        .get<PhotoGangBangerInterface[]>(
+          "http://localhost:8080/photo_gang_bangers/inactive_pangs",
+        )
+        .then((res) => {
+          setInActivePangs(res.data);
+        })
+        .catch((err)=> {
+          console.log(err)
         });
     } catch (e) {
       console.log(e);
@@ -55,37 +74,8 @@ const About: FC = () => {
     setTabValue(newTabValue);
   };
 
-  // Make new PR
-  //DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-  /* const mapUsers = (users: PhotoGangBangerInterface[]) => {
+  const mapUsers = (users: PhotoGangBangerInterface[]) => {
     return (users.map((user: PhotoGangBangerInterface) => (
-      <PhotoGangBanger
-        firstName={user.samfundetUser.firstName}
-        lastName={user.samfundetUser.lastName}
-        position={user.position.positionId.id}
-        email={user.samfundetUser.email.value}
-        image={user.samfundetUser.profilePicturePath}
-        key={user.photoGangBangerId.id}
-      />
-    )));
-  }; */
-
-  // TODO: Make a function for this because this will turn uggglyyy
-  const activeUsersMap: JSX.Element[] = activeGangBangers.map(
-    (user: PhotoGangBangerInterface) => (
-      <PhotoGangBanger
-        firstName={user.samfundetUser.firstName}
-        lastName={user.samfundetUser.lastName}
-        position={user.position.positionId.id}
-        email={user.samfundetUser.email.value}
-        image={user.samfundetUser.profilePicturePath}
-        key={user.photoGangBangerId.id}
-      />
-    ),
-  );
-
-  const activePangsMap: JSX.Element[] = activePangs.map(
-    (user: PhotoGangBangerInterface) => (
       <PhotoGangBanger
         firstName={user.samfundetUser.firstName}
         lastName={user.samfundetUser.lastName}
@@ -94,8 +84,8 @@ const About: FC = () => {
         image={user.samfundetUser.profilePicturePath}
         key={user.photoGangBangerId.id}
       />
-    ),
-  );
+    )));
+  };
 
   return (
     <>
@@ -116,11 +106,11 @@ const About: FC = () => {
       <TabPanel value={tabValue} index={0}>
         <div>
           <h2>Aktive fotogjengere</h2>
-          <div className={styles.gangBangers}>{activeUsersMap}</div>
+          <div className={styles.gangBangers}>{mapUsers(activeGangBangers)}</div>
           <h2>Aktive panger</h2>
-          <div className={styles.gangBangers}>{activePangsMap}</div>
-          <h2>Pensjonerte fotogjenger</h2>
-          {/* <div className={styles.gangBangers}>{retiredGangBangers}</div>; */}
+          <div className={styles.gangBangers}>{mapUsers(activePangs)}</div>
+          <h2>Pensjonerte fotogjengere</h2>
+          <div className={styles.gangBangers}>{mapUsers(inActivePangs)}</div>
         </div>
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
