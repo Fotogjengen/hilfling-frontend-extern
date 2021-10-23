@@ -7,7 +7,6 @@ import {
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 // TODO: this should still be here for when data from database gets collected higher in the component tree.
@@ -44,17 +43,18 @@ export interface IMotive {
 // TODO: Move to top of the page (component tree)
 const EventCardsDisplayer: FC<Props> = () => {
   useEffect(() => {
+    // TODO: Fix response type
     try {
-      void axios.get(`http://localhost:8080/motives/`).then((res) => {
+      /*       void axios.get(`http://localhost:8080/motives/`).then((res) => {
         setMotiveResponse(res.data);
-      });
+      }); */
     } catch (e) {
       console.log(e);
     }
   }, []);
 
   const [value, setValue] = useState<number>(0);
-  const [motiveResponse, setMotiveResponse] = useState<IMotive[]>([]);
+  const [motiveResponse /*  setMotiveResponse */] = useState<IMotive[]>([]);
 
   const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
     return (

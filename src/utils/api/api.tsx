@@ -14,10 +14,10 @@ export const api = axios.create({
   headers: HEADERS,
 });
 
-export async function getTest(): Promise<unknown> {
+/* export async function getTest(): Promise<unknown> {
   // TODO: Fix the ignored eslint error here
   return api
     .get("/")
     .then((res) => res.data[""])
     .catch((e) => console.error(e));
-}
+} */

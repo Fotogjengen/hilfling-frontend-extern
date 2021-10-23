@@ -1,8 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 
@@ -11,6 +9,7 @@ export interface IImageList {
   image: string;
 }
 
+// TODO: Extract interface to interface folder
 export interface IResponseObject {
   photoId: {
     id: number;
@@ -128,8 +127,12 @@ interface Motive {
 }
 
 const ShowMotive: FC = () => {
-  const [photoResponse, setPhotoResponse] = useState<IResponseObject[]>([]);
-  const [motiveResponse, setMotiveResponse] = useState<Motive>({} as Motive);
+  const [photoResponse /*  setPhotoResponse */] = useState<IResponseObject[]>(
+    [],
+  );
+  const [motiveResponse /*  setMotiveResponse */] = useState<Motive>(
+    {} as Motive,
+  );
 
   const images = [
     "//placekitten.com/1500/500",
@@ -141,7 +144,7 @@ const ShowMotive: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
 
   const updateIndex = (index: number) => {
     setPhotoIndex(index);
@@ -164,12 +167,13 @@ const ShowMotive: FC = () => {
   );
 
   useEffect(() => {
+    // TODO: Fix response type
     try {
-      void axios
+      /*       void axios
         .get(`http://localhost:8080/photos/motive/${motiveResponse.id}`)
         .then((res) => {
           setPhotoResponse(res.data);
-        });
+        }); */
     } catch (e) {
       console.log(e);
     }
@@ -178,9 +182,10 @@ const ShowMotive: FC = () => {
   useEffect(() => {
     //const { id } = useParams();
     try {
-      void axios.get(`http://localhost:8080/motives/${id}`).then((res) => {
+      // TODO: Fix response type
+      /*       void axios.get(`http://localhost:8080/motives/${id}`).then((res) => {
         setMotiveResponse(res.data);
-      });
+      }); */
     } catch (e) {
       console.log(e);
     }
