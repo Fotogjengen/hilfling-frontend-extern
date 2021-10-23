@@ -193,11 +193,10 @@ const About: FC = () => {
                   <Grid item xs={12} md={6}>
                     <div>
                       <List>
-                        <ListItemText primary="" />
-                        <ListItemText primary="A4" />
-                        <ListItemText primary="A3" />
-                        <ListItemText primary="A2" />
-                        <ListItemText primary="A1" />
+                        <ListItemText primary="A4 (21x30)" />
+                        <ListItemText primary="A3 (30x42)" />
+                        <ListItemText primary="A2 (42x60)" />
+                        <ListItemText primary="A1 (60x84)" />
                       </List>
                     </div>
                   </Grid>
@@ -213,6 +212,13 @@ const About: FC = () => {
                   </Grid>
                 </Grid>
               </Paper>
+              <br/>
+              <Typography paragraph>
+              Størrelsene er veiledende. Ved spesielle formatønsker, kontakt oss på epost. Vi kan også levere større format enn vist i tabellen ved digitale utskrifer: 60cm x ubegrenset lengde. Private bilder kan bestilles til samme pris.
+              </Typography>
+              <Typography>
+              Alle bilder hentes i LUKA ved Søndre Side på Studentersamfundet i Trondhjem, eller sendes i posten, forsvarlig innpakket i harde papphylser, mot kr 80,- i porto og ekspedering. Leveringstid for bildene varierer avhengig av vår arbeidsbelastning, men man kan regne med ca. en måned fra betalingsdato i travle perioder.
+              </Typography>
             </Box>
           </Grid>
         </Grid>
