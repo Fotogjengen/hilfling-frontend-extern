@@ -8,7 +8,8 @@
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .ts,.tsx .",
-    "lint:fix": "eslint --fix --ext .ts,.tsx ."
+    "lint:fix": "eslint --fix --ext .ts,.tsx .",
+    "codegen": "openapi --exportSchemas false --exportCore false --exportServices false -i ../hilfling_backend/target/openapi.json --output ./generated"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,6 +60,7 @@
     "@typescript-eslint/parser": "5.1.0",
     "eslint-config-prettier": "8.3.0",
     "lint-staged": "11.2.3",
+    "openapi-typescript-codegen": "0.11.0-alpha",
     "prettier": "2.4.1",
     "react-scripts": "4.0.3",
     "react-test-renderer": "17.0.2"
