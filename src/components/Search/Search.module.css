@@ -3,21 +3,15 @@
 
 :root {
   --primary-height: 50px;
-  --primary-width: 500px;
+  --primary-icon-width: 40px;
+  --primary-color: rgba(17, 17, 17, 0.7);
+  --primary-focus-color: rgba(17, 17, 17, 1);
 }
 .container {
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid grey;
+  border: 2px solid var(--primary-color);
   border-radius: 6px;
-}
-
-.input {
-  width: 85%;
-  height: var(--primary-height);
-  font-size: 30px;
-  margin: 0 15px;
-  border: 0px;
 }
 
 .inputbox {
@@ -27,40 +21,79 @@
   width: 100%;
 }
 
+.input {
+  color: var(--primary-color);
+  background-color: transparent;
+  width: calc(100% - 60px);
+  height: var(--primary-height);
+  font-size: 30px;
+  padding-left: 12px;
+  border: 0px;
+}
+
+.input::placeholder {
+  color: var(--primary-color);
+}
+
 .input:focus {
   box-shadow: 0px 0px 0px black;
+  color: var(--primary-focus-color);
 }
 
-.input:focus + .container {
-  border-color: black;
+.input:focus::-webkit-input-placeholder {
+  color: var(--primary-focus-color);
 }
 
-.search_symbol {
-  /*border-left: 2px solid rgba(128, 128, 128, 0.2); */
-  width: 20%;
-  height: var(--primary-height);
-  font-size: 40px;
+.search_box {
+  position: relative;
+  border-radius: 50%;
+  cursor: pointer;
 
+  width: 50px;
+  height: 50px;
+}
+
+.search_box div {
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  width: 0.1px;
+  height: 0.1px;
+  margin: 25px;
+  -webkit-transition: box-shadow 0.3s ease-in-out;
+  -moz-transition: box-shadow 0.3s ease-in-out;
+  -ms-transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0px 0px 0px 0px rgba(128, 128, 128, 0.2);
+  background-color: 0px 0px 0px 0px rgba(128, 128, 128, 0.2);
+}
+
+.search_box div:hover {
+  box-shadow: 0px 0px 2px 20px rgba(168, 168, 168, 0.4);
+}
+
+.search_icon {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.search_icon:active {
+  transform: scale(1.2);
 }
 
 .remove {
-  display: none;
-  background-color: transparent;
+  color: var(--primary-focus-color);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  color: white;
+
+  width: 50px;
+  background-color: transparent;
 }
 
 .remove * {
   margin: 10px;
-}
-
-.remove:hover {
-  font-weight: 20px;
+  cursor: pointer;
 }

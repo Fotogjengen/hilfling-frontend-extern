@@ -1,19 +1,19 @@
 import React, { FC, useState } from "react";
 import styles from "./Search.module.css";
-import IconButton from "@material-ui/core/IconButton";
 
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
-
 interface Props {
   width: string;
+  scale?: string;
   label?: string;
 }
 
-const Search: FC<Props> = ({ width, label }: Props) => {
+const Search: FC<Props> = ({ width, scale = "1", label }: Props) => {
   const [search_value, setSearchValue] = useState("");
-  const [border_color, setBorderColor] = useState("");
-  const [display_clear, setDisplayClear] = useState(["", ""]);
+  const [standar_color, setStandarColor] = useState("");
+  const [display_clear, setDisplayClear] = useState("none");
+  const container_scale = scale;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -21,54 +21,45 @@ const Search: FC<Props> = ({ width, label }: Props) => {
   };
 
   const handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBorderColor("grey");
+    setStandarColor("var(--primary-color)");
     displayClear(event);
   };
 
   const handleFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBorderColor("black");
+    setStandarColor("var(--primary-focus-color)");
     displayClear(event);
   };
 
   const displayClear = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     if (event.target.value == "") {
-      setDisplayClear(["white", "text"]);
+      setDisplayClear("none");
     } else {
-      setDisplayClear(["black", "pointer"]);
+      setDisplayClear("flex");
     }
   };
 
   const remove = () => {
     setSearchValue("");
-    setDisplayClear(["white", "text"]);
+    setDisplayClear("none");
   };
 
-  const item = [
-    "Oktoberfest",
-    "Olympiade",
-    "Frisktisk",
-    "sssssss",
-    "ooola dola",
-    "woola da sa",
-  ];
-
-  const type1_prop = {
+  const container_prop = {
     width: width,
-    borderColor: border_color,
-  };
-
-  const type2_prop = {
-    borderColor: border_color,
+    borderColor: standar_color,
+    transform: "scale(" + container_scale + ")",
   };
 
   const displayClear_prop = {
-    color: display_clear[0],
-    cursor: display_clear[1],
+    display: display_clear,
+    color: standar_color,
+  };
+
+  const search_icon_prop = {
+    color: standar_color,
   };
 
   return (
-    <div className={styles.container} style={type1_prop}>
+    <div className={styles.container} style={container_prop}>
       <div className={styles.inputbox}>
         <input
           onFocus={(e) => handleFocus(e)}
@@ -82,10 +73,13 @@ const Search: FC<Props> = ({ width, label }: Props) => {
         <div className={styles.remove} onClick={remove}>
           <ClearIcon style={displayClear_prop} />
         </div>
-        <div className={styles.search_symbol} style={type2_prop}>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
+        <div className={styles.search_box}>
+          <div>
+            <SearchIcon
+              style={search_icon_prop}
+              className={styles.search_icon}
+            />
+          </div>
         </div>
       </div>
     </div>

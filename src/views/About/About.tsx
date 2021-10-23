@@ -16,7 +16,6 @@ import {
 } from "@material-ui/core";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
-import Search from "../../components/Search/Search";
 
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
@@ -68,7 +67,6 @@ const About: FC = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={tabValue} index={0}>
-        <Search width={"80%"} label="Search.." />
         <div>
           <h2>Aktive fotogjengere</h2>
           <div className={styles.gangBangers}>{activeGangBangers}</div>;
