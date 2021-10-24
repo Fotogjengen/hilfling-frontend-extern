@@ -11,7 +11,6 @@ import {
   Paper,
   Grid,
   List,
-  ListItem,
   ListItemText,
 } from "@material-ui/core";
 import cn from "classnames";
