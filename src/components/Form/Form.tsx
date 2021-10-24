@@ -45,8 +45,8 @@ const Form: FC<FormProps> = ({
 
   const _onSubmit = (e: any) => {
     e.preventDefault();
-    setValues(initialValues);
     onSubmit(values);
+    setValues(initialValues);
   };
 
   return (

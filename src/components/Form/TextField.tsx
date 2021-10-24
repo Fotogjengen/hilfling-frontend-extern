@@ -22,8 +22,8 @@ let idCount = 0;
 
 const TextField: FC<
   FormFieldProps<TextFieldProps> & WithStyles<typeof styles>
-> = ({ name, label, classes, fullWidth, ...rest }) => {
-  const { errors, onChange } = useForm();
+> = ({ name, label, classes, fullWidth }) => {
+  const { errors, onChange, values } = useForm();
   const [touched, setTouched] = useState<boolean>(false);
   const id = `Select-${name}-${idCount++}`;
   const error = touched && errors[name];
@@ -33,7 +33,7 @@ const TextField: FC<
         label={label}
         onChange={(e) => onChange(name, e.target.value)}
         onBlur={() => setTouched(true)}
-        {...rest}
+        value={values[name]}
       />
       <FormHelperText className={classes.helperText}>{error}</FormHelperText>
     </FormControl>
