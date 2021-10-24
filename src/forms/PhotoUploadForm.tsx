@@ -99,7 +99,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
     formData.append("motiveTitle", values["motive"]);
     formData.append("securityLevelId", values["securityLevel"]);
     formData.append("placeName", values["place"]);
-    formData.append("albumid", values["album"]);
+    formData.append("albumId", values["album"]);
     formData.append("categoryName", values["category"]);
     formData.append("eventOwnerName", values["eventOwner"]);
     formData.append(
