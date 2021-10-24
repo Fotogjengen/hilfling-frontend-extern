@@ -22,7 +22,7 @@ import {
 import { PlaceApi } from "../utils/api/PlaceApi";
 import { SecurityLevelApi } from "../utils/api/SecurityLevelApi";
 import { AlbumApi } from "../utils/api/AlbumApi";
-import { PhotoApi, PhotoPostDto } from "../utils/api/PhotoApi";
+import { PhotoApi } from "../utils/api/PhotoApi";
 import { EventOwnerApi } from "../utils/api/EventOwnerApi";
 
 export interface PhotoUploadFormIV {
@@ -110,7 +110,6 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
   const validate: Validate = (values: any): Errors => {
     // TODO: Do validation
-    // console.log("validate", values);
     const errors: Errors = {};
     return errors;
   };
@@ -137,7 +136,10 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
           <Grid item xs={12}>
             <Select name="album" label="Album" fullWidth required>
               {albums.map((album, index) => (
-                <MenuItem key={`album-item-${index}`} value={album?.albumId?.id}>
+                <MenuItem
+                  key={`album-item-${index}`}
+                  value={album?.albumId?.id}
+                >
                   {album.title}
                 </MenuItem>
               ))}

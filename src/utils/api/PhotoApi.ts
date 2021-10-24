@@ -21,8 +21,10 @@ export const PhotoApi = {
   post: async function (photo: Photo): Promise<Photo> {
     return api.post("/photos", photo);
   },
-  batchUpload: async function (photos: any): Promise<any> {
+  batchUpload: async function (photos: any, onUploadProgress?: any): Promise<any> {
     console.log(photos);
-    return api.post("/photos/upload", photos);
+    return api.post("/photos/upload", photos, {
+      onUploadProgress,
+    });
   },
 };
