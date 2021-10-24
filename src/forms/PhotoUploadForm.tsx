@@ -83,18 +83,6 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   }, [categories]);
 
   const onSubmit = (values: Record<string, any>) => {
-    // TODO: Send to backend
-    console.log("submit", values);
-
-    const data = PhotoPostDto;
-    data.albumId = values["album"];
-    data.categoryName = values["category"];
-    data.eventOwnerName = values["eventOwner"];
-    data.motiveTitle = values["motive"];
-    data.photoGangBangerId = "6a89444f-25f6-44d9-8a73-94587d72b839"; // TODO: Use actual user Id
-    data.placeName = values["place"];
-    data.securityLevelId = values["securityLevel"];
-
     const formData = new FormData();
     formData.append("motiveTitle", values["motive"]);
     formData.append("securityLevelId", values["securityLevel"]);
@@ -107,26 +95,19 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       "6a89444f-25f6-44d9-8a73-94587d72b839",
     ); // TODO: Use actual user Id
     files.forEach((dragNDropFile, index) => {
-      // accumulator.isGoodPhotoList.push(dragNDropFile.isGoodPicture);
-      // accumulator.tagList.push(values["tags"]);
-      // accumulator.photoFileList.push(dragNDropFile as File);
       formData.append(
         "isGoodPhotoList",
         JSON.stringify(dragNDropFile.isGoodPicture),
       );
-      formData.append("tagList", "Test");
+      formData.append("tagList", values["tags"]);
       formData.append("photoFileList", acceptedFiles[index]);
-
-      data.tagList.push(values["tags"]);
-      data.isGoodPhotoList.push(dragNDropFile.isGoodPicture || false);
-      // data.photoFileList.push(acceptedFiles[index]);
     });
 
-    console.log(data);
     PhotoApi.batchUpload(formData)
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
   };
+
   const validate: Validate = (values: any): Errors => {
     // TODO: Do validation
     // console.log("validate", values);
