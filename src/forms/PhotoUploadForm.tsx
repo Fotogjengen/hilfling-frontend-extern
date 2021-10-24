@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Grid, MenuItem } from "@material-ui/core";
+import { FormControl, FormHelperText, Grid, MenuItem } from "@material-ui/core";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -50,6 +50,8 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
+  const [noPhotoError, _setNoPhotoError] = useState<string>("");
+  const setNoPhotoError = () => _setNoPhotoError("Ingen bilder er valgt.");
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -82,12 +84,11 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
     );
   }, [acceptedFiles]);
 
-  useEffect(() => {
-    console.log("categories");
-    console.log(categories);
-  }, [categories]);
-
   const onSubmit = (values: Record<string, any>) => {
+    if (files.length < 1) {
+      setNoPhotoError();
+      return;
+    }
     const formData = new FormData();
     formData.append("motiveTitle", values["motive"]);
     formData.append("securityLevelId", values["securityLevel"]);
@@ -115,8 +116,25 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
   const validate: Validate = (values: any): Errors => {
     // TODO: Do validation
-    console.log("validate", values);
     const errors: Errors = {};
+    if (values["album"] == "") {
+      errors["album"] = "Album må være valgt.";
+    }
+    if (values["motive"] == "") {
+      errors["motive"] = "Motiv må være valgt.";
+    }
+    if (values["category"] == "") {
+      errors["category"] = "Kategori må være valgt.";
+    }
+    if (values["place"] == "") {
+      errors["place"] = "Sted må være valgt.";
+    }
+    if (values["securityLevel"] == "") {
+      errors["securityLevel"] = "Sikkerhetsnivå må være valgt.";
+    }
+    if (values["eventOwner"] == "") {
+      errors["eventOwner"] = "Eier må være valgt.";
+    }
     return errors;
   };
 
@@ -238,6 +256,9 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
+          <FormHelperText className={styles.helperText}>
+            {noPhotoError}
+          </FormHelperText>
         </Grid>
       </Grid>
     </div>

@@ -33,5 +33,5 @@ export interface FormContext {
 export interface FormProps {
   initialValues: any;
   validate: Validate<any>;
-  onSubmit: (values: any) => void;
+  onSubmit: (values: any) => boolean | void;
 }
