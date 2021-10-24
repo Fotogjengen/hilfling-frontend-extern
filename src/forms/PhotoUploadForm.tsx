@@ -74,7 +74,12 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   }, []);
 
   useEffect(() => {
-    setFiles(acceptedFiles as DragNDropFile[]);
+    setFiles(
+      (acceptedFiles as DragNDropFile[]).map((file) => {
+        file.isGoodPicture = false;
+        return file;
+      }),
+    );
   }, [acceptedFiles]);
 
   useEffect(() => {
