@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { FormControl, FormHelperText, Grid, MenuItem } from "@material-ui/core";
+import { Grid, MenuItem } from "@material-ui/core";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -24,6 +24,7 @@ import { SecurityLevelApi } from "../utils/api/SecurityLevelApi";
 import { AlbumApi } from "../utils/api/AlbumApi";
 import { PhotoApi } from "../utils/api/PhotoApi";
 import { EventOwnerApi } from "../utils/api/EventOwnerApi";
+import Snackbar from "../components/Snackbar/Snackbar";
 
 export interface PhotoUploadFormIV {
   album: string;
@@ -50,8 +51,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
-  const [noPhotoError, _setNoPhotoError] = useState<string>("");
-  const setNoPhotoError = () => _setNoPhotoError("Ingen bilder er valgt.");
+  const [missingPhotoError, setMissingPhotoError] = useState<boolean>(false);
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -86,7 +86,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
   const onSubmit = (values: Record<string, any>) => {
     if (files.length < 1) {
-      setNoPhotoError();
+      setMissingPhotoError(true);
       return;
     }
     const formData = new FormData();
@@ -259,11 +259,14 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
-          <FormHelperText className={styles.helperText}>
-            {noPhotoError}
-          </FormHelperText>
         </Grid>
       </Grid>
+      <Snackbar
+        message="Ingen bilder er valgt."
+        severity="error"
+        open={missingPhotoError}
+        setOpen={setMissingPhotoError}
+      />
     </div>
   );
 };

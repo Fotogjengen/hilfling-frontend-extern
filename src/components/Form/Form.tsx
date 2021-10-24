@@ -25,11 +25,18 @@ const Form: FC<FormProps> = ({
 }) => {
   const [values, setValues] = useState<FormContext["values"]>(initialValues);
   const [errors, setErrors] = useState<FormContext["errors"]>({});
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
 
   const validateFields = () => {
     setErrors(validate(values));
   };
   useEffect(() => validateFields(), [values]);
+  useEffect(() => {
+    if (hasSubmitted) {
+      setValues(initialValues);
+      setHasSubmitted(false);
+    }
+  }, [hasSubmitted]);
 
   const onChange = (fieldName: string, value: any) => {
     if (!Object.keys(initialValues).includes(fieldName)) {
@@ -45,8 +52,7 @@ const Form: FC<FormProps> = ({
 
   const _onSubmit = (e: any) => {
     e.preventDefault();
-    onSubmit(values);
-    setValues(initialValues);
+    setHasSubmitted(!!onSubmit(values));
   };
 
   return (
