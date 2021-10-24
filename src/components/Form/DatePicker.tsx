@@ -23,7 +23,7 @@ let idCount = 0;
 
 const DatePicker: FC<
   FormFieldProps<KeyboardDatePickerProps> & WithStyles<typeof styles>
-> = ({ name, label, fullWidth, ...rest }) => {
+> = ({ name, label, fullWidth }) => {
   const { values, onChange } = useForm();
   // const [touched, setTouched] = useState<boolean>(false);
   const id = `DatePicker-${name}-${idCount++}`;
@@ -47,7 +47,6 @@ const DatePicker: FC<
           "aria-label": "change date",
         }}
         fullWidth={fullWidth}
-        {...rest}
       />
     </MuiPickersUtilsProvider>
   );

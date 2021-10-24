@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { Grid } from "@material-ui/core";
-import PhotoUploadForm from "../../../forms/PhotoUploadForm";
+import PhotoUploadForm, {
+  PhotoUploadFormIV,
+} from "../../../forms/PhotoUploadForm";
 
-const initialValues = {
+const initialValues: PhotoUploadFormIV = {
   album: "",
   date: new Date(Date.now()),
   motive: "",
@@ -10,6 +12,7 @@ const initialValues = {
   category: "",
   place: "",
   securityLevel: "",
+  eventOwner: "",
 };
 
 const PhotoUpload: FC = () => {

@@ -1,24 +1,9 @@
 import { api } from "./api";
-import { Category } from "../../interfaces/Category";
-
-interface PaginatedResult<T> {
-  config: object;
-  headers: object;
-  request: any;
-  status: number;
-  statusText: string;
-  data: {
-    currentList: T[];
-    limit: number;
-    offset: number;
-    pageSize: number;
-    totalPages: number;
-    totalRecords: number;
-  };
-}
+import { CategoryDto } from "../../../generated";
+import { PaginatedResult } from "./types";
 
 export const CategoryApi = {
-  getAll: async function (): Promise<PaginatedResult<Category>> {
+  getAll: async function (): Promise<PaginatedResult<CategoryDto>> {
     return api.get("/categories");
   },
 };

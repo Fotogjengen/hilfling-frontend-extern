@@ -1,6 +1,5 @@
 import { FieldRenderProps } from "react-final-form";
 import { FormControlProps } from "@material-ui/core";
-import {DragNDropFile} from "../../types";
 
 export interface FormHelperTextWrapperProps<T> extends FieldRenderProps<T> {
   label: string;

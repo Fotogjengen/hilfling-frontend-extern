@@ -26,7 +26,7 @@ const styles = () =>
   });
 
 const SubmitButton = (props: Props & FabProps & WithStyles<typeof styles>) => {
-  const { classes, float, children, onClick, ...rest } = props;
+  const { classes, float, children, onClick } = props;
   const { errors } = useForm();
   return (
     <Fab
@@ -37,7 +37,6 @@ const SubmitButton = (props: Props & FabProps & WithStyles<typeof styles>) => {
         [classes.floatRight]: float === "right",
       })}
       type="button"
-      {...rest}
       disabled={!isEmpty(errors)}
       onClick={onClick}
     >

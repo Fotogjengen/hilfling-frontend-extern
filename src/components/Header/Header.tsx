@@ -23,7 +23,7 @@ const HeaderComponent: FC = () => {
           LOGG INN
         </Link>
 
-        <Link component={GuiHeaderLink} to="/intern/upload">
+        <Link component={GuiHeaderLink} to="/intern/last-opp">
           LAST OPP
         </Link>
         {/* {authenticated ? (
