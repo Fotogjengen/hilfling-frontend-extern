@@ -25,8 +25,8 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
   return (
     <div className={styles.archiveBossAccordion}>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography> {name} </Typography>
+        <AccordionSummary expandIcon={<ExpandMoreIcon style={{fontSize: '3rem'}}/>}>
+          <Typography variant='h4'> {name} </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={5}>
