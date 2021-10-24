@@ -115,6 +115,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
   const validate: Validate = (values: any): Errors => {
     // TODO: Do validation
+    console.log("validate", values);
     const errors: Errors = {};
     return errors;
   };
