@@ -156,7 +156,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
           <Grid item xs={12}>
             <Select name="album" label="Album" fullWidth required>
               {albums.map((album, index) => (
-                <MenuItem key={`album-item-${index}`} value={album.title}>
+                <MenuItem key={`album-item-${index}`} value={album?.albumId?.id}>
                   {album.title}
                 </MenuItem>
               ))}
@@ -205,7 +205,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               {securityLevels.map((securityLevel, index) => (
                 <MenuItem
                   key={`security-level-item-${index}`}
-                  value={securityLevel.securityLevelType}
+                  value={securityLevel?.securityLevelId?.id}
                 >
                   {securityLevel.securityLevelType}
                 </MenuItem>
