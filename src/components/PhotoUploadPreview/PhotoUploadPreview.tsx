@@ -1,5 +1,5 @@
 import styles from "./PhotoUploadPreview.module.css";
-import React, { FC } from "react";
+import React, {FC, useState} from "react";
 import { DragNDropFile } from "../../types";
 import {
   FormControlLabel,
@@ -15,6 +15,7 @@ interface Props {
 
 const PhotoUploadPreview: FC<Props> = ({ file, handleChange }: Props) => {
   const fileSizeAsKb = Math.ceil(file.size / 1000);
+  const [isGoodPicture, setIsGoodPicture] = useState<boolean>(file.isGoodPicture);
 
   return (
     <Paper elevation={1}>
@@ -36,8 +37,11 @@ const PhotoUploadPreview: FC<Props> = ({ file, handleChange }: Props) => {
               label="Bra bilde"
               control={
                 <Checkbox
-                  checked={file.isGoodPicture}
-                  onChange={handleChange}
+                  checked={isGoodPicture}
+                  onChange={() => {
+                    handleChange();
+                    setIsGoodPicture(file.isGoodPicture)
+                  }}
                   name="Good picture"
                 />
               }
