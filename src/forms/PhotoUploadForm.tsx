@@ -110,7 +110,10 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
     PhotoApi.batchUpload(formData)
       .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setFiles([]);
+      });
   };
 
   const validate: Validate = (values: any): Errors => {
