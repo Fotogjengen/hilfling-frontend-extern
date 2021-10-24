@@ -25,9 +25,7 @@ const DatePicker: FC<
   FormFieldProps<KeyboardDatePickerProps> & WithStyles<typeof styles>
 > = ({ name, label, fullWidth }) => {
   const { values, onChange } = useForm();
-  // const [touched, setTouched] = useState<boolean>(false);
   const id = `DatePicker-${name}-${idCount++}`;
-  // const error = touched && errors[name];
 
   const handleDateChange = (date: MaterialUiPickersDate) => {
     onChange(name, date);

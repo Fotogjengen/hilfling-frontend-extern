@@ -37,8 +37,8 @@ const Form: FC<FormProps> = ({
         "The field that you changed is not registered in the initialValues prop",
       );
     }
-    setValues((values) => ({
-      ...values,
+    setValues((formValues) => ({
+      ...formValues,
       [fieldName]: value,
     }));
   };

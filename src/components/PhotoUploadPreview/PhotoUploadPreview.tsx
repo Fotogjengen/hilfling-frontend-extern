@@ -26,7 +26,7 @@ const PhotoUploadPreview: FC<Props> = ({ file, handleChange }: Props) => {
           alt={file.name}
           className={styles.image}
         />
-        <div className={styles.metaContainer}>
+        <div>
           <div>{file.name}</div>
           <div>{fileSizeAsKb} kb</div>
           <div>{file.type}</div>
