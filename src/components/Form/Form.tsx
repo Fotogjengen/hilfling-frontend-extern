@@ -59,8 +59,10 @@ const Form: FC<FormProps> = ({
     >
       <form onKeyDown={(e) => e.key !== "Enter"}>
         {children}
-        <Grid item xs={12}>
-          <SubmitButton onClick={(e) => _onSubmit(e)}>Last opp</SubmitButton>
+        <Grid container spacing={4}>
+          <Grid item xs={6}>
+            <SubmitButton onClick={(e) => _onSubmit(e)}>Last opp</SubmitButton>
+          </Grid>
         </Grid>
       </form>
     </Context.Provider>

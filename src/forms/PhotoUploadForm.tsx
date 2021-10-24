@@ -136,83 +136,94 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   ));
 
   return (
-    <Form onSubmit={onSubmit} initialValues={initialValues} validate={validate}>
+    <div>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Grid item xs={12}>
-            <Select name="album" label="Album" fullWidth required>
-              {albums.map((album, index) => (
-                <MenuItem
-                  key={`album-item-${index}`}
-                  value={album?.albumId?.id}
+          <Form
+            onSubmit={onSubmit}
+            initialValues={initialValues}
+            validate={validate}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Select name="album" label="Album" fullWidth required>
+                  {albums.map((album, index) => (
+                    <MenuItem
+                      key={`album-item-${index}`}
+                      value={album?.albumId?.id}
+                    >
+                      {album.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Grid>
+
+              <Grid item xs={12}>
+                <DatePicker name="date" label="Dato" fullWidth />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField name="motive" label="Motiv" fullWidth required />
+              </Grid>
+
+              <Grid item xs={12}>
+                <ChipField name="tags" label="Tags" fullWidth />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Select name="category" label="Kategori" fullWidth required>
+                  {categories.map((category, index) => (
+                    <MenuItem
+                      key={`category-item-${index}`}
+                      value={category.name}
+                    >
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Select name="place" label="Sted" fullWidth required>
+                  {places.map((place, index) => (
+                    <MenuItem key={`place-item-${index}`} value={place.name}>
+                      {place.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Select
+                  name="securityLevel"
+                  label="Sikkerhetsnivå"
+                  fullWidth
+                  required
                 >
-                  {album.title}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-
-          <Grid item xs={12}>
-            <DatePicker name="date" label="Dato" fullWidth />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField name="motive" label="Motiv" fullWidth required />
-          </Grid>
-
-          <Grid item xs={12}>
-            <ChipField name="tags" label="Tags" fullWidth />
-          </Grid>
-
-          <Grid item xs={12}>
-            <Select name="category" label="Kategori" fullWidth required>
-              {categories.map((category, index) => (
-                <MenuItem key={`category-item-${index}`} value={category.name}>
-                  {category.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Select name="place" label="Sted" fullWidth required>
-              {places.map((place, index) => (
-                <MenuItem key={`place-item-${index}`} value={place.name}>
-                  {place.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </Grid>
-
-          <Grid item xs={12}>
-            <Select
-              name="securityLevel"
-              label="Sikkerhetsnivå"
-              fullWidth
-              required
-            >
-              {securityLevels.map((securityLevel, index) => (
-                <MenuItem
-                  key={`security-level-item-${index}`}
-                  value={securityLevel?.securityLevelId?.id}
-                >
-                  {securityLevel.securityLevelType}
-                </MenuItem>
-              ))}
-            </Select>
-            <Grid item xs={12}>
-              <Select name="eventOwner" label="Eier" fullWidth required>
-                {eventOwners.map((eventOwner, index) => (
-                  <MenuItem
-                    key={`event-owner-item-${index}`}
-                    value={eventOwner.name}
-                  >
-                    {eventOwner.name}
-                  </MenuItem>
-                ))}
-              </Select>
+                  {securityLevels.map((securityLevel, index) => (
+                    <MenuItem
+                      key={`security-level-item-${index}`}
+                      value={securityLevel?.securityLevelId?.id}
+                    >
+                      {securityLevel.securityLevelType}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <Grid item xs={12}>
+                  <Select name="eventOwner" label="Eier" fullWidth required>
+                    {eventOwners.map((eventOwner, index) => (
+                      <MenuItem
+                        key={`event-owner-item-${index}`}
+                        value={eventOwner.name}
+                      >
+                        {eventOwner.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
+          </Form>
         </Grid>
         <Grid item xs={6}>
           <section>
@@ -229,7 +240,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
           </section>
         </Grid>
       </Grid>
-    </Form>
+    </div>
   );
 };
 
