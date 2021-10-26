@@ -1,11 +1,47 @@
 import { BaseModel } from "./BaseModel";
 
 export interface PhotoGangBanger extends BaseModel {
-  relationshipStatus: string;
-  semesterStart: string;
-  active: boolean;
-  pang: boolean;
+  photoGangBangerId: {
+    [id: string]: string;
+  };
+  relationShipStatus: string;
+  semesterStart: {
+    [key: string]: string;
+  };
   address: string;
   zipCode: number;
   city: string;
+  samfundetUser: {
+    samfundetUserId: {
+      id: string;
+    };
+    firstName: string;
+    lastName: string;
+    username: string;
+    phoneNumber: {
+      value: string;
+    };
+    email: {
+      value: string;
+    };
+    profilePicturePath: string;
+    sex: string;
+    securituLevel: {
+      securityLevelId: {
+        id: string;
+      };
+      securityLevelType: string;
+    };
+  };
+  position: {
+    positionId: {
+      id: string;
+    };
+    title: string;
+    email: {
+      value: string;
+    };
+  };
+  active: boolean;
+  pang: boolean;
 }

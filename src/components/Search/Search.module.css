@@ -2,7 +2,7 @@
 @import "../../styles/variables.css";
 
 :root {
-  --primary-height: 50px;
+  --primary-height: 50rem;
   --primary-icon-width: 40px;
   --primary-color: rgba(17, 17, 17, 0.7);
   --primary-focus-color: rgba(17, 17, 17, 1);
