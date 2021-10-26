@@ -5,7 +5,7 @@ import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
 import showMotive from "./components/Temp/ShowMotive";
 import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
-import Arkivsjef from "./views/Arkivsjef/ArchiveBoss";
+import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
 
 const Routes: FC = () => {

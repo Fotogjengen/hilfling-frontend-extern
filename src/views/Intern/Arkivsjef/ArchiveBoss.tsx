@@ -6,13 +6,13 @@ import {
   arkivsjefSted,
 } from "./mockdata";
 import styles from "./Arkivsjef.module.css";
-import ArchiveBossAccordion from "../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
+import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import Grid from "@material-ui/core/Grid";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import ArchiveBossOverflow from "../../components/Arkivsjef/ArchiveBossOverflow/ArchiveBossOverflow";
+import ArchiveBossOverflow from "../../../components/Arkivsjef/ArchiveBossOverflow/ArchiveBossOverflow";
 
 const ArchiveBoss: FC = () => {
   const album = arkivsjefAlbum;
