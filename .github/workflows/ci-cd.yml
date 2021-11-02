@@ -62,6 +62,9 @@ jobs:
             fotogjengen/hilfling-frontend:latest
           push: true #optional, default is false
 
+      - name: "Build app outside docker"
+        run: "npm run build"
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
