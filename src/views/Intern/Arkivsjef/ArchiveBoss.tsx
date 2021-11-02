@@ -6,7 +6,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import IconButton from "@material-ui/core/IconButton";
 import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
@@ -32,24 +31,11 @@ const ArchiveBoss: FC = () => {
     ));
   };
 
-  
-
-  const mapPlacesCategory = (dtoList: PlaceDto[] | CategoryDto[]) => {
+  const mapCurrentList = (dtoList: PlaceDto[] | CategoryDto[]) => {
     return dtoList.map((dto: PlaceDto | CategoryDto, index: number) => (
       <ArchiveBossElement text={dto.name} key={index}/>
     ));
   }
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    grid: {
-      color: theme.palette.text.secondary,
-      justifyContent: "center",
-    },
-  }));
-
-  const classes = useStyles();
 
   return (
     <div className={styles.archiveBoss}>
@@ -59,7 +45,6 @@ const ArchiveBoss: FC = () => {
           <Grid
             item
             xs={2}
-            className={classes.grid}
             alignContent="center"
             direction="row"
           >
@@ -90,10 +75,10 @@ const ArchiveBoss: FC = () => {
         {mapAlbums(albums)}
       </ArchiveBossAccordion>
       <ArchiveBossAccordion color="#f3ee78" name="Sted">
-        {mapPlacesCategory(places)}
+        {mapCurrentList(places)}
       </ArchiveBossAccordion>
       <ArchiveBossAccordion color="#9c77da" name="Kategori">
-        {mapPlacesCategory(categories)}
+        {mapCurrentList(categories)}
       </ArchiveBossAccordion>
     </div>
   );
