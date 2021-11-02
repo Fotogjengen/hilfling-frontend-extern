@@ -11,7 +11,6 @@ import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
 
-//TODO: Create handleDelete and handleChange function for the archiveBossOverflowMenu
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
@@ -25,8 +24,8 @@ const ArchiveBoss: FC = () => {
   }, []);
 
 
-  const mapAlbums = (albums: AlbumDto[]) => {
-    return albums.map((album: AlbumDto, index: number) => (
+  const mapAlbums = (albumsCurrentList: AlbumDto[]) => {
+    return albumsCurrentList.map((album: AlbumDto, index: number) => (
       <ArchiveBossElement text={album.title} key={index}/>
     ));
   };
