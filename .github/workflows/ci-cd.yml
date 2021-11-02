@@ -63,7 +63,7 @@ jobs:
           push: true #optional, default is false
 
       - name: "Build app outside docker"
-        run: "npm run build"
+        run: "npm ci && npm run build"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
