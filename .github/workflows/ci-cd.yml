@@ -62,6 +62,18 @@ jobs:
             fotogjengen/hilfling-frontend:latest
           push: true #optional, default is false
 
+      - name: "Build app outside docker"
+        run: "npm ci && npm run build"
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: "latest"
+          prerelease: true
+          files: ./build/
+
+
+
   lint:
       runs-on: ubuntu-latest
       steps:
