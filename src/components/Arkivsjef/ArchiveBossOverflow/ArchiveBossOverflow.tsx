@@ -5,7 +5,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { DefaultProps } from "../../../types";
 
-//https://codesandbox.io/s/um1t0?file=/demo.js
 
 const options = ["Rediger", "Slett"];
 
