@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { FC, SyntheticEvent, useState} from "react";
 import {
   GuiCardPreamble,
   GuiCardTitle,
   GuiImageCard,
 } from "../../../gui-components";
-import { AppBar, Tabs, Tab } from "@material-ui/core";
+import { AppBar, Tabs, Tab } from "@mui/material";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -126,7 +126,7 @@ const EventCardsDisplayer: FC<Props> = () => {
   });
 
   const handleChange = (
-    event: ChangeEvent<Record<string, unknown>>,
+    event: SyntheticEvent,
     newValue: number,
   ) => {
     setValue(newValue);

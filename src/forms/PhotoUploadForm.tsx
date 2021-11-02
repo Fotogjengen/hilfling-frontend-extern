@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Grid, MenuItem } from "@material-ui/core";
+import { Grid, MenuItem } from "@mui/material";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -212,18 +212,18 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
                     </MenuItem>
                   ))}
                 </Select>
-                <Grid item xs={12}>
-                  <Select name="eventOwner" label="Eier" fullWidth required>
-                    {eventOwners.map((eventOwner, index) => (
+              </Grid>
+              <Grid item xs={12}>
+                <Select name="eventOwner" label="Eier" fullWidth required>
+                  {eventOwners.map((eventOwner, index) => (
                       <MenuItem
-                        key={`event-owner-item-${index}`}
-                        value={eventOwner.name}
+                          key={`event-owner-item-${index}`}
+                          value={eventOwner.name}
                       >
                         {eventOwner.name}
                       </MenuItem>
-                    ))}
-                  </Select>
-                </Grid>
+                  ))}
+                </Select>
               </Grid>
             </Grid>
           </Form>

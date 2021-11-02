@@ -1,14 +1,19 @@
 import React, { FC } from "react";
-import { createStyles, withStyles, WithStyles } from "@material-ui/core";
+import { createStyles, withStyles, WithStyles } from "@mui/styles";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 import {
-  MuiPickersUtilsProvider,
+  /*MuiPickersUtilsProvider,
   KeyboardDatePicker,
-  KeyboardDatePickerProps,
-} from "@material-ui/pickers";
+  KeyboardDatePickerProps,*/
+  LocalizationProvider,
+  MuiPickersAdapter,
+  MobileDatePicker,
+  MobileDatePickerProps,
+} from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateFnsUtils from "@date-io/date-fns";
-import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
+import { TextField } from "@mui/material";
 
 const styles = () =>
   createStyles({
@@ -22,31 +27,26 @@ const styles = () =>
 let idCount = 0;
 
 const DatePicker: FC<
-  FormFieldProps<KeyboardDatePickerProps> & WithStyles<typeof styles>
-> = ({ name, label, fullWidth }) => {
+  FormFieldProps<MobileDatePickerProps> &
+    WithStyles<typeof styles> & { fullWidth?: boolean }
+> = ({ name, label, fullWidth = false }) => {
   const { values, onChange } = useForm();
   const id = `DatePicker-${name}-${idCount++}`;
 
-  const handleDateChange = (date: MaterialUiPickersDate) => {
+  const handleDateChange = (date: Date | null) => {
     onChange(name, date);
   };
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <KeyboardDatePicker
-        variant="inline"
-        format="dd/MM/yyyy"
-        margin="normal"
-        id={id}
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <MobileDatePicker
+        inputFormat="dd/MM/yyyy"
         label={label}
         value={values[name]}
         onChange={handleDateChange}
-        KeyboardButtonProps={{
-          "aria-label": "change date",
-        }}
-        fullWidth={fullWidth}
+        renderInput={(params) => <TextField id={id} {...params} fullWidth={fullWidth} />}
       />
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 };
 

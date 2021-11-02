@@ -1,11 +1,8 @@
 import React, { FC } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
 import { DefaultProps } from "../../../types";
 
-//https://codesandbox.io/s/um1t0?file=/demo.js
 
 const options = ["Rediger", "Slett"];
 
@@ -26,7 +23,7 @@ const ArchiveBossOverflow: FC<Props> = () => {
   return (
     <div>
       <IconButton onClick={handleClick}>
-        <MoreVertIcon />
+        <MoreVert />
       </IconButton>
       <Menu anchorEl={anchorEl} keepMounted open={open} onClose={handleClose}>
         {options.map((option) => (

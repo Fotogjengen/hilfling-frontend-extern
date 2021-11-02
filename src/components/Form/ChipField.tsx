@@ -13,10 +13,8 @@ import {
   Input,
   InputProps,
   InputLabel,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import { WithStyles, createStyles, withStyles } from "@mui/styles";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 
