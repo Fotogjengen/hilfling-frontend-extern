@@ -1,25 +1,44 @@
-import React, { FC } from "react";
-import {
-  arkivsjefAlbum,
-  arkivsjefKategori,
-  arkivsjefMedium,
-  arkivsjefSted,
-} from "./mockdata";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import Grid from "@material-ui/core/Grid";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import IconButton from "@material-ui/core/IconButton";
+import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import ArchiveBossOverflow from "../../../components/Arkivsjef/ArchiveBossOverflow/ArchiveBossOverflow";
+import { AlbumApi } from "../../../utils/api/AlbumApi";
+import { PlaceApi } from "../../../utils/api/PlaceApi";
+import { CategoryApi } from "../../../utils/api/CategoryApi";
+import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
+
+//TODO: Create handleDelete and handleChange function for the archiveBossOverflowMenu
 
 const ArchiveBoss: FC = () => {
-  const album = arkivsjefAlbum;
-  const category = arkivsjefKategori;
-  const medium = arkivsjefMedium;
-  const place = arkivsjefSted;
+  const [albums, setAlbums] = useState<AlbumDto[]>([]);
+  const [places, setPlaces] = useState<PlaceDto[]>([]);
+  const [categories, setCategories] = useState<CategoryDto[]>([])
 
+  useEffect(() => {
+    AlbumApi.getAll().then((res) => setAlbums(res.data.currentList)).catch((e) => console.log(e));
+    PlaceApi.getAll().then((res)=> setPlaces(res.data.currentList)).catch((e) => console.log(e));
+    CategoryApi.getAll().then((res)=> setCategories(res.data.currentList)).catch((e) => console.log(e));
+  }, []);
+
+
+  const mapAlbums = (albums: AlbumDto[]) => {
+    return albums.map((album: AlbumDto, index: number) => (
+      <ArchiveBossElement text={album.title} key={index}/>
+    ));
+  };
+
+  
+
+  const mapPlacesCategory = (dtoList: PlaceDto[] | CategoryDto[]) => {
+    return dtoList.map((dto: PlaceDto | CategoryDto, index: number) => (
+      <ArchiveBossElement text={dto.name} key={index}/>
+    ));
+  }
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -31,82 +50,6 @@ const ArchiveBoss: FC = () => {
   }));
 
   const classes = useStyles();
-
-  const mapAlbums = () =>
-    album.map((Album) => (
-      <Grid item xs={6} sm={3} key={Album.key}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <Grid item xs={6} sm={4}>
-            <ArchiveBossOverflow />
-          </Grid>
-          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
-            {Album.name}
-          </Grid>
-        </Grid>
-      </Grid>
-    ));
-
-  const mapCategory = () =>
-    category.map((Category) => (
-      <Grid item xs={6} sm={3} key={Category.key}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <Grid item xs={6} sm={4}>
-            <ArchiveBossOverflow />
-          </Grid>
-          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
-            {Category.name}
-          </Grid>
-        </Grid>
-      </Grid>
-    ));
-
-  const mapPlace = () =>
-    place.map((Place) => (
-      <Grid item xs={6} sm={3} key={Place.key}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <Grid item xs={6} sm={4}>
-            <ArchiveBossOverflow />
-          </Grid>
-          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
-            {Place.name}
-          </Grid>
-        </Grid>
-      </Grid>
-    ));
-
-  const mapMedium = () =>
-    medium.map((Medium) => (
-      <Grid item xs={6} sm={3} key={Medium.key}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <Grid item xs={6} sm={4}>
-            <ArchiveBossOverflow />
-          </Grid>
-          <Grid item xs={6} sm={4} alignContent="space-around" direction="row">
-            {Medium.name}
-          </Grid>
-        </Grid>
-      </Grid>
-    ));
 
   return (
     <div className={styles.archiveBoss}>
@@ -144,16 +87,13 @@ const ArchiveBoss: FC = () => {
         </Grid>
       </div>
       <ArchiveBossAccordion color="#da7777" name="Album">
-        {mapAlbums()}
+        {mapAlbums(albums)}
       </ArchiveBossAccordion>
       <ArchiveBossAccordion color="#f3ee78" name="Sted">
-        {mapPlace()}
+        {mapPlacesCategory(places)}
       </ArchiveBossAccordion>
       <ArchiveBossAccordion color="#9c77da" name="Kategori">
-        {mapCategory()}
-      </ArchiveBossAccordion>
-      <ArchiveBossAccordion color="#7793da" name="Medium">
-        {mapMedium()}
+        {mapPlacesCategory(categories)}
       </ArchiveBossAccordion>
     </div>
   );
