@@ -23,6 +23,9 @@ const styles = () =>
     helperText: {
       color: "red",
     },
+    chips: {
+      marginBottom: "1rem",
+    },
   });
 
 const ChipField: FC<FormFieldProps<InputProps> & WithStyles<typeof styles>> = ({
@@ -79,7 +82,7 @@ const ChipField: FC<FormFieldProps<InputProps> & WithStyles<typeof styles>> = ({
 
   return (
     <Fragment>
-      <div>{values[name] && chipRenderer}</div>
+      <div className={classes.chips}>{values[name] && chipRenderer}</div>
       <FormControl fullWidth={fullWidth}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
         <Input
