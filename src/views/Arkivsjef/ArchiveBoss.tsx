@@ -1,4 +1,6 @@
 import React, { FC } from "react";
+import { Grid, IconButton, Typography } from "@mui/material";
+import { AddCircle } from "@mui/icons-material";
 import {
   arkivsjefAlbum,
   arkivsjefKategori,
@@ -7,11 +9,6 @@ import {
 } from "./mockdata";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
-import Grid from "@material-ui/core/Grid";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import ArchiveBossOverflow from "../../components/Arkivsjef/ArchiveBossOverflow/ArchiveBossOverflow";
 
 const ArchiveBoss: FC = () => {
@@ -20,25 +17,13 @@ const ArchiveBoss: FC = () => {
   const medium = arkivsjefMedium;
   const place = arkivsjefSted;
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    grid: {
-      color: theme.palette.text.secondary,
-      justifyContent: "center",
-    },
-  }));
-
-  const classes = useStyles();
-
   const mapAlbums = () =>
     album.map((Album) => (
       <Grid item xs={6} sm={3} key={Album.key}>
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
         >
           <Grid item xs={6} sm={4}>
@@ -57,7 +42,7 @@ const ArchiveBoss: FC = () => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
         >
           <Grid item xs={6} sm={4}>
@@ -76,7 +61,7 @@ const ArchiveBoss: FC = () => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
         >
           <Grid item xs={6} sm={4}>
@@ -95,7 +80,7 @@ const ArchiveBoss: FC = () => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="center"
         >
           <Grid item xs={6} sm={4}>
@@ -112,22 +97,21 @@ const ArchiveBoss: FC = () => {
     <div className={styles.archiveBoss}>
       <h2> Arkivsjef </h2>
       <div className={styles.description}>
-        <Grid container direction="row" justify="center" alignItems="center">
-          <Grid
-            item
-            xs={2}
-            className={classes.grid}
-            alignContent="center"
-            direction="row"
-          >
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid item xs={2} alignContent="center" direction="row">
             <Grid
               container
               direction="column"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
             >
               <IconButton aria-label="add">
-                <AddCircleIcon className={styles.svgicon} />
+                <AddCircle className={styles.svgicon} />
               </IconButton>
               <Typography>Legg til ny</Typography>
             </Grid>

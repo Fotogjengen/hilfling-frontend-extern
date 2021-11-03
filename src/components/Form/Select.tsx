@@ -1,14 +1,12 @@
 import React, { FC, useState } from "react";
 import {
-  createStyles,
   FormControl,
   FormHelperText,
   InputLabel,
   Select as MuiSelect,
   SelectProps,
-  withStyles,
-  WithStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import { withStyles, WithStyles, createStyles } from "@mui/styles";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 

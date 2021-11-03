@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import styles from "./NotFound.module.css";
 import image from "./404.png";
 

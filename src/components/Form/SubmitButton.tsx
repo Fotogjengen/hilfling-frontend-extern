@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  createStyles,
-  WithStyles,
-  Fab,
-  FabProps,
-} from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
+import { Fab, FabProps } from "@mui/material";
+import { withStyles, WithStyles, createStyles } from "@mui/styles";
 import cn from "classnames";
 import { useForm } from "./Form";
 import { isEmpty } from "lodash";

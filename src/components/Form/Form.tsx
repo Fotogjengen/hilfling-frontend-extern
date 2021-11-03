@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { FormContext, FormProps } from "./types";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import SubmitButton from "./SubmitButton";
 
 const Context = createContext<FormContext>({

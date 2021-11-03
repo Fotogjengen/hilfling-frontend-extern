@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, SyntheticEvent} from "react";
 import PhotoGangBanger from "../../components/About/PhotoGangBanger";
 import styles from "./About.module.css";
 import axios from "axios";
@@ -12,7 +12,7 @@ import {
   Grid,
   List,
   ListItemText,
-} from "@material-ui/core";
+} from "@mui/material";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
 import { PhotoGangBanger as PhotoGangBangerInterface } from "../../interfaces/PhotoGangBanger";
@@ -74,7 +74,7 @@ const About: FC = () => {
   }, []);
 
   const handleTabChange = (
-    event: ChangeEvent<Record<string, unknown>>,
+    event: SyntheticEvent,
     newTabValue: number,
   ) => {
     setTabValue(newTabValue);
@@ -211,12 +211,19 @@ const About: FC = () => {
                   </Grid>
                 </Grid>
               </Paper>
-              <br/>
+              <br />
               <Typography paragraph>
-              Størrelsene er veiledende. Ved spesielle formatønsker, kontakt oss på epost. Vi kan også levere større format enn vist i tabellen ved digitale utskrifer: 60cm x ubegrenset lengde. Private bilder kan bestilles til samme pris.
+                Størrelsene er veiledende. Ved spesielle formatønsker, kontakt
+                oss på epost. Vi kan også levere større format enn vist i
+                tabellen ved digitale utskrifer: 60cm x ubegrenset lengde.
+                Private bilder kan bestilles til samme pris.
               </Typography>
               <Typography>
-              Alle bilder hentes i LUKA ved Søndre Side på Studentersamfundet i Trondhjem, eller sendes i posten, forsvarlig innpakket i harde papphylser, mot kr 80,- i porto og ekspedering. Leveringstid for bildene varierer avhengig av vår arbeidsbelastning, men man kan regne med ca. en måned fra betalingsdato i travle perioder.
+                Alle bilder hentes i LUKA ved Søndre Side på Studentersamfundet
+                i Trondhjem, eller sendes i posten, forsvarlig innpakket i harde
+                papphylser, mot kr 80,- i porto og ekspedering. Leveringstid for
+                bildene varierer avhengig av vår arbeidsbelastning, men man kan
+                regne med ca. en måned fra betalingsdato i travle perioder.
               </Typography>
             </Box>
           </Grid>
