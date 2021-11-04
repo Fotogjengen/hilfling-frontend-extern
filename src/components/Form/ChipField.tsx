@@ -13,10 +13,8 @@ import {
   Input,
   InputProps,
   InputLabel,
-  WithStyles,
-  createStyles,
-  withStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import { WithStyles, createStyles, withStyles } from "@mui/styles";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
 
@@ -24,6 +22,9 @@ const styles = () =>
   createStyles({
     helperText: {
       color: "red",
+    },
+    chips: {
+      marginBottom: "1rem",
     },
   });
 
@@ -81,7 +82,7 @@ const ChipField: FC<FormFieldProps<InputProps> & WithStyles<typeof styles>> = ({
 
   return (
     <Fragment>
-      <div>{values[name] && chipRenderer}</div>
+      <div className={classes.chips}>{values[name] && chipRenderer}</div>
       <FormControl fullWidth={fullWidth}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
         <Input

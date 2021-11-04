@@ -1,13 +1,15 @@
 import React, { FC } from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@mui/styles";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary as MuiAccordionSummary,
+  Typography,
+  Grid,
+} from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
 import styles from "./ArchiveBossAccordion.module.css";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { DefaultProps } from "../../../types";
-import Grid from "@material-ui/core/Grid";
 
 interface Props extends DefaultProps {
   color: string;
@@ -15,7 +17,7 @@ interface Props extends DefaultProps {
 }
 
 const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
-  const AccordionSummary = withStyles({
+  const AccordionSummary: any = withStyles({
     root: {
       backgroundColor: color,
       padding: "1rem",
@@ -25,8 +27,8 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
   return (
     <div className={styles.archiveBossAccordion}>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon style={{fontSize: '2rem'}}/>}>
-          <Typography variant='h5'> {name} </Typography>
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Typography> {name} </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={5}>

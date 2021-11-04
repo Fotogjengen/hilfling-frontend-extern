@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import styles from "./TabPanel.module.css";
 
 interface Props {

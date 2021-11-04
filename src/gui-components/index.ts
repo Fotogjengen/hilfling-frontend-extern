@@ -11,7 +11,6 @@ import GuiDotDivider from "./GuiDotDivider";
 import GuiDropdown from "./GuiDropdown";
 import GuiDropdownTab from "./GuiDropdownTab";
 import GuiFooter from "./GuiFooter";
-import GuiHamburger from "./GuiHamburger";
 import GuiHeader from "./GuiHeader";
 import GuiHeaderLink from "./GuiHeaderLink";
 import GuiImage, { GuiProfileImage } from "./GuiImage";
@@ -37,7 +36,6 @@ export {
   GuiDropdown,
   GuiDropdownTab,
   GuiFooter,
-  GuiHamburger,
   GuiHeader,
   GuiHeaderLink,
   GuiImage,

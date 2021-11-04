@@ -6,7 +6,7 @@ import {
   FormGroup,
   Checkbox,
   Paper,
-} from "@material-ui/core";
+} from "@mui/material";
 
 interface Props {
   file: DragNDropFile;
