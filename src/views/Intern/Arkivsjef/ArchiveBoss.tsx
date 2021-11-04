@@ -48,7 +48,7 @@ const ArchiveBoss: FC = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={2} alignContent="center" direction="row">
+          <Grid item xs={2} alignContent="center">
             <Grid
               container
               direction="column"
