@@ -3,3 +3,10 @@
   padding-bottom: 1rem;
   padding-left: 2.2rem;
 }
+
+.linkContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
