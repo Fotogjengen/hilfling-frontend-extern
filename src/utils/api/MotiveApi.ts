@@ -6,4 +6,7 @@ export const MotiveApi = {
   getAll: async function (): Promise<PaginatedResult<MotiveDto>> {
     return api.get("/motives");
   },
+  getById: async function (id: string): Promise<PaginatedResult<MotiveDto>> {
+    return api.get(`/motives/${id}`);
+  },
 };
