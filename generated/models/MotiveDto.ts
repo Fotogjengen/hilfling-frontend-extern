@@ -8,9 +8,10 @@ import type { EventOwnerDto } from './EventOwnerDto';
 import type { MotiveId } from './MotiveId';
 
 export type MotiveDto = {
-    motiveId?: MotiveId;
-    title?: string;
-    categoryDto?: CategoryDto;
-    eventOwnerDto?: EventOwnerDto;
-    albumDto?: AlbumDto;
+    motiveId: MotiveId;
+    title: string;
+    categoryDto: CategoryDto;
+    eventOwnerDto: EventOwnerDto;
+    albumDto: AlbumDto;
+    dateCreated: Date;
 }
