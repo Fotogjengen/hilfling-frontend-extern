@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   Container,
@@ -12,6 +12,8 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
+import { PhotoGangBangerDto } from "../../generated";
+import { PhotoGangBangerApi } from "../utils/api/PhotoGangBanger";
 
 interface StyledChipProps {
   bgcolor?: string;
@@ -26,12 +28,20 @@ const StyledChip = styled(Chip, {
 
 const CsaTester = () => {
   const { user } = useAuth0();
+  const [gangBanger, setGangBanger] = useState<PhotoGangBangerDto>({});
 
   const imageCount = 42069;
+  const testId = "7a89444f-25f6-44d9-8a73-94587d72b839";
 
   useEffect(() => {
-    console.log(user);
+    PhotoGangBangerApi.getById(testId)
+      .then(setGangBanger)
+      .catch((e) => console.error(e));
   }, [user]);
+
+  useEffect(() => {
+    console.log(gangBanger);
+  }, [gangBanger]);
 
   return (
     <div>
@@ -39,7 +49,7 @@ const CsaTester = () => {
         <Grid container>
           <Grid item xs={4}>
             <Avatar
-              src={user?.picture}
+              src={gangBanger.samfundetUser?.profilePicturePath}
               sx={{
                 width: 120,
                 height: 120,
@@ -101,9 +111,12 @@ const CsaTester = () => {
           </Grid>
         </Grid>
 
-        <Grid container sx={{
-          mt: 5
-        }}>
+        <Grid
+          container
+          sx={{
+            mt: 5,
+          }}
+        >
           <Grid item xs={4}>
             <Card>
               <CardContent>
