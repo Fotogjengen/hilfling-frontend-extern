@@ -8,8 +8,10 @@ import { AppBar, Tabs, Tab } from "@mui/material";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MotiveDto } from "../../../../generated";
+import { EventOwnerDto, MotiveDto } from "../../../../generated";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
+import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
+
 
 // TODO: this should still be here for when data from database gets collected higher in the component tree.
 interface Props {
@@ -20,87 +22,101 @@ interface Props {
   image?: string;
 }
 
-
 const EventCardsDisplayer: FC<Props> = () => {
   const [value, setValue] = useState<number>(0);
   const [motiveResponse, setMotiveResponse] = useState<MotiveDto[]>([]);
+  const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
 
   useEffect(() => {
     MotiveApi.getAll()
       .then((res) => setMotiveResponse(res.data.currentList))
       .catch((e) => console.log(e));
+    EventOwnerApi.getAll()
+      .then((res) => setEventOwners(res.data.currentList))
+      .catch((err) => console.error(err));
   }, []);
 
-  const imageCardsSamf = motiveResponse.map((motiveObject, index) => { 
+  const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
+    // TODO: IDK hvordan å løse dette? Muligens heller bruke .filter()
+    const samf = motiveObject.eventOwnerDto.name === "Samfundet" ? true : false;
     const id = motiveObject.motiveId.id || "default";
-    return (
-      // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
-      <Link key={index} to={`/motive/${id}`}>
-        <GuiImageCard
-          key={`image-card-${index}`}
-          placement="left"
-          type="samfundet"
-          image="https://www.w3schools.com/css/img_lights.jpg"
-        >
-          <GuiCardTitle capitalized title={motiveObject.title} />
-          <GuiCardPreamble
-            color="red"
-            date={motiveObject.dateCreated.toString()}
-            images={69420}
-            location="Blåfjell"
-            type="EventCard"
-          />
-        </GuiImageCard>
-      </Link>
-    );
-  });
-
-  const imageCardsIsfit = ["Et flott sted ISFiT liker"].map(
-    (placeName, index) => {
+    if (samf) {
       return (
-        <Link key={index} to={`/motive/${"isfit-motiv"}`}>
+        // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
+        <Link key={index} to={`/motive/${id}`}>
           <GuiImageCard
             key={`image-card-${index}`}
-            placement={"left"}
+            placement="left"
             type="samfundet"
-            image={"https://www.w3schools.com/css/img_lights.jpg"}
+            image="https://www.w3schools.com/css/img_lights.jpg"
           >
-            <GuiCardTitle capitalized title={"Temafest: Gjøre verden bedre"} />
+            <GuiCardTitle capitalized title={motiveObject.title} />
             <GuiCardPreamble
               color="red"
-              date="12.10.2020"
-              images={123}
-              location={placeName}
-              type={"EventCard"}
+              date={motiveObject.dateCreated.toString()}
+              images={69420}
+              location="Blåfjell"
+              type="EventCard"
             />
           </GuiImageCard>
         </Link>
       );
-    },
-  );
-
-  const imageCardsUka = ["Fæffæs lommebok", "BI"].map((placeName, index) => {
-    return (
-      <Link key={index} to={`/motive/${"UKEN-motiv :)"}`}>
-        <GuiImageCard
-          key={`image-card-${index}`}
-          placement={"left"}
-          type="samfundet"
-          image={"https://www.w3schools.com/css/img_lights.jpg"}
-        >
-          <GuiCardTitle capitalized title={"Temafest: Tjene $$$"} />
-          <GuiCardPreamble
-            color="red"
-            date="12.10.2020"
-            images={123}
-            location={placeName}
-            type={"EventCard"}
-          />
-        </GuiImageCard>
-      </Link>
-    );
+    }
   });
 
+  const imageCardsIsfit = motiveResponse.map((motiveObject, index) => {
+    const samf = motiveObject.eventOwnerDto.name === "ISFIT" ? true : false;
+    const id = motiveObject.motiveId.id || "default";
+    if (samf) {
+      return (
+        // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
+        <Link key={index} to={`/motive/${id}`}>
+          <GuiImageCard
+            key={`image-card-${index}`}
+            placement="left"
+            type="samfundet"
+            image="https://www.w3schools.com/css/img_lights.jpg"
+          >
+            <GuiCardTitle capitalized title={motiveObject.title} />
+            <GuiCardPreamble
+              color="red"
+              date={motiveObject.dateCreated.toString()}
+              images={69420}
+              location="Blåfjell"
+              type="EventCard"
+            />
+          </GuiImageCard>
+        </Link>
+      );
+    }
+  });
+
+  const imageCardsUka = motiveResponse.map((motiveObject, index) => {
+    const samf = motiveObject.eventOwnerDto.name === "UKA" ? true : false;
+    const id = motiveObject.motiveId.id || "default";
+    if (samf) {
+      return (
+        // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
+        <Link key={index} to={`/motive/${id}`}>
+          <GuiImageCard
+            key={`image-card-${index}`}
+            placement="left"
+            type="samfundet"
+            image="https://www.w3schools.com/css/img_lights.jpg"
+          >
+            <GuiCardTitle capitalized title={motiveObject.title} />
+            <GuiCardPreamble
+              color="red"
+              date={motiveObject.dateCreated.toString()}
+              images={69420}
+              location="Blåfjell"
+              type="EventCard"
+            />
+          </GuiImageCard>
+        </Link>
+      );
+    }
+  });
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
