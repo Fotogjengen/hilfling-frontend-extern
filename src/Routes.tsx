@@ -8,7 +8,6 @@ import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
 import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Routes: FC = () => {
   return (

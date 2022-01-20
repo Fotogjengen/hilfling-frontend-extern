@@ -10,3 +10,16 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.headerTextElement {
+  padding: 0rem;
+  user-select: none;
+  font-size: 1.7rem;
+  margin: 2rem;
+  color: black;
+}
+
+.headerTextElement:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
