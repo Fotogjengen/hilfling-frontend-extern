@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import styles from "./Header.module.css";
-import { GuiHeader, GuiHeaderLink } from "../../gui-components";
-import { Link, useHistory } from "react-router-dom";
+import { GuiHeader } from "../../gui-components";
+import { useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "@mui/material";
 import GuiLogo from "../../gui-components/GuiLogo";
 
 const HeaderComponent: FC = () => {
-  const { loginWithRedirect, isAuthenticated, logout, isLoading } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const { replace } = useHistory();
 
   return (

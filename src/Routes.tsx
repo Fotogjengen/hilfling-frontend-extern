@@ -8,6 +8,7 @@ import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
 import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
 import ProtectedRoute from "./utils/auth/ProtectedRoute";
+import CsaTester from "./views/CsaTester";
 
 const Routes: FC = () => {
   return (
@@ -18,6 +19,7 @@ const Routes: FC = () => {
         <Route exact path="/motive/:id" component={showMotive} />
         <Route exact path="/about" component={About} />
         <Route exact path="/myprofile" component={MyProfile} />
+        <Route exact path="/csa-tester" component={CsaTester} />
         <ProtectedRoute exact path="/intern/last-opp" component={PhotoUpload} />
         <ProtectedRoute exact path="/intern/arkivsjef" component={Arkivsjef} />
         <Route component={NotFound} />
