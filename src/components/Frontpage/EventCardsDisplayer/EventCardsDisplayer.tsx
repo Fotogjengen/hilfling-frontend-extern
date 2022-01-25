@@ -25,7 +25,7 @@ interface Props {
 const EventCardsDisplayer: FC<Props> = () => {
   const [value, setValue] = useState<number>(0);
   const [motiveResponse, setMotiveResponse] = useState<MotiveDto[]>([]);
-  const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
+  const [, setEventOwners] = useState<EventOwnerDto[]>([]);
 
   useEffect(() => {
     MotiveApi.getAll()
