@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   Container,
@@ -26,7 +26,7 @@ const StyledChip = styled(Chip, {
   color: textColor,
 }));
 
-const CsaTester = () => {
+const CsaTester: FC = () => {
   const { user } = useAuth0();
   const [gangBanger, setGangBanger] = useState<PhotoGangBangerDto>({});
 
