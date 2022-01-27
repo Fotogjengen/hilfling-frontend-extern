@@ -1,23 +1,28 @@
 import React, { FC, ReactNode } from "react";
 import styles from "./GuiHeader.module.css";
-import GuiLogo from "../GuiLogo";
 import { DefaultProps } from "../../types";
 import cx from "classnames";
-import { Link } from "react-router-dom";
 
 interface Props extends DefaultProps {
   /** Elements in the header, after hamburger meny */
   children?: ReactNode;
+  float?: "left" | "right";
 }
 
-const GuiHeader: FC<Props> = ({ children, className, ...rest }: Props) => (
-  <div className={styles.container}>
-    <Link to="/" style={{color: "#1b1b1b"}}>
-      <GuiLogo size={60} />
-    </Link>
-    <div className={cx(styles.childrenContainer, className)} {...rest}>
-      {children}
-    </div>
+const GuiHeader: FC<Props> = ({
+  children,
+  float = "left",
+  className,
+  ...rest
+}: Props) => (
+  <div
+    className={cx(styles.childrenContainer, className, {
+      left: float === "left",
+      right: float === "right",
+    })}
+    {...rest}
+  >
+    {children}
   </div>
 );
 
