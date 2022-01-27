@@ -1,6 +1,5 @@
 import { api } from "./api";
-import { CategoryDto, PhotoGangBangerDto } from "../../../generated";
-import { PaginatedResult } from "./types";
+import { PhotoGangBangerDto } from "../../../generated";
 
 export const PhotoGangBangerApi = {
   getById: async function (id: string): Promise<PhotoGangBangerDto> {
