@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { PhotoGangBangerDto } from "../../generated";
 import { PhotoGangBangerApi } from "../utils/api/PhotoGangBanger";
+import FGUserInfoForm from "../forms/FGUserInfoForm";
 
 interface StyledChipProps {
   bgcolor?: string;
@@ -46,7 +47,7 @@ const CsaTester: FC = () => {
   return (
     <div>
       <Container maxWidth="md">
-        <Grid container>
+        <Grid container spacing={2}>
           <Grid item xs={4}>
             <Avatar
               src={gangBanger.samfundetUser?.profilePicturePath}
@@ -116,6 +117,7 @@ const CsaTester: FC = () => {
           sx={{
             mt: 5,
           }}
+          spacing={2}
         >
           <Grid item xs={4}>
             <Card>
@@ -141,6 +143,15 @@ const CsaTester: FC = () => {
                 </Typography>
               </CardContent>
             </Card>
+          </Grid>
+          <Grid item xs={8}>
+            <FGUserInfoForm
+              initialValues={{
+                firstName: gangBanger.samfundetUser?.firstName || "",
+                relationShipStatus: gangBanger.relationShipStatus || "Singel :(",
+
+              }}
+            />
           </Grid>
         </Grid>
       </Container>

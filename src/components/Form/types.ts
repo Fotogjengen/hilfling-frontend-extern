@@ -26,4 +26,7 @@ export interface FormProps {
   initialValues: any;
   validate: Validate<any>;
   onSubmit: (values: any) => void;
+  submitButtonText?: string;
+  submitButtonColor?: string;
+  submitButtonDisabled?: boolean;
 }

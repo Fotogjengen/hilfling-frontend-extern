@@ -8,6 +8,8 @@ import { isEmpty } from "lodash";
 interface Props {
   children: string;
   float?: "right" | "left";
+  backgroundColor?: string;
+  disabled?: boolean;
 }
 
 const styles = () =>
@@ -20,8 +22,14 @@ const styles = () =>
     },
   });
 
-const SubmitButton = (props: Props & FabProps & WithStyles<typeof styles>) => {
-  const { classes, float, children, onClick } = props;
+const SubmitButton = ({
+  classes,
+  float,
+  children,
+  onClick,
+  backgroundColor = "#7793DA",
+  disabled = false,
+}: Props & FabProps & WithStyles<typeof styles>) => {
   const { errors } = useForm();
   return (
     <Fab
@@ -32,8 +40,11 @@ const SubmitButton = (props: Props & FabProps & WithStyles<typeof styles>) => {
         [classes.floatRight]: float === "right",
       })}
       type="button"
-      disabled={!isEmpty(errors)}
+      disabled={!isEmpty(errors) || disabled}
       onClick={onClick}
+      sx={{
+        backgroundColor: backgroundColor,
+      }}
     >
       {children}
     </Fab>
