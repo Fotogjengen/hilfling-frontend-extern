@@ -1,9 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import styles from "./Search.module.css";
-import { GuiHeader, GuiHeaderLink } from "../../gui-components";
-import { Link } from "react-router-dom";
-import { Grid, Icon, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, TextField } from "@mui/material";
-import { VisibilityOff } from "@mui/icons-material";
+import { Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
@@ -13,7 +10,7 @@ import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 //   authenticated: boolean | null;
 // }
 
-const Search = () => {
+const Search: FC = () => {
 
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -40,6 +37,9 @@ const Search = () => {
     SearchSuggestionsApi.get(search)
     .then((res) => setSuggestions(res))
     .catch((e) => console.log(e));;
+    if(search.length === 0){
+      setSuggestions([]);
+    }
   },[search]);
 
   const suggestionBoxes = useMemo(() => {
