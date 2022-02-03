@@ -13,17 +13,17 @@ import type { PlaceDto } from './PlaceDto';
 import type { SecurityLevelDto } from './SecurityLevelDto';
 
 export type PhotoDto = {
-    photoId?: PhotoId;
-    smallUrl?: string;
-    mediumUrl?: string;
-    largeUrl?: string;
-    motive?: MotiveDto;
-    placeDto?: PlaceDto;
-    securityLevel?: SecurityLevelDto;
-    gang?: GangDto;
-    albumDto?: AlbumDto;
-    categoryDto?: CategoryDto;
-    photoGangBangerDto?: PhotoGangBangerDto;
-    photoTags?: Array<PhotoTagDto>;
-    goodPicture?: boolean;
+    photoId: PhotoId;
+    smallUrl: string;
+    mediumUrl: string;
+    largeUrl: string;
+    motive: MotiveDto;
+    placeDto: PlaceDto;
+    securityLevel: SecurityLevelDto;
+    gang: GangDto;
+    albumDto: AlbumDto;
+    categoryDto: CategoryDto;
+    photoGangBangerDto: PhotoGangBangerDto;
+    photoTags: Array<PhotoTagDto>;
+    goodPicture: boolean;
 }

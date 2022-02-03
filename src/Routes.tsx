@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
-import showMotive from "./components/Temp/ShowMotive";
+import showMotive from "./components/ImageViewer/ShowMotive";
 import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
 import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
