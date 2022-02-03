@@ -13,7 +13,8 @@ import { MotiveApi } from "../../../utils/api/MotiveApi";
 import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 
 
-// TODO: this should still be here for when data from database gets collected higher in the component tree.
+const EventTypes: string[] = ["Samfundet", "ISFIT", "UKA"];
+
 interface Props {
   title?: string;
   images?: number;
@@ -37,8 +38,9 @@ const EventCardsDisplayer: FC<Props> = () => {
   }, []);
 
   const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
-    // TODO: IDK hvordan å løse dette? Muligens heller bruke .filter()
-    const samf = motiveObject.eventOwnerDto.name === "Samfundet" ? true : false;
+    // TODO: IDK hvordan å løse dette? Muligens heller bruke .filter() jeg vet ikke
+    const samf =
+      motiveObject.eventOwnerDto.name === EventTypes[0] ? true : false;
     const id = motiveObject.motiveId.id || "default";
     if (samf) {
       return (
@@ -65,7 +67,8 @@ const EventCardsDisplayer: FC<Props> = () => {
   });
 
   const imageCardsIsfit = motiveResponse.map((motiveObject, index) => {
-    const samf = motiveObject.eventOwnerDto.name === "ISFIT" ? true : false;
+    const samf =
+      motiveObject.eventOwnerDto.name === EventTypes[1] ? true : false;
     const id = motiveObject.motiveId.id || "default";
     if (samf) {
       return (
@@ -92,7 +95,8 @@ const EventCardsDisplayer: FC<Props> = () => {
   });
 
   const imageCardsUka = motiveResponse.map((motiveObject, index) => {
-    const samf = motiveObject.eventOwnerDto.name === "UKA" ? true : false;
+    const samf =
+      motiveObject.eventOwnerDto.name === EventTypes[2] ? true : false;
     const id = motiveObject.motiveId.id || "default";
     if (samf) {
       return (
