@@ -4,12 +4,6 @@ import { Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
-// interface Props {
-//   login: () => void;
-//   logout: () => void;
-//   authenticated: boolean | null;
-// }
-
 const Search: FC = () => {
 
   const [search, setSearch] = useState("");
@@ -36,7 +30,7 @@ const Search: FC = () => {
   useEffect(() => {
     SearchSuggestionsApi.get(search)
     .then((res) => setSuggestions(res))
-    .catch((e) => console.log(e));;
+    .catch((e) => console.log(e));
     if(search.length === 0){
       setSuggestions([]);
     }
