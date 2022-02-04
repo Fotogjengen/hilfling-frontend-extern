@@ -31,6 +31,8 @@ const FGUserInfoForm: FC<Props> = ({ initialValues }) => {
   const onSubmit = (values: Record<string, any>) => {
     console.log("submit");
     setIsEditing(!isEditing);
+
+
   };
 
   const validate: Validate = (values: any): Errors => {
@@ -47,18 +49,91 @@ const FGUserInfoForm: FC<Props> = ({ initialValues }) => {
         initialValues={initialValues}
         validate={validate}
         submitButtonDisabled={false}
-        submitButtonText={"Rediger"}
+        submitButtonText={isEditing ? "Lagre" : "Rediger"}
+        variant="text"
       >
         <Grid container spacing={2}>
+          {/*Fornavn*/}
           <Grid item xs={12}>
             <TextField
-              name="name"
-              label="Navn"
+              name="firstName"
+              label="Fornavn"
               fullWidth
               required
               disabled={!isEditing}
             />
           </Grid>
+          {/*Last name*/}
+          <Grid item xs={12}>
+            <TextField
+                name="lastName"
+                label="Etternavn"
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*Semesterstart*/}
+          <Grid item xs={12}>
+            <TextField
+                name="semesterStart"
+                label="Semesterstart"
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*Address*/}
+          <Grid item xs={12}>
+            <TextField
+                name="address"
+                label="Adresse"
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*Zip code*/}
+          <Grid item xs={12}>
+            <TextField
+                name="zipCode"
+                label="Postnummer"
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*City*/}
+          <Grid item xs={12}>
+            <TextField
+                name="city"
+                label="By"
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*Phone number*/}
+          <Grid item xs={12}>
+            <TextField
+                name="phoneNumber"
+                label="Tlf."
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*Sex*/}
+          <Grid item xs={12}>
+            <TextField
+                name="sex"
+                label="Kjønn"
+                fullWidth
+                required
+                disabled={!isEditing}
+            />
+          </Grid>
+          {/*Relationship status*/}
           <Grid item xs={12}>
             <TextField
                 name="relationShipStatus"

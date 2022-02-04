@@ -27,6 +27,6 @@ export interface FormProps {
   validate: Validate<any>;
   onSubmit: (values: any) => void;
   submitButtonText?: string;
-  submitButtonColor?: string;
   submitButtonDisabled?: boolean;
+  variant?:  "contained" | "outlined" | "text"
 }

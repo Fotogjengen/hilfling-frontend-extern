@@ -30,14 +30,19 @@ const StyledChip = styled(Chip, {
 const CsaTester: FC = () => {
   const { user } = useAuth0();
   const [gangBanger, setGangBanger] = useState<PhotoGangBangerDto>({});
+  const [isLoaded, setIsloaded] = useState<boolean>(false);
 
   const imageCount = 42069;
   const testId = "7a89444f-25f6-44d9-8a73-94587d72b839";
 
   useEffect(() => {
     PhotoGangBangerApi.getById(testId)
-      .then(setGangBanger)
-      .catch((e) => console.error(e));
+      .then((res) => {
+        console.log(res);
+        setGangBanger(res);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => setIsloaded(true));
   }, [user]);
 
   useEffect(() => {
@@ -145,13 +150,26 @@ const CsaTester: FC = () => {
             </Card>
           </Grid>
           <Grid item xs={8}>
-            <FGUserInfoForm
-              initialValues={{
-                firstName: gangBanger.samfundetUser?.firstName || "",
-                relationShipStatus: gangBanger.relationShipStatus || "Singel :(",
-
-              }}
-            />
+            {isLoaded && (
+              <FGUserInfoForm
+                initialValues={{
+                  firstName: gangBanger.samfundetUser?.firstName || "",
+                  lastName: gangBanger.samfundetUser?.lastName || "",
+                  relationShipStatus: gangBanger.relationShipStatus || "",
+                  semesterStart: gangBanger.semesterStart?.value || "",
+                  address: gangBanger.address || "",
+                  zipCode: gangBanger.zipCode || "",
+                  city: gangBanger.city || "",
+                  phoneNumber:
+                    gangBanger.samfundetUser?.phoneNumber?.value || "",
+                  profilePicturePath:
+                    gangBanger.samfundetUser?.profilePicturePath || "",
+                  sex: gangBanger.samfundetUser?.sex || "",
+                  active: gangBanger.active,
+                  pang: gangBanger.pang,
+                }}
+              />
+            )}
           </Grid>
         </Grid>
       </Container>

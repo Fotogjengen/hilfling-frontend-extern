@@ -21,9 +21,9 @@ const Form: FC<FormProps> = ({
   initialValues,
   validate,
   onSubmit,
-  submitButtonColor,
   submitButtonDisabled,
   submitButtonText = "Last opp",
+  variant = "contained",
   children,
 }) => {
   const [values, setValues] = useState<FormContext["values"]>(initialValues);
@@ -66,8 +66,8 @@ const Form: FC<FormProps> = ({
           <Grid item xs={6}>
             <SubmitButton
               disabled={submitButtonDisabled}
-              backgroundColor={submitButtonColor}
               onClick={(e) => _onSubmit(e)}
+              variant={variant}
             >
               {submitButtonText}
             </SubmitButton>
