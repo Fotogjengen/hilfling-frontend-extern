@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, SyntheticEvent} from "react";
-import PhotoGangBanger from "../../components/About/PhotoGangBanger";
+import PhotoGangBangerPublic from "../../components/About/PhotoGangBangerPublic";
 import styles from "./About.module.css";
 import axios from "axios";
 import {
@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
-import { PhotoGangBanger as PhotoGangBangerInterface } from "../../interfaces/PhotoGangBanger";
+import { PhotoGangBangerPublic as PhotoGangBangerInterface } from "../../interfaces/PhotoGangBangerPublic";
 
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
@@ -75,12 +75,12 @@ const About: FC = () => {
 
   const mapUsers = (users: PhotoGangBangerInterface[]) => {
     return users.map((user: PhotoGangBangerInterface) => (
-      <PhotoGangBanger
-        firstName={user.samfundetUser.firstName}
-        lastName={user.samfundetUser.lastName}
+      <PhotoGangBangerPublic
+        firstName={user.samfundetUserPublic.firstName}
+        lastName={user.samfundetUserPublic.lastName}
         position={user.position.title}
-        email={user.samfundetUser.email.value}
-        image={user.samfundetUser.profilePicturePath}
+        email={user.samfundetUserPublic.email.value}
+        image={user.samfundetUserPublic.profilePicturePath}
         key={user.photoGangBangerId.id}
       />
     ));
