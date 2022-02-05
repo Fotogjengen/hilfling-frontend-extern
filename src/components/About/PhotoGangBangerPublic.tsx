@@ -11,10 +11,11 @@ interface Props {
 }
 
 const PhotoGangBangerPublic: FC<Props> = ({
-  image,
+  
   firstName,
   lastName,
   position,
+  image,
   email,
 }: Props) => {
   const onClick = (): void => {

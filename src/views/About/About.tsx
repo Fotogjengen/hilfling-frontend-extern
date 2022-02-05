@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect, SyntheticEvent} from "react";
 import PhotoGangBangerPublic from "../../components/About/PhotoGangBangerPublic";
 import styles from "./About.module.css";
-import axios from "axios";
 import {
   AppBar,
   Tab,
@@ -15,55 +14,29 @@ import {
 } from "@mui/material";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
-import { PhotoGangBangerPublic as PhotoGangBangerInterface } from "../../interfaces/PhotoGangBangerPublic";
+import { PhotoGangBangerPublicDto } from "../../../generated";
+import { PhotoGangBangerApi } from "../../utils/api/PhotoGangBangerApi";
+
 
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [activeGangBangers, setActiveGangBangers] = useState<
-    PhotoGangBangerInterface[]
+    PhotoGangBangerPublicDto[]
   >([]);
-  const [activePangs, setActivePangs] = useState<PhotoGangBangerInterface[]>(
+  const [activePangs, setActivePangs] = useState<PhotoGangBangerPublicDto[]>(
     [],
   );
-  const [inActivePangs, setInActivePangs] = useState<
-    PhotoGangBangerInterface[]
+  const [inActivePangs, setInactivePangs] = useState<
+  PhotoGangBangerPublicDto[]
   >([]);
 
   useEffect(() => {
-    try {
-      axios
-        .get<PhotoGangBangerInterface[]>(
-          "http://localhost:8080/photo_gang_bangers/active_pangs",
-        )
-        .then((res) => {
-          setActivePangs(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      axios
-        .get<PhotoGangBangerInterface[]>(
-          "http://localhost:8080/photo_gang_bangers/actives",
-        )
-        .then((res) => {
-          setActiveGangBangers(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      axios
-        .get<PhotoGangBangerInterface[]>(
-          "http://localhost:8080/photo_gang_bangers/inactive_pangs",
-        )
-        .then((res) => {
-          setInActivePangs(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    PhotoGangBangerApi.getAllActivesPublic().then(res => {
+      setActiveGangBangers(res)
+    }).catch(err => console.log(err))
+    PhotoGangBangerApi.getAllActivePangsPublic().then(res => setActivePangs(res)).catch(err => console.log(err))
+    PhotoGangBangerApi.getAllInactivePangsPublic().then(res => setInactivePangs(res)).catch(err => console.log(err))
+
   }, []);
 
   const handleTabChange = (
@@ -73,15 +46,15 @@ const About: FC = () => {
     setTabValue(newTabValue);
   };
 
-  const mapUsers = (users: PhotoGangBangerInterface[]) => {
-    return users.map((user: PhotoGangBangerInterface) => (
+  const mapUsers = (users: PhotoGangBangerPublicDto[]) => {
+    return users.map((user: PhotoGangBangerPublicDto, index: number) => (
       <PhotoGangBangerPublic
-        firstName={user.samfundetUserPublic.firstName}
-        lastName={user.samfundetUserPublic.lastName}
-        position={user.position.title}
-        email={user.samfundetUserPublic.email.value}
-        image={user.samfundetUserPublic.profilePicturePath}
-        key={user.photoGangBangerId.id}
+        firstName={user.samfundetUser?.firstName || ""} 
+        lastName={user.samfundetUser?.lastName || ""}
+        position={user.position?.title || ""}
+        email={user.samfundetUser?.email?.value || ""}
+        image={user.samfundetUser?.profilePicturePath || ""}
+        key={`photo-gang-banger-public-key-${index}`}
       />
     ));
   };
@@ -106,12 +79,12 @@ const About: FC = () => {
         <div>
           <h2>Aktive fotogjengere</h2>
           <div className={styles.gangBangers}>
-            {mapUsers(activeGangBangers)}
+            {activeGangBangers && mapUsers(activeGangBangers)}
           </div>
           <h2>Aktive panger</h2>
-          <div className={styles.gangBangers}>{mapUsers(activePangs)}</div>
+          <div className={styles.gangBangers}>{activePangs && mapUsers(activePangs)}</div>
           <h2>Pensjonerte fotogjengere</h2>
-          <div className={styles.gangBangers}>{mapUsers(inActivePangs)}</div>
+          <div className={styles.gangBangers}>{inActivePangs && mapUsers(inActivePangs)}</div>
         </div>
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
