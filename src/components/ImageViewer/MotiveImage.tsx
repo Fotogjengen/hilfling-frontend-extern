@@ -18,7 +18,6 @@ const MotiveImage: FC<Props> = ({
   updateIndex,
   title,
 }: Props) => {
-  console.log(image)
   return (
     <>
       <div className={styles.motiveImage} onClick={() => updateIndex(index)}>
