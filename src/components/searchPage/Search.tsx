@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import styles from "./Search.module.css";
-import { Grid, IconButton, Input, InputAdornment, MenuItem, Select, TextField } from "@mui/material";
+import { Grid, IconButton, InputAdornment, MenuItem, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
