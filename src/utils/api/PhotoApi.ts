@@ -1,5 +1,4 @@
 import { api } from "./api";
-import { PaginatedResult } from "./types";
 import { Photo, PhotoDto } from "../../../generated";
 
 class PhotoPost {
