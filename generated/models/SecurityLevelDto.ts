@@ -5,8 +5,8 @@
 import type { SecurityLevelId } from './SecurityLevelId';
 
 export type SecurityLevelDto = {
-    securityLevelId?: SecurityLevelId;
-    securityLevelType?: SecurityLevelDto.securityLevelType;
+    securityLevelId: SecurityLevelId;
+    securityLevelType: SecurityLevelDto.securityLevelType;
 }
 
 export namespace SecurityLevelDto {
