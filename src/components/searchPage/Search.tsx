@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import styles from "./Search.module.css";
-import { Grid, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Grid, IconButton, Input, InputAdornment, MenuItem, Select, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
@@ -38,11 +38,15 @@ const Search: FC = () => {
 
   const suggestionBoxes = useMemo(() => {
     return suggestions.map((s, key) => (
-      <div className={styles.suggestions} key={key}>
-        {s}
-      </div>
+      <MenuItem value={s} key={key} color="" onClick={() => handleSearch(s)}>
+      {s}
+      </MenuItem>
     ))
   },[suggestions])
+
+  const handleSearch = (s: string) => {
+    return s;
+  }
 
   return (
     <div className={styles.header}>
@@ -57,9 +61,7 @@ const Search: FC = () => {
               </InputAdornment>
             )
           }}/>
-          <div className="suggestionBox">
-            {suggestionBoxes}
-          </div>
+          {suggestionBoxes}
         </div>
       </Grid>
     </div>
