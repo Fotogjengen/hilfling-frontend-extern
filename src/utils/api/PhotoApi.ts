@@ -1,7 +1,6 @@
 import { api } from "./api";
-import { Photo } from "../../interfaces/Photo";
 import { PaginatedResult } from "./types";
-import { PhotoDto } from "../../../generated";
+import { Photo, PhotoDto } from "../../../generated";
 
 class PhotoPost {
   albumId = "";
@@ -20,8 +19,8 @@ class PhotoPost {
 export const PhotoPostDto = new PhotoPost();
 
 export const PhotoApi = {
-  getAllByMotiveId: async function (id: string, motive:string): Promise<PaginatedResult<PhotoDto>> {
-    return api.get(`/photos/${motive}/${id}`);
+  getAllByMotiveId: async function (id: string): Promise<PhotoDto[]> {
+    return api.get(`/photos/motive/${id}`).then((res) => res.data);
   },
   post: async function (photo: Photo): Promise<Photo> {
     return api.post("/photos", photo);
