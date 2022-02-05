@@ -18,3 +18,4 @@ export const PhotoGangBangerApi = {
     return api.get("/photo_gang_bangers/inactive_pangs").then(res => res.data);
   },
 };
+

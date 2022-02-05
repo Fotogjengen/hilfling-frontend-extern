@@ -46,14 +46,14 @@ const About: FC = () => {
     setTabValue(newTabValue);
   };
 
-  const mapUsers = (users: PhotoGangBangerPublicDto[]) => {
-    return users.map((user: PhotoGangBangerPublicDto, index: number) => (
+  const mapUsers = (photoGangBangersMap: PhotoGangBangerPublicDto[]) => {
+    return photoGangBangersMap.map((photoGangBanger: PhotoGangBangerPublicDto, index: number) => (
       <PhotoGangBangerPublic
-        firstName={user.samfundetUser?.firstName || ""} 
-        lastName={user.samfundetUser?.lastName || ""}
-        position={user.position?.title || ""}
-        email={user.samfundetUser?.email?.value || ""}
-        image={user.samfundetUser?.profilePicturePath || ""}
+        firstName={photoGangBanger.samfundetUser?.firstName || ""} 
+        lastName={photoGangBanger.samfundetUser?.lastName || ""}
+        position={photoGangBanger.position?.title || ""}
+        email={photoGangBanger.samfundetUser?.email?.value || ""}
+        image={photoGangBanger.samfundetUser?.profilePicturePath || ""}
         key={`photo-gang-banger-public-key-${index}`}
       />
     ));
