@@ -1,17 +1,12 @@
 import React, { FC } from "react";
-import { IResponseObject } from "./ShowMotive";
 
 import styles from "./imageStyle.module.css";
-
-export interface IImageList {
-  _id: number;
-  image: string;
-}
+import { PhotoDto } from "../../../generated";
 
 interface Props {
-  id: number;
+  id: string;
   image: string;
-  imageListProp: IResponseObject[];
+  imageListProp: PhotoDto[];
   index: number;
   updateIndex: (index: number) => void;
   title: string;
