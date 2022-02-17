@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Swich } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
