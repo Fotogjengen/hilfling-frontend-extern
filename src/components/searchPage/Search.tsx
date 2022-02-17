@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
-import styles from "./Search.module.css";
-import { Grid, IconButton, InputAdornment, MenuItem, TextField } from "@mui/material";
+import { Container, Grid, IconButton, InputAdornment, MenuItem, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
@@ -49,9 +48,9 @@ const Search: FC = () => {
   }
 
   return (
-    <div className={styles.header}>
-      <Grid>
-        <div>
+    <>
+    <Container>
+      <Grid container spacing={2} >
           <TextField label={placeholder} fullWidth variant="outlined" onChange={handleChange} InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -61,10 +60,12 @@ const Search: FC = () => {
               </InputAdornment>
             )
           }}/>
+          <div>
           {suggestionBoxes}
-        </div>
+          </div>
       </Grid>
-    </div>
+    </Container>
+  </>
   );
 };
 

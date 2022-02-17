@@ -18,7 +18,7 @@ const HeaderComponent: FC = () => {
         <GuiHeader>
           <div
             className={styles.headerTextElement}
-            onClick={() => replace("/photos")}
+            onClick={() => replace("/search")}
           >
             BILDER
           </div>
