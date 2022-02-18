@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, SyntheticEvent} from "react";
+import React, { FC, useState, useEffect, SyntheticEvent } from "react";
 import PhotoGangBangerPublic from "../../components/About/PhotoGangBangerPublic";
 import styles from "./About.module.css";
 import {
@@ -17,7 +17,6 @@ import TabPanel from "../../components/TabPanel/TabPanel";
 import { PhotoGangBangerPublicDto } from "../../../generated";
 import { PhotoGangBangerApi } from "../../utils/api/PhotoGangBangerApi";
 
-
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [activeGangBangers, setActiveGangBangers] = useState<
@@ -27,36 +26,40 @@ const About: FC = () => {
     [],
   );
   const [inActivePangs, setInactivePangs] = useState<
-  PhotoGangBangerPublicDto[]
+    PhotoGangBangerPublicDto[]
   >([]);
 
   useEffect(() => {
-    PhotoGangBangerApi.getAllActivesPublic().then(res => {
-      setActiveGangBangers(res)
-    }).catch(err => console.log(err))
-    PhotoGangBangerApi.getAllActivePangsPublic().then(res => setActivePangs(res)).catch(err => console.log(err))
-    PhotoGangBangerApi.getAllInactivePangsPublic().then(res => setInactivePangs(res)).catch(err => console.log(err))
-
+    PhotoGangBangerApi.getAllActivesPublic()
+      .then((res) => {
+        setActiveGangBangers(res);
+      })
+      .catch((err) => console.log(err));
+    PhotoGangBangerApi.getAllActivePangsPublic()
+      .then((res) => setActivePangs(res))
+      .catch((err) => console.log(err));
+    PhotoGangBangerApi.getAllInactivePangsPublic()
+      .then((res) => setInactivePangs(res))
+      .catch((err) => console.log(err));
   }, []);
 
-  const handleTabChange = (
-    event: SyntheticEvent,
-    newTabValue: number,
-  ) => {
+  const handleTabChange = (event: SyntheticEvent, newTabValue: number) => {
     setTabValue(newTabValue);
   };
 
   const mapUsers = (photoGangBangerPublicDtos: PhotoGangBangerPublicDto[]) => {
-    return photoGangBangerPublicDtos.map((photoGangBanger: PhotoGangBangerPublicDto, index: number) => (
-      <PhotoGangBangerPublic
-        firstName={photoGangBanger.samfundetUser?.firstName || ""} 
-        lastName={photoGangBanger.samfundetUser?.lastName || ""}
-        position={photoGangBanger.position?.title || ""}
-        email={photoGangBanger.samfundetUser?.email?.value || ""}
-        image={photoGangBanger.samfundetUser?.profilePicturePath || ""}
-        key={`photo-gang-banger-public-key-${index}`}
-      />
-    ));
+    return photoGangBangerPublicDtos.map(
+      (photoGangBanger: PhotoGangBangerPublicDto, index: number) => (
+        <PhotoGangBangerPublic
+          firstName={photoGangBanger.samfundetUser?.firstName || ""}
+          lastName={photoGangBanger.samfundetUser?.lastName || ""}
+          position={photoGangBanger.position?.title || ""}
+          email={photoGangBanger.samfundetUser?.email?.value || ""}
+          image={photoGangBanger.samfundetUser?.profilePicturePath || ""}
+          key={`photo-gang-banger-public-key-${index}`}
+        />
+      ),
+    );
   };
 
   return (
@@ -82,9 +85,13 @@ const About: FC = () => {
             {activeGangBangers && mapUsers(activeGangBangers)}
           </div>
           <h2>Aktive panger</h2>
-          <div className={styles.gangBangers}>{activePangs && mapUsers(activePangs)}</div>
+          <div className={styles.gangBangers}>
+            {activePangs && mapUsers(activePangs)}
+          </div>
           <h2>Pensjonerte fotogjengere</h2>
-          <div className={styles.gangBangers}>{inActivePangs && mapUsers(inActivePangs)}</div>
+          <div className={styles.gangBangers}>
+            {inActivePangs && mapUsers(inActivePangs)}
+          </div>
         </div>
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
