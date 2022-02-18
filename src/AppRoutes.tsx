@@ -24,7 +24,7 @@ const AppRoutes: FC = () => {
         <Route path="/csa-tester" element={<CsaTester />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
-        <Route element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
