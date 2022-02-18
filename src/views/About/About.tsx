@@ -46,8 +46,8 @@ const About: FC = () => {
     setTabValue(newTabValue);
   };
 
-  const mapUsers = (photoGangBangersMap: PhotoGangBangerPublicDto[]) => {
-    return photoGangBangersMap.map((photoGangBanger: PhotoGangBangerPublicDto, index: number) => (
+  const mapUsers = (photoGangBangerPublicDtos: PhotoGangBangerPublicDto[]) => {
+    return photoGangBangerPublicDtos.map((photoGangBanger: PhotoGangBangerPublicDto, index: number) => (
       <PhotoGangBangerPublic
         firstName={photoGangBanger.samfundetUser?.firstName || ""} 
         lastName={photoGangBanger.samfundetUser?.lastName || ""}
