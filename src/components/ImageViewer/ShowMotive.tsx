@@ -24,7 +24,7 @@ const ShowMotive: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  const {id} = useParams<{id: string}>();
+  const { id } = useParams<{id: string}>();
 
   const updateIndex = (index: number) => {
     setPhotoIndex(index);
