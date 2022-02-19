@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect, SyntheticEvent } from "react";
-import PhotoGangBangerPublic from "../../components/About/PhotoGangBangerPublic";
+
 import styles from "./About.module.css";
 import {
   AppBar,
@@ -14,53 +14,22 @@ import {
 } from "@mui/material";
 import cn from "classnames";
 import TabPanel from "../../components/TabPanel/TabPanel";
-import { PhotoGangBangerPublicDto } from "../../../generated";
-import { PhotoGangBangerApi } from "../../utils/api/PhotoGangBangerApi";
+
+import { GifBoxRounded } from "@mui/icons-material";
+import { AboutTab } from "./AboutTab";
+import { InfoTab } from "./InfoTab";
+import { HistoryTab } from "./HistoryTab";
 
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
-  const [activeGangBangers, setActiveGangBangers] = useState<
-    PhotoGangBangerPublicDto[]
-  >([]);
-  const [activePangs, setActivePangs] = useState<PhotoGangBangerPublicDto[]>(
-    [],
-  );
-  const [inActivePangs, setInactivePangs] = useState<
-    PhotoGangBangerPublicDto[]
-  >([]);
 
-  useEffect(() => {
-    PhotoGangBangerApi.getAllActivesPublic()
-      .then((res) => {
-        setActiveGangBangers(res);
-      })
-      .catch((err) => console.log(err));
-    PhotoGangBangerApi.getAllActivePangsPublic()
-      .then((res) => setActivePangs(res))
-      .catch((err) => console.log(err));
-    PhotoGangBangerApi.getAllInactivePangsPublic()
-      .then((res) => setInactivePangs(res))
-      .catch((err) => console.log(err));
-  }, []);
+
 
   const handleTabChange = (event: SyntheticEvent, newTabValue: number) => {
     setTabValue(newTabValue);
   };
 
-  const mapUsers = (photoGangBangerPublicDtos: PhotoGangBangerPublicDto[]) => {
-    return photoGangBangerPublicDtos.map(
-      (photoGangBanger: PhotoGangBangerPublicDto, index: number) => (
-        <PhotoGangBangerPublic
-          firstName={photoGangBanger.samfundetUser?.firstName || ""}
-          lastName={photoGangBanger.samfundetUser?.lastName || ""}
-          position={photoGangBanger.position?.title || ""}
-          email={photoGangBanger.samfundetUser?.email?.value || ""}
-          image={photoGangBanger.samfundetUser?.profilePicturePath || ""}
-          key={`photo-gang-banger-public-key-${index}`}
-        />
-      ),
-    );
-  };
+
 
   return (
     <div className="container">
@@ -79,26 +48,15 @@ const About: FC = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={tabValue} index={0}>
-        <div>
-          <h2>Aktive fotogjengere</h2>
-          <div className={styles.gangBangers}>
-            {activeGangBangers && mapUsers(activeGangBangers)}
-          </div>
-          <h2>Aktive panger</h2>
-          <div className={styles.gangBangers}>
-            {activePangs && mapUsers(activePangs)}
-          </div>
-          <h2>Pensjonerte fotogjengere</h2>
-          <div className={styles.gangBangers}>
-            {inActivePangs && mapUsers(inActivePangs)}
-          </div>
-        </div>
+        <AboutTab/>
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
+        <InfoTab/>
+        {/*
         <Grid container>
           <Grid item xs={12} md={6}>
             <Box m={2}>
-              <Typography gutterBottom variant="h4">
+              <Typography gutterBottom>
                 KREDITERING
               </Typography>
               <Typography paragraph>
@@ -109,10 +67,10 @@ const About: FC = () => {
                 <Typography>Foto: foto.samfundet.no</Typography>
               </Paper>
               <br />
-              <Typography gutterBottom variant="h4">
+              <Typography>
                 TJENESTER OG PRISER
               </Typography>
-              <Typography gutterBottom variant="h5">
+              <Typography>
                 BESTILLING
               </Typography>
               <Typography paragraph>
@@ -200,13 +158,54 @@ const About: FC = () => {
               </Typography>
             </Box>
           </Grid>
-        </Grid>
+        </Grid> */}
       </TabPanel>
       <TabPanel value={tabValue} index={2}>
+        <HistoryTab/>
+
+       {/* <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Typography>
+                HVORFOR HAR VI FOTOGJENGEN PÅ SAMF?
+            </Typography>
+            <Typography>
+                Fotogjengen er en gjeng ved Studentersamfundet i Trondhjem. Vi
+                har som oppgave å ta bilder av alt som skjer på Samfundet, under
+                UKA og under ISFiT. Vi består av 12 fotofunksjonærer og
+                webfunksjonærer. På denne siden finner du informasjon om oss og
+                hvilke tjenester vi tilbyr.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography>
+                  HVORFOR HAR VI FOTOGJENGEN PÅ SAMF??????+
+              </Typography>
+              <Typography>
+                  Fotogjengen er en gjeng ved Studentersamfundet i Trondhjem. Vi
+                  har som oppgave å ta bilder av alt som skjer på Samfundet, under
+                  UKA og under ISFiT. Vi består av 12 fotofunksjonærer og
+                  webfunksjonærer. På denne siden finner du informasjon om oss og
+                  hvilke tjenester vi tilbyr.
+              </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography>
+                  HVORFOR HAR VI FOTOGJENGEN PÅ SAMF?
+              </Typography>
+              <Typography>
+                  Fotogjengen er en gjeng ved Studentersamfundet i Trondhjem. Vi
+                  har som oppgave å ta bilder av alt som skjer på Samfundet, under
+                  UKA og under ISFiT. Vi består av 12 fotofunksjonærer og
+                  webfunksjonærer. På denne siden finner du informasjon om oss og
+                  hvilke tjenester vi tilbyr.
+              </Typography>
+          </Grid>
+        </Grid>
+
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Box m={2}>
-              <Typography gutterBottom variant="h5" component="h5">
+              <Typography gutterBottom>
                 HVORFOR HAR VI FOTOGJENGEN PÅ SAMF?
               </Typography>
               <Typography paragraph>
@@ -218,10 +217,10 @@ const About: FC = () => {
               </Typography>
             </Box>
             <Box m={2}>
-              <Typography gutterBottom variant="h5" component="h5">
+              <Typography gutterBottom>
                 HISTORIE
               </Typography>
-              <Typography paragraph>
+              <Typography gutterBottom>
                 I Finansstyremøtet den 7. oktober 1958 ble det bestemt at
                 Fotogjengen (FG) skulle være en «gjeng» i Huset, underlagt
                 Finansstyret. Barnet var imidlertid nær konfirmasjonsalderen ved
@@ -234,17 +233,17 @@ const About: FC = () => {
                 (ARK) i en urtid.
                 <div className={cn(styles.allRound)}>
                   <div className={cn(styles.round, styles.redBackground)}>
-                    <Typography gutterBottom variant="h5">
+                    <Typography gutterBottom>
                       1958
                     </Typography>
                   </div>
                   <div className={cn(styles.round, styles.greenBackground)}>
-                    <Typography gutterBottom variant="h5">
+                    <Typography gutterBottom>
                       FG
                     </Typography>
                   </div>
                   <div className={cn(styles.round, styles.blueBackground)}>
-                    <Typography gutterBottom variant="h5">
+                    <Typography gutterBottom>
                       Hilfling
                     </Typography>
                   </div>
@@ -264,12 +263,10 @@ const About: FC = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Box m={2}>
-              <Box>
-                <Typography gutterBottom variant="h5" component="h5">
-                  HVEM VAR HILFLING
-                </Typography>
-              </Box>
-              <Typography paragraph>
+              <Typography gutterBottom>
+                HVEM VAR HILFLING
+              </Typography>
+              <Typography gutterBottom>
                 Fotograf Hilfling, senere hans sønn, Hilfling jr., var
                 Studentersamfundets (og UKAs) faste fotograf fra starten i 1910
                 til og med UKA-45, både av daglige og festlige begivenheter.
@@ -288,10 +285,11 @@ const About: FC = () => {
                 imidlertid ikke ha følt savnet som sårt. Søknaden om lokale ble
                 innvilget, men det ble ikke gjort noen avtale om fotografering.
               </Typography>
-              <Typography gutterBottom variant="h5" component="h5">
+
+              <Typography gutterBottom >
                 OPPSTART AV FG
               </Typography>
-              <Typography paragraph>
+              <Typography gutterBottom>
                 Høsten 1946 skrev redaktør Nic. Stabell i Under Dusken (UD) et
                 åpent brev til S.K. hvor han etterlyste en kontinuerlig
                 fotografering av begivenhetene i Studentersamfundet «til bruk
@@ -321,7 +319,7 @@ const About: FC = () => {
               </Typography>
             </Box>
           </Grid>
-        </Grid>
+         </Grid> */}
       </TabPanel>
     </div>
   );
