@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import styles from "./Header.module.css";
 import { GuiHeader } from "../../gui-components";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import GuiLogo from "../../gui-components/GuiLogo";
 
 const HeaderComponent: FC = () => {
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
-  const { replace } = useHistory();
+  const replace = useNavigate();
 
   return (
     <div className={styles.header}>
