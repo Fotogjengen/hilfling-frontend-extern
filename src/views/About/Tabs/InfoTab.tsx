@@ -13,7 +13,7 @@ const InfoTab: FC = () => {
     <div>
       <Grid container spacing={4} padding={"0.5em"}>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6">
+          <Typography variant="h5">
             <b>KREDITERING</b>
           </Typography>
           <Typography paragraph>
@@ -24,14 +24,11 @@ const InfoTab: FC = () => {
             <Typography>Foto: foto.samfundet.no</Typography>
           </Paper>
           <br/>
-          <Typography variant="h6">
+          <Typography variant="h5">
             <b>TJENESTER OG PRISER</b>
           </Typography>
-          <Typography paragraph>
-            Denne infoen kommer imorgen, men ikke neste dag.
-          </Typography>
           <Typography variant="h6">
-            <b>BESTILLING</b>
+             BESTILLING
           </Typography>
           <Typography paragraph>
             Dersom et har seg slik at du finner et så fint bilde av deg
@@ -73,7 +70,7 @@ const InfoTab: FC = () => {
             eksamensperiode.
           </Typography>
           <Typography variant="h6">
-            <b>PRISER</b>
+            PRISER
           </Typography>
           <Paper className={cn(styles.cardFoto, styles.greenBackground)}>
               <Grid container spacing={6}>
