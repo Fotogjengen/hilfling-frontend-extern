@@ -1,21 +1,21 @@
-import React , { FC , useEffect, useState } from 'react'
+import React ,{ FC , useEffect, useState } from 'react'
 
 
 
-import styles from "./About.module.css";
+import styles from "../About.module.css";
 
 
 
-import { PhotoGangBangerPublicDto } from "../../../generated";
-import { PhotoGangBangerApi } from "../../utils/api/PhotoGangBangerApi";
-import PhotoGangBangerPublic from "../../components/About/PhotoGangBangerPublic";
+import { PhotoGangBangerPublicDto } from "../../../../generated";
+import { PhotoGangBangerApi } from "../../../utils/api/PhotoGangBangerApi";
+import PhotoGangBangerPublic from "../../../components/About/PhotoGangBangerPublic";
 
 
 
 
 
 
-export const AboutTab: FC = () => {
+const AboutTab: FC = () => {
 
 
     const [activeGangBangers, setActiveGangBangers] = useState<PhotoGangBangerPublicDto[]>([]);
@@ -72,3 +72,6 @@ export const AboutTab: FC = () => {
         </div>
     )
 }
+
+
+export default AboutTab;
