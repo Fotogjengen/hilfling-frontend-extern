@@ -18,7 +18,6 @@ const About: FC = () => {
 
   const handleTabChange = (event: SyntheticEvent, newTabValue: number) => {
     setTabValue(newTabValue);
-    console.log(event);
   };
 
   return (
