@@ -1,23 +1,5 @@
-.gangBangers {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-/* TODO: LEGGE INN I HILFLING-GUI */
-h2 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.8rem;
-  margin-top: 0; /*denne skal ikke i gui*/
-}
-
-.paper {
-  width: 400px;
-  padding: 18px;
-}
-
 .redBackground {
-  background-color: #da7777 !important;
+  background: #da7777 !important;
 }
 
 .blueBackground {
@@ -27,16 +9,31 @@ h2 {
 .greenBackground {
   background: #BADA77 !important;
 }
-.allRound {
-  display: flex;
-  margin: 1rem;
-  align-items: center;
-}
+
+
 .round {
-  width: 9rem;
-  height: 9rem;
-  margin: 1rem;
-  padding-top: 3.2rem;
-  text-align: center;
-  border-radius: 100rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6em;
+  width: 6em;
+  box-shadow: 10em 10em 10em solid grey;
 }
+
+h6 {
+  border-radius: 0.5em;
+  width: fit-content;
+  padding-bottom: 0.2em;
+  
+}
+
+.cardFoto {
+  width: fit-content;
+  padding: 0.1em 0.4em 
+}
+
+a {
+  font-size: inherit;
+}
+
