@@ -8,15 +8,15 @@ interface Props {
   /** Text to display in the ArchiveBoss */
   text: string | undefined;
   /** Id to the ArchiveBoss element */
-  id?: string | undefined;
+  id?: string;
 }
 
-const ArchiveBossElement: FC<Props> = ({ text }: Props) => {
+const ArchiveBossElement: FC<Props> = ({ text, id }: Props) => {
   return (
     <Grid item xs={6} sm={3}>
       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
         <Grid item xs={6} sm={4}>
-          <ArchiveBossOverflow />
+          <ArchiveBossOverflow id={id} />
         </Grid>
         <Grid item xs={6} sm={4} alignContent="space-around">
           {text}
