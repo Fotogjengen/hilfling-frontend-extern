@@ -1,14 +1,15 @@
 import React, { FC } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
-import { DefaultProps } from "../../../types";
 
 
 const options = ["Rediger", "Slett"];
 
-type Props = DefaultProps;
+interface Props {
+  id?: string;
+}
 
-const ArchiveBossOverflow: FC<Props> = () => {
+const ArchiveBossOverflow: FC<Props> = ({ id }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -20,17 +21,28 @@ const ArchiveBossOverflow: FC<Props> = () => {
     setAnchorEl(null);
   };
 
+  const handleDelete = () => {
+    /**
+     * TODO: Sende type ned som prop også
+     * If-statement som sier om dersom det er f.eks. type "Album" skal det kalles på AlbumAPI-et
+     * 
+     */
+    setAnchorEl(null);
+  };
+
+
   return (
     <div>
       <IconButton onClick={handleClick}>
         <MoreVert />
       </IconButton>
       <Menu anchorEl={anchorEl} keepMounted open={open} onClose={handleClose}>
-        {options.map((option) => (
-          <MenuItem key={option} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
+        <MenuItem key={options[0]} onClick={handleClose}>
+          {options[0]}
+        </MenuItem>
+        <MenuItem key={options[1]} onClick={handleDelete}>
+          {options[1]}
+        </MenuItem>
       </Menu>
     </div>
   );
