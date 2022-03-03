@@ -28,13 +28,31 @@ const ArchiveBoss: FC = () => {
 
   const mapAlbums = (albumsCurrentList: AlbumDto[]) => {
     return albumsCurrentList.map((album: AlbumDto, index: number) => (
-      <ArchiveBossElement text={album.title} key={index} />
+      <ArchiveBossElement
+        text={album.title}
+        id={album.albumId?.id}
+        key={index}
+      />
     ));
   };
 
-  const mapCurrentList = (dtoList: PlaceDto[] | CategoryDto[]) => {
-    return dtoList.map((dto: PlaceDto | CategoryDto, index: number) => (
-      <ArchiveBossElement text={dto.name} key={index} />
+  const mapPlace = (placeCurrentList: PlaceDto[]) => {
+    return placeCurrentList.map((place: PlaceDto, index: number) => (
+      <ArchiveBossElement
+        text={place.name}
+        id={place.placeId?.id}
+        key={index}
+      />
+    ));
+  };
+
+  const mapCategory = (categoyCurrentList: CategoryDto[]) => {
+    return categoyCurrentList.map((category: CategoryDto, index: number) => (
+      <ArchiveBossElement
+        text={category.name}
+        id={category.categoryId?.id}
+        key={index}
+      />
     ));
   };
 
@@ -76,10 +94,10 @@ const ArchiveBoss: FC = () => {
         {mapAlbums(albums)}
       </ArchiveBossAccordion>
       <ArchiveBossAccordion color="#f3ee78" name="Sted">
-        {mapCurrentList(places)}
+        {mapPlace(places)}
       </ArchiveBossAccordion>
       <ArchiveBossAccordion color="#9c77da" name="Kategori">
-        {mapCurrentList(categories)}
+        {mapCategory(categories)}
       </ArchiveBossAccordion>
     </div>
   );

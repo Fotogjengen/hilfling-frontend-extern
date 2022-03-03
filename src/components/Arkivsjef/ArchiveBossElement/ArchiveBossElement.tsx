@@ -7,6 +7,8 @@ interface Props {
   key: number | string | null | undefined;
   /** Text to display in the ArchiveBoss */
   text: string | undefined;
+  /** Id to the ArchiveBoss element */
+  id?: string | undefined;
 }
 
 const ArchiveBossElement: FC<Props> = ({ text }: Props) => {
