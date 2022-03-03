@@ -9,14 +9,16 @@ interface Props {
   text: string | undefined;
   /** Id to the ArchiveBoss element */
   id?: string;
+  /** Type of Overflow menu */
+  type: string;
 }
 
-const ArchiveBossElement: FC<Props> = ({ text, id }: Props) => {
+const ArchiveBossElement: FC<Props> = ({ text, id, type }: Props) => {
   return (
     <Grid item xs={6} sm={3}>
       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
         <Grid item xs={6} sm={4}>
-          <ArchiveBossOverflow id={id} />
+          <ArchiveBossOverflow id={id} type={type}/>
         </Grid>
         <Grid item xs={6} sm={4} alignContent="space-around">
           {text}

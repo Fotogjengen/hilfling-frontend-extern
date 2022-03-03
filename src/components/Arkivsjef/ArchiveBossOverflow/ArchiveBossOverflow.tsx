@@ -7,9 +7,10 @@ const options = ["Rediger", "Slett"];
 
 interface Props {
   id?: string;
+  type: string;
 }
 
-const ArchiveBossOverflow: FC<Props> = ({ id }) => {
+const ArchiveBossOverflow: FC<Props> = ({ id, type }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

@@ -32,6 +32,7 @@ const ArchiveBoss: FC = () => {
         text={album.title}
         id={album.albumId?.id}
         key={index}
+        type="album"
       />
     ));
   };
@@ -41,6 +42,7 @@ const ArchiveBoss: FC = () => {
       <ArchiveBossElement
         text={place.name}
         id={place.placeId?.id}
+        type="place"
         key={index}
       />
     ));
@@ -51,6 +53,7 @@ const ArchiveBoss: FC = () => {
       <ArchiveBossElement
         text={category.name}
         id={category.categoryId?.id}
+        type="category"
         key={index}
       />
     ));
