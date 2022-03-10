@@ -1,12 +1,14 @@
 import React, { FC } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
-
+import { AlbumApi } from "../../../utils/api/AlbumApi";
+import { CategoryApi } from "../../../utils/api/CategoryApi";
+import { PlaceApi } from "../../../utils/api/PlaceApi";
 
 const options = ["Rediger", "Slett"];
 
 interface Props {
-  id?: string;
+  id: string;
   type: string;
 }
 
@@ -23,14 +25,21 @@ const ArchiveBossOverflow: FC<Props> = ({ id, type }) => {
   };
 
   const handleDelete = () => {
-    /**
-     * TODO: Sende type ned som prop også
-     * If-statement som sier om dersom det er f.eks. type "Album" skal det kalles på AlbumAPI-et
-     * 
-     */
+    if (type === "album") {
+      AlbumApi.deleteById(id)
+        .then((res) => console.log(res, " deleted"))
+        .catch((e) => console.log(e));
+    } else if (type === "place") {
+      PlaceApi.deleteById(id)
+        .then((res) => console.log(res, " deleted"))
+        .catch((e) => console.log(e));
+    } else if (type === "category") {
+      CategoryApi.deleteById(id)
+        .then((res) => console.log(res, " deleted"))
+        .catch((e) => console.log(e));
+    }
     setAnchorEl(null);
   };
-
 
   return (
     <div>

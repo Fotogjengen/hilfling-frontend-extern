@@ -30,7 +30,7 @@ const ArchiveBoss: FC = () => {
     return albumsCurrentList.map((album: AlbumDto, index: number) => (
       <ArchiveBossElement
         text={album.title}
-        id={album.albumId?.id}
+        id={album.albumId.id}
         key={index}
         type="album"
       />
@@ -41,7 +41,7 @@ const ArchiveBoss: FC = () => {
     return placeCurrentList.map((place: PlaceDto, index: number) => (
       <ArchiveBossElement
         text={place.name}
-        id={place.placeId?.id}
+        id={place.placeId.id}
         type="place"
         key={index}
       />
@@ -52,7 +52,7 @@ const ArchiveBoss: FC = () => {
     return categoyCurrentList.map((category: CategoryDto, index: number) => (
       <ArchiveBossElement
         text={category.name}
-        id={category.categoryId?.id}
+        id={category.categoryId.id}
         type="category"
         key={index}
       />
@@ -82,7 +82,6 @@ const ArchiveBoss: FC = () => {
               <Typography>Legg til ny</Typography>
             </Grid>
           </Grid>
-
           <Grid item xs={10}>
             <Typography>
               Denne siden er for fotogjengens Arkivsjef. Her kan du legge til,

@@ -7,13 +7,14 @@ interface Props {
   key: number | string | null | undefined;
   /** Text to display in the ArchiveBoss */
   text: string | undefined;
-  /** Id to the ArchiveBoss element */
-  id?: string;
+  /** Id belonging to the ArchiveBoss element */
+  id: string;
   /** Type of Overflow menu */
   type: string;
 }
 
-const ArchiveBossElement: FC<Props> = ({ text, id, type }: Props) => {
+/** TODO: Ehm er det noen bedre å gjøre dette på kanskje :) */
+const ArchiveBossElement: FC<Props> = ({ text, id ='notdefinedyet', type }: Props) => {
   return (
     <Grid item xs={6} sm={3}>
       <Grid container direction="row" justifyContent="flex-start" alignItems="center">
