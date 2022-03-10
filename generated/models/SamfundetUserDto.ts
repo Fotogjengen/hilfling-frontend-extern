@@ -16,5 +16,5 @@ export type SamfundetUserDto = {
     email?: Email;
     profilePicturePath?: string;
     sex?: string;
-    securituLevel?: SecurityLevelDto;
+    securityLevel?: SecurityLevelDto;
 }

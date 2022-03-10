@@ -1,8 +1,16 @@
-import React, {FC, useState} from "react";
+import React, { FC, useState } from "react";
 import Form from "../components/Form/Form";
 import { Grid } from "@mui/material";
 import { Errors, Validate } from "../components/Form/types";
 import TextField from "../components/Form/TextField";
+import { PhotoGangBangerApi } from "../utils/api/PhotoGangBangerApi";
+import {
+  PhotoGangBangerDto,
+  PhotoGangBangerId,
+  PhotoGangBangerPatchRequestDto, PositionDto,
+  SamfundetUserPatchRequestDto,
+  SemesterStart
+} from "../../generated";
 
 export interface FGUserInfoFormIV {
   firstName?: string;
@@ -31,8 +39,12 @@ const FGUserInfoForm: FC<Props> = ({ initialValues }) => {
   const onSubmit = (values: Record<string, any>) => {
     console.log("submit");
     setIsEditing(!isEditing);
+    //console.log(values as PhotoGangBangerPatchRequestDto)
 
-
+    console.log(pgbprdto)
+    /*PhotoGangBangerApi.patch()
+      .then((res) => console.log(res))
+      .catch((error) => console.error(error));*/
   };
 
   const validate: Validate = (values: any): Errors => {
@@ -66,81 +78,81 @@ const FGUserInfoForm: FC<Props> = ({ initialValues }) => {
           {/*Last name*/}
           <Grid item xs={12}>
             <TextField
-                name="lastName"
-                label="Etternavn"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="lastName"
+              label="Etternavn"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*Semesterstart*/}
           <Grid item xs={12}>
             <TextField
-                name="semesterStart"
-                label="Semesterstart"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="semesterStart"
+              label="Semesterstart"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*Address*/}
           <Grid item xs={12}>
             <TextField
-                name="address"
-                label="Adresse"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="address"
+              label="Adresse"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*Zip code*/}
           <Grid item xs={12}>
             <TextField
-                name="zipCode"
-                label="Postnummer"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="zipCode"
+              label="Postnummer"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*City*/}
           <Grid item xs={12}>
             <TextField
-                name="city"
-                label="By"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="city"
+              label="By"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*Phone number*/}
           <Grid item xs={12}>
             <TextField
-                name="phoneNumber"
-                label="Tlf."
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="phoneNumber"
+              label="Tlf."
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*Sex*/}
           <Grid item xs={12}>
             <TextField
-                name="sex"
-                label="Kjønn"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="sex"
+              label="Kjønn"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
           {/*Relationship status*/}
           <Grid item xs={12}>
             <TextField
-                name="relationShipStatus"
-                label="Sivilstatus"
-                fullWidth
-                required
-                disabled={!isEditing}
+              name="relationShipStatus"
+              label="Sivilstatus"
+              fullWidth
+              required
+              disabled={!isEditing}
             />
           </Grid>
         </Grid>
