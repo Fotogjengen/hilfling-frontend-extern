@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import "./index.css";
-import Routes from "./Routes";
+import AppRoutes from "./AppRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import guistyles from "./styles/utilities.module.css";
@@ -22,7 +22,7 @@ const Root: React.FC = () => (
           <div className={"container"}>
             <Router>
               <HeaderComponent />
-              <Routes />
+              <AppRoutes />
             </Router>
           </div>
         </div>

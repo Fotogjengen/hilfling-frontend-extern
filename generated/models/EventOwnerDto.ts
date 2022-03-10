@@ -5,8 +5,8 @@
 import type { EventOwnerId } from './EventOwnerId';
 
 export type EventOwnerDto = {
-    eventOwnerId?: EventOwnerId;
-    name?: EventOwnerDto.name;
+    eventOwnerId: EventOwnerId;
+    name: EventOwnerDto.name;
 }
 
 export namespace EventOwnerDto {

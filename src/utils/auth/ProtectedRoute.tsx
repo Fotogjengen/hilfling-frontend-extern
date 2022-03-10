@@ -3,11 +3,11 @@ import { Route, RouteProps } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 
 interface Props extends RouteProps {
-  component: ComponentType<any>;
+  element: ComponentType<any>;
 }
 
-const ProtectedRoute: FC<Props> = ({ component, ...args }) => (
-  <Route component={withAuthenticationRequired(component)} {...args} />
+const ProtectedRoute: FC<Props> = ({ element, ...args }) => (
+  <Route element={withAuthenticationRequired(element)} {...args} />
 );
 
 export default ProtectedRoute;

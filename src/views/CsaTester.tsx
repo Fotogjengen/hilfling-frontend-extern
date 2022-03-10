@@ -13,7 +13,7 @@ import {
   CardContent,
 } from "@mui/material";
 import { PhotoGangBangerDto } from "../../generated";
-import { PhotoGangBangerApi } from "../utils/api/PhotoGangBanger";
+import { PhotoGangBangerApi } from "../utils/api/PhotoGangBangerApi";
 import FGUserInfoForm from "../forms/FGUserInfoForm";
 
 interface StyledChipProps {

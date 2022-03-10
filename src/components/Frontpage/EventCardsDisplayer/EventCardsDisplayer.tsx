@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useState} from "react";
+import React, { FC, SyntheticEvent, useState } from "react";
 import {
   GuiCardPreamble,
   GuiCardTitle,
@@ -8,8 +8,13 @@ import { AppBar, Tabs, Tab } from "@mui/material";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { EventOwnerDto, MotiveDto } from "../../../../generated";
+import { MotiveApi } from "../../../utils/api/MotiveApi";
+import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 
-// TODO: this should still be here for when data from database gets collected higher in the component tree.
+
+const EventTypes: string[] = ["Samfundet", "ISFIT", "UKA"];
+
 interface Props {
   title?: string;
   images?: number;
@@ -18,117 +23,105 @@ interface Props {
   image?: string;
 }
 
-export interface IMotive {
-  id: string;
-  dateCreated: string;
-  title: string;
-  category: {
-    id: string;
-    dateCreated: string;
-    name: string;
-  };
-  eventOwner: {
-    id: string;
-    dateCreated: string;
-    name: string;
-  };
-  album: {
-    id: string;
-    dateCreated: string;
-    title: string;
-    isAnalog: boolean;
-  };
-}
-
-// TODO: Move to top of the page (component tree)
 const EventCardsDisplayer: FC<Props> = () => {
+  const [value, setValue] = useState<number>(0);
+  const [motiveResponse, setMotiveResponse] = useState<MotiveDto[]>([]);
+  const [, setEventOwners] = useState<EventOwnerDto[]>([]);
+
   useEffect(() => {
-    // TODO: Fix response type
-    try {
-      /*       void axios.get(`http://localhost:8080/motives/`).then((res) => {
-        setMotiveResponse(res.data);
-      }); */
-    } catch (e) {
-      console.log(e);
-    }
+    MotiveApi.getAll()
+      .then((res) => setMotiveResponse(res.data.currentList))
+      .catch((e) => console.log(e));
+    EventOwnerApi.getAll()
+      .then((res) => setEventOwners(res.data.currentList))
+      .catch((err) => console.error(err));
   }, []);
 
-  const [value, setValue] = useState<number>(0);
-  const [motiveResponse /*  setMotiveResponse */] = useState<IMotive[]>([]);
-
   const imageCardsSamf = motiveResponse.map((motiveObject, index) => {
-    return (
-      // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
-      <Link key={index} to={`/motive/${motiveObject.id}`}>
-        <GuiImageCard
-          key={`image-card-${index}`}
-          placement="left"
-          type="samfundet"
-          image="https://www.w3schools.com/css/img_lights.jpg"
-        >
-          <GuiCardTitle capitalized title={motiveObject.title} />
-          <GuiCardPreamble
-            color="red"
-            date={motiveObject.dateCreated}
-            images={69420}
-            location="Blåfjell"
-            type="EventCard"
-          />
-        </GuiImageCard>
-      </Link>
-    );
-  });
-
-  const imageCardsIsfit = ["Et flott sted ISFiT liker"].map(
-    (placeName, index) => {
+    // TODO: IDK hvordan å løse dette? Muligens heller bruke .filter() jeg vet ikke
+    const samf =
+      motiveObject.eventOwnerDto.name === EventTypes[0] ? true : false;
+    const id = motiveObject.motiveId.id || "default";
+    if (samf) {
       return (
-        <Link key={index} to={`/motive/${"isfit-motiv"}`}>
+        // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
+        <Link key={index} to={`/motive/${id}`}>
           <GuiImageCard
             key={`image-card-${index}`}
-            placement={"left"}
+            placement="left"
             type="samfundet"
-            image={"https://www.w3schools.com/css/img_lights.jpg"}
+            image="https://www.w3schools.com/css/img_lights.jpg"
           >
-            <GuiCardTitle capitalized title={"Temafest: Gjøre verden bedre"} />
+            <GuiCardTitle capitalized title={motiveObject.title} />
             <GuiCardPreamble
               color="red"
-              date="12.10.2020"
-              images={123}
-              location={placeName}
-              type={"EventCard"}
+              date={motiveObject.dateCreated.toString()}
+              images={69420}
+              location="Blåfjell"
+              type="EventCard"
             />
           </GuiImageCard>
         </Link>
       );
-    },
-  );
-
-  const imageCardsUka = ["Fæffæs lommebok", "BI"].map((placeName, index) => {
-    return (
-      <Link key={index} to={`/motive/${"UKEN-motiv :)"}`}>
-        <GuiImageCard
-          key={`image-card-${index}`}
-          placement={"left"}
-          type="samfundet"
-          image={"https://www.w3schools.com/css/img_lights.jpg"}
-        >
-          <GuiCardTitle capitalized title={"Temafest: Tjene $$$"} />
-          <GuiCardPreamble
-            color="red"
-            date="12.10.2020"
-            images={123}
-            location={placeName}
-            type={"EventCard"}
-          />
-        </GuiImageCard>
-      </Link>
-    );
+    }
   });
 
-  const handleChange = (
-    event: SyntheticEvent,
-    newValue: number,
-  ) => {
+  const imageCardsIsfit = motiveResponse.map((motiveObject, index) => {
+    const samf =
+      motiveObject.eventOwnerDto.name === EventTypes[1] ? true : false;
+    const id = motiveObject.motiveId.id || "default";
+    if (samf) {
+      return (
+        // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
+        <Link key={index} to={`/motive/${id}`}>
+          <GuiImageCard
+            key={`image-card-${index}`}
+            placement="left"
+            type="samfundet"
+            image="https://www.w3schools.com/css/img_lights.jpg"
+          >
+            <GuiCardTitle capitalized title={motiveObject.title} />
+            <GuiCardPreamble
+              color="red"
+              date={motiveObject.dateCreated.toString()}
+              images={69420}
+              location="Blåfjell"
+              type="EventCard"
+            />
+          </GuiImageCard>
+        </Link>
+      );
+    }
+  });
+
+  const imageCardsUka = motiveResponse.map((motiveObject, index) => {
+    const samf =
+      motiveObject.eventOwnerDto.name === EventTypes[2] ? true : false;
+    const id = motiveObject.motiveId.id || "default";
+    if (samf) {
+      return (
+        // TODO: Placement, type, location, type and image should be from motiveObject when backend is done
+        <Link key={index} to={`/motive/${id}`}>
+          <GuiImageCard
+            key={`image-card-${index}`}
+            placement="left"
+            type="samfundet"
+            image="https://www.w3schools.com/css/img_lights.jpg"
+          >
+            <GuiCardTitle capitalized title={motiveObject.title} />
+            <GuiCardPreamble
+              color="red"
+              date={motiveObject.dateCreated.toString()}
+              images={69420}
+              location="Blåfjell"
+              type="EventCard"
+            />
+          </GuiImageCard>
+        </Link>
+      );
+    }
+  });
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
