@@ -10,7 +10,7 @@ interface IArchiveBossContext {
   setPlaces: Dispatch<SetStateAction<PlaceDto[]>>;
 }
 
-const defaultState = {};
+const defaultState = {} as IArchiveBossContext;
 
 export const ArchiveBossContext =
-  createContext<Partial<IArchiveBossContext>>(defaultState);
+  createContext<IArchiveBossContext>(defaultState);
