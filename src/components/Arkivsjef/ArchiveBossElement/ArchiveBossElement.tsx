@@ -1,6 +1,11 @@
 import { Grid } from "@mui/material";
-import React, { FC } from "react";
-import ArchiveBossOverflow from "../ArchiveBossOverflow/ArchiveBossOverflow";
+import React, { FC, useContext, useState, useEffect } from "react";
+import { Alert, IconButton, Menu, MenuItem } from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
+import { AlbumApi } from "../../../utils/api/AlbumApi";
+import { CategoryApi } from "../../../utils/api/CategoryApi";
+import { PlaceApi } from "../../../utils/api/PlaceApi";
+import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossContext";
 
 interface Props {
   /** Index of element when mapped */
@@ -19,6 +24,40 @@ const ArchiveBossElement: FC<Props> = ({
   id = "notdefinedyet",
   type,
 }: Props) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [alert, setAlert] = useState(false);
+  const open = Boolean(anchorEl);
+
+  const { albums, setAlbums, places, setPlaces, categories, setCategories } =
+    useContext(ArchiveBossContext);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDelete = () => {
+    if (type === "album") {
+      return AlbumApi.deleteById(id)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => console.log(e));
+    } else if (type === "place") {
+      PlaceApi.deleteById(id)
+        .then((res) => console.log(places))
+        .catch((e) => console.log(e));
+    } else if (type === "category") {
+      CategoryApi.deleteById(id)
+        .then((res) => console.log(res, " deleted"))
+        .catch((e) => console.log(e));
+    }
+    setAnchorEl(null);
+  };
+
   return (
     <Grid item xs={6} sm={3}>
       <Grid
@@ -28,7 +67,24 @@ const ArchiveBossElement: FC<Props> = ({
         alignItems="center"
       >
         <Grid item xs={6} sm={4}>
-          <ArchiveBossOverflow id={id} type={type} />
+          <div>
+            <IconButton onClick={handleClick}>
+              <MoreVert />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              keepMounted
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem key="edit" onClick={handleClose}>
+                Rediger
+              </MenuItem>
+              <MenuItem key="delete" onClick={handleDelete}>
+                Slett
+              </MenuItem>
+            </Menu>
+          </div>
         </Grid>
         <Grid item xs={6} sm={4} alignContent="space-around">
           {text}
