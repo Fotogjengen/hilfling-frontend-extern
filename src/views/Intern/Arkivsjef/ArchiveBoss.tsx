@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  Dispatch,
-  FC,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import { Grid, IconButton, Typography } from "@mui/material";
@@ -15,20 +8,7 @@ import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
-
-interface IArchiveBossContext {
-  albums: AlbumDto[];
-  setAlbums: Dispatch<SetStateAction<AlbumDto[]>>;
-  categories: CategoryDto[];
-  setCategories: Dispatch<SetStateAction<CategoryDto[]>>;
-  places: PlaceDto[];
-  setPlaces: Dispatch<SetStateAction<PlaceDto[]>>;
-}
-
-const defaultState = {};
-
-export const ArchiveBossContext =
-  createContext<Partial<IArchiveBossContext>>(defaultState);
+import { ArchiveBossContext } from "./ArchiveBossContext";
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
