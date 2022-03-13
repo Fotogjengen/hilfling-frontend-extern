@@ -13,13 +13,22 @@ interface Props {
   type: string;
 }
 
-/** TODO: Ehm er det noen bedre å gjøre dette på kanskje :) */
-const ArchiveBossElement: FC<Props> = ({ text, id ='notdefinedyet', type }: Props) => {
+/** TODO: Ehm er det noen bedre å gjøre dette id på kanskje :) */
+const ArchiveBossElement: FC<Props> = ({
+  text,
+  id = "notdefinedyet",
+  type,
+}: Props) => {
   return (
     <Grid item xs={6} sm={3}>
-      <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justifyContent="flex-start"
+        alignItems="center"
+      >
         <Grid item xs={6} sm={4}>
-          <ArchiveBossOverflow id={id} type={type}/>
+          <ArchiveBossOverflow id={id} type={type} />
         </Grid>
         <Grid item xs={6} sm={4} alignContent="space-around">
           {text}

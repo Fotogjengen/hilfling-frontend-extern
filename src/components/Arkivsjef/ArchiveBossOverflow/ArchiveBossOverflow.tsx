@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
+import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBoss";
 
 const options = ["Rediger", "Slett"];
 
@@ -16,6 +17,9 @@ const ArchiveBossOverflow: FC<Props> = ({ id, type }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const { albums, setAlbums, places, setPlaces, categories, setCategories } =
+    useContext(ArchiveBossContext);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,11 +31,11 @@ const ArchiveBossOverflow: FC<Props> = ({ id, type }) => {
   const handleDelete = () => {
     if (type === "album") {
       AlbumApi.deleteById(id)
-        .then((res) => console.log(res, " deleted"))
+        .then()
         .catch((e) => console.log(e));
     } else if (type === "place") {
       PlaceApi.deleteById(id)
-        .then((res) => console.log(res, " deleted"))
+        .then((res) => console.log(places))
         .catch((e) => console.log(e));
     } else if (type === "category") {
       CategoryApi.deleteById(id)
