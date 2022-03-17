@@ -18,10 +18,9 @@ interface Props {
   type: string;
 }
 
-/** TODO: Ehm er det noen bedre å gjøre dette id på kanskje :) */
 const ArchiveBossElement: FC<Props> = ({
   text,
-  id = "notdefinedyet",
+  id,
   type,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
