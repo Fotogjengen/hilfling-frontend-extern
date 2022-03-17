@@ -5,6 +5,6 @@
 import type { PlaceId } from './PlaceId';
 
 export type PlaceDto = {
-    placeId?: PlaceId;
-    name?: string;
+    placeId: PlaceId;
+    name: string;
 }
