@@ -9,7 +9,12 @@ export const AlbumApi = {
     return api.get("/albums");
   },
   deleteById: async function (id: string): Promise<DeletedResult> {
+    return api.delete(`/albums/${id}`);
+  },
+  post: async function (album: AlbumDto): Promise<number> {
     return api
-      .delete(`/albums/${id}`)
+      .post("/albums", album)
+      .then((res) => res.data)
+      .catch((e) => console.log(e));
   },
 };
