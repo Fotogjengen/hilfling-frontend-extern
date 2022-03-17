@@ -57,7 +57,7 @@ const ArchiveBossAddElements = () => {
             Her kan du legge til nytt album, ny kategori eller nytt sted. Denne
             funksjonen skal hovedsakelig brukes av arkivsjef.
           </DialogContentText>
-          <br/>
+          <br />
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
