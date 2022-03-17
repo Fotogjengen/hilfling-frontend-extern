@@ -20,7 +20,7 @@ import styles from "./ArchiveBossAddElements.module.css";
 
 /** TODO:
  * [X] Bruke AutoComplete slik at man kan velge mellom kategori/album/sted
- * [] Lag POST funksjonene
+ * [X] Lag POST funksjonene
  * [] Bruke POST-endepunktene
  */
 
@@ -30,7 +30,7 @@ const ArchiveBossAddElements = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
+
   /** TODO: Bruk Post-Endepunktene */
   const handleCreate = () => {
     setOpen(false);
