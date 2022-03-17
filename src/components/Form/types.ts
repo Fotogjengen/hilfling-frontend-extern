@@ -25,7 +25,7 @@ export interface FormContext {
 export interface FormProps {
   initialValues: any;
   validate: Validate<any>;
-  onSubmit: (values: any) => void;
+  onSubmit: (values: any) => Promise<boolean | null>;
   submitButtonText?: string;
   submitButtonDisabled?: boolean;
   variant?:  "contained" | "outlined" | "text"

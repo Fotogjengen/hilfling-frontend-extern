@@ -18,7 +18,7 @@ import {
   EventOwnerDto,
   PlaceDto,
   SecurityLevelDto,
-} from "../../generated";
+} from "../generated";
 import { PlaceApi } from "../utils/api/PlaceApi";
 import { SecurityLevelApi } from "../utils/api/SecurityLevelApi";
 import { AlbumApi } from "../utils/api/AlbumApi";
@@ -87,7 +87,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
     console.log(categories);
   }, [categories]);
 
-  const onSubmit = (values: Record<string, any>) => {
+  const onSubmit = (values: Record<string, any>): Promise<boolean | null> => {
     const formData = new FormData();
     formData.append("motiveTitle", values["motive"]);
     formData.append("securityLevelId", values["securityLevel"]);
@@ -108,9 +108,9 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       formData.append("photoFileList", acceptedFiles[index]);
     });
 
-    PhotoApi.batchUpload(formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err))
+    return PhotoApi.batchUpload(formData)
+      .then(() => true)
+      .catch(() => false)
       .finally(() => {
         setFiles([]);
       });
@@ -216,12 +216,12 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <Grid item xs={12}>
                 <Select name="eventOwner" label="Eier" fullWidth required>
                   {eventOwners.map((eventOwner, index) => (
-                      <MenuItem
-                          key={`event-owner-item-${index}`}
-                          value={eventOwner.name}
-                      >
-                        {eventOwner.name}
-                      </MenuItem>
+                    <MenuItem
+                      key={`event-owner-item-${index}`}
+                      value={eventOwner.name}
+                    >
+                      {eventOwner.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </Grid>

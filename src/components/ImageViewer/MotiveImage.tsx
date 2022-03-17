@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import styles from "./imageStyle.module.css";
-import { PhotoDto } from "../../../generated";
+import { PhotoDto } from "../../generated";
 
 interface Props {
   id: string;

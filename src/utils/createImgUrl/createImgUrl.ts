@@ -1,4 +1,4 @@
-import { PhotoDto } from "../../../generated";
+import { PhotoDto } from "../../generated";
 
 /* TODO: Fix this. Idk how */
 export const createImgUrl = (photo: PhotoDto):string => {

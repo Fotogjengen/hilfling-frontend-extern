@@ -3,7 +3,7 @@ import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { MotiveDto, PhotoDto } from "../../../generated";
+import { MotiveDto, PhotoDto } from "../../generated";
 import { useParams } from "react-router-dom";
 import { MotiveApi } from "../../utils/api/MotiveApi";
 import { PhotoApi } from "../../utils/api/PhotoApi";

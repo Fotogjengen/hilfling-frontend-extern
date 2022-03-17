@@ -6,7 +6,7 @@ import styles from "../About.module.css";
 
 
 
-import { PhotoGangBangerPublicDto } from "../../../../generated";
+import { PhotoGangBangerPublicDto } from "../../../generated";
 import { PhotoGangBangerApi } from "../../../utils/api/PhotoGangBangerApi";
 import PhotoGangBangerPublic from "../../../components/About/PhotoGangBangerPublic";
 

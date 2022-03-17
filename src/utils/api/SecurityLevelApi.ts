@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { SecurityLevelDto } from "../../../generated";
+import { SecurityLevelDto } from "../../generated";
 import { PaginatedResult } from "./types";
 
 export const SecurityLevelApi = {

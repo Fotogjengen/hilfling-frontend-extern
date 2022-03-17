@@ -97,3 +97,7 @@ export { SecurityLevelDto } from "./models/SecurityLevelDto";
 export type { SecurityLevelId } from "./models/SecurityLevelId";
 export type { SemesterStart } from "./models/SemesterStart";
 export type { ZipCode } from "./models/ZipCode";
+
+export { RelationShipStatus } from "./models/PhotoGangBangerDto";
+export { PhotoGangBangerPatchRequestDtoBuilder } from "./models/PhotoGangBangerPatchRequestDto";
+export { SamfundetUserPatchRequestDtoBuilder } from "./models/SamfundetUserPatchRequestDto";

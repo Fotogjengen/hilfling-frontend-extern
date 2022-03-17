@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { AlbumDto } from "../../../generated";
+import { AlbumDto } from "../../generated";
 import { PaginatedResult } from "./types";
 
 export const AlbumApi = {

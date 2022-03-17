@@ -1,21 +1,24 @@
 import React, { FC, useState } from "react";
 import Form from "../components/Form/Form";
-import { Grid } from "@mui/material";
+import { Grid, MenuItem } from "@mui/material";
 import { Errors, Validate } from "../components/Form/types";
 import TextField from "../components/Form/TextField";
 import { PhotoGangBangerApi } from "../utils/api/PhotoGangBangerApi";
 import {
+  PhoneNumber,
   PhotoGangBangerDto,
-  PhotoGangBangerId,
-  PhotoGangBangerPatchRequestDto, PositionDto,
+  PhotoGangBangerPatchRequestDto,
+  PhotoGangBangerPatchRequestDtoBuilder,
+  RelationShipStatus,
   SamfundetUserPatchRequestDto,
-  SemesterStart
-} from "../../generated";
+  SamfundetUserPatchRequestDtoBuilder,
+} from "../generated";
+import Select from "../components/Form/Select";
 
 export interface FGUserInfoFormIV {
   firstName?: string;
   lastName?: string;
-  relationShipStatus?: string;
+  relationShipStatus?: RelationShipStatus;
   semesterStart?: string;
   address?: string;
   zipCode?: string;
@@ -23,7 +26,7 @@ export interface FGUserInfoFormIV {
   active?: boolean;
   pang?: boolean;
   username?: string;
-  phoneNumber?: string;
+  phoneNumber?: PhoneNumber;
   email?: string;
   profilePicturePath?: string;
   sex?: string;
@@ -31,20 +34,82 @@ export interface FGUserInfoFormIV {
 
 interface Props {
   initialValues: FGUserInfoFormIV;
+  gangBanger: PhotoGangBangerDto;
 }
 
-const FGUserInfoForm: FC<Props> = ({ initialValues }) => {
+const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const onSubmit = (values: Record<string, any>) => {
-    console.log("submit");
+  const onSubmit = (values: FGUserInfoFormIV): Promise<boolean | null> => {
+    const returnValue: boolean | null = null;
     setIsEditing(!isEditing);
-    //console.log(values as PhotoGangBangerPatchRequestDto)
 
-    console.log(pgbprdto)
-    /*PhotoGangBangerApi.patch()
-      .then((res) => console.log(res))
-      .catch((error) => console.error(error));*/
+    if (!isEditing) {
+      return new Promise<boolean | null>((resolve) => resolve(null));
+    }
+    console.log(values.relationShipStatus)
+
+    const firstName =
+      values.firstName !== gangBanger.samfundetUser?.firstName &&
+      values.firstName
+        ? values.firstName
+        : undefined;
+    const lastName =
+      values.lastName !== gangBanger.samfundetUser?.lastName && values.lastName
+        ? values.lastName
+        : undefined;
+    const phoneNumber =
+      values.phoneNumber !== gangBanger.samfundetUser?.phoneNumber &&
+      values.phoneNumber
+        ? values.phoneNumber
+        : undefined;
+    const sex =
+      values.sex !== gangBanger.samfundetUser?.sex && values.sex
+        ? values.sex
+        : undefined;
+
+    const address =
+      values.address !== gangBanger.address && values.address
+        ? values.address
+        : undefined;
+    const zipCode =
+      values.zipCode !== gangBanger.zipCode && values.zipCode
+        ? values.zipCode
+        : undefined;
+    const city =
+      values.city !== gangBanger.city && values.city ? values.city : undefined;
+    const relationshipStatus =
+      values.relationShipStatus !== gangBanger.relationShipStatus &&
+      values.relationShipStatus
+        ? values.relationShipStatus
+        : undefined;
+
+    if (
+      gangBanger.photoGangBangerId &&
+      gangBanger.samfundetUser?.samfundetUserId
+    ) {
+      const samfundetUserPatchRequestDto: SamfundetUserPatchRequestDto =
+        new SamfundetUserPatchRequestDtoBuilder(
+          gangBanger.samfundetUser.samfundetUserId,
+        )
+          .withFirstName(firstName)
+          .withLastName(lastName)
+          .withPhoneNumber(phoneNumber)
+          .withSex(sex).dto;
+
+      const request: PhotoGangBangerPatchRequestDto =
+        new PhotoGangBangerPatchRequestDtoBuilder(gangBanger.photoGangBangerId)
+          .withSamfundetUser(samfundetUserPatchRequestDto)
+          .withAddress(address)
+          .withZipCode(zipCode)
+          .withCity(city)
+          .withRelationShipStatus(relationshipStatus).dto;
+
+      return PhotoGangBangerApi.patch(request)
+        .then(() => true)
+        .catch(() => false);
+    }
+    return new Promise<boolean | null>((resolve) => resolve(false));
   };
 
   const validate: Validate = (values: any): Errors => {
@@ -147,13 +212,32 @@ const FGUserInfoForm: FC<Props> = ({ initialValues }) => {
           </Grid>
           {/*Relationship status*/}
           <Grid item xs={12}>
-            <TextField
+            <Select
               name="relationShipStatus"
               label="Sivilstatus"
               fullWidth
               required
               disabled={!isEditing}
-            />
+            >
+              <MenuItem
+                key={`relationshipstatus-single`}
+                value={RelationShipStatus.SINGLE.valueOf()}
+              >
+                {RelationShipStatus.SINGLE}
+              </MenuItem>
+              <MenuItem
+                key={`relationshipstatus-married`}
+                value={RelationShipStatus.MARRIED.valueOf()}
+              >
+                {RelationShipStatus.MARRIED}
+              </MenuItem>
+              <MenuItem
+                key={`relationshipstatus-relationship`}
+                value={RelationShipStatus.RELATIONSHIP.valueOf()}
+              >
+                {RelationShipStatus.RELATIONSHIP}
+              </MenuItem>
+            </Select>
           </Grid>
         </Grid>
       </Form>

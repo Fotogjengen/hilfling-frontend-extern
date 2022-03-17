@@ -1,18 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
-  Container,
   Avatar,
-  Grid,
   Box,
-  Typography,
-  Divider,
-  Chip,
-  styled,
   Card,
   CardContent,
+  Chip,
+  Container,
+  Divider,
+  Grid,
+  styled,
+  Typography,
 } from "@mui/material";
-import { PhotoGangBangerDto } from "../../generated";
+import { PhotoGangBangerDto, RelationShipStatus } from "../generated";
 import { PhotoGangBangerApi } from "../utils/api/PhotoGangBangerApi";
 import FGUserInfoForm from "../forms/FGUserInfoForm";
 
@@ -155,19 +155,21 @@ const CsaTester: FC = () => {
                 initialValues={{
                   firstName: gangBanger.samfundetUser?.firstName || "",
                   lastName: gangBanger.samfundetUser?.lastName || "",
-                  relationShipStatus: gangBanger.relationShipStatus || "",
+                  relationShipStatus:
+                    gangBanger.relationShipStatus || RelationShipStatus.SINGLE,
                   semesterStart: gangBanger.semesterStart?.value || "",
                   address: gangBanger.address || "",
                   zipCode: gangBanger.zipCode || "",
                   city: gangBanger.city || "",
                   phoneNumber:
-                    gangBanger.samfundetUser?.phoneNumber?.value || "",
+                    gangBanger.samfundetUser?.phoneNumber || undefined,
                   profilePicturePath:
                     gangBanger.samfundetUser?.profilePicturePath || "",
                   sex: gangBanger.samfundetUser?.sex || "",
                   active: gangBanger.active,
                   pang: gangBanger.pang,
                 }}
+                gangBanger={gangBanger}
               />
             )}
           </Grid>

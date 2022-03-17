@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { MotiveDto, PhotoGangBangerDto } from "../../../generated";
+import { MotiveDto, PhotoGangBangerDto } from "../../generated";
 import { PaginatedResult } from "./types";
 
 export const MotiveApi = {

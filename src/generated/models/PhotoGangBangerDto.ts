@@ -9,7 +9,7 @@ import type { SemesterStart } from './SemesterStart';
 
 export type PhotoGangBangerDto = {
     photoGangBangerId?: PhotoGangBangerId;
-    relationShipStatus?: PhotoGangBangerDto.relationShipStatus;
+    relationShipStatus?: RelationShipStatus;
     semesterStart?: SemesterStart;
     address?: string;
     zipCode?: string;
@@ -20,13 +20,8 @@ export type PhotoGangBangerDto = {
     pang?: boolean;
 }
 
-export namespace PhotoGangBangerDto {
-
-    export enum relationShipStatus {
-        SINGLE = 'single',
-        RELATIONSHIP = 'relationship',
-        MARRIED = 'married',
-    }
-
-
+export enum RelationShipStatus {
+    SINGLE = 'single',
+    RELATIONSHIP = 'relationship',
+    MARRIED = 'married',
 }

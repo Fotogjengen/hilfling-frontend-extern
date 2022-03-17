@@ -3,7 +3,7 @@ import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import { Grid, IconButton, Typography } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
-import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
+import { AlbumDto, PlaceDto, CategoryDto } from "../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";

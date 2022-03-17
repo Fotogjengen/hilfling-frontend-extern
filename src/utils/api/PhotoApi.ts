@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { Photo, PhotoDto } from "../../../generated";
+import { Photo, PhotoDto } from "../../generated";
 
 class PhotoPost {
   albumId = "";

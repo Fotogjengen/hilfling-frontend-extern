@@ -1,16 +1,16 @@
-import React, {FC, useEffect, useState} from "react";
+import React, { FC, useEffect, useState } from "react";
 import guistyles from "../../styles/utilities.module.css";
-import { tags, User } from "./mockdata";
+import { tags } from "./mockdata";
 import ProfileTags from "../../components/MyProfile/ProfileTags/ProfileTags";
 import styles from "./MyProfile.module.css";
 import cx from "classnames";
 import ProfileCard from "../../components/MyProfile/ProfileCard/ProfileCard";
 import { GuiProfileImage } from "../../gui-components";
-import {Email, PhotoGangBangerDto} from "../../../generated";
-import {PhotoGangBangerApi} from "../../utils/api/PhotoGangBangerApi";
-import {useAuth0} from "@auth0/auth0-react";
+import { PhotoGangBangerDto, RelationShipStatus } from "../../generated";
+import { PhotoGangBangerApi } from "../../utils/api/PhotoGangBangerApi";
+import { useAuth0 } from "@auth0/auth0-react";
 import FGUserInfoForm from "../../forms/FGUserInfoForm";
-import {Grid} from "@mui/material";
+import { Grid } from "@mui/material";
 
 const MyProfile: FC = () => {
   const { user } = useAuth0();
@@ -24,12 +24,12 @@ const MyProfile: FC = () => {
 
   useEffect(() => {
     PhotoGangBangerApi.getById(testId)
-        .then((res) => {
-          console.log(res);
-          setGangBanger(res);
-        })
-        .catch((e) => console.error(e))
-        .finally(() => setIsloaded(true));
+      .then((res) => {
+        console.log(res);
+        setGangBanger(res);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => setIsloaded(true));
   }, [user]);
 
   return (
@@ -53,33 +53,41 @@ const MyProfile: FC = () => {
       <div className={styles.nameAndTagContainer}>
         <div>
           <div>
-            <h1 className={styles.profileName}>{gangBanger.samfundetUser?.firstName || "Ingen bruker funnet"}</h1>
+            <h1 className={styles.profileName}>
+              {gangBanger.samfundetUser?.firstName || "Ingen bruker funnet"}
+            </h1>
           </div>
           <ProfileTags tags={myTags} />
         </div>
         <div>
-          <Grid item xs={8} sx={{
-            marginTop: "4rem"
-          }}>
+          <Grid
+            item
+            xs={8}
+            sx={{
+              marginTop: "4rem",
+            }}
+          >
             {isLoaded && (
-                <FGUserInfoForm
-                    initialValues={{
-                      firstName: gangBanger.samfundetUser?.firstName || "",
-                      lastName: gangBanger.samfundetUser?.lastName || "",
-                      relationShipStatus: gangBanger.relationShipStatus || "",
-                      semesterStart: gangBanger.semesterStart?.value || "",
-                      address: gangBanger.address || "",
-                      zipCode: gangBanger.zipCode || "",
-                      city: gangBanger.city || "",
-                      phoneNumber:
-                          gangBanger.samfundetUser?.phoneNumber?.value || "",
-                      profilePicturePath:
-                          gangBanger.samfundetUser?.profilePicturePath || "",
-                      sex: gangBanger.samfundetUser?.sex || "",
-                      active: gangBanger.active,
-                      pang: gangBanger.pang,
-                    }}
-                />
+              <FGUserInfoForm
+                initialValues={{
+                  firstName: gangBanger.samfundetUser?.firstName || "",
+                  lastName: gangBanger.samfundetUser?.lastName || "",
+                  relationShipStatus:
+                    gangBanger.relationShipStatus || RelationShipStatus.SINGLE,
+                  semesterStart: gangBanger.semesterStart?.value || "",
+                  address: gangBanger.address || "",
+                  zipCode: gangBanger.zipCode || "",
+                  city: gangBanger.city || "",
+                  phoneNumber:
+                    gangBanger.samfundetUser?.phoneNumber || undefined,
+                  profilePicturePath:
+                    gangBanger.samfundetUser?.profilePicturePath || "",
+                  sex: gangBanger.samfundetUser?.sex || "",
+                  active: gangBanger.active,
+                  pang: gangBanger.pang,
+                }}
+                gangBanger={gangBanger}
+              />
             )}
           </Grid>
         </div>

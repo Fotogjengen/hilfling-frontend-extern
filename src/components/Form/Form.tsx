@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { FormContext, FormProps } from "./types";
-import { Grid } from "@mui/material";
+import { Grid, Alert, Snackbar } from "@mui/material";
 import SubmitButton from "./SubmitButton";
 
 const Context = createContext<FormContext>({
@@ -26,6 +26,11 @@ const Form: FC<FormProps> = ({
   variant = "contained",
   children,
 }) => {
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [alert, setAlert] = useState<string>("");
+  const [alertSeverity, setAlertSeverity] = useState<
+    "error" | "info" | "warning" | "success"
+  >("success");
   const [values, setValues] = useState<FormContext["values"]>(initialValues);
   const [errors, setErrors] = useState<FormContext["errors"]>({});
 
@@ -48,8 +53,20 @@ const Form: FC<FormProps> = ({
 
   const _onSubmit = (e: any) => {
     e.preventDefault();
-    onSubmit(values);
-    setValues(initialValues);
+    onSubmit(values).then((res) => {
+      if (res == true) {
+        setAlert("Suksess! :)");
+        setShowAlert(true);
+        setAlertSeverity("success");
+      } else if (res == false) {
+        setAlert("Noe gikk feil. :(");
+        setShowAlert(true);
+        setAlertSeverity("error");
+      } else {
+        setShowAlert(false);
+      }
+    });
+    //setValues(initialValues);
   };
 
   return (
@@ -60,6 +77,27 @@ const Form: FC<FormProps> = ({
         onChange,
       }}
     >
+      {showAlert && (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={showAlert}
+          autoHideDuration={6000}
+          onClose={() => setShowAlert(false)}
+          sx={{
+            width: "50%"
+          }}
+        >
+          <Alert
+            severity={alertSeverity}
+            sx={{
+              width: "100%",
+            }}
+            onClose={() => setShowAlert(false)}
+          >
+            {alert}
+          </Alert>
+        </Snackbar>
+      )}
       <form onKeyDown={(e) => e.key !== "Enter"}>
         {children}
         <Grid container spacing={4}>

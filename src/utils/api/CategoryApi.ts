@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { CategoryDto } from "../../../generated";
+import { CategoryDto } from "../../generated";
 import { PaginatedResult } from "./types";
 
 export const CategoryApi = {

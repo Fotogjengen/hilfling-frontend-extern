@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { EventOwnerDto } from "../../../generated";
+import { EventOwnerDto } from "../../generated";
 import { PaginatedResult } from "./types";
 
 export const EventOwnerApi = {

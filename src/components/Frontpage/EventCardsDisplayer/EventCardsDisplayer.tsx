@@ -8,7 +8,7 @@ import { AppBar, Tabs, Tab } from "@mui/material";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { EventOwnerDto, MotiveDto } from "../../../../generated";
+import { EventOwnerDto, MotiveDto } from "../../../generated";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 

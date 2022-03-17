@@ -1,6 +1,6 @@
 import { api } from "./api";
-import { PhotoGangBangerDto, PhotoGangBangerPublicDto } from "../../../generated";
-import {PhotoGangBangerPatchRequestDto} from "../../../generated/models/PhotoGangBangerPatchRequestDto";
+import { PhotoGangBangerDto, PhotoGangBangerPublicDto } from "../../generated";
+import {PhotoGangBangerPatchRequestDto} from "../../generated/models/PhotoGangBangerPatchRequestDto";
 
 export const PhotoGangBangerApi = {
   getById: async function (id: string): Promise<PhotoGangBangerDto> {

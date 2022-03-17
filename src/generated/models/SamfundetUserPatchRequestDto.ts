@@ -17,67 +17,65 @@ export type SamfundetUserPatchRequestDto = {
     securityLevel?: SecurityLevelDto;
 }
 
-class SamfundetUserPatchRequestDtoBuilder implements PatchRequest<SamfundetUserPatchRequestDto> {
+export class SamfundetUserPatchRequestDtoBuilder implements PatchRequest<SamfundetUserPatchRequestDto> {
     dto: SamfundetUserPatchRequestDto;
 
     constructor(id: SamfundetUserId) {
         this.dto = {
-            samfundetUserId: {
-                id,
-            } as SamfundetUserId,
+            samfundetUserId: id
         } as SamfundetUserPatchRequestDto;
     }
 
-    withFirstName(firstName: string): SamfundetUserPatchRequestDtoBuilder {
+    withFirstName(firstName?: string): SamfundetUserPatchRequestDtoBuilder {
         if (firstName) {
             this.dto.firstName = firstName
         }
         return this
     }
 
-    withLastName(lastName: string): SamfundetUserPatchRequestDtoBuilder {
+    withLastName(lastName?: string): SamfundetUserPatchRequestDtoBuilder {
         if (lastName) {
             this.dto.lastName = lastName
         }
         return this
     }
 
-    withUsername(username: string): SamfundetUserPatchRequestDtoBuilder {
+    withUsername(username?: string): SamfundetUserPatchRequestDtoBuilder {
         if (username) {
             this.dto.username = username
         }
         return this
     }
 
-    withPhoneNumber(phoneNumber: PhoneNumber): SamfundetUserPatchRequestDtoBuilder {
+    withPhoneNumber(phoneNumber?: PhoneNumber): SamfundetUserPatchRequestDtoBuilder {
         if (phoneNumber) {
             this.dto.phoneNumber = phoneNumber;
         }
         return this
     }
 
-    withEmail(email: Email): SamfundetUserPatchRequestDtoBuilder {
+    withEmail(email?: Email): SamfundetUserPatchRequestDtoBuilder {
         if (email) {
             this.dto.email = email
         }
         return this
     }
 
-    withProfilePicturePath(profilePicturePath: string): SamfundetUserPatchRequestDtoBuilder {
+    withProfilePicturePath(profilePicturePath?: string): SamfundetUserPatchRequestDtoBuilder {
         if (profilePicturePath) {
             this.dto.profilePicturePath = profilePicturePath
         }
         return this
     }
 
-    withSex(sex: string): SamfundetUserPatchRequestDtoBuilder {
+    withSex(sex?: string): SamfundetUserPatchRequestDtoBuilder {
         if (sex) {
             this.dto.sex = sex
         }
         return this
     }
 
-    withSecurityLevel(securityLevel: SecurityLevelDto) {
+    withSecurityLevel(securityLevel?: SecurityLevelDto) {
         if (securityLevel) {
             this.dto.securityLevel = securityLevel
         }
@@ -85,14 +83,14 @@ class SamfundetUserPatchRequestDtoBuilder implements PatchRequest<SamfundetUserP
     }
 
     withAll(
-        firstName: string,
-        lastName: string,
-        username: string,
-        phoneNumber: PhoneNumber,
-        email: Email,
-        profilePicturePath: string,
-        sex: string,
-        securityLevel: SecurityLevelDto
+        firstName?: string,
+        lastName?: string,
+        username?: string,
+        phoneNumber?: PhoneNumber,
+        email?: Email,
+        profilePicturePath?: string,
+        sex?: string,
+        securityLevel?: SecurityLevelDto
     ): SamfundetUserPatchRequestDtoBuilder {
         return this
             .withFirstName(firstName)
