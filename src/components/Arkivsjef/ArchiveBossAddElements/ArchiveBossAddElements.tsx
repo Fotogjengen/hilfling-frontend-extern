@@ -19,8 +19,9 @@ import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
 
 /** TODO:
- * - Bruke POST-endepunktene
- * - Bruke AutoComplete slik at man kan velge mellom kategori/album/sted
+ * [X] Bruke AutoComplete slik at man kan velge mellom kategori/album/sted
+ * [] Lag POST funksjonene
+ * [] Bruke POST-endepunktene
  */
 
 const ArchiveBossAddElements = () => {
@@ -28,6 +29,11 @@ const ArchiveBossAddElements = () => {
 
   const handleClickOpen = () => {
     setOpen(true);
+  };
+
+  /** TODO: Bruk Post-Endepunktene */
+  const handleCreate = () => {
+    setOpen(false);
   };
 
   const handleClose = () => {
@@ -85,7 +91,7 @@ const ArchiveBossAddElements = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Avbryt</Button>
-          <Button variant="contained" onClick={handleClose}>
+          <Button variant="contained" onClick={handleCreate}>
             Lag ny
           </Button>
         </DialogActions>
