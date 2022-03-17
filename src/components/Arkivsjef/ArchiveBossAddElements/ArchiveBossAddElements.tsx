@@ -30,7 +30,7 @@ const ArchiveBossAddElements = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  
   /** TODO: Bruk Post-Endepunktene */
   const handleCreate = () => {
     setOpen(false);
@@ -42,7 +42,7 @@ const ArchiveBossAddElements = () => {
 
   const types = ["Kategori", "Sted", "Album"];
 
-  const [type, setType] = useState("Kategori");
+  const [type, setType] = useState(types[0]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setType(event.target.value);
