@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import React, { FC, useContext, useState, useEffect } from "react";
-import { Alert, IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
@@ -25,7 +25,6 @@ const ArchiveBossElement: FC<Props> = ({
   type,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [alert, setAlert] = useState(false);
   const open = Boolean(anchorEl);
 
   const { albums, setAlbums, places, setPlaces, categories, setCategories } =
@@ -41,18 +40,30 @@ const ArchiveBossElement: FC<Props> = ({
 
   const handleDelete = () => {
     if (type === "album") {
-      return AlbumApi.deleteById(id)
+      AlbumApi.deleteById(id)
         .then((res) => {
-          console.log(res);
+          if (res.data == 1) {
+            setAlbums(albums.filter((album) => album?.albumId.id !== id));
+          }
         })
         .catch((e) => console.log(e));
     } else if (type === "place") {
       PlaceApi.deleteById(id)
-        .then((res) => console.log(places))
+        .then((res) => {
+          if (res.data == 1) {
+            setPlaces(places.filter((place) => place?.placeId.id !== id));
+          }
+        })
         .catch((e) => console.log(e));
     } else if (type === "category") {
       CategoryApi.deleteById(id)
-        .then((res) => console.log(res, " deleted"))
+        .then((res) => {
+          if (res.data == 1) {
+            setCategories(
+              categories.filter((category) => category?.categoryId.id !== id),
+            );
+          }
+        })
         .catch((e) => console.log(e));
     }
     setAnchorEl(null);
