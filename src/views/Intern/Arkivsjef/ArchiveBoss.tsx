@@ -9,6 +9,7 @@ import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
 import { ArchiveBossContext } from "./ArchiveBossContext";
+import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
@@ -73,6 +74,7 @@ const ArchiveBoss: FC = () => {
     >
       <div className={styles.archiveBoss}>
         <h2> Arkivsjef </h2>
+
         <div className={styles.description}>
           <Grid
             container
@@ -86,11 +88,9 @@ const ArchiveBoss: FC = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
+                className={styles.addNewButton}
               >
-                <IconButton aria-label="add">
-                  <AddCircle className={styles.svgicon} />
-                </IconButton>
-                <Typography>Legg til ny</Typography>
+                <ArchiveBossAddElements />
               </Grid>
             </Grid>
             <Grid item xs={10}>

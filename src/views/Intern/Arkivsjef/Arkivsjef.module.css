@@ -23,7 +23,6 @@
    margin-bottom: 2rem;
     color: #000000;
 }
-.svgicon{
-    transform: scale(2);
-    color: #3e3e3e;
+.addNewButton {
+    text-align: center;
 }
