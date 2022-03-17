@@ -1,7 +1,6 @@
 import { api } from "./api";
 import { PlaceDto } from "../../../generated";
-import { PaginatedResult } from "./types";
-import { DeletedResult } from "./AlbumApi";
+import { DeletedResult, PaginatedResult } from "./types";
 
 export const PlaceApi = {
   getAll: async function (): Promise<PaginatedResult<PlaceDto>> {
