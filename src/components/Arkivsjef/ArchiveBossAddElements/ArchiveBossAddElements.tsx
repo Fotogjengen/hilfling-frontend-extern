@@ -29,8 +29,15 @@ import * as yup from "yup";
  * [X] Bruke AutoComplete slik at man kan velge mellom kategori/album/sted
  * [X] Lag POST funksjonene
  * [] Fikse form-en og validering :)
+ *    [X] Fikse navn
+ *    [] Fikse type
  * [] Bruke POST-endepunktene
  */
+
+type FormProps = {
+  name: string;
+  type: string;
+};
 
 const ArchiveBossAddElements = () => {
   const [open, setOpen] = useState(false);
@@ -39,16 +46,13 @@ const ArchiveBossAddElements = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
-  /** TODO: Bruk Post-Endepunktene */
-
   const handleClose = () => {
     setOpen(false);
   };
 
   const onSubmit = (
     values: FormikValues,
-    props: FormikHelpers<{ name: string }>,
+    props: FormikHelpers<FormProps>,
   ) => {
     console.log(props);
     console.log(values);
@@ -57,9 +61,11 @@ const ArchiveBossAddElements = () => {
 
   const validationSchema = yup.object({
     name: yup.string().required("Sliten? Du må fylle inn navn <3"),
+    type: yup.string().required("Du må legge til typen")
   });
   const initialValues = {
     name: "",
+    type: types[0]
   };
 
   return (
@@ -85,6 +91,14 @@ const ArchiveBossAddElements = () => {
                   Denne funksjonen skal hovedsakelig brukes av arkivsjef.
                 </DialogContentText>
                 <br />
+                <Field
+                  name="type"
+                  as={TextField}
+                  label="Type"
+                  error={props.errors.type && props.touched.type}
+                  helperText={<ErrorMessage name="type" />}
+                  fullWidth
+                />
                 <Field
                   as={TextField}
                   name="name"
