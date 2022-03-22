@@ -12,6 +12,7 @@ import {
   InputLabel,
   Select,
   Typography,
+  MenuItem
 } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
@@ -91,14 +92,21 @@ const ArchiveBossAddElements = () => {
                   Denne funksjonen skal hovedsakelig brukes av arkivsjef.
                 </DialogContentText>
                 <br />
-                <Field
-                  name="type"
-                  as={TextField}
-                  label="Type"
-                  error={props.errors.type && props.touched.type}
-                  helperText={<ErrorMessage name="type" />}
-                  fullWidth
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                  {/* TODO: Add onChange and value */}
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Type"
+                  >
+                    {types.map((type, index) => (
+                      <MenuItem key={index} value={type}>
+                        {type}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
                 <Field
                   as={TextField}
                   name="name"
