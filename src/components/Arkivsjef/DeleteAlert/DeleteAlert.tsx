@@ -18,7 +18,7 @@ const DeleteAlert: FC<Props>= ({
   }: Props)=> {
   return (
     <Collapse in={open} className={styles.collapse} >
-        <div className={styles.alertContainer} onClick= {() => setOpen(false)}>
+        <div onClick= {() => setOpen(false)}>
             <Alert severity="success"> {message}</Alert>
         </div>
     </Collapse>

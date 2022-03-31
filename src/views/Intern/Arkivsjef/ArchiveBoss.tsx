@@ -65,7 +65,7 @@ const ArchiveBoss: FC = () => {
     ));
   };
 
-  const [openAlert, setOpenAlert] = React.useState(true);
+  const [openAlert, setOpenAlert] = React.useState(false);
 
   return (
     <>
