@@ -1,11 +1,13 @@
-import { Grid } from "@mui/material";
+import {Grid } from "@mui/material";
 import React, { FC, useContext, useState } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
+
 import { MoreVert } from "@mui/icons-material";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossContext";
+import DeleteDialog from "./DeleteDialog";
 
 interface Props {
   /** Index of element when mapped */
@@ -16,15 +18,22 @@ interface Props {
   id: string;
   /** Type of Overflow menu */
   type: string;
+
+  setOpenAlert: (value: boolean) => void;
 }
 
 const ArchiveBossElement: FC<Props> = ({
   text,
   id,
   type,
+  setOpenAlert,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+
+  
 
   const { albums, setAlbums, places, setPlaces, categories, setCategories } =
     useContext(ArchiveBossContext);
@@ -37,7 +46,24 @@ const ArchiveBossElement: FC<Props> = ({
     setAnchorEl(null);
   };
 
+
+
+  const handleBeforeDelete= () => {
+    setOpenDeleteDialog(true);
+
+  };
+  const handleDialogClose = (value: boolean) => {
+    setOpenDeleteDialog(false);
+    if (value == true) {
+      handleDelete();
+    }
+  };
+    
+    
+
+
   const handleDelete = () => {
+    setOpenAlert(true);
     if (type === "album") {
       AlbumApi.deleteById(id)
         .then((res) => {
@@ -90,7 +116,7 @@ const ArchiveBossElement: FC<Props> = ({
               <MenuItem key="edit" onClick={handleClose}>
                 Rediger
               </MenuItem>
-              <MenuItem key="delete" onClick={handleDelete}>
+              <MenuItem key="delete" onClick={handleBeforeDelete}>
                 Slett
               </MenuItem>
             </Menu>
@@ -100,7 +126,13 @@ const ArchiveBossElement: FC<Props> = ({
           {text}
         </Grid>
       </Grid>
+      <DeleteDialog
+          open={openDeleteDialog}
+          onClose={handleDialogClose}
+          name = {text}
+      />
     </Grid>
+    
   );
 };
 
