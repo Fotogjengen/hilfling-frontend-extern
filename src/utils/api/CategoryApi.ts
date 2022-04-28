@@ -9,7 +9,7 @@ export const CategoryApi = {
   deleteById: async function (id: string): Promise<DeletedResult> {
     return api.delete(`/categories/${id}`);
   },
-  post: async function (category: CategoryDto): Promise<number> {
+  post: async function (category: any): Promise<number> {
     return api
       .post("/categories", category)
       .then((res) => res.data)

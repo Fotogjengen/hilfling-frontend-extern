@@ -6,14 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {
-  FormControl,
-  IconButton,
-  InputLabel,
-  Select,
-  Typography,
-  MenuItem
-} from "@mui/material";
+import { IconButton, Typography, Select, MenuItem } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
 import {
@@ -25,14 +18,20 @@ import {
   FormikHelpers,
 } from "formik";
 import * as yup from "yup";
+import { CategoryApi } from "../../../utils/api/CategoryApi";
+import { PlaceApi } from "../../../utils/api/PlaceApi";
+import { AlbumApi } from "../../../utils/api/AlbumApi";
 
 /** TODO:
  * [X] Bruke AutoComplete slik at man kan velge mellom kategori/album/sted
  * [X] Lag POST funksjonene
- * [] Fikse form-en og validering :)
+ * [X] Fikse form-en og validering :)
  *    [X] Fikse navn
- *    [] Fikse type
- * [] Bruke POST-endepunktene
+ *    [X] Fikse type
+ * [X] Bruke POST-endepunktene
+ * [] Fikse håndtering av album
+ * [] Fikse slik at det oppdateres automatisk
+ *    - Idé bruke react-context!
  */
 
 type FormProps = {
@@ -51,22 +50,32 @@ const ArchiveBossAddElements = () => {
     setOpen(false);
   };
 
-  const onSubmit = (
-    values: FormikValues,
-    props: FormikHelpers<FormProps>,
-  ) => {
-    console.log(props);
-    console.log(values);
+  const onSubmit = (values: FormikValues, props: FormikHelpers<FormProps>) => {
+    if (values.type == "Kategori") {
+      CategoryApi.post({ name: values.name })
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+    } else if (values.type == "Sted") {
+      PlaceApi.post({ name: values.name })
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+    } else if (values.type == "Album") {
+      AlbumApi.post({ name: values.name, analog: 'false' })
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+    }
     setOpen(false);
   };
 
   const validationSchema = yup.object({
     name: yup.string().required("Sliten? Du må fylle inn navn <3"),
-    type: yup.string().required("Du må legge til typen")
+    type: yup
+      .string()
+      .required("Du må legge til typen: kategori, sted eller album"),
   });
   const initialValues = {
     name: "",
-    type: types[0]
+    type: "",
   };
 
   return (
@@ -92,29 +101,32 @@ const ArchiveBossAddElements = () => {
                   Denne funksjonen skal hovedsakelig brukes av arkivsjef.
                 </DialogContentText>
                 <br />
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                  {/* TODO: Add onChange and value */}
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    label="Type"
-                  >
-                    {types.map((type, index) => (
-                      <MenuItem key={index} value={type}>
-                        {type}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
                 <Field
                   as={TextField}
                   name="name"
                   label="Navn"
                   error={props.errors.name && props.touched.name}
-                  helperText={<ErrorMessage name="name" />}
                   fullWidth
                 />
+                <Field
+                  as={TextField}
+                  sx={{ marginTop: 1.5 }}
+                  name="type"
+                  label="Type"
+                  error={props.errors.type && props.touched.type}
+                  fullWidth
+                  select
+                >
+                  {types.map((type, index) => {
+                    return (
+                      <MenuItem value={type} key={index}>
+                        {type}
+                      </MenuItem>
+                    );
+                  })}
+                </Field>
+                <ErrorMessage name="name" />
+                <ErrorMessage name="type" />
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Avbryt</Button>

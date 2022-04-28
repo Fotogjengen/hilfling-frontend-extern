@@ -11,7 +11,7 @@ export const AlbumApi = {
   deleteById: async function (id: string): Promise<DeletedResult> {
     return api.delete(`/albums/${id}`);
   },
-  post: async function (album: AlbumDto): Promise<number> {
+  post: async function (album: any): Promise<number> {
     return api
       .post("/albums", album)
       .then((res) => res.data)
