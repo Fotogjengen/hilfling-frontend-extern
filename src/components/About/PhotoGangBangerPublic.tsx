@@ -22,7 +22,7 @@ const PhotoGangBangerPublic: FC<Props> = ({
     alert("Hei");
   };
 
-  const mailTo = "mailto:" + email;
+  const mailTo = "mailto: " + email;
   return (
     <div className={styles.profile}>
       <div className={styles.profileImage}>
