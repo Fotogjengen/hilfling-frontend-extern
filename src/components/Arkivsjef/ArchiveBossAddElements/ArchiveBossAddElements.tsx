@@ -6,7 +6,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton, Typography, MenuItem, Radio, RadioGroup} from "@mui/material";
+import {
+  IconButton,
+  Typography,
+  MenuItem,
+  Checkbox,
+} from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikValues } from "formik";
@@ -22,14 +27,14 @@ import { AlbumApi } from "../../../utils/api/AlbumApi";
  *    [X] Fikse navn
  *    [X] Fikse type
  * [X] Bruke POST-endepunktene
- * [] Fikse håndtering av album
+ * [X] Fikse håndtering av album
  * [] Fikse slik at det oppdateres automatisk
  *    - Idé bruke react-context!
  */
 
 const ArchiveBossAddElements = () => {
   const [open, setOpen] = useState(false);
-  const types = ["Kategori", "Sted", "Album"];
+  const types: string[] = ["Kategori", "Sted", "Album"];
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,9 +53,9 @@ const ArchiveBossAddElements = () => {
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
     } else if (values.type == "Album") {
-      console.log(values.name, values.type);
-      console.log({ title: values.name, analog: true });
-      AlbumApi.post({ title: values.name, analog: true })
+      console.log(values.albumType);
+      console.log({ title: values.name, isAnalog: values.albumType });
+      AlbumApi.post({ title: values.name, isAnalog: values.albumType })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
     }
@@ -58,16 +63,16 @@ const ArchiveBossAddElements = () => {
   };
 
   const validationSchema = yup.object({
-    name: yup.string().required("Sliten? Du må fylle inn navn <3"),
+    name: yup.string().required("Sliten? Du må fylle inn navn ❤️"),
     type: yup
       .string()
       .required("Du må legge til typen: kategori, sted eller album"),
-    radioGroup: yup.string().required("A radio option is required")
+    albumType: yup.boolean(),
   });
   const initialValues = {
     name: "",
     type: "",
-    radioGroup: ""
+    albumType: false,
   };
 
   return (
@@ -117,8 +122,21 @@ const ArchiveBossAddElements = () => {
                     );
                   })}
                 </Field>
+                {props.values.type === "Album" ? (
+                  <Field
+                    as={Checkbox}
+                    sx={{ marginTop: 1.5 }}
+                    name="albumType"
+                    label="Er dette et analog?"
+                    error={props.errors.albumType && props.touched.albumType}
+                    type="checkbox"
+                  />
+                ) : (
+                  ""
+                )}
                 <ErrorMessage name="name" />
                 <ErrorMessage name="type" />
+                {props.values.albumType}
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Avbryt</Button>
