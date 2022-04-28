@@ -13,3 +13,12 @@ export interface PaginatedResult<T> {
         totalRecords: number;
     };
 }
+
+export type DeletedResult = {
+  config: object;
+  headers: object;
+  request: any;
+  status: number;
+  statusText: string;
+  data: number;
+};

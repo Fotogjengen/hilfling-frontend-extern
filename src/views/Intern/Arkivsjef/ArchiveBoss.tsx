@@ -11,12 +11,11 @@ import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
 import { ArchiveBossContext } from "./ArchiveBossContext";
 
-
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
-  const [openAlert, setOpenAlert] = React.useState(true);
+  const [openAlert, setOpenAlert] = React.useState(false);
   const [lastDeletedName, setLastDeletedName] = React.useState("Deleted");
 
   useEffect(() => {

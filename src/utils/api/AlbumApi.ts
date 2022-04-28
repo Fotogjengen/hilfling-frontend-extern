@@ -2,6 +2,7 @@ import { api } from "./api";
 import { AlbumDto } from "../../../generated";
 import { PaginatedResult } from "./types";
 
+
 export type DeletedResult = {
   config: object;
   headers: object;
