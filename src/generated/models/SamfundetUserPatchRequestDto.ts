@@ -84,7 +84,7 @@ export class SamfundetUserPatchRequestDtoBuilder
     return this;
   }
 
-  withSecurityLevel(securityLevel?: SecurityLevelDto) {
+  withSecurityLevel(securityLevel?: SecurityLevelDto): SamfundetUserPatchRequestDtoBuilder {
     if (securityLevel) {
       this.dto.securityLevel = securityLevel;
     }

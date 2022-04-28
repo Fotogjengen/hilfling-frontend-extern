@@ -19,7 +19,6 @@ export const PhotoGangBangerApi = {
   },
 
   patch: async function (dto: PhotoGangBangerPatchRequestDto): Promise<PhotoGangBangerDto | null> {
-    console.log(dto)
     return api.patch("/photo_gang_bangers", dto).then(res => res.data)
   }
 };

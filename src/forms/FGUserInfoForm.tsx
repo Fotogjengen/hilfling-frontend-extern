@@ -15,6 +15,7 @@ import {
   SemesterStart,
 } from "../generated";
 import Select from "../components/Form/Select";
+import SelectWithFreetextOption from "../components/Form/SelectWithFreetextOption";
 
 export interface FGUserInfoFormIV {
   firstName?: string;
@@ -42,10 +43,9 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const onSubmit = (values: FGUserInfoFormIV): Promise<boolean | null> => {
-    const returnValue: boolean | null = null;
     setIsEditing(!isEditing);
-
-    if (!isEditing) {
+    
+    if (!isEditing || values === initialValues) {
       return new Promise<boolean | null>((resolve) => resolve(null));
     }
 
@@ -63,7 +63,6 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
       values.phoneNumber
         ? values.phoneNumber
         : undefined;
-    console.log(typeof phoneNumber);
     const sex =
       values.sex !== gangBanger.samfundetUser?.sex && values.sex
         ? values.sex
@@ -112,8 +111,6 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
           .withSemesterStart(semesterStart)
           .withRelationShipStatus(relationshipStatus).dto;
 
-      console.log(request);
-
       return PhotoGangBangerApi.patch(request)
         .then(() => true)
         .catch(() => false);
@@ -125,6 +122,27 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
     // TODO: Do validation
     console.log("validate", values);
     const errors: Errors = {};
+    if (values["firstName"].length <= 0) {
+      errors["firstName"] = "Fornavn kan ikke være kortere enn én bokstav.";
+    }
+    if (values["lastName"].length <= 0) {
+      errors["firstName"] = "Etternavn kan ikke være kortere enn én bokstav.";
+    }
+    const semesterStartRegex = /^[HV][0-9][0-9][0-9][0-9]$/g;
+    if (!semesterStartRegex.test(values["semesterStart"])) {
+      errors["semesterStart"] =
+        "Semesterstart må være på formen [HV][Opptaksår], f.eks. V2022.";
+    }
+    const zipCodeRegex = /^[0-9][0-9][0-9][0-9]$/g;
+    if (!zipCodeRegex.test(values["zipCode"]) && values["zipCode"].length > 0) {
+      errors["zipCode"] = "Postnummeret er ikke gyldig.";
+    }
+    const phoneNumberRegex = /^[49][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/g;
+    if (!phoneNumberRegex.test(values["phoneNumber"]) && !phoneNumberRegex.test(values["phoneNumber"].value)) {
+      console.log(!phoneNumberRegex.test(values["phoneNumber"]))
+      errors["phoneNumber"] = "Telefonnummeret må være et norskt mobilnummer.";
+    }
+
     return errors;
   };
 
@@ -134,7 +152,7 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
         onSubmit={onSubmit}
         initialValues={initialValues}
         validate={validate}
-        submitButtonDisabled={false}
+        submitButtonDisabled={isEditing}
         submitButtonText={isEditing ? "Lagre" : "Rediger"}
         variant="text"
       >
@@ -211,13 +229,33 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
           </Grid>
           {/*Sex*/}
           <Grid item xs={12}>
-            <TextField
+            <SelectWithFreetextOption
+              freetextOptionName="Annet"
               name="sex"
               label="Kjønn"
               fullWidth
               required
               disabled={!isEditing}
-            />
+            >
+              <MenuItem
+                key={`sex-kvinne`}
+                value={"Kvinne"}
+              >
+                Kvinne
+              </MenuItem>
+              <MenuItem
+                  key={`sex-mann`}
+                  value={"Mann"}
+              >
+                Mann
+              </MenuItem>
+              <MenuItem
+                  key={`sex-annet`}
+                  value={"Annet"}
+              >
+                Annet
+              </MenuItem>
+            </SelectWithFreetextOption>
           </Grid>
           {/*Relationship status*/}
           <Grid item xs={12}>

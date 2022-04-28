@@ -26,7 +26,7 @@ const SubmitButton = ({
   float,
   children,
   onClick,
-  disabled = false,
+  disabled = true,
   variant
 }: Props & ButtonProps & WithStyles<typeof styles>) => {
   const { errors } = useForm();
@@ -39,7 +39,7 @@ const SubmitButton = ({
       })}
       type="button"
       variant={variant}
-      disabled={!isEmpty(errors) || disabled}
+      disabled={(!isEmpty(errors) && disabled)}
       onClick={onClick}
     >
       {children}

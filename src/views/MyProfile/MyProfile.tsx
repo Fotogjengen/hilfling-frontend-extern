@@ -25,7 +25,6 @@ const MyProfile: FC = () => {
   useEffect(() => {
     PhotoGangBangerApi.getById(testId)
       .then((res) => {
-        console.log(res);
         setGangBanger(res);
       })
       .catch((e) => console.error(e))

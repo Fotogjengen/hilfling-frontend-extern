@@ -53,7 +53,7 @@ const Form: FC<FormProps> = ({
 
   const _onSubmit = (e: any) => {
     e.preventDefault();
-    onSubmit(values).then((res) => {
+    return onSubmit(values).then((res) => {
       if (res == true) {
         setAlert("Suksess! :)");
         setShowAlert(true);

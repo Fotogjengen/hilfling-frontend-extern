@@ -1,7 +1,7 @@
 import { PhotoGangBangerId } from "./PhotoGangBangerId";
 import { SemesterStart } from "./SemesterStart";
 import { PositionDto } from "./PositionDto";
-import { PhotoGangBangerDto, RelationShipStatus } from "./PhotoGangBangerDto";
+import { RelationShipStatus } from "./PhotoGangBangerDto";
 import {
   SamfundetUserPatchRequestDto,
   SamfundetUserPatchRequestDtoBuilder,
@@ -68,7 +68,6 @@ export class PhotoGangBangerPatchRequestDtoBuilder
     if (city) {
       this.dto.city = city;
     }
-    console.log(this.dto)
     return this;
   }
 
