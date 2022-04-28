@@ -66,8 +66,9 @@ export class PhotoGangBangerPatchRequestDtoBuilder
 
   withCity(city?: string): PhotoGangBangerPatchRequestDtoBuilder {
     if (city) {
-      this.dto.city;
+      this.dto.city = city;
     }
+    console.log(this.dto)
     return this;
   }
 

@@ -12,6 +12,7 @@ import {
   RelationShipStatus,
   SamfundetUserPatchRequestDto,
   SamfundetUserPatchRequestDtoBuilder,
+  SemesterStart,
 } from "../generated";
 import Select from "../components/Form/Select";
 
@@ -47,7 +48,6 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
     if (!isEditing) {
       return new Promise<boolean | null>((resolve) => resolve(null));
     }
-    console.log(values.relationShipStatus)
 
     const firstName =
       values.firstName !== gangBanger.samfundetUser?.firstName &&
@@ -63,6 +63,7 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
       values.phoneNumber
         ? values.phoneNumber
         : undefined;
+    console.log(typeof phoneNumber);
     const sex =
       values.sex !== gangBanger.samfundetUser?.sex && values.sex
         ? values.sex
@@ -75,6 +76,11 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
     const zipCode =
       values.zipCode !== gangBanger.zipCode && values.zipCode
         ? values.zipCode
+        : undefined;
+    const semesterStart: SemesterStart | undefined =
+      values.semesterStart !== gangBanger.semesterStart?.value &&
+      values.semesterStart
+        ? ({ value: values.semesterStart } as SemesterStart)
         : undefined;
     const city =
       values.city !== gangBanger.city && values.city ? values.city : undefined;
@@ -103,7 +109,10 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
           .withAddress(address)
           .withZipCode(zipCode)
           .withCity(city)
+          .withSemesterStart(semesterStart)
           .withRelationShipStatus(relationshipStatus).dto;
+
+      console.log(request);
 
       return PhotoGangBangerApi.patch(request)
         .then(() => true)
@@ -221,19 +230,19 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
             >
               <MenuItem
                 key={`relationshipstatus-single`}
-                value={RelationShipStatus.SINGLE.valueOf()}
+                value={RelationShipStatus.SINGLE}
               >
                 {RelationShipStatus.SINGLE}
               </MenuItem>
               <MenuItem
                 key={`relationshipstatus-married`}
-                value={RelationShipStatus.MARRIED.valueOf()}
+                value={RelationShipStatus.MARRIED}
               >
                 {RelationShipStatus.MARRIED}
               </MenuItem>
               <MenuItem
                 key={`relationshipstatus-relationship`}
-                value={RelationShipStatus.RELATIONSHIP.valueOf()}
+                value={RelationShipStatus.RELATIONSHIP}
               >
                 {RelationShipStatus.RELATIONSHIP}
               </MenuItem>

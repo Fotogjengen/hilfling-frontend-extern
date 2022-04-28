@@ -31,7 +31,7 @@ const TextField: FC<
         label={label}
         onChange={(e) => onChange(name, e.target.value)}
         onBlur={() => setTouched(true)}
-        value={values[name]}
+        value={typeof values[name] === "object" ? values[name].value : values[name]}
         disabled={disabled}
       />
       <FormHelperText className={classes.helperText}>{error}</FormHelperText>

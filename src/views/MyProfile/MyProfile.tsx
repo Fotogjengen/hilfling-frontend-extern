@@ -20,7 +20,7 @@ const MyProfile: FC = () => {
   const [gangBanger, setGangBanger] = useState<PhotoGangBangerDto>({});
   const [isLoaded, setIsloaded] = useState<boolean>(false);
 
-  const testId = "6a89444f-25f6-44d9-8a73-94587d72b839";
+  const testId = "7a89444f-25f6-44d9-8a73-94587d72b839";
 
   useEffect(() => {
     PhotoGangBangerApi.getById(testId)
