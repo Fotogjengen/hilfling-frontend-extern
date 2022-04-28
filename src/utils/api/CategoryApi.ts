@@ -1,6 +1,7 @@
 import { api } from "./api";
 import { CategoryDto } from "../../../generated";
-import { DeletedResult, PaginatedResult } from "./types";
+import { PaginatedResult } from "./types";
+import { DeletedResult } from "./AlbumApi";
 
 export const CategoryApi = {
   getAll: async function (): Promise<PaginatedResult<CategoryDto>> {
