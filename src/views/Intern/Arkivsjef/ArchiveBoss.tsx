@@ -71,7 +71,11 @@ const ArchiveBoss: FC = () => {
 
   return (
     <>
-      <DeleteAlert message={lastDeletedName} open={openAlert} setOpen={setOpenAlert} />
+      <DeleteAlert
+        message={lastDeletedName}
+        open={openAlert}
+        setOpen={setOpenAlert}
+      />
       <ArchiveBossContext.Provider
         value={{
           setAlbums,
@@ -106,11 +110,11 @@ const ArchiveBoss: FC = () => {
               </Grid>
               <Grid item xs={10}>
                 <Typography>
-                  Denne siden er for fotogjengens Arkivsjef. Her kan du legge til,
-                  slette, eller endre Album, Kategorier, Steder eller Medium. Vær
-                  meget forsiktig med å forandre albumnavn dersom albumet har
-                  bilder liggende i seg - det ødelegger mappestrukturen til
-                  bildene.
+                  Denne siden er for fotogjengens Arkivsjef. Her kan du legge
+                  til, slette, eller endre Album, Kategorier, Steder eller
+                  Medium. Vær meget forsiktig med å forandre albumnavn dersom
+                  albumet har bilder liggende i seg - det ødelegger
+                  mappestrukturen til bildene.
                 </Typography>
               </Grid>
             </Grid>

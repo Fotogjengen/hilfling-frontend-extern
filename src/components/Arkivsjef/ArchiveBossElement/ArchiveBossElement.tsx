@@ -28,7 +28,6 @@ const ArchiveBossElement: FC<Props> = ({
   setOpenAlert,
   setLastDeletedName,
 }: Props) => {
-
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
@@ -44,10 +43,9 @@ const ArchiveBossElement: FC<Props> = ({
     setAnchorEl(null);
   };
 
-  const handleBeforeDelete= () => {
+  const handleBeforeDelete = () => {
     handleClose();
     setOpenDeleteDialog(true);
-
   };
   const handleDialogClose = (value: boolean) => {
     setOpenDeleteDialog(false);
@@ -55,13 +53,13 @@ const ArchiveBossElement: FC<Props> = ({
       handleDelete();
     }
   };
-    
+
   const handleDelete = () => {
     setOpenAlert(true);
-    setLastDeletedName(`${text ?? ''} ble slettet`);
+    setLastDeletedName(`${text ?? ""} ble slettet`);
     if (type === "album") {
       AlbumApi.deleteById(id)
-        .then((res) => { 
+        .then((res) => {
           if (res.data == 1) {
             setAlbums(albums.filter((album) => album?.albumId.id !== id));
           }
@@ -122,12 +120,11 @@ const ArchiveBossElement: FC<Props> = ({
         </Grid>
       </Grid>
       <DeleteDialog
-          open={openDeleteDialog}
-          onClose={handleDialogClose}
-          name = {text}
+        open={openDeleteDialog}
+        onClose={handleDialogClose}
+        name={text}
       />
     </Grid>
-    
   );
 };
 

@@ -10,13 +10,7 @@ interface Props {
   name?: string;
 }
 
-const DeleteDialog: FC<Props> = ({
-  open,
-  onClose,
-  name,
-
-}: Props) => {
-
+const DeleteDialog: FC<Props> = ({ open, onClose, name }: Props) => {
   const handleClose = () => {
     onClose(false);
   };
@@ -26,17 +20,28 @@ const DeleteDialog: FC<Props> = ({
   };
 
   return (
-    <Dialog  onClose={handleClose} open={open}>
-      <div className={styles.container} >
+    <Dialog onClose={handleClose} open={open}>
+      <div className={styles.container}>
         <DialogTitle>Sikker på at du vil slette? {name} ?</DialogTitle>
-        <div className={styles.buttonContainer} >
-          <Button className={styles.button} variant="outlined"  onClick={() => handleButtonClick(false)}>Cancel</Button>
-          <Button className={styles.button} variant="contained" onClick={() => handleButtonClick(true)}>Delete</Button>
+        <div className={styles.buttonContainer}>
+          <Button
+            className={styles.button}
+            variant="outlined"
+            onClick={() => handleButtonClick(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={() => handleButtonClick(true)}
+          >
+            Delete
+          </Button>
         </div>
       </div>
     </Dialog>
-    
   );
-}
+};
 
 export default DeleteDialog;
