@@ -37,8 +37,8 @@ const ArchiveBoss: FC = () => {
         id={album.albumId.id}
         key={index}
         type="album"
-        setOpenAlert = {setOpenAlert}
-        setLastDeletedName = {setLastDeletedName}
+        setOpenAlert={setOpenAlert}
+        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
@@ -50,8 +50,8 @@ const ArchiveBoss: FC = () => {
         id={place.placeId.id}
         type="place"
         key={index}
-        setOpenAlert = {setOpenAlert}
-        setLastDeletedName = {setLastDeletedName}
+        setOpenAlert={setOpenAlert}
+        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
@@ -63,13 +63,11 @@ const ArchiveBoss: FC = () => {
         id={category.categoryId.id}
         type="category"
         key={index}
-        setOpenAlert = {setOpenAlert}
-        setLastDeletedName = {setLastDeletedName}
+        setOpenAlert={setOpenAlert}
+        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
-
-
 
   return (
     <>

@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 import  {Collapse, Alert } from '@mui/material';
-
 import styles from "./Alert.module.css";
-
-
 
 interface Props {
     open: boolean,
@@ -24,6 +21,5 @@ const DeleteAlert: FC<Props>= ({
     </Collapse>
   )
 }
-
 
 export default DeleteAlert;
