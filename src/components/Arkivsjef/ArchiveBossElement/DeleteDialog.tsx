@@ -28,10 +28,10 @@ const DeleteDialog: FC<Props> = ({
   return (
     <Dialog  onClose={handleClose} open={open}>
       <div className={styles.container} >
-        <DialogTitle>SIKKAR AT DELATERE {name} ?</DialogTitle>
+        <DialogTitle>Sikker på at du vil slette? {name} ?</DialogTitle>
         <div className={styles.buttonContainer} >
           <Button className={styles.button} variant="outlined"  onClick={() => handleButtonClick(false)}>Cancel</Button>
-          <Button className={styles.button} variant="contained"  onClick={() => handleButtonClick(true)}>Delete</Button>
+          <Button className={styles.button} variant="contained" onClick={() => handleButtonClick(true)}>Delete</Button>
         </div>
       </div>
     </Dialog>

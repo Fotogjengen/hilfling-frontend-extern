@@ -16,6 +16,8 @@ const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
+  const [openAlert, setOpenAlert] = React.useState(true);
+  const [lastDeletedName, setLastDeletedName] = React.useState("Deleted");
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -37,6 +39,7 @@ const ArchiveBoss: FC = () => {
         key={index}
         type="album"
         setOpenAlert = {setOpenAlert}
+        setLastDeletedName = {setLastDeletedName}
       />
     ));
   };
@@ -49,6 +52,7 @@ const ArchiveBoss: FC = () => {
         type="place"
         key={index}
         setOpenAlert = {setOpenAlert}
+        setLastDeletedName = {setLastDeletedName}
       />
     ));
   };
@@ -61,15 +65,16 @@ const ArchiveBoss: FC = () => {
         type="category"
         key={index}
         setOpenAlert = {setOpenAlert}
+        setLastDeletedName = {setLastDeletedName}
       />
     ));
   };
 
-  const [openAlert, setOpenAlert] = React.useState(false);
+
 
   return (
     <>
-      <DeleteAlert message="it is deletert min frendoso" open={openAlert} setOpen={setOpenAlert} />
+      <DeleteAlert message={lastDeletedName} open={openAlert} setOpen={setOpenAlert} />
       <ArchiveBossContext.Provider
         value={{
           setAlbums,

@@ -20,6 +20,7 @@ interface Props {
   type: string;
 
   setOpenAlert: (value: boolean) => void;
+  setLastDeletedName: (value: string) => void;
 }
 
 const ArchiveBossElement: FC<Props> = ({
@@ -27,6 +28,7 @@ const ArchiveBossElement: FC<Props> = ({
   id,
   type,
   setOpenAlert,
+  setLastDeletedName,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -49,6 +51,7 @@ const ArchiveBossElement: FC<Props> = ({
 
 
   const handleBeforeDelete= () => {
+    handleClose();
     setOpenDeleteDialog(true);
 
   };
@@ -64,9 +67,10 @@ const ArchiveBossElement: FC<Props> = ({
 
   const handleDelete = () => {
     setOpenAlert(true);
+    setLastDeletedName(`${text ?? ''} ble slettet`);
     if (type === "album") {
       AlbumApi.deleteById(id)
-        .then((res) => {
+        .then((res) => { 
           if (res.data == 1) {
             setAlbums(albums.filter((album) => album?.albumId.id !== id));
           }
