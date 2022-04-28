@@ -5,7 +5,7 @@
 import type { AlbumId } from './AlbumId';
 
 export type AlbumDto = {
-    albumId?: AlbumId;
-    title?: string;
-    analog?: boolean;
+    albumId: AlbumId;
+    title: string;
+    analog: boolean;
 }
