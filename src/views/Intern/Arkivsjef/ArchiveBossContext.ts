@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
+import { AlbumDto, PlaceDto, CategoryDto } from "../../../generated";
 
 interface IArchiveBossContext {
   albums: AlbumDto[];
