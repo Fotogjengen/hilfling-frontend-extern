@@ -6,17 +6,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton, Typography, Select, MenuItem } from "@mui/material";
+import { IconButton, Typography, MenuItem, Radio, RadioGroup} from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikValues,
-  FormikHelpers,
-} from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikValues } from "formik";
 import * as yup from "yup";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
@@ -34,11 +27,6 @@ import { AlbumApi } from "../../../utils/api/AlbumApi";
  *    - Idé bruke react-context!
  */
 
-type FormProps = {
-  name: string;
-  type: string;
-};
-
 const ArchiveBossAddElements = () => {
   const [open, setOpen] = useState(false);
   const types = ["Kategori", "Sted", "Album"];
@@ -50,7 +38,7 @@ const ArchiveBossAddElements = () => {
     setOpen(false);
   };
 
-  const onSubmit = (values: FormikValues, props: FormikHelpers<FormProps>) => {
+  const onSubmit = (values: FormikValues) => {
     if (values.type == "Kategori") {
       CategoryApi.post({ name: values.name })
         .then((res) => console.log(res))
@@ -60,7 +48,9 @@ const ArchiveBossAddElements = () => {
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
     } else if (values.type == "Album") {
-      AlbumApi.post({ name: values.name, analog: 'false' })
+      console.log(values.name, values.type);
+      console.log({ title: values.name, analog: true });
+      AlbumApi.post({ title: values.name, analog: true })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
     }
@@ -72,10 +62,12 @@ const ArchiveBossAddElements = () => {
     type: yup
       .string()
       .required("Du må legge til typen: kategori, sted eller album"),
+    radioGroup: yup.string().required("A radio option is required")
   });
   const initialValues = {
     name: "",
     type: "",
+    radioGroup: ""
   };
 
   return (
