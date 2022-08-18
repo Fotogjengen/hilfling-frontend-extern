@@ -1,7 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
-import { Grid, Typography } from "@mui/material";
+import DeleteAlert from "../../../components/Arkivsjef/DeleteAlert/DeleteAlert";
+import { Grid, IconButton, Typography } from "@mui/material";
+import { AddCircle } from "@mui/icons-material";
 import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
@@ -14,6 +16,8 @@ const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [lastDeletedName, setLastDeletedName] = React.useState("Deleted");
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -34,6 +38,8 @@ const ArchiveBoss: FC = () => {
         id={album.albumId.id}
         key={index}
         type="album"
+        setOpenAlert={setOpenAlert}
+        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
@@ -45,6 +51,8 @@ const ArchiveBoss: FC = () => {
         id={place.placeId.id}
         type="place"
         key={index}
+        setOpenAlert={setOpenAlert}
+        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
@@ -56,11 +64,19 @@ const ArchiveBoss: FC = () => {
         id={category.categoryId.id}
         type="category"
         key={index}
+        setOpenAlert={setOpenAlert}
+        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
 
   return (
+    <>
+    <DeleteAlert
+        message={lastDeletedName}
+        open={openAlert}
+        setOpen={setOpenAlert}
+      />
     <ArchiveBossContext.Provider
       value={{
         setAlbums,
@@ -114,6 +130,7 @@ const ArchiveBoss: FC = () => {
         </ArchiveBossAccordion>
       </div>
     </ArchiveBossContext.Provider>
+    </>
   );
 };
 
