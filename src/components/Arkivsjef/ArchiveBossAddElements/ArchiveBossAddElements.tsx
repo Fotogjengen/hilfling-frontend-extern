@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,12 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {
-  IconButton,
-  Typography,
-  MenuItem,
-  Checkbox,
-} from "@mui/material";
+import { IconButton, Typography, MenuItem, Checkbox } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikValues } from "formik";
@@ -19,22 +14,13 @@ import * as yup from "yup";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
-
-/** TODO:
- * [X] Bruke AutoComplete slik at man kan velge mellom kategori/album/sted
- * [X] Lag POST funksjonene
- * [X] Fikse form-en og validering :)
- *    [X] Fikse navn
- *    [X] Fikse type
- * [X] Bruke POST-endepunktene
- * [X] Fikse håndtering av album
- * [] Fikse slik at det oppdateres automatisk
- *    - Idé bruke react-context!
- */
+import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossContext";
 
 const ArchiveBossAddElements = () => {
   const [open, setOpen] = useState(false);
   const types: string[] = ["Kategori", "Sted", "Album"];
+  const { albums, setAlbums, places, setPlaces, categories, setCategories } =
+    useContext(ArchiveBossContext);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,16 +34,30 @@ const ArchiveBossAddElements = () => {
       CategoryApi.post({ name: values.name })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
+      // TODO: On-hold til vi får id fra backend
+      setCategories([
+        ...categories,
+        { categoryId: { id: "123" }, name: values.name },
+      ]);
     } else if (values.type == "Sted") {
       PlaceApi.post({ name: values.name })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
+      // TODO: On-hold til vi får id fra backend
+      setPlaces([...places, { placeId: { id: "123" }, name: values.name }]);
     } else if (values.type == "Album") {
-      console.log(values.albumType);
-      console.log({ title: values.name, isAnalog: values.albumType });
       AlbumApi.post({ title: values.name, isAnalog: values.albumType })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
+      // TODO: On-hold til vi får id fra backend
+      setAlbums([
+        ...albums,
+        {
+          albumId: { id: "123" },
+          title: values.name,
+          analog: values.albumType,
+        },
+      ]);
     }
     setOpen(false);
   };
@@ -87,7 +87,20 @@ const ArchiveBossAddElements = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {(props) => (
+          {(props: {
+            errors: { name: string; type: string; albumType: boolean };
+            touched: { name: string; type: string; albumType: boolean };
+            values: {
+              type: string;
+              albumType:
+                | boolean
+                | React.ReactChild
+                | React.ReactFragment
+                | React.ReactPortal
+                | null
+                | undefined;
+            };
+          }) => (
             <Form>
               <DialogTitle>
                 Legg til nytt album, ny kategori eller nytt sted
@@ -127,7 +140,6 @@ const ArchiveBossAddElements = () => {
                     as={Checkbox}
                     sx={{ marginTop: 1.5 }}
                     name="albumType"
-                    label="Er dette et analog?"
                     error={props.errors.albumType && props.touched.albumType}
                     type="checkbox"
                   />
