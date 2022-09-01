@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton, Typography, MenuItem, Checkbox } from "@mui/material";
+import { IconButton, Typography, MenuItem, Checkbox, Grid } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikValues } from "formik";
@@ -76,7 +76,7 @@ const ArchiveBossAddElements = () => {
   };
 
   return (
-    <div>
+    <>
       <IconButton aria-label="add" onClick={handleClickOpen}>
         <AddCircle className={styles.svgicon} />
       </IconButton>
@@ -136,13 +136,26 @@ const ArchiveBossAddElements = () => {
                   })}
                 </Field>
                 {props.values.type === "Album" ? (
-                  <Field
-                    as={Checkbox}
-                    sx={{ marginTop: 1.5 }}
-                    name="albumType"
-                    error={props.errors.albumType && props.touched.albumType}
-                    type="checkbox"
-                  />
+                  <Grid
+                    container
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                  >
+                    <Grid item xs={6}>
+                      <Typography>Skal dette være et analogt album?</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Field
+                        as={Checkbox}
+                        name="albumType"
+                        error={
+                          props.errors.albumType && props.touched.albumType
+                        }
+                        type="checkbox"
+                      />
+                    </Grid>
+                  </Grid>
                 ) : (
                   ""
                 )}
@@ -152,7 +165,7 @@ const ArchiveBossAddElements = () => {
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Avbryt</Button>
-                <Button variant="contained" type="submit">
+                <Button variant="contained" type="submit" fullWidth>
                   Lag ny
                 </Button>
               </DialogActions>
@@ -160,7 +173,7 @@ const ArchiveBossAddElements = () => {
           )}
         </Formik>
       </Dialog>
-    </div>
+    </>
   );
 };
 
