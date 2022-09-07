@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
 import { Grid, MenuItem } from "@mui/material";
-import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
 import TextField from "../components/Form/TextField";
@@ -161,10 +160,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
                 </Select>
               </Grid>
 
-              <Grid item xs={12}>
-                <DatePicker name="date" label="Dato" fullWidth />
-              </Grid>
-
+              <Grid item xs={12}/>
               <Grid item xs={12}>
                 <TextField name="motive" label="Motiv" fullWidth required />
               </Grid>
