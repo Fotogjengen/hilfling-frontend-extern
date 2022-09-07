@@ -35,7 +35,7 @@ jobs:
       - name: Install dependenceis
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: npm ci
-      #- run: npm run build --if-present
+      - run: npm run build --if-present
       - run: npm test
 
   build-and-deploy:
