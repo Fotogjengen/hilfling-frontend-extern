@@ -32,10 +32,12 @@ const Select: FC<FormFieldProps<SelectProps & WithStyles<typeof styles>>> = ({
   const error = touched && errors[name];
   return (
     <FormControl fullWidth={fullWidth}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
+      <InputLabel id={`${id}-label-id`} htmlFor={name}>{label}</InputLabel>
       <MuiSelect
         id={id}
+        labelId={`${id}-label-id`}
         name={name}
+        label={label}
         onChange={(e) => onChange(name, e.target.value)}
         value={values[name]}
         onBlur={() => setTouched(true)}
