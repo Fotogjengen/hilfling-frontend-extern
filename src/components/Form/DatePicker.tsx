@@ -22,7 +22,7 @@ const styles = () =>
 let idCount = 0;
 
 const DatePicker: FC<
-  FormFieldProps<MobileDatePickerProps> &
+  FormFieldProps<MobileDatePickerProps<Date>> &
     WithStyles<typeof styles> & { fullWidth?: boolean }
 > = ({ name, label, fullWidth = false }) => {
   const { values, onChange } = useForm();
