@@ -46,5 +46,4 @@ const DatePicker: FC<
     </LocalizationProvider>
   );
 }; 
-// TODO: Pipeline is mad about this 
 export default withStyles(styles)(DatePicker);
