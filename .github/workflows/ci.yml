@@ -62,9 +62,6 @@ jobs:
   lint:
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v1
-          with:
-            reviewdog_version: latest
         - name: Run eslint with reviewdog
           uses: reviewdog/action-eslint@v1.0.0
           env:
