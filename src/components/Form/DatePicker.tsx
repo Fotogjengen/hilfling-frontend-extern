@@ -8,7 +8,7 @@ import {
   MobileDatePickerProps,
 } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 
 const styles = () =>
   createStyles({
@@ -22,7 +22,7 @@ const styles = () =>
 let idCount = 0;
 
 const DatePicker: FC<
-  FormFieldProps<MobileDatePickerProps> &
+  FormFieldProps<MobileDatePickerProps<Date>> &
     WithStyles<typeof styles> & { fullWidth?: boolean }
 > = ({ name, label, fullWidth = false }) => {
   const { values, onChange } = useForm();
@@ -39,7 +39,9 @@ const DatePicker: FC<
         label={label}
         value={values[name]}
         onChange={handleDateChange}
-        renderInput={(params) => <TextField id={id} {...params} fullWidth={fullWidth} />}
+        renderInput={(params: TextFieldProps ) => (
+          <TextField id={id} {...params} fullWidth={fullWidth} />
+        )}
       />
     </LocalizationProvider>
   );
