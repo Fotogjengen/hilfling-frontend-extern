@@ -8,7 +8,7 @@ import {
   MobileDatePickerProps,
 } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 
 const styles = () =>
   createStyles({
@@ -39,7 +39,7 @@ const DatePicker: FC<
         label={label}
         value={values[name]}
         onChange={handleDateChange}
-        renderInput={(params) => (
+        renderInput={(params: TextFieldProps ) => (
           <TextField id={id} {...params} fullWidth={fullWidth} />
         )}
       />
