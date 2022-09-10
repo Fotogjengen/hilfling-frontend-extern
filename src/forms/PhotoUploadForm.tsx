@@ -6,6 +6,7 @@ import TextField from "../components/Form/TextField";
 import Form from "../components/Form/Form";
 import { Errors, Validate } from "../components/Form/types";
 import { DragNDropFile } from "../types";
+//import DatePicker from "../components/Form/DatePicker";
 import cx from "classnames";
 import styles from "../views/Intern/PhotoUpload/PhotoUpload.module.css";
 import { useDropzone } from "react-dropzone";
@@ -159,8 +160,9 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
                   ))}
                 </Select>
               </Grid>
-
-              <Grid item xs={12}/>
+              {/* TODO: Pipeline is not happy with this:// <Grid item xs={12}>
+                  <DatePicker name="date" label="Dato" fullWidth />
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField name="motive" label="Motiv" fullWidth required />
               </Grid>
@@ -212,12 +214,12 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <Grid item xs={12}>
                 <Select name="eventOwner" label="Eier" fullWidth required>
                   {eventOwners.map((eventOwner, index) => (
-                      <MenuItem
-                          key={`event-owner-item-${index}`}
-                          value={eventOwner.name}
-                      >
-                        {eventOwner.name}
-                      </MenuItem>
+                    <MenuItem
+                      key={`event-owner-item-${index}`}
+                      value={eventOwner.name}
+                    >
+                      {eventOwner.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </Grid>
