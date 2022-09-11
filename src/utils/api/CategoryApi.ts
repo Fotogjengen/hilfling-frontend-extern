@@ -1,7 +1,6 @@
 import { api } from "./api";
 import { CategoryDto } from "../../../generated";
-import { PaginatedResult } from "./types";
-import { DeletedResult } from "./AlbumApi";
+import { DeletedResult, PaginatedResult } from "./types";
 
 export const CategoryApi = {
   getAll: async function (): Promise<PaginatedResult<CategoryDto>> {
@@ -9,5 +8,12 @@ export const CategoryApi = {
   },
   deleteById: async function (id: string): Promise<DeletedResult> {
     return api.delete(`/categories/${id}`);
+  },
+  // eslint-disable-next-line
+  post: async function (category: any): Promise<number> {
+    return api
+      .post("/categories", category)
+      .then((res) => res.data)
+      .catch((e) => console.log(e));
   },
 };
