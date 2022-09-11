@@ -2,21 +2,22 @@ import React, { FC, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import DeleteAlert from "../../../components/Arkivsjef/DeleteAlert/DeleteAlert";
-import { Grid, IconButton, Typography } from "@mui/material";
-import { AddCircle } from "@mui/icons-material";
+import { Grid, Typography } from "@mui/material";
 import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
 import { ArchiveBossContext } from "./ArchiveBossContext";
+import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
+  const [update, setUpdate] = useState(false);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
-  const [openAlert, setOpenAlert] = React.useState(false);
-  const [lastDeletedName, setLastDeletedName] = React.useState("Deleted");
+  const [openAlert, setOpenAlert] = useState(false);
+  const [lastDeletedName, setLastDeletedName] = useState("Deleted");
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -84,10 +85,13 @@ const ArchiveBoss: FC = () => {
           categories,
           places,
           setPlaces,
+          update,
+          setUpdate,
         }}
       >
         <div className={styles.archiveBoss}>
           <h2> Arkivsjef </h2>
+
           <div className={styles.description}>
             <Grid
               container
@@ -101,11 +105,9 @@ const ArchiveBoss: FC = () => {
                   direction="column"
                   justifyContent="center"
                   alignItems="center"
+                  className={styles.addNewButton}
                 >
-                  <IconButton aria-label="add">
-                    <AddCircle className={styles.svgicon} />
-                  </IconButton>
-                  <Typography>Legg til ny</Typography>
+                  <ArchiveBossAddElements />
                 </Grid>
               </Grid>
               <Grid item xs={10}>

@@ -8,6 +8,8 @@ interface IArchiveBossContext {
   setCategories: Dispatch<SetStateAction<CategoryDto[]>>;
   places: PlaceDto[];
   setPlaces: Dispatch<SetStateAction<PlaceDto[]>>;
+  setUpdate: Dispatch<SetStateAction<boolean>>;
+  update: boolean;
 }
 
 const defaultState = {} as IArchiveBossContext;
