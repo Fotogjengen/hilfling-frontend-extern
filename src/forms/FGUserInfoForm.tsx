@@ -44,7 +44,7 @@ const FGUserInfoForm: FC<Props> = ({ initialValues, gangBanger }) => {
 
   const onSubmit = (values: FGUserInfoFormIV): Promise<boolean | null> => {
     setIsEditing(!isEditing);
-    
+
     if (!isEditing || values === initialValues) {
       return new Promise<boolean | null>((resolve) => resolve(null));
     }
