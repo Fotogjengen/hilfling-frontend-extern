@@ -1,4 +1,4 @@
-import React, {FC, useState} as React from "react";
+import React, { FC, useState } as React from "react";
 import styles from "./Header.module.css";
 
 import { useAuth0 } from "@auth0/auth0-react";
