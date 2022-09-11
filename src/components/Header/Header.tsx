@@ -1,5 +1,4 @@
-import * as React from "react";
-import { FC } from "react";
+import React, {FC, useState} as React from "react";
 import styles from "./Header.module.css";
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -20,7 +19,7 @@ const HeaderComponent: FC = () => {
   const { isAuthenticated } = useAuth0();
   const replace = useNavigate();
 
-  const [showMenu, setShowMenu] = React.useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const onMenuClick = () => setShowMenu(true);
   const onCloseClick = () => setShowMenu(false);
 
