@@ -1,73 +1,123 @@
-import React, { FC } from "react";
+import * as React from "react";
+import { FC } from "react";
 import styles from "./Header.module.css";
-import { GuiHeader } from "../../gui-components";
-import { useNavigate } from "react-router-dom";
+
 import { useAuth0 } from "@auth0/auth0-react";
-import GuiLogo from "../../gui-components/GuiLogo";
+import { Link, useNavigate } from "react-router-dom";
+import { GuiLogo } from "../../gui-components";
+import { Grow, Collapse } from "@mui/material";
+
+import ImageIcon from "@mui/icons-material/Image";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import InfoIcon from "@mui/icons-material/Info";
+import UploadIcon from "@mui/icons-material/Upload";
+import ImageSearchIcon from "@mui/icons-material/ImageSearch";
+import LockIcon from "@mui/icons-material/Lock";
+import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmailerrorred";
 
 const HeaderComponent: FC = () => {
-  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const replace = useNavigate();
 
+  const [showMenu, setShowMenu] = React.useState(false);
+  const onMenuClick = () => setShowMenu(true);
+  const onCloseClick = () => setShowMenu(false);
+
+  const handleResize = () => setShowMenu(false);
+
+  window.addEventListener("resize", handleResize);
+
+  const menuLinks = [
+    {
+      name: "Bilder",
+      to: "/search",
+      icon: <ImageIcon />,
+      noAuth: true,
+    },
+    {
+      name: "Om oss",
+      to: "/about",
+      icon: <InfoIcon />,
+      noAuth: true,
+    },
+    {
+      name: "Last opp",
+      to: "/intern/last-opp",
+      icon: <UploadIcon />,
+      noAuth: isAuthenticated,
+    },
+    {
+      name: "Søk",
+      to: "/search",
+      icon: <ImageSearchIcon />,
+      noAuth: true,
+    },
+    {
+      name: "Logg inn",
+      to: "/logg-inn",
+      icon: <LockIcon />,
+      noAuth: !isAuthenticated,
+    },
+    {
+      name: "Logg ut",
+      to: "/logg-inn",
+      icon: <NoEncryptionGmailerrorredIcon />,
+      noAuth: isAuthenticated,
+    },
+  ];
+
   return (
-    <div className={styles.header}>
-      <div style={{ color: "#1b1b1b" }}>
-        <GuiLogo size={60} onClick={() => replace("/")} />
-      </div>
-      <div className={styles.linkContainer}>
-        <GuiHeader>
-          <div
-            className={styles.headerTextElement}
-            onClick={() => replace("/search")}
-          >
-            BILDER
+    <>
+      <nav className={styles.nav}>
+        <div className={styles.navHead}>
+          <GuiLogo size={50} onClick={() => replace("/")} />
+          <div className={styles.hamburger}>
+            {showMenu ? (
+              <CloseIcon onClick={() => onCloseClick()} fontSize="large" />
+            ) : (
+              <MenuIcon onClick={() => onMenuClick()} fontSize="large" />
+            )}
           </div>
-          <div
-            className={styles.headerTextElement}
-            onClick={() => replace("/about")}
-          >
-            OM OSS
-          </div>
+        </div>
+        <Collapse in={showMenu} className={styles.navMenuList}>
+          <>
+            {menuLinks.map((link, index) => {
+              if (link.noAuth) {
+                return (
+                  <Grow
+                    key={index}
+                    in={showMenu}
+                    style={{ transformOrigin: "0 0 0" }}
+                    {...(showMenu ? { timeout: index * 500 + 500 } : {})}
+                  >
+                    <Link className={styles.menuLink} to={link.to}>
+                      {link.name} {link.icon}
+                    </Link>
+                  </Grow>
+                );
+              }
+            })}
+          </>
+        </Collapse>
+        <div className={styles.navContainer}>
+          <div className={styles.navList}>
+            <Link to="/search">BILDER</Link>
+            <Link to="/about">OM OSS</Link>
+            {isAuthenticated && <Link to="/intern/last-opp">LAST OPP</Link>}
 
-          <div
-            className={styles.headerTextElement}
-            onClick={() => replace("/intern/last-opp")}
-          >
-            LAST OPP
+            <Link to="/search">SØK</Link>
           </div>
-
-          <div
-            className={styles.headerTextElement}
-            onClick={() => replace("/search")}
-          >
-            SØK
+          <div className={styles.loggContainer}>
+            {isAuthenticated ? (
+              <Link to="/logg-inn"> LOGG UT </Link>
+            ) : (
+              <Link to="/logg-inn"> LOGG INN </Link>
+            )}
           </div>
-
-          {/* {authenticated ? (
-          <GuiHeaderLink onClick={logout}>LOGG UT</GuiHeaderLink>
-        ) : (
-          <GuiHeaderLink onClick={login}>LOGG INN</GuiHeaderLink>
-        )} */}
-        </GuiHeader>
-        <GuiHeader float="right">
-          {isAuthenticated ? (
-            <div
-              className={styles.headerTextElement}
-              onClick={() => logout({ returnTo: window.location.origin })}
-            >
-              LOGG UT
-            </div>
-          ) : (
-            <div
-              className={styles.headerTextElement}
-              onClick={() => loginWithRedirect()}
-            >
-              LOGG INN
-            </div>
-          )}
-        </GuiHeader>
-      </div>
-    </div>
+        </div>
+      </nav>
+    </>
   );
 };
 

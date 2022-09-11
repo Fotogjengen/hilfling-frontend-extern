@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import guistyles from "./styles/utilities.module.css";
 import { GuiFooter } from "./gui-components";
-import HeaderComponent from "./components/HeaderV3/Header";
+import HeaderComponent from "./components/Header/Header";
 import { theme } from "./styles/muiStyles";
 import { Auth0Provider } from "@auth0/auth0-react";
 

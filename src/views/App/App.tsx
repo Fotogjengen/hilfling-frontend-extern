@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Carousel from "../../components/Frontpage/Carousel/Carousel";
 import styles from "./App.module.css";
 import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/EventCardsDisplayer";
 import CardInformationFotogjengen from "../../components/Frontpage/CardInformationFotogjengen/CardInformationFotogjengen";
