@@ -14,9 +14,10 @@ import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAdd
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
+  const [update, setUpdate] = useState(false);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
-  const [openAlert, setOpenAlert] = React.useState(false);
-  const [lastDeletedName, setLastDeletedName] = React.useState("Deleted");
+  const [openAlert, setOpenAlert] = useState(false);
+  const [lastDeletedName, setLastDeletedName] = useState("Deleted");
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -71,64 +72,66 @@ const ArchiveBoss: FC = () => {
 
   return (
     <>
-    <DeleteAlert
+      <DeleteAlert
         message={lastDeletedName}
         open={openAlert}
         setOpen={setOpenAlert}
       />
-    <ArchiveBossContext.Provider
-      value={{
-        setAlbums,
-        albums,
-        setCategories,
-        categories,
-        places,
-        setPlaces,
-      }}
-    >
-      <div className={styles.archiveBoss}>
-        <h2> Arkivsjef </h2>
+      <ArchiveBossContext.Provider
+        value={{
+          setAlbums,
+          albums,
+          setCategories,
+          categories,
+          places,
+          setPlaces,
+          update,
+          setUpdate,
+        }}
+      >
+        <div className={styles.archiveBoss}>
+          <h2> Arkivsjef </h2>
 
-        <div className={styles.description}>
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid item xs={2} alignContent="center">
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                className={styles.addNewButton}
-              >
-                <ArchiveBossAddElements />
+          <div className={styles.description}>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item xs={2} alignContent="center">
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
+                  className={styles.addNewButton}
+                >
+                  <ArchiveBossAddElements />
+                </Grid>
+              </Grid>
+              <Grid item xs={10}>
+                <Typography>
+                  Denne siden er for fotogjengens Arkivsjef. Her kan du legge
+                  til, slette, eller endre Album, Kategorier, Steder eller
+                  Medium. Vær meget forsiktig med å forandre albumnavn dersom
+                  albumet har bilder liggende i seg - det ødelegger
+                  mappestrukturen til bildene.
+                </Typography>
               </Grid>
             </Grid>
-            <Grid item xs={10}>
-              <Typography>
-                Denne siden er for fotogjengens Arkivsjef. Her kan du legge til,
-                slette, eller endre Album, Kategorier, Steder eller Medium. Vær
-                meget forsiktig med å forandre albumnavn dersom albumet har
-                bilder liggende i seg - det ødelegger mappestrukturen til
-                bildene.
-              </Typography>
-            </Grid>
-          </Grid>
+          </div>
+          <ArchiveBossAccordion color="#da7777" name="Album">
+            {mapAlbums(albums)}
+          </ArchiveBossAccordion>
+          <ArchiveBossAccordion color="#f3ee78" name="Sted">
+            {mapPlace(places)}
+          </ArchiveBossAccordion>
+          <ArchiveBossAccordion color="#9c77da" name="Kategori">
+            {mapCategory(categories)}
+          </ArchiveBossAccordion>
         </div>
-        <ArchiveBossAccordion color="#da7777" name="Album">
-          {mapAlbums(albums)}
-        </ArchiveBossAccordion>
-        <ArchiveBossAccordion color="#f3ee78" name="Sted">
-          {mapPlace(places)}
-        </ArchiveBossAccordion>
-        <ArchiveBossAccordion color="#9c77da" name="Kategori">
-          {mapCategory(categories)}
-        </ArchiveBossAccordion>
-      </div>
-    </ArchiveBossContext.Provider>
+      </ArchiveBossContext.Provider>
     </>
   );
 };

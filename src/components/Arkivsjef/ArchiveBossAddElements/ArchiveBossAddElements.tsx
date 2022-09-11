@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,7 +6,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IconButton, Typography, MenuItem, Checkbox, Grid } from "@mui/material";
+import {
+  IconButton,
+  Typography,
+  MenuItem,
+  Checkbox,
+  Grid,
+} from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import styles from "./ArchiveBossAddElements.module.css";
 import { Formik, Form, Field, ErrorMessage, FormikValues } from "formik";
@@ -19,7 +25,7 @@ import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossC
 const ArchiveBossAddElements = () => {
   const [open, setOpen] = useState(false);
   const types: string[] = ["Kategori", "Sted", "Album"];
-  const { albums, setAlbums, places, setPlaces, categories, setCategories } =
+  const { setAlbums, setPlaces, setCategories, setUpdate, update } =
     useContext(ArchiveBossContext);
 
   const handleClickOpen = () => {
@@ -34,33 +40,35 @@ const ArchiveBossAddElements = () => {
       CategoryApi.post({ name: values.name })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
-      // TODO: On-hold til vi får id fra backend
-      setCategories([
-        ...categories,
-        { categoryId: { id: "123" }, name: values.name },
-      ]);
+      setUpdate(true);
     } else if (values.type == "Sted") {
       PlaceApi.post({ name: values.name })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
-      // TODO: On-hold til vi får id fra backend
-      setPlaces([...places, { placeId: { id: "123" }, name: values.name }]);
+      setUpdate(true);
     } else if (values.type == "Album") {
       AlbumApi.post({ title: values.name, isAnalog: values.albumType })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
-      // TODO: On-hold til vi får id fra backend
-      setAlbums([
-        ...albums,
-        {
-          albumId: { id: "123" },
-          title: values.name,
-          analog: values.albumType,
-        },
-      ]);
+      setUpdate(true);
     }
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (update) {
+      AlbumApi.getAll()
+        .then((res) => setAlbums(res.data.currentList))
+        .catch((e) => console.log(e));
+      PlaceApi.getAll()
+        .then((res) => setPlaces(res.data.currentList))
+        .catch((e) => console.log(e));
+      CategoryApi.getAll()
+        .then((res) => setCategories(res.data.currentList))
+        .catch((e) => console.log(e));
+      setUpdate(false);
+    }
+  }, [update]);
 
   const validationSchema = yup.object({
     name: yup.string().required("Sliten? Du må fylle inn navn ❤️"),
