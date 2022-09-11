@@ -10,6 +10,7 @@ import NotFound from "./views/NotFound/NotFound";
 import Search from "./components/searchPage/Search";
 import CsaTester from "./views/CsaTester";
 import Motives from "./views/Intern/Motives/Motives";
+import LoggInn from "./views/Intern/LoggInn/LoggInn";
 
 const AppRoutes: FC = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes: FC = () => {
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
         <Route path="/intern/motiv" element={<Motives />} />
+        <Route path="/logg-inn" element={<LoggInn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

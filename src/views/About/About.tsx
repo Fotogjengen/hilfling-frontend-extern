@@ -1,27 +1,22 @@
-import React, { FC, useState ,SyntheticEvent } from "react";
+import React, { FC, useState, SyntheticEvent } from "react";
 
-import {
-  AppBar,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { AppBar, Tab, Tabs } from "@mui/material";
 import TabPanel from "../../components/TabPanel/TabPanel";
 
 import InfoTab from "./Tabs/InfoTab";
 import HistoryTab from "./Tabs/HistoryTab";
 import AboutTab from "./Tabs/AboutTab";
+import styles from "./About.module.css";
 
 const About: FC = () => {
   const [tabValue, setTabValue] = useState<number>(0);
-
-
 
   const handleTabChange = (event: SyntheticEvent, newTabValue: number) => {
     setTabValue(newTabValue);
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <AppBar position="static" color="default">
         <Tabs
           value={tabValue}
@@ -37,13 +32,13 @@ const About: FC = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={tabValue} index={0}>
-        <AboutTab/>
+        <AboutTab />
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
-        <InfoTab/>
+        <InfoTab />
       </TabPanel>
       <TabPanel value={tabValue} index={2}>
-        <HistoryTab/>
+        <HistoryTab />
       </TabPanel>
     </div>
   );
