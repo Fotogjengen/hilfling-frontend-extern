@@ -1,25 +1,45 @@
-.contentContainer {
-  margin: 0 auto;
-  display: flex;
-  min-width: 300px;
-  max-width: 1500px;
-  flex-wrap: wrap;
-}
-
-.leftSide {
-  margin: 0 auto;
-  padding: 0rem 2rem 0rem 2rem;
-}
-
-.rightSide {
-  max-width: 900px;
-  min-width: 300px;
-  flex-basis: 400px;
-  flex-grow: 1;
-  margin: 0 auto;
+* {
   box-sizing: border-box;
 }
 
-.events {
-	margin-top: 2rem;
+.contentContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
+
+.CaroContainer {
+  /*
+  position: relative;
+  top: -0.5rem; */
+  display: flex;
+  justify-content: center;
+}
+
+.fakeCaro {
+  
+  width: 100%;
+  min-height: 25rem;
+  background-color: rgb(226, 132, 117);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.rightSide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+
+@media screen and (min-width: 50rem) {
+  .contentContainer {
+    grid-template-columns: 10fr 4fr;
+  }
+}
+
+
+ 

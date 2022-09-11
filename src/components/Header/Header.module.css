@@ -1,25 +1,96 @@
-.header {
-  padding-top: 4rem;
-  padding-bottom: 1rem;
-  padding-left: 2.2rem;
+.nav {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.navHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
 }
 
-.linkContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.hamburger {
+    cursor: pointer;
+    position: relative;
+    top: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.headerTextElement {
-  padding: 0rem;
-  user-select: none;
-  font-size: 1.7rem;
-  margin: 2rem;
-  color: black;
+.hamburger:hover {
+    transform: scale(1.1);
 }
 
-.headerTextElement:hover {
-  transform: scale(1.05);
-  cursor: pointer;
+.navMenuList {
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
 }
+
+.menuLink {
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90vw;
+    margin: 1rem 0rem;
+    padding: 0.2rem 0.6rem;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px 0px;
+    
+}
+
+.menuLink > * {
+    margin: 0 0.5rem;
+}
+
+.navContainer {
+    margin: 1rem;
+    font-size: 1.5rem;
+    display: none;
+    grid-template-columns: 8fr 2fr;
+}
+
+.loggContainer {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.loggContainer > div {
+    cursor: pointer;
+}
+
+.loggButton {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+
+
+.navList {
+    width: 60vw;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.navList>* {
+    margin-right: 3vw;
+}
+
+
+
+@media screen and (min-width: 50rem) {
+    .navContainer {
+        display: grid;
+    }
+    .hamburger {
+        display: none;
+    }
+}
+

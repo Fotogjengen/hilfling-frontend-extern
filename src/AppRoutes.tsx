@@ -9,6 +9,7 @@ import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
 import Search from "./components/searchPage/Search";
 import CsaTester from "./views/CsaTester";
+import LoggInn from "./views/Intern/LoggInn/LoggInn";
 
 const AppRoutes: FC = () => {
   return (
@@ -24,6 +25,7 @@ const AppRoutes: FC = () => {
         <Route path="/csa-tester" element={<CsaTester />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
+        <Route path="/logg-inn" element={<LoggInn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
