@@ -1,0 +1,46 @@
+.head {
+    margin-top: 4rem;
+    font-family: "Raleway", Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+}
+
+.navContainer {
+    margin:  2rem 1.5rem ;
+    position: relative;
+    font-size: calc(1.5vw + 0.4rem);
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+}
+
+.loggContainer {
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.loggButton {   
+    padding: calc(0.5vw + 0.3rem);
+    border: 0.1rem solid black;
+    border-radius: 0.4rem;
+    cursor:pointer;
+}
+
+.loggButton:hover {
+    box-shadow: rgba(110, 102, 102, 0.50) 0px 1px 8px;
+}
+.loggButton > * {
+    font-size: 1.6vw;
+}
+
+.navList {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.navList > * {
+    margin-right: 3vw;
+}
+
