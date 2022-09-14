@@ -61,16 +61,13 @@
     justify-content: right;
 }
 
-.loggContainer > div {
+.loggContainer > * {
     cursor: pointer;
 }
 
-.loggButton {
-    padding: 0.5rem;
-    cursor: pointer;
+.loggContainer > *:hover {
+    transform: scale(1.05);
 }
-
-
 
 .navList {
     width: 60vw;
@@ -81,6 +78,10 @@
 
 .navList>* {
     margin-right: 3vw;
+}
+
+.navList > *:hover {
+    transform: scale(1.05);
 }
 
 
