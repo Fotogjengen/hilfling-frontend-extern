@@ -29,3 +29,7 @@
     padding: 1rem;
 }
 
+
+.linkBox:hover {
+    transform: scale(1.01);
+}

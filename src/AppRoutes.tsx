@@ -22,7 +22,7 @@ const AppRoutes: FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:term" element={<Search />} />
-        <Route path="/myprofile" element={<MyProfile />} />
+        <Route path="/intern/myprofile" element={<MyProfile />} />
         <Route path="/csa-tester" element={<CsaTester />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
