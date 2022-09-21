@@ -5,11 +5,20 @@
     font-size: 2rem;
 }
 
+.head {
+    text-align: center;
+    width: 95%;
+    margin-bottom: 0.5rem;
+
+    
+}
+
 .linkContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
 
 }
 

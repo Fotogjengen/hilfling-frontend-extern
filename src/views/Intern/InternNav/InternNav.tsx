@@ -6,7 +6,10 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import UploadIcon from "@mui/icons-material/Upload";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
+import ComputerIcon from "@mui/icons-material/Computer";
 import { Link } from "react-router-dom";
 
 const InternNav = () => {
@@ -38,26 +41,30 @@ const InternNav = () => {
       icon: <AccountBoxIcon style={{ fontSize: iconSize }} />,
     },
     {
-      name: "Blank",
-      to: "/nopage",
-      icon: <CheckBoxOutlineBlankIcon style={{ fontSize: iconSize }} />,
+      name: "Samf wiki",
+      to: "/samf-wiki",
+      icon: <LibraryBooksIcon style={{ fontSize: iconSize }} />,
     },
     {
-      name: "Blank",
-      to: "/nopage",
-      icon: <CheckBoxOutlineBlankIcon style={{ fontSize: iconSize }} />,
+      name: "Fg wiki",
+      to: "/fg-wiki",
+      icon: <CameraAltIcon style={{ fontSize: iconSize }} />,
     },
     {
-      name: "Blank",
-      to: "/nopage",
-      icon: <CheckBoxOutlineBlankIcon style={{ fontSize: iconSize }} />,
+      name: "Utlån",
+      to: "/utlaan",
+      icon: <CameraswitchIcon style={{ fontSize: iconSize }} />,
+    },
+    {
+      name: "Fg web",
+      to: "/fg-web",
+      icon: <ComputerIcon style={{ fontSize: iconSize }} />,
     },
   ];
 
   return (
     <>
       <div className={styles.container}>
-        <div>Hei bitch hva vild du?</div>
         <div className={styles.linkContainer}>
           {internLinks.map((link, index) => (
             <Link className={styles.linkBox} key={index} to={link.to}>
