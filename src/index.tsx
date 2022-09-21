@@ -26,6 +26,7 @@ const Root: React.FC = () => (
             </Router>
           </div>
         </div>
+
         <GuiFooter />
       </ThemeProvider>
     </Auth0Provider>

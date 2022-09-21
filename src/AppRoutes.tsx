@@ -10,6 +10,8 @@ import NotFound from "./views/NotFound/NotFound";
 import Search from "./components/searchPage/Search";
 import CsaTester from "./views/CsaTester";
 import LoggInn from "./views/Intern/LoggInn/LoggInn";
+import InternNav from "./views/Intern/InternNav/InternNav";
+import Redirect from "./utils/Redirect/Redirect";
 
 const AppRoutes: FC = () => {
   return (
@@ -21,12 +23,31 @@ const AppRoutes: FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:term" element={<Search />} />
-        <Route path="/myprofile" element={<MyProfile />} />
+        <Route path="/intern/myprofile" element={<MyProfile />} />
         <Route path="/csa-tester" element={<CsaTester />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
         <Route path="/logg-inn" element={<LoggInn />} />
+        <Route path="/intern" element={<InternNav />} />
         <Route path="*" element={<NotFound />} />
+        <Route
+          path="/samf-wiki"
+          element={<Redirect link="https://wiki.samfundet.no/wiki/" />}
+        />
+        <Route
+          path="/fg-wiki"
+          element={<Redirect link="https://wiki.samfundet.no/fg/" />}
+        />
+        <Route
+          path="/utlaan"
+          element={
+            <Redirect link="https://wiki.samfundet.no/fg/Utl%C3%A5nsordning" />
+          }
+        />
+        <Route
+          path="/fg-web"
+          element={<Redirect link="https://github.com/Fotogjengen/" />}
+        />
       </Routes>
     </>
   );
