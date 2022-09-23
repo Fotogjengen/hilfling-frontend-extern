@@ -1,40 +1,83 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import styles from "./Carousel.module.css";
-import {
-  GuiCarouselItems,
-  GuiCarousel as CarouselComponent,
-} from "../../../gui-components";
-import { BaseCarouselItem } from "../../../types";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
-const Carousel: FC<Record<string, never>> = () => {
-  const [items, setItems] = useState<BaseCarouselItem[]>([]);
+import { PhotoDto } from "../../../../generated";
+import { PhotoCarouselApi } from "../../../utils/api/PhotoCarouselApi";
+
+const Carousel: FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const [slideGoRight, setSlideGoRight] = useState(true);
+
+  const [carouselPhotos, setCarouselPhotos] = useState<PhotoDto[]>([]);
+
+  const onArrowRightClick = () => {
+    if (currentSlide >= carouselPhotos.length) {
+      setCurrentSlide(1);
+    } else {
+      setCurrentSlide(currentSlide + 1);
+    }
+    setSlideGoRight(true);
+  };
+
+  const onArrowLeftClick = () => {
+    if (currentSlide <= 1) {
+      setCurrentSlide(carouselPhotos.length);
+    } else {
+      setCurrentSlide(currentSlide - 1);
+    }
+    setSlideGoRight(false);
+  };
 
   useEffect(() => {
-    setItems([
-      {
-        title: "hei",
-        image:
-          "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
-      },
-      {
-        title: "hei2",
-        image:
-          "http://images6.fanpop.com/image/photos/39900000/IMG-6250-PNG-kion-39961687-1024-577.png",
-      },
-      {
-        title: "hei3",
-        image:
-          "https://s1.1zoom.me/big0/752/Starfish_Shells_Summer_Glasses_Sand_569727_1280x853.jpg",
-      },
-    ]);
+    if (slideGoRight) {
+      const timer = setTimeout(() => onArrowRightClick(), 30000);
+      return () => clearTimeout(timer);
+    } else {
+      const timer = setTimeout(() => onArrowLeftClick(), 30000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentSlide]);
+
+  useEffect(() => {
+    PhotoCarouselApi.getAllCarouselPhotos()
+      .then((res) => {
+        setCarouselPhotos(res);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
   return (
-    <div className={styles.fitToCard}>
-      <CarouselComponent delay={5000} height={500} width={900}>
-        {GuiCarouselItems({ width: 900, height: 500, items })}
-      </CarouselComponent>
-    </div>
+    <>
+      <div className={styles.container}>
+        {carouselPhotos.map((img, index) => {
+          return (
+            <img
+              key={index}
+              className={styles.img}
+              style={{
+                opacity: currentSlide - 1 == index ? "1" : "0",
+                transition: "opacity 1.5s ease-out",
+              }}
+              src={img.mediumUrl}
+              alt={img.motive.title}
+            />
+          );
+        })}
+
+        <div className={styles.arrows}>
+          <ArrowBackIosNewRoundedIcon
+            style={{ fontSize: 40 }}
+            onClick={() => onArrowLeftClick()}
+          />
+          <ArrowForwardIosRoundedIcon
+            style={{ fontSize: 40 }}
+            onClick={() => onArrowRightClick()}
+          />
+        </div>
+      </div>
+    </>
   );
 };
-
 export default Carousel;
