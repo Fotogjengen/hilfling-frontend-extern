@@ -1,9 +1,5 @@
 import {
   Autocomplete,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
   Grid,
   TextField,
   Typography,
@@ -12,7 +8,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   AlbumDto,
-  Category,
   CategoryDto,
   EventOwnerDto,
   MotiveDto,
@@ -22,7 +17,7 @@ import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./EditMotive.module.css";
-import EditIcon from "@mui/icons-material/Edit";
+import MotiveCard from "../../../components/MotiveCard/MotiveCard";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
@@ -57,15 +52,28 @@ const EditMotive = () => {
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={12} sm={6}>
           <TextField
+            value={motive.title || ""}
+            onChange={(e) => setMotive({ ...motive, title: e.target.value })}
             label="Endre navn på motiv"
             margin="normal"
             fullWidth
           />
           <Autocomplete
             disablePortal
-            id="combo-box-demo"
-            getOptionLabel={(categories: CategoryDto) => categories.name}
-            options={categories}
+            getOptionLabel={(categories) => categories}
+            options={categories.map((category) => category?.name || "")}
+            value={motive?.categoryDto?.name || ""}
+            onChange={(e, value) => {
+              if (value) {
+                setMotive({
+                  ...motive,
+                  categoryDto: {
+                    ...motive.categoryDto,
+                    name: value,
+                  },
+                });
+              }
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -77,9 +85,20 @@ const EditMotive = () => {
           />
           <Autocomplete
             disablePortal
-            id="combo-box-demo"
-            getOptionLabel={(albums: AlbumDto) => albums.title}
-            options={albums}
+            getOptionLabel={(albums) => albums}
+            options={albums.map((album) => album.title)}
+            value={motive?.albumDto?.title || ""}
+            onChange={(e, value) => {
+              if (value) {
+                setMotive({
+                  ...motive,
+                  albumDto: {
+                    ...motive.albumDto,
+                    title: value,
+                  },
+                });
+              }
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -91,9 +110,20 @@ const EditMotive = () => {
           />
           <Autocomplete
             disablePortal
-            id="combo-box-demo"
-            getOptionLabel={(eventOwners: EventOwnerDto) => eventOwners.name}
-            options={eventOwners}
+            getOptionLabel={(eventOwners) => eventOwners}
+            options={eventOwners.map((eventOwner) => eventOwner.name)}
+            value={motive?.eventOwnerDto?.name || ""}
+            onChange={(e, value) => {
+              if (value) {
+                setMotive({
+                  ...motive,
+                  eventOwnerDto: {
+                    ...motive.eventOwnerDto,
+                    name: value,
+                  },
+                });
+              }
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -105,37 +135,8 @@ const EditMotive = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Card key={motive?.motiveId?.id}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {motive?.categoryDto?.name}
-              </Typography>
-              <Typography sx={{ mb: 1.5, color: "#ad2f33" }}>
-                {motive?.title}
-              </Typography>
-              <Typography variant="body2">
-                Eier: {motive?.eventOwnerDto?.name}
-              </Typography>
-              <Typography variant="body2">
-                Dato: {motive?.dateCreated}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button
-                size="small"
-                variant="contained"
-                endIcon={<EditIcon />}
-                fullWidth
-                disabled
-              >
-                Rediger motiv
-              </Button>
-            </CardActions>
-          </Card>
+          <Typography variant="h6">Slik vil motivet se ut</Typography>
+          <MotiveCard key={1} motive={motive}/>
         </Grid>
       </Grid>
     </div>
