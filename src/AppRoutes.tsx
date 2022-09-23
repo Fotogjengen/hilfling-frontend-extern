@@ -11,6 +11,7 @@ import Search from "./components/searchPage/Search";
 import CsaTester from "./views/CsaTester";
 import Motives from "./views/Intern/Motives/Motives";
 import LoggInn from "./views/Intern/LoggInn/LoggInn";
+import EditMotive from "./views/Intern/EditMotive/EditMotive";
 
 const AppRoutes: FC = () => {
   return (
@@ -26,7 +27,8 @@ const AppRoutes: FC = () => {
         <Route path="/csa-tester" element={<CsaTester />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
-        <Route path="/intern/motiv" element={<Motives />} />
+        <Route path="/intern/motive" element={<Motives />} />
+        <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/logg-inn" element={<LoggInn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
