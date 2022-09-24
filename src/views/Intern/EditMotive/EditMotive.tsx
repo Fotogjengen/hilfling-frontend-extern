@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   AlbumDto,
   CategoryDto,
@@ -20,7 +20,6 @@ import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./EditMotive.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
-import { useNavigate } from "react-router-dom";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
