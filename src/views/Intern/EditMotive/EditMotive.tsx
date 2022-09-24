@@ -2,13 +2,12 @@ import {
   Autocomplete,
   Button,
   Grid,
-  Skeleton,
   TextField,
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import React, { useEffect, useState } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   AlbumDto,
   CategoryDto,
@@ -21,15 +20,7 @@ import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./EditMotive.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
-
-/* 
-TODO: 
-
-[] Må faktisk endre ID-en :) på alle som skal endres på omg 
-[] Validere dersom navn er tomt
-[] Redirigerer tilbake 
-[] Adde feedback
-*/
+import { useNavigate } from "react-router-dom";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
@@ -38,7 +29,9 @@ const EditMotive = () => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+
   useEffect(() => {
     if (id) {
       MotiveApi.getById(id)
@@ -65,15 +58,10 @@ const EditMotive = () => {
   const handleClick = () => {
     MotiveApi.patch(motive)
       .then(() => {
-        <Navigate to="/intern/motives" />;
-        console.log(motive);
+        navigate("/intern/motive");
       })
       .catch((e) => console.log(e));
   };
-
-  useEffect(() => {
-    console.log(motive);
-  }, [motive]);
 
   return (
     <div className={styles.editMotive}>
@@ -95,10 +83,12 @@ const EditMotive = () => {
               />
               <Autocomplete
                 disablePortal
-                getOptionLabel={(categories: CategoryDto) => categories.name}
-                options={categories.map(
-                  (category) => category || "" || undefined,
-                )}
+                getOptionLabel={(categories: CategoryDto) =>
+                  categories?.name || ""
+                }
+                options={categories.map((category) => category)}
+                // Used to suppress a warning idk why
+                isOptionEqualToValue={(option, value) => option !== value}
                 value={motive?.categoryDto || ""}
                 onChange={(e, value) => {
                   if (value) {
@@ -126,8 +116,9 @@ const EditMotive = () => {
               />
               <Autocomplete
                 disablePortal
-                getOptionLabel={(albums: AlbumDto) => albums.title}
-                options={albums.map((album) => album || "" || undefined)}
+                getOptionLabel={(albums: AlbumDto) => albums?.title || ""}
+                options={albums.map((album) => album || "" )}
+                isOptionEqualToValue={(option, value) => option !== value}
                 value={motive?.albumDto || ""}
                 onChange={(e, value) => {
                   if (value) {
@@ -155,16 +146,21 @@ const EditMotive = () => {
               />
               <Autocomplete
                 disablePortal
-                getOptionLabel={(eventOwners) => eventOwners}
-                options={eventOwners.map((eventOwner) => eventOwner.name)}
-                value={motive?.eventOwnerDto?.name || ""}
+                getOptionLabel={(eventOwners: EventOwnerDto) => eventOwners?.name || ""}
+                options={eventOwners.map((eventOwner) => eventOwner)}
+                isOptionEqualToValue={(option, value) => option !== value}
+                value={motive?.eventOwnerDto || ""}
                 onChange={(e, value) => {
                   if (value) {
                     setMotive({
                       ...motive,
                       eventOwnerDto: {
                         ...motive.eventOwnerDto,
-                        name: value,
+                        name: value.name,
+                        eventOwnerId: {
+                          ...motive.eventOwnerDto?.eventOwnerId,
+                          id: value.eventOwnerId.id,
+                        },
                       },
                     });
                   }
@@ -182,15 +178,27 @@ const EditMotive = () => {
             <Grid item xs={12} sm={6}>
               <Typography variant="h6">Slik vil motivet se ut</Typography>
               <MotiveCard key={1} motive={motive}>
-                <Button
-                  size="small"
-                  variant="contained"
-                  endIcon={<EditIcon />}
-                  onClick={handleClick}
-                  fullWidth
-                >
-                  Rediger motiv
-                </Button>
+                {motive?.title == "" ? (
+                  <Button
+                    size="small"
+                    variant="contained"
+                    endIcon={<EditIcon />}
+                    disabled
+                    fullWidth
+                  >
+                    Endre motivet
+                  </Button>
+                ) : (
+                  <Button
+                    size="small"
+                    variant="contained"
+                    endIcon={<EditIcon />}
+                    onClick={handleClick}
+                    fullWidth
+                  >
+                    Endre motivet
+                  </Button>
+                )}
               </MotiveCard>
             </Grid>
           </>

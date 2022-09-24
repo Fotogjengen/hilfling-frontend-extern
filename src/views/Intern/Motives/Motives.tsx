@@ -24,6 +24,7 @@ const Motives = () => {
             size="small"
             variant="contained"
             endIcon={<EditIcon />}
+            sx={{marginTop: 2}}
             fullWidth
           >
             Rediger motiv
