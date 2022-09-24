@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
-import DeleteAlert from "../../../components/Arkivsjef/DeleteAlert/DeleteAlert";
+import DeleteAlert from "../../../components/Alerts/DeleteAlert/DeleteAlert";
 import { Grid, Typography } from "@mui/material";
 import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
