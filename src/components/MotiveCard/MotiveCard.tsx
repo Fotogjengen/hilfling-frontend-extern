@@ -1,12 +1,5 @@
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-} from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import React, { FC, ReactNode } from "react";
-import EditIcon from "@mui/icons-material/Edit";
 import { MotiveDto } from "../../../generated";
 interface Props {
   motive: MotiveDto;
@@ -33,8 +26,8 @@ const MotiveCard: FC<Props> = (props: Props) => {
         <Typography variant="body2">
           Dato: {props?.motive?.dateCreated}
         </Typography>
+        {props.children}
       </CardContent>
-      <CardActions>{props.children}</CardActions>
     </Card>
   );
 };
