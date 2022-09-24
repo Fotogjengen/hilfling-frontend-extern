@@ -1,24 +1,25 @@
 import React, { FC } from "react";
-import { Collapse, Alert } from "@mui/material";
+import { Collapse, Alert as MUIAlert } from "@mui/material";
 import styles from "./Alert.module.css";
 
 interface Props {
   open: boolean;
   setOpen: (value: boolean) => void;
   message: string;
+  severity: "error" | "warning" | "info" | "success";
 }
 
-const DeleteAlert: FC<Props> = ({ open, setOpen, message }: Props) => {
+const Alert: FC<Props> = ({ open, setOpen, message, severity }: Props) => {
   return (
     <Collapse in={open} className={styles.collapse}>
       <div onClick={() => setOpen(false)}>
-        <Alert severity="success" sx={{ boxShadow: 4 }}>
+        <MUIAlert severity={severity} sx={{ boxShadow: 4 }}>
           {" "}
           {message}{" "}
-        </Alert>
+        </MUIAlert>
       </div>
     </Collapse>
   );
 };
 
-export default DeleteAlert;
+export default Alert;
