@@ -5,13 +5,10 @@
 .contentContainer {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .CaroContainer {
-  /*
-  position: relative;
-  top: -0.5rem; */
   display: flex;
   justify-content: center;
 }
@@ -29,9 +26,12 @@
 
 
 .rightSide {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSide > * {
+  margin-bottom: 1rem;
 }
 
 

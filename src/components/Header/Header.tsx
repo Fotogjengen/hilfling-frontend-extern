@@ -10,10 +10,10 @@ import ImageIcon from "@mui/icons-material/Image";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import InfoIcon from "@mui/icons-material/Info";
-import UploadIcon from "@mui/icons-material/Upload";
-import ImageSearchIcon from "@mui/icons-material/ImageSearch";
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import LockIcon from "@mui/icons-material/Lock";
 import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmailerrorred";
+import SearchIcon from "@mui/icons-material/Search";
 
 const HeaderComponent: FC = () => {
   const { isAuthenticated } = useAuth0();
@@ -40,18 +40,21 @@ const HeaderComponent: FC = () => {
       icon: <InfoIcon />,
       noAuth: true,
     },
-    {
-      name: "Last opp",
-      to: "/intern/last-opp",
-      icon: <UploadIcon />,
-      noAuth: isAuthenticated,
-    },
+
     {
       name: "Søk",
       to: "/search",
-      icon: <ImageSearchIcon />,
+      icon: <SearchIcon />,
       noAuth: true,
     },
+
+    {
+      name: "Intern",
+      to: "/intern",
+      icon: <AccessibilityNewIcon />,
+      noAuth: isAuthenticated,
+    },
+
     {
       name: "Logg inn",
       to: "/logg-inn",
@@ -103,8 +106,7 @@ const HeaderComponent: FC = () => {
           <div className={styles.navList}>
             <Link to="/search">BILDER</Link>
             <Link to="/about">OM OSS</Link>
-            {isAuthenticated && <Link to="/intern/last-opp">LAST OPP</Link>}
-
+            {isAuthenticated && <Link to="/intern/">INTERN</Link>}
             <Link to="/search">SØK</Link>
           </div>
           <div className={styles.loggContainer}>
