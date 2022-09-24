@@ -11,36 +11,27 @@ import { MotiveDto } from "../../../generated";
 interface Props {
   motive: MotiveDto;
   key: number;
+  children?: ReactNode;
 }
 
-const MotiveCard: FC<Props> = (motive: Props) => {
+const MotiveCard: FC<Props> = (props: Props) => {
   return (
-    <Card key={motive?.motive?.motiveId?.id}>
+    <Card key={props?.motive?.motiveId?.id}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {motive?.motive?.categoryDto?.name}
+          {props?.motive?.categoryDto?.name}
         </Typography>
         <Typography sx={{ mb: 1.5, color: "#ad2f33" }}>
-          {motive?.motive?.title}
+          {props?.motive?.title}
         </Typography>
         <Typography variant="body2">
-          Eier: {motive?.motive?.eventOwnerDto?.name}
+          Eier: {props?.motive?.eventOwnerDto?.name}
         </Typography>
         <Typography variant="body2">
-          Dato: {motive?.motive?.dateCreated}
+          Dato: {props?.motive?.dateCreated}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button
-          size="small"
-          variant="contained"
-          endIcon={<EditIcon />}
-          fullWidth
-          disabled
-        >
-          Rediger motiv
-        </Button>
-      </CardActions>
+      <CardActions>{props.children}</CardActions>
     </Card>
   );
 };

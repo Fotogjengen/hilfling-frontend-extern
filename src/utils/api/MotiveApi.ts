@@ -12,6 +12,12 @@ export const MotiveApi = {
       .then((res) => res.data)
       .catch((e) => console.log(e));
   },
+  patch: async function (motive: MotiveDto): Promise<MotiveDto> {
+    return api
+      .patch(`/motives`, motive)
+      .then((res) => res.data)
+      .catch((e) => console.log(e));
+  },
 };
 
 export const PhotoGangBangerApi = {

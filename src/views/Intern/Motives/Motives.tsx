@@ -4,6 +4,9 @@ import { MotiveDto } from "../../../../generated";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./Motives.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
+import { Button } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import { Link } from "react-router-dom";
 
 const Motives = () => {
   const [motives, setMotives] = useState<MotiveDto[]>([]);
@@ -15,7 +18,18 @@ const Motives = () => {
 
   const mapMotives = (motivesCurrentList: MotiveDto[]) => {
     return motivesCurrentList.map((motive: MotiveDto, index: number) => (
-      <MotiveCard key={index} motive={motive} />
+      <MotiveCard key={index} motive={motive}>
+        <Link to={`/intern/motive/${motive.motiveId.id}`}>
+          <Button
+            size="small"
+            variant="contained"
+            endIcon={<EditIcon />}
+            fullWidth
+          >
+            Rediger motiv
+          </Button>
+        </Link>
+      </MotiveCard>
     ));
   };
 
