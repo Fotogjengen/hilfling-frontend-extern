@@ -117,7 +117,7 @@ const EditMotive = () => {
               <Autocomplete
                 disablePortal
                 getOptionLabel={(albums: AlbumDto) => albums?.title || ""}
-                options={albums.map((album) => album || "" )}
+                options={albums.map((album) => album || "")}
                 isOptionEqualToValue={(option, value) => option !== value}
                 value={motive?.albumDto || ""}
                 onChange={(e, value) => {
@@ -146,7 +146,9 @@ const EditMotive = () => {
               />
               <Autocomplete
                 disablePortal
-                getOptionLabel={(eventOwners: EventOwnerDto) => eventOwners?.name || ""}
+                getOptionLabel={(eventOwners: EventOwnerDto) =>
+                  eventOwners?.name || ""
+                }
                 options={eventOwners.map((eventOwner) => eventOwner)}
                 isOptionEqualToValue={(option, value) => option !== value}
                 value={motive?.eventOwnerDto || ""}
@@ -194,6 +196,7 @@ const EditMotive = () => {
                     variant="contained"
                     endIcon={<EditIcon />}
                     onClick={handleClick}
+                    sx={{ marginTop: 2 }}
                     fullWidth
                   >
                     Endre motivet
