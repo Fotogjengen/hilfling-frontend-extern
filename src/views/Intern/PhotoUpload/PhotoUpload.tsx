@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import PhotoUploadForm, {
   PhotoUploadFormIV,
 } from "../../../forms/PhotoUploadForm";
+import styles from "./PhotoUpload.module.css";
 
 const initialValues: PhotoUploadFormIV = {
   album: "",
@@ -17,11 +18,14 @@ const initialValues: PhotoUploadFormIV = {
 
 const PhotoUpload: FC = () => {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <PhotoUploadForm initialValues={initialValues} />
+    <div className={styles.photoUpload}>
+      <Typography variant="h2" gutterBottom>Last opp bilder</Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <PhotoUploadForm initialValues={initialValues} />
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 
