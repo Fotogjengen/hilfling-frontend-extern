@@ -6,6 +6,7 @@ import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import DeleteDialog from "./DeleteDialog";
+import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 interface Props {
   /** Index of element when mapped */
@@ -31,6 +32,8 @@ const ArchiveBossElement: FC<Props> = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+
+  const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
   const { albums, setAlbums, places, setPlaces, categories, setCategories } =
     useContext(ArchiveBossContext);
@@ -63,6 +66,9 @@ const ArchiveBossElement: FC<Props> = ({
           if (res.data == 1) {
             setAlbums(albums.filter((album) => album?.albumId.id !== id));
           }
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(`Albumet ble slettet`);
         })
         .catch((e) => console.log(e));
     } else if (type === "place") {
@@ -71,6 +77,9 @@ const ArchiveBossElement: FC<Props> = ({
           if (res.data == 1) {
             setPlaces(places.filter((place) => place?.placeId.id !== id));
           }
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(`Stedet ble slettet`);
         })
         .catch((e) => console.log(e));
     } else if (type === "category") {
@@ -80,6 +89,9 @@ const ArchiveBossElement: FC<Props> = ({
             setCategories(
               categories.filter((category) => category?.categoryId.id !== id),
             );
+            setOpen(true);
+            setSeverity(severityEnum.ERROR);
+            setMessage(`Kategorien ble slettet`);
           }
         })
         .catch((e) => console.log(e));
