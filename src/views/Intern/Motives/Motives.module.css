@@ -1,0 +1,11 @@
+.motives{
+    background-color: white;
+    padding:2rem;
+}
+.motives h2{
+    text-align: center;
+    border-bottom: 0.1rem solid #000000;
+    text-transform: uppercase;
+    padding-bottom: 1rem;
+    color: #1b1b1b;
+}

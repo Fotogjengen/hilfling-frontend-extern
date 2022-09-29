@@ -9,7 +9,9 @@ import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
 import Search from "./components/searchPage/Search";
 import CsaTester from "./views/CsaTester";
+import Motives from "./views/Intern/Motives/Motives";
 import LoggInn from "./views/Intern/LoggInn/LoggInn";
+import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Redirect from "./utils/Redirect/Redirect";
 
@@ -27,6 +29,8 @@ const AppRoutes: FC = () => {
         <Route path="/csa-tester" element={<CsaTester />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
+        <Route path="/intern/motive" element={<Motives />} />
+        <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/logg-inn" element={<LoggInn />} />
         <Route path="/intern" element={<InternNav />} />
         <Route path="*" element={<NotFound />} />

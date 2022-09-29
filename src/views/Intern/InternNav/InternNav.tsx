@@ -32,7 +32,7 @@ const InternNav = () => {
     },
     {
       name: "Motiv",
-      to: "/intern/arkivsjef",
+      to: "/intern/motive",
       icon: <SportsKabaddiIcon style={{ fontSize: iconSize }} />,
     },
     {
