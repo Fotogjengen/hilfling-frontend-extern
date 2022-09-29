@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   AlbumDto,
@@ -20,6 +20,7 @@ import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./EditMotive.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
+import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
@@ -28,6 +29,8 @@ const EditMotive = () => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
+
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
@@ -35,16 +38,32 @@ const EditMotive = () => {
     if (id) {
       MotiveApi.getById(id)
         .then((res) => setMotive(res))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       AlbumApi.getAll()
         .then((res) => setAlbums(res.data.currentList))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       CategoryApi.getAll()
         .then((res) => setCategories(res.data.currentList))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       EventOwnerApi.getAll()
         .then((res) => setEventOwners(res.data.currentList))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
     }
   }, []);
 
@@ -58,8 +77,15 @@ const EditMotive = () => {
     MotiveApi.patch(motive)
       .then(() => {
         navigate("/intern/motive");
+        setOpen(true);
+        setSeverity(severityEnum.SUCCESS);
+        setMessage(`Motivet ${motive.title} ble oppdatert`);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(e);
+      });
   };
 
   return (
