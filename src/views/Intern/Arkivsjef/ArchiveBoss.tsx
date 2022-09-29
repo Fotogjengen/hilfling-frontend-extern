@@ -8,7 +8,7 @@ import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
-import { ArchiveBossContext } from "./ArchiveBossContext";
+import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
 
 const ArchiveBoss: FC = () => {

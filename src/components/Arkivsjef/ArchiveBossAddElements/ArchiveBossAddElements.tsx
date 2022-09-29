@@ -20,7 +20,7 @@ import * as yup from "yup";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
-import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossContext";
+import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 
 const ArchiveBossAddElements = () => {
   const [open, setOpen] = useState(false);

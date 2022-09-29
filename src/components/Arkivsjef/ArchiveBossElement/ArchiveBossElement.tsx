@@ -4,7 +4,7 @@ import { MoreVert } from "@mui/icons-material";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
-import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossContext";
+import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import DeleteDialog from "./DeleteDialog";
 
 interface Props {
