@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, FC } from "react";
 import { render } from "react-dom";
 import "./index.css";
 import AppRoutes from "./AppRoutes";
@@ -9,28 +9,53 @@ import { GuiFooter } from "./gui-components";
 import HeaderComponent from "./components/Header/Header";
 import { theme } from "./styles/muiStyles";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { AlertContext, severityEnum } from "./contexts/AlertContext";
+import Alert from "./components/Alert/Alert";
 
-const Root: React.FC = () => (
-  <>
-    <Auth0Provider
-      domain="carosa.eu.auth0.com"
-      clientId="7zfnSz84t1gQLq9D5NxFAbQPijqY1IgK"
-      redirectUri={window.location.origin}
-    >
-      <ThemeProvider theme={theme}>
-        <div className={guistyles.container}>
-          <div className={"container"}>
-            <Router>
-              <HeaderComponent />
-              <AppRoutes />
-            </Router>
-          </div>
-        </div>
+const Root: FC = () => {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState(severityEnum.INFO);
+  
+  return (
+    <>
+      <Auth0Provider
+        domain="carosa.eu.auth0.com"
+        clientId="7zfnSz84t1gQLq9D5NxFAbQPijqY1IgK"
+        redirectUri={window.location.origin}
+      >
+        <ThemeProvider theme={theme}>
+          <AlertContext.Provider
+            value={{
+              open,
+              setOpen,
+              setMessage,
+              message,
+              setSeverity,
+              severity,
+            }}
+          >
+            <Alert
+              open={open}
+              setOpen={setOpen}
+              message={message}
+              severity={severity}
+            />
 
-        <GuiFooter />
-      </ThemeProvider>
-    </Auth0Provider>
-  </>
-);
+            <div className={guistyles.container}>
+              <div className={"container"}>
+                <Router>
+                  <HeaderComponent />
+                  <AppRoutes />
+                </Router>
+              </div>
+            </div>
+            <GuiFooter />
+          </AlertContext.Provider>
+        </ThemeProvider>
+      </Auth0Provider>
+    </>
+  );
+};
 
 render(<Root />, document.getElementById("root"));
