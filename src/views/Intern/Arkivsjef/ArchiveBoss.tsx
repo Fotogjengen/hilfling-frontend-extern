@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
 import Alert from "../../../components/Alert/Alert";
@@ -10,6 +10,7 @@ import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
 import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
+import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
@@ -19,16 +20,30 @@ const ArchiveBoss: FC = () => {
   const [openAlert, setOpenAlert] = useState(false);
   const [lastDeletedName, setLastDeletedName] = useState("Deleted");
 
+  const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
+
   useEffect(() => {
     AlbumApi.getAll()
       .then((res) => setAlbums(res.data.currentList))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(e);
+      });
     PlaceApi.getAll()
       .then((res) => setPlaces(res.data.currentList))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(e);
+      });
     CategoryApi.getAll()
       .then((res) => setCategories(res.data.currentList))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(e);
+      });
   }, []);
 
   const mapAlbums = (albumsCurrentList: AlbumDto[]) => {
