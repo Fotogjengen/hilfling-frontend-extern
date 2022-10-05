@@ -18,12 +18,6 @@ export const MotiveApi = {
       .then((res) => res.data)
       .catch((e) => console.log(e));
   },
-  delete: async function (id: string): Promise<MotiveDto> {
-    return api
-      .delete(`/motives/${id}`)
-      .then((res) => res.data)
-      .catch((e) => console.log(e));
-  },
 };
 
 export const PhotoGangBangerApi = {
