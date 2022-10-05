@@ -48,7 +48,7 @@ const ArchiveBossElement: FC<Props> = ({
   };
   const handleDialogClose = (value: boolean) => {
     setOpenDeleteDialog(false);
-    if (value == true) {
+    if (value) {
       handleDelete();
     }
   };
