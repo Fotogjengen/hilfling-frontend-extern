@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import React, { FC } from "react";
-import styles from "./ArchiveBossElement.module.css";
+import styles from "./DeleteDialog.module.css";
 
 interface Props {
   open: boolean;

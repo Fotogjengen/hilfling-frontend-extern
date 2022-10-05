@@ -23,7 +23,7 @@ import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./EditMotive.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
-import DeleteDialog from "../../../components/Arkivsjef/ArchiveBossElement/DeleteDialog";
+import DeleteDialog from "../../../components/DeleteDialog/DeleteDialog";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
@@ -32,11 +32,7 @@ const EditMotive = () => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -116,6 +112,7 @@ const EditMotive = () => {
   const handleDelete = () => {
     // TODO: We don't have an endpoint for deleting motives yet
     console.log("deleted");
+    navigate("/intern/motive");
     /* MotiveApi.delete(motive.motiveId.id)
       .then(() => {
         navigate("/intern/motive");
@@ -247,11 +244,7 @@ const EditMotive = () => {
             <Grid item xs={12} sm={6}>
               <Typography variant="h6">Slik vil motivet se ut</Typography>
               <MotiveCard key={1} motive={motive}>
-                <Grid
-                  container
-                  spacing={2}
-                  alignItems="center"
-                >
+                <Grid container spacing={2} alignItems="center">
                   <Grid item xs={12} sm={10}>
                     {motive?.title == "" ? (
                       <Button
@@ -275,7 +268,7 @@ const EditMotive = () => {
                       </Button>
                     )}
                   </Grid>
-                  <Grid item xs={12} sm="auto">
+                  <Grid item xs={12} sm={2}>
                     <IconButton
                       color="primary"
                       aria-label="upload picture"
