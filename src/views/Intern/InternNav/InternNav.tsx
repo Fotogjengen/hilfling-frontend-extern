@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./InternNav.module.css";
 
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 import InventoryIcon from "@mui/icons-material/Inventory";
@@ -13,15 +12,7 @@ import ComputerIcon from "@mui/icons-material/Computer";
 import { Link } from "react-router-dom";
 
 import { experimentalStyled as styled } from "@mui/material/styles";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 
 const InternNav = () => {
   const iconSize = 100;
