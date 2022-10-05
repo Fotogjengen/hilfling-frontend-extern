@@ -26,6 +26,7 @@ const MotiveCard: FC<Props> = (props: Props) => {
         <Typography variant="body2">
           Dato: {props?.motive?.dateCreated}
         </Typography>
+        <br />
         {props.children}
       </CardContent>
     </Card>
