@@ -19,27 +19,27 @@ const ArchiveBoss: FC = () => {
 
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
+  const setError = (e: string) => {
+    setOpen(true);
+    setSeverity(severityEnum.ERROR);
+    setMessage(e);
+  };
+
   useEffect(() => {
     AlbumApi.getAll()
       .then((res) => setAlbums(res.data.currentList))
       .catch((e) => {
-        setOpen(true);
-        setSeverity(severityEnum.ERROR);
-        setMessage(e);
+        setError(e)
       });
     PlaceApi.getAll()
       .then((res) => setPlaces(res.data.currentList))
       .catch((e) => {
-        setOpen(true);
-        setSeverity(severityEnum.ERROR);
-        setMessage(e);
+        setError(e)
       });
     CategoryApi.getAll()
       .then((res) => setCategories(res.data.currentList))
       .catch((e) => {
-        setOpen(true);
-        setSeverity(severityEnum.ERROR);
-        setMessage(e);
+        setError(e)
       });
   }, []);
 
