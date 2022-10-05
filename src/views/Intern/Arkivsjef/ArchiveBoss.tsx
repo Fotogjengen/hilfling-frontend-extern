@@ -1,7 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
-import Alert from "../../../components/Alert/Alert";
 import { Grid, Typography } from "@mui/material";
 import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
