@@ -74,11 +74,9 @@ const InternNav = () => {
   ];
 
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
   }));
 
   return (
@@ -90,12 +88,12 @@ const InternNav = () => {
       >
         {internLinks.map((link, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <Item>
-              <Link to={link.to}>
+            <Link to={link.to}>
+              <Item>
                 <Typography>{link.name}</Typography>
                 {link.icon}
-              </Link>
-            </Item>
+              </Item>
+            </Link>
           </Grid>
         ))}
       </Grid>
