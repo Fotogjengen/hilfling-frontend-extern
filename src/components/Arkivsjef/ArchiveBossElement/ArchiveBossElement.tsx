@@ -18,16 +18,12 @@ interface Props {
   /** Type of Overflow menu */
   type: string;
 
-  setOpenAlert: (value: boolean) => void;
-  setLastDeletedName: (value: string) => void;
 }
 
 const ArchiveBossElement: FC<Props> = ({
   text,
   id,
   type,
-  setOpenAlert,
-  setLastDeletedName,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -58,8 +54,6 @@ const ArchiveBossElement: FC<Props> = ({
   };
 
   const handleDelete = () => {
-    setOpenAlert(true);
-    setLastDeletedName(`${text ?? ""} ble slettet`);
     if (type === "album") {
       AlbumApi.deleteById(id)
         .then((res) => {
