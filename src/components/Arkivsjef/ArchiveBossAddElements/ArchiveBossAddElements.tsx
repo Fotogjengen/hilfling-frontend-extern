@@ -20,52 +20,92 @@ import * as yup from "yup";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
-import { ArchiveBossContext } from "../../../views/Intern/Arkivsjef/ArchiveBossContext";
+import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
+import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 const ArchiveBossAddElements = () => {
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const types: string[] = ["Kategori", "Sted", "Album"];
   const { setAlbums, setPlaces, setCategories, setUpdate, update } =
     useContext(ArchiveBossContext);
 
+  const { setMessage, setSeverity, setOpen } =
+    useContext(AlertContext);
+
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenDialog(true);
   };
   const handleClose = () => {
-    setOpen(false);
+    setOpenDialog(false);
   };
 
   const onSubmit = (values: FormikValues) => {
     if (values.type == "Kategori") {
       CategoryApi.post({ name: values.name })
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+        .then((res) => {
+          setOpen(true);
+          setSeverity(severityEnum.SUCCESS);
+          setMessage(`Kategori "${values.name}" ble lagt til`);
+        })
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       setUpdate(true);
     } else if (values.type == "Sted") {
       PlaceApi.post({ name: values.name })
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+        .then((res) => {
+          setOpen(true);
+          setSeverity(severityEnum.SUCCESS);
+          setMessage(`Stedet "${values.name}" ble lagt til`);
+        })
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       setUpdate(true);
     } else if (values.type == "Album") {
       AlbumApi.post({ title: values.name, isAnalog: values.albumType })
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+        .then((res) => {
+          setOpen(true);
+          setSeverity(severityEnum.SUCCESS);
+          setMessage(`Albumet "${values.name}" ble lagt til`);
+        })
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       setUpdate(true);
     }
-    setOpen(false);
+    setOpenDialog(false);
   };
 
   useEffect(() => {
     if (update) {
       AlbumApi.getAll()
         .then((res) => setAlbums(res.data.currentList))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       PlaceApi.getAll()
         .then((res) => setPlaces(res.data.currentList))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       CategoryApi.getAll()
         .then((res) => setCategories(res.data.currentList))
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
       setUpdate(false);
     }
   }, [update]);
@@ -89,7 +129,7 @@ const ArchiveBossAddElements = () => {
         <AddCircle className={styles.svgicon} />
       </IconButton>
       <Typography onClick={handleClickOpen}>Legg til ny</Typography>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={openDialog} onClose={handleClose}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

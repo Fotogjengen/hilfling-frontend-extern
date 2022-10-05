@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { Grid, MenuItem } from "@mui/material";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
@@ -24,6 +24,7 @@ import { SecurityLevelApi } from "../utils/api/SecurityLevelApi";
 import { AlbumApi } from "../utils/api/AlbumApi";
 import { PhotoApi } from "../utils/api/PhotoApi";
 import { EventOwnerApi } from "../utils/api/EventOwnerApi";
+import { AlertContext, severityEnum } from "../contexts/AlertContext";
 
 export interface PhotoUploadFormIV {
   album: string;
@@ -51,26 +52,48 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
 
+  const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
+
   useEffect(() => {
     AlbumApi.getAll()
       .then((res) => setAlbums(res.data.currentList))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(err);
+      });
 
     CategoryApi.getAll()
       .then((res) => setCategories(res.data.currentList))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(err);
+      });
 
     EventOwnerApi.getAll()
       .then((res) => setEventOwners(res.data.currentList))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(err);
+      });
 
     PlaceApi.getAll()
       .then((res) => setPlaces(res.data.currentList))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(err);
+      });
 
     SecurityLevelApi.getAll()
       .then((res) => setSecurityLevels(res.data.currentList))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -110,7 +133,11 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
 
     PhotoApi.batchUpload(formData)
       .then((res) => console.log(res))
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(err);
+      })
       .finally(() => {
         setFiles([]);
       });

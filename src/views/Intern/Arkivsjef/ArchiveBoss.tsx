@@ -1,34 +1,46 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import styles from "./Arkivsjef.module.css";
 import ArchiveBossAccordion from "../../../components/Arkivsjef/ArchiveBossAccordion/ArchiveBossAccordion";
-import Alert from "../../../components/Alert/Alert";
 import { Grid, Typography } from "@mui/material";
 import { AlbumDto, PlaceDto, CategoryDto } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement/ArchiveBossElement";
-import { ArchiveBossContext } from "./ArchiveBossContext";
+import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
+import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [update, setUpdate] = useState(false);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
-  const [openAlert, setOpenAlert] = useState(false);
-  const [lastDeletedName, setLastDeletedName] = useState("Deleted");
+
+  const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
+
+  const setError = (e: string) => {
+    setOpen(true);
+    setSeverity(severityEnum.ERROR);
+    setMessage(e);
+  };
 
   useEffect(() => {
     AlbumApi.getAll()
       .then((res) => setAlbums(res.data.currentList))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setError(e)
+      });
     PlaceApi.getAll()
       .then((res) => setPlaces(res.data.currentList))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setError(e)
+      });
     CategoryApi.getAll()
       .then((res) => setCategories(res.data.currentList))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        setError(e)
+      });
   }, []);
 
   const mapAlbums = (albumsCurrentList: AlbumDto[]) => {
@@ -38,8 +50,6 @@ const ArchiveBoss: FC = () => {
         id={album.albumId.id}
         key={index}
         type="album"
-        setOpenAlert={setOpenAlert}
-        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
@@ -51,8 +61,6 @@ const ArchiveBoss: FC = () => {
         id={place.placeId.id}
         type="place"
         key={index}
-        setOpenAlert={setOpenAlert}
-        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
@@ -64,20 +72,12 @@ const ArchiveBoss: FC = () => {
         id={category.categoryId.id}
         type="category"
         key={index}
-        setOpenAlert={setOpenAlert}
-        setLastDeletedName={setLastDeletedName}
       />
     ));
   };
 
   return (
     <>
-      <Alert
-        message={lastDeletedName}
-        open={openAlert}
-        setOpen={setOpenAlert}
-        severity="success"
-      />
       <ArchiveBossContext.Provider
         value={{
           setAlbums,
