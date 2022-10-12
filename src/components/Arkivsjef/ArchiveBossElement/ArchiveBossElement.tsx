@@ -5,7 +5,7 @@ import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
-import DeleteDialog from "./DeleteDialog";
+import DeleteDialog from "../../DeleteDialog/DeleteDialog";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 interface Props {
@@ -48,7 +48,7 @@ const ArchiveBossElement: FC<Props> = ({
   };
   const handleDialogClose = (value: boolean) => {
     setOpenDeleteDialog(false);
-    if (value == true) {
+    if (value) {
       handleDelete();
     }
   };

@@ -42,7 +42,7 @@ const ArchiveBossAddElements = () => {
   const onSubmit = (values: FormikValues) => {
     if (values.type == "Kategori") {
       CategoryApi.post({ name: values.name })
-        .then((res) => {
+        .then(() => {
           setOpen(true);
           setSeverity(severityEnum.SUCCESS);
           setMessage(`Kategori "${values.name}" ble lagt til`);
@@ -55,7 +55,7 @@ const ArchiveBossAddElements = () => {
       setUpdate(true);
     } else if (values.type == "Sted") {
       PlaceApi.post({ name: values.name })
-        .then((res) => {
+        .then(() => {
           setOpen(true);
           setSeverity(severityEnum.SUCCESS);
           setMessage(`Stedet "${values.name}" ble lagt til`);
@@ -68,7 +68,7 @@ const ArchiveBossAddElements = () => {
       setUpdate(true);
     } else if (values.type == "Album") {
       AlbumApi.post({ title: values.name, isAnalog: values.albumType })
-        .then((res) => {
+        .then(() => {
           setOpen(true);
           setSeverity(severityEnum.SUCCESS);
           setMessage(`Albumet "${values.name}" ble lagt til`);

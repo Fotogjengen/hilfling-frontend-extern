@@ -2,10 +2,12 @@ import {
   Autocomplete,
   Button,
   Grid,
+  IconButton,
   TextField,
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -21,6 +23,7 @@ import { MotiveApi } from "../../../utils/api/MotiveApi";
 import styles from "./EditMotive.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
+import DeleteDialog from "../../../components/DeleteDialog/DeleteDialog";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
@@ -28,6 +31,12 @@ const EditMotive = () => {
   const [categories, setCategories] = useState<CategoryDto[]>([]);
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+  const [, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
@@ -73,7 +82,7 @@ const EditMotive = () => {
     }
   }, [motive, albums, categories, eventOwners]);
 
-  const handleClick = () => {
+  const handleClickPatch = () => {
     MotiveApi.patch(motive)
       .then(() => {
         navigate("/intern/motive");
@@ -86,6 +95,36 @@ const EditMotive = () => {
         setSeverity(severityEnum.ERROR);
         setMessage(e);
       });
+  };
+
+  const handleDialogClose = (value: boolean) => {
+    setOpenDeleteDialog(false);
+    if (value == true) {
+      handleDelete();
+    }
+  };
+
+  const handleBeforeDelete = () => {
+    handleClose();
+    setOpenDeleteDialog(true);
+  };
+
+  const handleDelete = () => {
+    // TODO: We don't have an endpoint for deleting motives yet
+    console.log("deleted");
+    navigate("/intern/motive");
+    /* MotiveApi.delete(motive.motiveId.id)
+      .then(() => {
+        navigate("/intern/motive");
+        setOpen(true);
+        setSeverity(severityEnum.SUCCESS);
+        setMessage(`Motivet ${motive.title} ble slettet`);
+      })
+      .catch((e) => {
+        setOpen(true);
+        setSeverity(severityEnum.ERROR);
+        setMessage(e);
+      }); */
   };
 
   return (
@@ -205,33 +244,51 @@ const EditMotive = () => {
             <Grid item xs={12} sm={6}>
               <Typography variant="h6">Slik vil motivet se ut</Typography>
               <MotiveCard key={1} motive={motive}>
-                {motive?.title == "" ? (
-                  <Button
-                    size="small"
-                    variant="contained"
-                    endIcon={<EditIcon />}
-                    disabled
-                    fullWidth
-                  >
-                    Endre motivet
-                  </Button>
-                ) : (
-                  <Button
-                    size="small"
-                    variant="contained"
-                    endIcon={<EditIcon />}
-                    onClick={handleClick}
-                    sx={{ marginTop: 2 }}
-                    fullWidth
-                  >
-                    Endre motivet
-                  </Button>
-                )}
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item xs={12} sm={10}>
+                    {motive?.title == "" ? (
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        endIcon={<EditIcon />}
+                        disabled
+                        fullWidth
+                      >
+                        Endre motivet
+                      </Button>
+                    ) : (
+                      <Button
+                        size="small"
+                        endIcon={<EditIcon />}
+                        onClick={handleClickPatch}
+                        variant="outlined"
+                        fullWidth
+                      >
+                        Endre motivet
+                      </Button>
+                    )}
+                  </Grid>
+                  <Grid item xs={12} sm={2}>
+                    <IconButton
+                      color="primary"
+                      aria-label="upload picture"
+                      component="label"
+                      onClick={() => handleBeforeDelete()}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
               </MotiveCard>
             </Grid>
           </>
         )}
       </Grid>
+      <DeleteDialog
+        open={openDeleteDialog}
+        onClose={handleDialogClose}
+        name={motive.title}
+      />
     </div>
   );
 };
