@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./InternNav.module.css";
 
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 import InventoryIcon from "@mui/icons-material/Inventory";
@@ -11,6 +10,9 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ComputerIcon from "@mui/icons-material/Computer";
 import { Link } from "react-router-dom";
+
+import { experimentalStyled as styled } from "@mui/material/styles";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 
 const InternNav = () => {
   const iconSize = 100;
@@ -62,19 +64,31 @@ const InternNav = () => {
     },
   ];
 
+  const Item = styled(Paper)(({ theme }) => ({
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.primary,
+  }));
+
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.linkContainer}>
-          {internLinks.map((link, index) => (
-            <Link className={styles.linkBox} key={index} to={link.to}>
-              {link.name}
-              {link.icon}
+    <Container>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        {internLinks.map((link, index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <Link to={link.to}>
+              <Item>
+                <Typography>{link.name}</Typography>
+                {link.icon}
+              </Item>
             </Link>
-          ))}
-        </div>
-      </div>
-    </>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 
