@@ -9,6 +9,7 @@ import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
 import Search from "./components/searchPage/Search";
 import CsaTester from "./views/CsaTester";
+import SearchPage from "./components/searchPage/SearchPage";
 
 const AppRoutes: FC = () => {
   return (
@@ -18,7 +19,7 @@ const AppRoutes: FC = () => {
         <Route path="/motive" element={<ShowMotive />} />
         <Route path="/motive/:id" element={<ShowMotive />} />
         <Route path="/about" element={<About />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/search/:term" element={<Search />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/csa-tester" element={<CsaTester />} />
