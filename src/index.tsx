@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import { render } from "react-dom";
 import "./index.css";
 import AppRoutes from "./AppRoutes";
@@ -13,10 +13,11 @@ import { AlertContext, severityEnum } from "./contexts/AlertContext";
 import Alert from "./components/Alert/Alert";
 
 const Root: FC = () => {
+  // Hooks for the Alert component
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState(severityEnum.INFO);
-  
+
   return (
     <>
       <Auth0Provider
@@ -35,13 +36,14 @@ const Root: FC = () => {
               severity,
             }}
           >
-            <Alert
-              open={open}
-              setOpen={setOpen}
-              message={message}
-              severity={severity}
-            />
-
+            {open ? (
+              <Alert
+                open={open}
+                setOpen={setOpen}
+                message={message}
+                severity={severity}
+              />
+            ) : null}
             <div className={guistyles.container}>
               <div className={"container"}>
                 <Router>
