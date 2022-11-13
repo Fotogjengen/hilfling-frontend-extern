@@ -29,52 +29,19 @@ const ArchiveBoss: FC = () => {
     AlbumApi.getAll()
       .then((res) => setAlbums(res.data.currentList))
       .catch((e) => {
-        setError(e)
+        setError(e);
       });
     PlaceApi.getAll()
       .then((res) => setPlaces(res.data.currentList))
       .catch((e) => {
-        setError(e)
+        setError(e);
       });
     CategoryApi.getAll()
       .then((res) => setCategories(res.data.currentList))
       .catch((e) => {
-        setError(e)
+        setError(e);
       });
   }, []);
-
-  const mapAlbums = (albumsCurrentList: AlbumDto[]) => {
-    return albumsCurrentList.map((album: AlbumDto, index: number) => (
-      <ArchiveBossElement
-        text={album.title}
-        id={album.albumId.id}
-        key={index}
-        type="album"
-      />
-    ));
-  };
-
-  const mapPlace = (placeCurrentList: PlaceDto[]) => {
-    return placeCurrentList.map((place: PlaceDto, index: number) => (
-      <ArchiveBossElement
-        text={place.name}
-        id={place.placeId.id}
-        type="place"
-        key={index}
-      />
-    ));
-  };
-
-  const mapCategory = (categoyCurrentList: CategoryDto[]) => {
-    return categoyCurrentList.map((category: CategoryDto, index: number) => (
-      <ArchiveBossElement
-        text={category.name}
-        id={category.categoryId.id}
-        type="category"
-        key={index}
-      />
-    ));
-  };
 
   return (
     <>
@@ -122,14 +89,54 @@ const ArchiveBoss: FC = () => {
               </Grid>
             </Grid>
           </div>
+
           <ArchiveBossAccordion color="#da7777" name="Album">
-            {mapAlbums(albums)}
+            <Grid container spacing={2}>
+              {albums.map((album: AlbumDto, index: number) => (
+                <Grid item key={index} xs={12} sm={4}>
+                  <ArchiveBossElement
+                    text={album.title}
+                    id={album.albumId.id}
+                    key={index}
+                    type="album"
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </ArchiveBossAccordion>
           <ArchiveBossAccordion color="#f3ee78" name="Sted">
-            {mapPlace(places)}
+            <Grid container spacing={2}>
+              {places.map((place: PlaceDto, index: number) => (
+                <Grid
+                  item
+                  key={index}
+                  xs={12}
+                  sm={4}
+                  style={{ borderBottom: "1px solid #000000;" }}
+                >
+                  <ArchiveBossElement
+                    text={place.name}
+                    id={place.placeId.id}
+                    type="place"
+                    key={index}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </ArchiveBossAccordion>
           <ArchiveBossAccordion color="#9c77da" name="Kategori">
-            {mapCategory(categories)}
+            <Grid container spacing={2}>
+              {categories.map((category: CategoryDto, index: number) => (
+                <Grid item key={index} xs={12} sm={4}>
+                  <ArchiveBossElement
+                    text={category.name}
+                    id={category.categoryId.id}
+                    type="category"
+                    key={index}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </ArchiveBossAccordion>
         </div>
       </ArchiveBossContext.Provider>
