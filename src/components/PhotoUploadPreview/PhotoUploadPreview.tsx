@@ -34,7 +34,7 @@ const PhotoUploadPreview: FC<Props> = ({ file, handleChange }: Props) => {
 
           <FormGroup>
             <FormControlLabel
-              label="Bra bilde"
+              label="Oppslagsbilde"
               control={
                 <Checkbox
                   checked={isGoodPicture}
