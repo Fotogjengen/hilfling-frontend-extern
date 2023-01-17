@@ -107,13 +107,7 @@ const ArchiveBoss: FC = () => {
           <ArchiveBossAccordion color="#f3ee78" name="Sted">
             <Grid container spacing={2}>
               {places.map((place: PlaceDto, index: number) => (
-                <Grid
-                  item
-                  key={index}
-                  xs={12}
-                  sm={4}
-                  style={{ borderBottom: "1px solid #000000" }}
-                >
+                <Grid item key={index} xs={12} sm={4}>
                   <ArchiveBossElement
                     text={place.name}
                     id={place.placeId.id}
