@@ -7,10 +7,18 @@ import { PhotoDto } from "../../../../generated";
 import { PhotoCarouselApi } from "../../../utils/api/PhotoCarouselApi";
 
 const Carousel: FC = () => {
+  const [showArrows, setShowArrows] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
   const [slideGoRight, setSlideGoRight] = useState(true);
 
   const [carouselPhotos, setCarouselPhotos] = useState<PhotoDto[]>([]);
+
+  const handleMouseEnter = () => {
+    setShowArrows(true);
+  };
+  const handleMouseLeave = () => {
+    setShowArrows(false);
+  };
 
   const onArrowRightClick = () => {
     if (currentSlide >= carouselPhotos.length) {
@@ -50,7 +58,11 @@ const Carousel: FC = () => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        onMouseEnter={() => handleMouseEnter()}
+        onMouseLeave={() => handleMouseLeave()}
+      >
         {carouselPhotos.map((img, index) => {
           return (
             <img
@@ -65,17 +77,18 @@ const Carousel: FC = () => {
             />
           );
         })}
-
-        <div className={styles.arrows}>
-          <ArrowBackIosNewRoundedIcon
-            style={{ fontSize: 40 }}
-            onClick={() => onArrowLeftClick()}
-          />
-          <ArrowForwardIosRoundedIcon
-            style={{ fontSize: 40 }}
-            onClick={() => onArrowRightClick()}
-          />
-        </div>
+        {showArrows ? (
+          <div className={styles.arrows}>
+            <ArrowBackIosNewRoundedIcon
+              style={{ fontSize: 40 }}
+              onClick={() => onArrowLeftClick()}
+            />
+            <ArrowForwardIosRoundedIcon
+              style={{ fontSize: 40 }}
+              onClick={() => onArrowRightClick()}
+            />
+          </div>
+        ) : null}
       </div>
     </>
   );
