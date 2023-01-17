@@ -112,7 +112,7 @@ const ArchiveBoss: FC = () => {
                   key={index}
                   xs={12}
                   sm={4}
-                  style={{ borderBottom: "1px solid #000000;" }}
+                  style={{ borderBottom: "1px solid #000000" }}
                 >
                   <ArchiveBossElement
                     text={place.name}
