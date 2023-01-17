@@ -2,7 +2,7 @@ import React, { ComponentType, FC } from "react";
 import { Route, RouteProps } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 
-interface Props extends RouteProps {
+type Props = RouteProps & {
   element: ComponentType<any>;
 }
 
