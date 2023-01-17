@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Collapse, Alert as MUIAlert } from "@mui/material";
 import styles from "./Alert.module.css";
 
@@ -10,6 +10,20 @@ interface Props {
 }
 
 const Alert: FC<Props> = ({ open, setOpen, message, severity }: Props) => {
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      setOpen(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, []);
+
+  if (!open) {
+    return null;
+  }
+
   return (
     <Collapse in={open} className={styles.collapse}>
       <div onClick={() => setOpen(false)}>
