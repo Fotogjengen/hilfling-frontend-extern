@@ -15,56 +15,67 @@ import { experimentalStyled as styled } from "@mui/material/styles";
 import { Container, Grid, Paper, Typography } from "@mui/material";
 
 const InternNav = () => {
-  const iconSize = 100;
-  const internLinks = [
+  const mainIconSize = 100;
+  const otherIconSize = 50;
+
+  const mainLinks = [
     {
       name: "Internsøk",
       to: "/søk",
-      icon: <ImageSearchIcon style={{ fontSize: iconSize }} />,
+      icon: <ImageSearchIcon style={{ fontSize: mainIconSize }} />,
     },
     {
       name: "Last opp",
       to: "/intern/last-opp",
-      icon: <UploadIcon style={{ fontSize: iconSize }} />,
+      icon: <UploadIcon style={{ fontSize: mainIconSize }} />,
     },
     {
       name: "Arkiv",
       to: "/intern/arkivsjef",
-      icon: <InventoryIcon style={{ fontSize: iconSize }} />,
+      icon: <InventoryIcon style={{ fontSize: mainIconSize }} />,
     },
     {
       name: "Motiv",
       to: "/intern/motive",
-      icon: <SportsKabaddiIcon style={{ fontSize: iconSize }} />,
+      icon: <SportsKabaddiIcon style={{ fontSize: mainIconSize }} />,
     },
     {
-      name: "Profile",
+      name: "Min profil",
       to: "/intern/myprofile",
-      icon: <AccountBoxIcon style={{ fontSize: iconSize }} />,
+      icon: <AccountBoxIcon style={{ fontSize: mainIconSize }} />,
     },
+  ];
+
+  const otherLinks = [
     {
       name: "Samf wiki",
       to: "/samf-wiki",
-      icon: <LibraryBooksIcon style={{ fontSize: iconSize }} />,
+      icon: <LibraryBooksIcon style={{ fontSize: otherIconSize }} />,
     },
     {
       name: "Fg wiki",
       to: "/fg-wiki",
-      icon: <CameraAltIcon style={{ fontSize: iconSize }} />,
+      icon: <CameraAltIcon style={{ fontSize: otherIconSize }} />,
     },
     {
       name: "Utlån",
       to: "/utlaan",
-      icon: <CameraswitchIcon style={{ fontSize: iconSize }} />,
+      icon: <CameraswitchIcon style={{ fontSize: otherIconSize }} />,
     },
     {
       name: "Fg web",
       to: "/fg-web",
-      icon: <ComputerIcon style={{ fontSize: iconSize }} />,
+      icon: <ComputerIcon style={{ fontSize: otherIconSize }} />,
     },
   ];
 
-  const Item = styled(Paper)(({ theme }) => ({
+  const MainItem = styled(Paper)(({ theme }) => ({
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.primary,
+  }));
+
+  const OtherItem = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.primary,
@@ -72,18 +83,39 @@ const InternNav = () => {
 
   return (
     <Container>
+      <Typography variant="h4" sx={{ paddingTop: 2 }}>
+        Internsider
+      </Typography>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {internLinks.map((link, index) => (
+        {mainLinks.map((link, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
             <Link to={link.to}>
-              <Item>
+              <MainItem>
                 <Typography>{link.name}</Typography>
                 {link.icon}
-              </Item>
+              </MainItem>
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
+      <br />
+      <Typography variant="h5">Andre lenker</Typography>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        {otherLinks.map((link, index) => (
+          <Grid item xs={2} sm={4} md={2} key={index}>
+            <Link to={link.to}>
+              <OtherItem>
+                <Typography>{link.name}</Typography>
+                {link.icon}
+              </OtherItem>
             </Link>
           </Grid>
         ))}
