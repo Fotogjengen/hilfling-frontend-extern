@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import "./index.css";
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import guistyles from "./styles/utilities.module.css";
 import { GuiFooter } from "./gui-components";
 import HeaderComponent from "./components/Header/Header";
@@ -44,14 +44,12 @@ const Root: FC = () => {
                 severity={severity}
               />
             ) : null}
-            <div className={guistyles.container}>
-              <div className={"container"}>
-                <Router>
-                  <HeaderComponent />
-                  <AppRoutes />
-                </Router>
-              </div>
-            </div>
+            <Box sx={{ m: "2rem" }}>
+              <Router>
+                <HeaderComponent />
+                <AppRoutes />
+              </Router>
+            </Box>
             <GuiFooter />
           </AlertContext.Provider>
         </ThemeProvider>

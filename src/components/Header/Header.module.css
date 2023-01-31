@@ -1,14 +1,9 @@
-.nav {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
+
 .navHead {
+    margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 0.5rem;
-    padding-right: 0.5rem;
 }
 
 .hamburger {
@@ -38,8 +33,6 @@
     align-items: center;
     justify-content: space-between;
     width: 90vw;
-    margin: 1rem 0rem;
-    padding: 0.2rem 0.6rem;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px 0px;
     
 }
@@ -49,7 +42,6 @@
 }
 
 .navContainer {
-    margin: 1rem;
     font-size: 1.5rem;
     display: none;
     grid-template-columns: 8fr 2fr;
