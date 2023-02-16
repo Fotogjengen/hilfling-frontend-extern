@@ -5,7 +5,6 @@ import CardInformationFotogjengen from "../../components/Frontpage/CardInformati
 import CardInformationAnmoding from "../../components/Frontpage/CardInformationAnmoding/CardInformationAnmoding";
 import Carousel from "../../components/Frontpage/Carousel/Carousel";
 import { InstagramEmbed } from "react-social-media-embed";
-import { Paper } from "@mui/material";
 // import { withAuth } from "@okta/okta-react";
 // import { useAuth } from "../../utils/auth";
 
