@@ -7,21 +7,21 @@ import ShowMotive from "./components/ImageViewer/ShowMotive";
 import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
 import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
-import Search from "./components/searchPage/Search";
+import Search from "./views/Search/Search";
 import CsaTester from "./views/CsaTester";
 import Motives from "./views/Intern/Motives/Motives";
 import LoggInn from "./views/Intern/LoggInn/LoggInn";
 import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Redirect from "./utils/Redirect/Redirect";
+import PhotoMotive from "./views/PhotoMotive/PhotoMotive";
 
 const AppRoutes: FC = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/motive" element={<ShowMotive />} />
-        <Route path="/motive/:id" element={<ShowMotive />} />
+        <Route path="/motive/:id" element={<PhotoMotive />} />
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:term" element={<Search />} />

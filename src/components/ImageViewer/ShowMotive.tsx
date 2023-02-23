@@ -4,16 +4,14 @@ import MotiveImage from "./MotiveImage";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { MotiveDto, PhotoDto } from "../../../generated";
-import { useParams } from "react-router-dom";
-import { MotiveApi } from "../../utils/api/MotiveApi";
-import { PhotoApi } from "../../utils/api/PhotoApi";
 import { createImgUrl } from "../../utils/createImgUrl/createImgUrl";
 
-const ShowMotive: FC = () => {
-  const [photoResponse, setPhotoResponse] = useState<PhotoDto[]>([]);
-  const [motiveResponse, setMotiveResponse] = useState<MotiveDto>(
-    {} as MotiveDto,
-  );
+interface Props {
+    photos:PhotoDto[]
+    motive:MotiveDto
+}
+
+const ShowMotive: FC<Props> = ({photos,motive}) => {
 
   const images = [
     "//placekitten.com/1500/500",
@@ -24,20 +22,18 @@ const ShowMotive: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  const { id } = useParams<{id: string}>();
-
   const updateIndex = (index: number) => {
     setPhotoIndex(index);
     setIsOpen(true);
   };
 
-  const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
+  const imageItems = photos.map((image: PhotoDto, index: number) => {
     return (
       <MotiveImage
         id={image.photoId.id}
         image={createImgUrl(image)}
         key={index}
-        imageListProp={photoResponse}
+        imageListProp={photos}
         index={index}
         updateIndex={() => updateIndex(index)}
         title={image.motive.title}
@@ -45,23 +41,11 @@ const ShowMotive: FC = () => {
     );
   });
 
-  useEffect(() => {
-    // TODO: Fix response type
-    if (id) {
-      MotiveApi.getById(id)
-      .then((res) => setMotiveResponse(res))
-      .catch((e) => console.log(e));
-      PhotoApi.getAllByMotiveId(id)
-      .then((res) => setPhotoResponse(res))
-      .catch((e) => console.log(e));
-    }
-  }, []);
-
   return (
     <>
       <div className={styles.backgroundFlex}>
         <div className={styles.imageHeader}>
-          <p className={styles.headerText}>{motiveResponse.title}</p>
+          <p className={styles.headerText}>{motive.title}</p>
           <hr className={styles.hr} />
         </div>
         <div className={styles.filterAndImages}>
@@ -76,23 +60,23 @@ const ShowMotive: FC = () => {
       </div>
       {isOpen && (
         <Lightbox
-          mainSrc={createImgUrl(photoResponse[photoIndex])}
+          mainSrc={createImgUrl(photos[photoIndex])}
           nextSrc={
-            createImgUrl(photoResponse[(photoIndex + 1) % photoResponse.length])
+            createImgUrl(photos[(photoIndex + 1) % photos.length])
           }
           prevSrc={
-            createImgUrl(photoResponse[
-              (photoIndex + images.length - 1) % photoResponse.length
+            createImgUrl(photos[
+              (photoIndex + images.length - 1) % photos.length
             ])
           }
           onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
             setPhotoIndex(
-              (photoIndex + photoResponse.length - 1) % photoResponse.length,
+              (photoIndex + photos.length - 1) % photos.length,
             )
           }
           onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % photoResponse.length)
+            setPhotoIndex((photoIndex + 1) % photos.length)
           }
         />
       )}

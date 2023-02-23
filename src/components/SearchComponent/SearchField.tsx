@@ -3,7 +3,7 @@ import { Container, Grid, IconButton, InputAdornment, MenuItem, TextField } from
 import SearchIcon from '@mui/icons-material/Search';
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
-const Search: FC = () => {
+const SearchField: FC = () => {
 
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -69,4 +69,4 @@ const Search: FC = () => {
   );
 };
 
-export default Search;
+export default SearchField;
