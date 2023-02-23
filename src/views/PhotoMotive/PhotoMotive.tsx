@@ -22,7 +22,6 @@ const PhotoMotive = () => {
         .catch((e) => console.log(e));
     }
   }, []);
-  console.log(photoResponse, motiveResponse);
 
   return <ShowMotive photos={photoResponse} motive={motiveResponse}/>;
 };
