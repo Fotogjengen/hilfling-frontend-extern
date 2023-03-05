@@ -52,6 +52,8 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
 
+  const [progress, setProgress] = useState(0);
+
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
   useEffect(() => {
@@ -137,19 +139,26 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       formData.append("photoFileList", acceptedFiles[index]);
     });
 
-    PhotoApi.batchUpload(formData)
+    const onUploadProgress = (progressEvent: ProgressEvent) => {
+      const p = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+      setProgress(p);
+      console.log(
+        `Uploaded ${progressEvent.loaded} out of ${progressEvent.total}`,
+      );
+    };
+
+    PhotoApi.batchUpload(formData, onUploadProgress)
       .then((res) => console.log(res))
       .catch((err) => {
         console.log(err);
-        /*
+
         setOpen(true);
         setSeverity(severityEnum.ERROR);
-        setMessage(err); */
+        setMessage(err);
       })
       .finally(() => {
         setFiles([]);
       });
-    console.log("formDATA ", formData);
   };
 
   const validate: Validate = (values: any): Errors => {
@@ -277,6 +286,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
+          <div> {progress}%</div>
         </Grid>
       </Grid>
     </div>

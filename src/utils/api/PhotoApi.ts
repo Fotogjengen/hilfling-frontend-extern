@@ -26,7 +26,7 @@ export const PhotoApi = {
   },
   batchUpload: async function (
     photos: FormData,
-    onUploadProgress?: () => void,
+    onUploadProgress?: (progressEvent: ProgressEvent) => void,
   ): Promise<any> {
     console.log(photos);
     return api.post("/photos/upload", photos, {
