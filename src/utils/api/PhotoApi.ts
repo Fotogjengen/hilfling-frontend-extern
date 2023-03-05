@@ -21,6 +21,12 @@ export const PhotoApi = {
   getAllByMotiveId: async function (id: string): Promise<PhotoDto[]> {
     return api.get(`/photos/motive/${id}`).then((res) => res.data.currentList);
   },
+  getGoodByMotiveId: async function (id: string): Promise<PhotoDto[]> {
+    return api.get(`/photos/good/${id}`).then((res) => res.data.currentList);
+  },
+  getAllGood: async function (): Promise<PhotoDto[]> {
+    return api.get(`/photos/good`).then((res) => res.data.currentList);
+  },
   post: async function (photo: Photo): Promise<Photo> {
     return api.post("/photos", photo);
   },

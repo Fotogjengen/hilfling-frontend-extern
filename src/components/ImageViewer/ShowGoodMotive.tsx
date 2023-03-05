@@ -27,7 +27,6 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
   );
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isAnyGood, setIsAnyGood] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const bgcolors = ["#da7777", "#f3ee78", "#9c77da", "#BADA77", "#7793da"];
 
@@ -43,11 +42,8 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
   ];
 
   const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
-    if (image.goodPicture) {
-      setIsAnyGood(true);
-    }
     return (
-      /*image.goodPicture && */ <Grid key={index} item>
+      <Grid key={index} item>
         <MotiveImage
           id={image.photoId.id}
           image={createImgUrl(image)}
@@ -67,7 +63,7 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
       MotiveApi.getById(id)
         .then((res) => setMotiveResponse(res))
         .catch((e) => console.log(e));
-      PhotoApi.getAllByMotiveId(id)
+      PhotoApi.getAllGood()
         .then((res) => setPhotoResponse(res))
         .catch((e) => console.log(e));
     }
@@ -75,8 +71,8 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
 
   return (
     <>
-      {
-        /*isAnyGood &&  */ <Accordion>
+      {photoResponse.length != 0 && (
+        <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -91,8 +87,7 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
             <Grid container>{imageItems}</Grid>
           </AccordionDetails>
         </Accordion>
-      }
-
+      )}
       {isOpen && (
         <Lightbox
           mainSrc={createImgUrl(photoResponse[photoIndex])}
