@@ -1,27 +1,35 @@
-import { MotiveDto, PhotoDto } from "../../../generated";
-import React, { FC, useState, useEffect } from "react";
-import { MotiveApi } from "../../utils/api/MotiveApi";
+import { PhotoDto } from "../../../generated";
+import { MotiveDto } from "../../../generated";
+import React, { useState, useEffect } from "react";
 import { PhotoApi } from "../../utils/api/PhotoApi";
-import { useParams } from "react-router-dom";
+import { MotiveApi } from "../../utils/api/MotiveApi";
 import ShowMotive from "../../components/ImageViewer/ShowMotive";
+
 
 const PhotoMotive = () => {
   const [photoResponse, setPhotoResponse] = useState<PhotoDto[]>([]);
-  const [motiveResponse, setMotiveResponse] = useState<MotiveDto>(
-    {} as MotiveDto,
-  );
-  const { id } = useParams<{ id: string }>();
+  const [motiveResponse, setMotiveResponse] = useState<MotiveDto>({} as MotiveDto);
+  
 
   useEffect(() => {
-    if (id) {
-      MotiveApi.getById(id)
-        .then((res) => setMotiveResponse(res))
-        .catch((e) => console.log(e));
-      PhotoApi.getAllByMotiveId(id)
-        .then((res) => setPhotoResponse(res))
-        .catch((e) => console.log(e));
+      PhotoApi.getAll()
+        .then((res) => {
+          setPhotoResponse(res)
+        }).catch((e) => console.log(e))
     }
-  }, []);
+  ,[]);
+  useEffect(() => {
+    MotiveApi.getAll()
+    .then((res) => {
+      setMotiveResponse(res.data.currentList[0])
+    }).catch((e) => console.log(e)),[]
+  },[])
+
+  console.log(motiveResponse, "motiv ")
+  console.log(photoResponse,"fotorespons")
+
+  
+  
 
   return <ShowMotive photos={photoResponse} motive={motiveResponse}/>;
 };

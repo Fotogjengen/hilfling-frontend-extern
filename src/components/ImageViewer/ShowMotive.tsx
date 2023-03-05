@@ -8,16 +8,10 @@ import { createImgUrl } from "../../utils/createImgUrl/createImgUrl";
 
 interface Props {
     photos:PhotoDto[]
-    motive:MotiveDto
+    motive:MotiveDto 
 }
 
-const ShowMotive: FC<Props> = ({photos,motive}) => {
-
-  const images = [
-    "//placekitten.com/1500/500",
-    "//placekitten.com/4000/3000",
-    "//placekitten.com/800/1200",
-  ];
+const ShowMotive: FC<Props> = ({photos, motive}) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -45,7 +39,9 @@ const ShowMotive: FC<Props> = ({photos,motive}) => {
     <>
       <div className={styles.backgroundFlex}>
         <div className={styles.imageHeader}>
-          <p className={styles.headerText}>{motive.title}</p>
+          <p className={styles.headerText}>
+            {motive.title}
+            </p>
           <hr className={styles.hr} />
         </div>
         <div className={styles.filterAndImages}>
@@ -66,7 +62,7 @@ const ShowMotive: FC<Props> = ({photos,motive}) => {
           }
           prevSrc={
             createImgUrl(photos[
-              (photoIndex + images.length - 1) % photos.length
+              (photoIndex + photos.length - 1) % photos.length
             ])
           }
           onCloseRequest={() => setIsOpen(false)}
