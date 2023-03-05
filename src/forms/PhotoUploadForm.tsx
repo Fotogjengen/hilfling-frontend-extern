@@ -127,20 +127,29 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
         "isGoodPhotoList",
         JSON.stringify(dragNDropFile.isGoodPicture),
       );
-      formData.append("tagList", values["tags"]);
+
+      let tags = ["noTag"];
+      if (values["tags"].length >= tags.length) {
+        tags = values["tags"];
+      }
+      formData.append("tagList", JSON.stringify(tags));
+
       formData.append("photoFileList", acceptedFiles[index]);
     });
 
     PhotoApi.batchUpload(formData)
       .then((res) => console.log(res))
       .catch((err) => {
+        console.log(err);
+        /*
         setOpen(true);
         setSeverity(severityEnum.ERROR);
-        setMessage(err);
+        setMessage(err); */
       })
       .finally(() => {
         setFiles([]);
       });
+    console.log("formDATA ", formData);
   };
 
   const validate: Validate = (values: any): Errors => {
@@ -243,12 +252,12 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <Grid item xs={12}>
                 <Select name="eventOwner" label="Eier" fullWidth required>
                   {eventOwners.map((eventOwner, index) => (
-                      <MenuItem
-                          key={`event-owner-item-${index}`}
-                          value={eventOwner.name}
-                      >
-                        {eventOwner.name}
-                      </MenuItem>
+                    <MenuItem
+                      key={`event-owner-item-${index}`}
+                      value={eventOwner.name}
+                    >
+                      {eventOwner.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </Grid>
