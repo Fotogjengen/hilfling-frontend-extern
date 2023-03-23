@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
 import Lightbox from "react-image-lightbox";

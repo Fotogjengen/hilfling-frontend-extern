@@ -25,9 +25,6 @@ const PhotoMotive = () => {
     }).catch((e) => console.log(e)),[]
   },[])
 
-  console.log(motiveResponse, "motiv ")
-  console.log(photoResponse,"fotorespons")
-
   
   
 
