@@ -48,7 +48,7 @@ const SearchField: FC = () => {
   }
 
   return (
-    <>
+    <div >
     <Container>
       <Grid container spacing={2} >
           <TextField label={placeholder} fullWidth variant="outlined" onChange={handleChange} InputProps={{
@@ -65,7 +65,7 @@ const SearchField: FC = () => {
           </div>
       </Grid>
     </Container>
-  </>
+  </div>
   );
 };
 

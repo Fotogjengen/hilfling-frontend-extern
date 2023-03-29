@@ -14,14 +14,14 @@ import LoggInn from "./views/Intern/LoggInn/LoggInn";
 import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Redirect from "./utils/Redirect/Redirect";
-import PhotoMotive from "./views/PhotoMotive/PhotoMotive";
+import MotiveHeader from "./components/ImageViewer/MotiveHeader";
 
 const AppRoutes: FC = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/motive/:id" element={<PhotoMotive />} />
+        <Route path="/motive/:id" element={<MotiveHeader />} />
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:term" element={<Search />} />

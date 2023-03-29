@@ -8,10 +8,10 @@ import { createImgUrl } from "../../utils/createImgUrl/createImgUrl";
 
 interface Props {
     photos:PhotoDto[]
-    motive:MotiveDto 
+    //motive:MotiveDto 
 }
 
-const ShowMotive: FC<Props> = ({photos, motive}) => {
+const ShowMotive: FC<Props> = ({photos}) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -38,12 +38,12 @@ const ShowMotive: FC<Props> = ({photos, motive}) => {
   return (
     <>
       <div className={styles.backgroundFlex}>
-        <div className={styles.imageHeader}>
+        {/* <div className={styles.imageHeader}>
           <p className={styles.headerText}>
             {motive.title}
             </p>
           <hr className={styles.hr} />
-        </div>
+        </div> */}
         <div className={styles.filterAndImages}>
           <div className={styles.flex}>
             {imageItems}

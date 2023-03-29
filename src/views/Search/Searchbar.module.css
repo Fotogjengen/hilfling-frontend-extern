@@ -1,0 +1,26 @@
+.hr {
+    background-color: "#000000";
+    height: 2px;
+    width: 95%;
+}
+
+.backgroundFlex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.imageHeader {
+    height: 75px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.searchbar {
+    padding:3rem;
+}

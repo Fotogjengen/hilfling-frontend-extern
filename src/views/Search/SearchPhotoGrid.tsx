@@ -3,10 +3,11 @@ import { MotiveDto } from "../../../generated";
 import React, { useState, useEffect } from "react";
 import { PhotoApi } from "../../utils/api/PhotoApi";
 import { MotiveApi } from "../../utils/api/MotiveApi";
+import styles from "./Searchbar.module.css";
 import ShowMotive from "../../components/ImageViewer/ShowMotive";
 
 
-const PhotoMotive = () => {
+const MotiveHeader = () => {
   const [photoResponse, setPhotoResponse] = useState<PhotoDto[]>([]);
   const [motiveResponse, setMotiveResponse] = useState<MotiveDto>({} as MotiveDto);
   
@@ -24,11 +25,11 @@ const PhotoMotive = () => {
       setMotiveResponse(res.data.currentList[0])
     }).catch((e) => console.log(e)),[]
   },[])
+  
 
   
   
 
-  return <ShowMotive photos={photoResponse}/>;
-};
+  return ( <ShowMotive photos={photoResponse}/>)};
 
-export default PhotoMotive;
+export default MotiveHeader;
