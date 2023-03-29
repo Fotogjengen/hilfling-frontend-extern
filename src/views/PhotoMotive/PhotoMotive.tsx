@@ -3,7 +3,7 @@ import { MotiveDto } from "../../../generated";
 import React, { useState, useEffect } from "react";
 import { PhotoApi } from "../../utils/api/PhotoApi";
 import { MotiveApi } from "../../utils/api/MotiveApi";
-import ShowMotive from "../../components/ImageViewer/ShowMotive";
+import ShowMotive from "../../components/ImageViewer/GridImageViewer";
 
 
 const PhotoMotive = () => {
