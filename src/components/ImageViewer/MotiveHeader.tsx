@@ -27,10 +27,6 @@ const MotiveHeader = () => {
     }
   }, []);
   
-
-  
-  
-
   return (<div className = {styles.backgroundFlex}>
     <div className={styles.imageHeader}>
           <p className={styles.headerText}>
