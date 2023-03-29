@@ -1,14 +1,13 @@
-import React, { FC, useState } from "react";
+import React,{ FC, useState } from "react";
 import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { MotiveDto, PhotoDto } from "../../../generated";
+import { PhotoDto } from "../../../generated";
 import { createImgUrl } from "../../utils/createImgUrl/createImgUrl";
 
 interface Props {
     photos:PhotoDto[]
-    //motive:MotiveDto 
 }
 
 const ShowMotive: FC<Props> = ({photos}) => {
@@ -38,12 +37,6 @@ const ShowMotive: FC<Props> = ({photos}) => {
   return (
     <>
       <div className={styles.backgroundFlex}>
-        {/* <div className={styles.imageHeader}>
-          <p className={styles.headerText}>
-            {motive.title}
-            </p>
-          <hr className={styles.hr} />
-        </div> */}
         <div className={styles.filterAndImages}>
           <div className={styles.flex}>
             {imageItems}
