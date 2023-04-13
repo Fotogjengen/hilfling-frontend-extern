@@ -15,7 +15,7 @@ const styles = () =>
       width: "100%",
     },
   });
-let idCount = 0;
+// let idCount = 0;
 
 const DatePicker: FC<
   FormFieldProps<MobileDatePickerProps<Date>> &
