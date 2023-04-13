@@ -3,7 +3,6 @@ import { MotiveDto } from "../../../generated";
 import React, { useState, useEffect } from "react";
 import { PhotoApi } from "../../utils/api/PhotoApi";
 import { MotiveApi } from "../../utils/api/MotiveApi";
-import styles from "./Searchbar.module.css";
 import ShowMotive from "../../components/ImageViewer/GridImageViewer";
 
 
