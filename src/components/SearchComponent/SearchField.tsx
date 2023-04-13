@@ -1,12 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
-import {
-  Container,
-  Grid,
-  IconButton,
-  InputAdornment,
-  MenuItem,
-  TextField,
-} from "@mui/material";
+import { IconButton, InputAdornment, MenuItem, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
 
