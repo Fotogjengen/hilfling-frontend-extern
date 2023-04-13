@@ -36,12 +36,7 @@ const SearchField: FC = () => {
 
   const suggestionBoxes = useMemo(() => {
     return suggestions.map((s, key) => (
-      <MenuItem
-        value={s}
-        key={`Menu-item-${key}`}
-        color=""
-        onClick={() => handleSearch(s)}
-      >
+      <MenuItem value={s} key={key} color="" onClick={() => handleSearch(s)}>
         {s}
       </MenuItem>
     ));

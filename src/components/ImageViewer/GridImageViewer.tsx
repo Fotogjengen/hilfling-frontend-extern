@@ -20,11 +20,12 @@ const ShowMotive: FC<Props> = ({ photos }) => {
   };
 
   const imageItems = photos.map((image: PhotoDto, index: number) => {
+    const key = `motive-image${index}`;
     return (
       <MotiveImage
         id={image.photoId.id}
         image={createImgUrl(image)}
-        key={`motive-image${index}`}
+        key={key}
         imageListProp={photos}
         index={index}
         updateIndex={() => updateIndex(index)}

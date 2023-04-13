@@ -1,11 +1,10 @@
-import { PhotoDto } from "../../../generated";
-import { MotiveDto } from "../../../generated";
+import { PhotoDto, MotiveDto } from "../../../generated";
 import React, { useState, useEffect } from "react";
 import { PhotoApi } from "../../utils/api/PhotoApi";
 import { MotiveApi } from "../../utils/api/MotiveApi";
 import ShowMotive from "../../components/ImageViewer/GridImageViewer";
 
-const MotiveHeader = () => {
+const SearchPhotoGrid = () => {
   const [photoResponse, setPhotoResponse] = useState<PhotoDto[]>([]);
   const [, setMotiveResponse] = useState<MotiveDto>({} as MotiveDto);
 
@@ -28,4 +27,4 @@ const MotiveHeader = () => {
   return <ShowMotive photos={photoResponse} />;
 };
 
-export default MotiveHeader;
+export default SearchPhotoGrid;
