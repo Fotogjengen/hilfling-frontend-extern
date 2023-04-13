@@ -7,9 +7,7 @@ import ShowMotive from "../../components/ImageViewer/GridImageViewer";
 
 const PhotoMotive = () => {
   const [photoResponse, setPhotoResponse] = useState<PhotoDto[]>([]);
-  const [motiveResponse, setMotiveResponse] = useState<MotiveDto>(
-    {} as MotiveDto,
-  );
+  const [, setMotiveResponse] = useState<MotiveDto>({} as MotiveDto);
 
   useEffect(() => {
     PhotoApi.getAll()
@@ -23,8 +21,7 @@ const PhotoMotive = () => {
       .then((res) => {
         setMotiveResponse(res.data.currentList[0]);
       })
-      .catch((e) => console.log(e)),
-      [];
+      .catch((e) => console.log(e));
   }, []);
 
   return <ShowMotive photos={photoResponse} />;

@@ -10,7 +10,6 @@ const MotiveHeader = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    // TODO: Fix response type
     if (id) {
       PhotoApi.getAllByMotiveId(id)
         .then((res) => setPhotoResponse(res))

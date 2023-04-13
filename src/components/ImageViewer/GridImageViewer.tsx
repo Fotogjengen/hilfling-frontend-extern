@@ -24,7 +24,7 @@ const ShowMotive: FC<Props> = ({ photos }) => {
       <MotiveImage
         id={image.photoId.id}
         image={createImgUrl(image)}
-        key={index}
+        key={`motive-image${index}`}
         imageListProp={photos}
         index={index}
         updateIndex={() => updateIndex(index)}
