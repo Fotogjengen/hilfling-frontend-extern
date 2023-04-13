@@ -19,10 +19,10 @@ const MotiveHeader = () => {
   useEffect(() => {
     MotiveApi.getAll()
       .then((res) => {
-        setMotiveResponse(res.data.currentList[0]);
+        let motives = res.data.currentList[0];
+        setMotiveResponse(motives);
       })
-      .catch((e) => console.log(e)),
-      [];
+      .catch((e) => console.log(e));
   }, []);
 
   return <ShowMotive photos={photoResponse} />;
