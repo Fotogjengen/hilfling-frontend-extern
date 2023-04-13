@@ -19,7 +19,7 @@ const MotiveHeader = () => {
   useEffect(() => {
     MotiveApi.getAll()
       .then((res) => {
-        let motives = res.data.currentList[0];
+        const motives = res.data.currentList[0];
         setMotiveResponse(motives);
       })
       .catch((e) => console.log(e));
