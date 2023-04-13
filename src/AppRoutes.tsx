@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
-import ShowMotive from "./components/ImageViewer/GridImageViewer";
 import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
 import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
