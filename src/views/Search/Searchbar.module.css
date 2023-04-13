@@ -11,6 +11,7 @@
   width: 100%;
   background-color: white;
   border-radius: 5px;
+  padding:1.5px;
 }
 
 .imageHeader {
@@ -19,8 +20,4 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-}
-
-.searchbar {
-  padding: 3rem;
 }

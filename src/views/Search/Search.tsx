@@ -5,14 +5,14 @@ import styles from "./Searchbar.module.css";
 
 const Search = () => {
   return (
-    <div className={styles.backgroundFlex}>
-      <div className={styles.searchbar}>
+    <div>
+      <div className={styles.backgroundFlex}>
         <SearchField />
       </div>
-      <div className={styles.imageHeader}>
-        <hr className={styles.hr} />
+      <h2>De 20 nyligste bildene:</h2>
+      <div className={styles.backgroundFlex}>
+        <SearchPhotoGrid />
       </div>
-      <SearchPhotoGrid />
     </div>
   );
 };

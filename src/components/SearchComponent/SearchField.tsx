@@ -55,26 +55,22 @@ const SearchField: FC = () => {
 
   return (
     <div>
-      <Container>
-        <Grid container spacing={2}>
-          <TextField
-            label={placeholder}
-            fullWidth
-            variant="outlined"
-            onChange={handleChange}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <div>{suggestionBoxes}</div>
-        </Grid>
-      </Container>
+      <TextField
+        label={placeholder}
+        fullWidth
+        variant="outlined"
+        onChange={handleChange}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton>
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+      <div>{suggestionBoxes}</div>
     </div>
   );
 };
