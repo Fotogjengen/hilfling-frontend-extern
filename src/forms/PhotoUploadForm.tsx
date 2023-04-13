@@ -104,7 +104,6 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       }),
     );
   }, [acceptedFiles]);
-
   useEffect(() => {
     console.log("categories");
     console.log(categories);
@@ -243,12 +242,12 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <Grid item xs={12}>
                 <Select name="eventOwner" label="Eier" fullWidth required>
                   {eventOwners.map((eventOwner, index) => (
-                      <MenuItem
-                          key={`event-owner-item-${index}`}
-                          value={eventOwner.name}
-                      >
-                        {eventOwner.name}
-                      </MenuItem>
+                    <MenuItem
+                      key={`event-owner-item-${index}`}
+                      value={eventOwner.name}
+                    >
+                      {eventOwner.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </Grid>
