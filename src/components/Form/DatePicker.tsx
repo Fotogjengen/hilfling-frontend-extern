@@ -2,8 +2,13 @@ import React, { FC } from "react";
 import { createStyles, withStyles, WithStyles } from "@mui/styles";
 import { FormFieldProps } from "./types";
 import { useForm } from "./Form";
-import { LocalizationProvider, MobileDatePicker, MobileDatePickerProps } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
+import {
+  LocalizationProvider,
+  MobileDatePicker,
+  MobileDatePickerProps,
+} from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 const styles = () =>
   createStyles({
@@ -37,8 +42,8 @@ const DatePicker: FC<
         slotProps={{
           textField: {
             fullWidth: fullWidth,
-            helperText: "DD / MM / YYYY"
-          }
+            helperText: "DD / MM / YYYY",
+          },
         }}
       />
     </LocalizationProvider>
