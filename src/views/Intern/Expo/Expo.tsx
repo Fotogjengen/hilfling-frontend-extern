@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import JSZip from "jszip";
-import * as FileSaver from "file-saver";
-
 import {
   Box,
   Button,
@@ -20,6 +17,8 @@ import { PhotoApi } from "../../../utils/api/PhotoApi";
 import { createImgUrl } from "../../../utils/createImgUrl/createImgUrl";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import FileSaver from "file-saver";
+import JSZip from "jszip";
 
 const Expo = () => {
   const [photoResponse, setPhotoResponse] = useState<PhotoDto[]>([]);
