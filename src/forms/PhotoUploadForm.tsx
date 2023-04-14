@@ -1,5 +1,15 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { Grid, MenuItem } from "@mui/material";
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  Grid,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -25,6 +35,7 @@ import { AlbumApi } from "../utils/api/AlbumApi";
 import { PhotoApi } from "../utils/api/PhotoApi";
 import { EventOwnerApi } from "../utils/api/EventOwnerApi";
 import { AlertContext, severityEnum } from "../contexts/AlertContext";
+import { styled } from "@mui/material/styles";
 
 export interface PhotoUploadFormIV {
   album: string;
@@ -51,6 +62,9 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
@@ -110,6 +124,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   }, [categories]);
 
   const onSubmit = (values: Record<string, any>) => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("motiveTitle", values["motive"]);
     formData.append("securityLevelId", values["securityLevel"]);
@@ -132,7 +147,14 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       formData.append("photoFileList", acceptedFiles[index]);
     });
 
-    PhotoApi.batchUpload(formData)
+    const handleUploadProgress = (progressEvent: ProgressEvent) => {
+      const percentCompleted = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total,
+      );
+      setProgress(percentCompleted);
+    };
+
+    PhotoApi.batchUpload(formData, handleUploadProgress)
       .then((res) => console.log(res))
       .catch((err) => {
         setOpen(true);
@@ -141,6 +163,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       })
       .finally(() => {
         setFiles([]);
+        setIsLoading(false);
       });
   };
 
@@ -165,6 +188,11 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       />
     </li>
   ));
+
+  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 40,
+    borderRadius: 5,
+  }));
 
   return (
     <div>
@@ -265,12 +293,33 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <input {...getInputProps()} />
               <p>Dra og slipp filer her, eller klikk for å velge filer.</p>
             </div>
+
             <aside>
               <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
         </Grid>
       </Grid>
+      <Dialog open={isLoading}>
+        <DialogContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "50vw",
+          }}
+        >
+          <Typography sx={{ fontSize: "larger", paddingBottom: 2 }}>
+            Ta en sipp med kaffe:)
+          </Typography>
+          <BorderLinearProgress
+            sx={{ width: "100%" }}
+            variant="determinate"
+            value={progress}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
