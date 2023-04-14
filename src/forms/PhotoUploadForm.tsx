@@ -52,8 +52,6 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
 
-  const [progress, setProgress] = useState(0);
-
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
   useEffect(() => {
@@ -106,7 +104,6 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       }),
     );
   }, [acceptedFiles]);
-
   useEffect(() => {
     console.log("categories");
     console.log(categories);
@@ -124,34 +121,20 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       "photoGangBangerId",
       "6a89444f-25f6-44d9-8a73-94587d72b839",
     ); // TODO: Use actual user Id
+    formData.append("tagList", values["tags"]);
+
     files.forEach((dragNDropFile, index) => {
       formData.append(
         "isGoodPhotoList",
         JSON.stringify(dragNDropFile.isGoodPicture),
       );
 
-      let tags = ["noTag"];
-      if (values["tags"].length >= tags.length) {
-        tags = values["tags"];
-      }
-      formData.append("tagList", JSON.stringify(tags));
-
       formData.append("photoFileList", acceptedFiles[index]);
     });
 
-    const onUploadProgress = (progressEvent: ProgressEvent) => {
-      const p = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-      setProgress(p);
-      console.log(
-        `Uploaded ${progressEvent.loaded} out of ${progressEvent.total}`,
-      );
-    };
-
-    PhotoApi.batchUpload(formData, onUploadProgress)
+    PhotoApi.batchUpload(formData)
       .then((res) => console.log(res))
       .catch((err) => {
-        console.log(err);
-
         setOpen(true);
         setSeverity(severityEnum.ERROR);
         setMessage(err);
@@ -286,7 +269,6 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
-          <div> {progress}%</div>
         </Grid>
       </Grid>
     </div>
