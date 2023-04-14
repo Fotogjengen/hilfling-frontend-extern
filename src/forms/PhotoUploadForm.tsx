@@ -1,15 +1,12 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import {
-  Box,
   Dialog,
   DialogContent,
   Grid,
   MenuItem,
   Typography,
 } from "@mui/material";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -189,7 +186,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
     </li>
   ));
 
-  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  const BorderLinearProgress = styled(LinearProgress)(() => ({
     height: 40,
     borderRadius: 5,
   }));
@@ -311,7 +308,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
           }}
         >
           <Typography sx={{ fontSize: "larger", paddingBottom: 2 }}>
-            Ta en sipp med kaffe:)
+            {progress === 100 ? "Velykket!" : "Send en vits til Endre:)"}
           </Typography>
           <BorderLinearProgress
             sx={{ width: "100%" }}
