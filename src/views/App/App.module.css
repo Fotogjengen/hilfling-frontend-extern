@@ -24,6 +24,10 @@
 
 }
 
+.insta {
+  display: none;
+}
+
 
 .rightSide {
   display: flex;
@@ -38,6 +42,10 @@
 @media screen and (min-width: 50rem) {
   .contentContainer {
     grid-template-columns: 10fr 4fr;
+  }
+
+  .insta {
+    display: contents;
   }
 }
 

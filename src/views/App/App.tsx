@@ -4,6 +4,7 @@ import EventCardsDisplayer from "../../components/Frontpage/EventCardsDisplayer/
 import CardInformationFotogjengen from "../../components/Frontpage/CardInformationFotogjengen/CardInformationFotogjengen";
 import CardInformationAnmoding from "../../components/Frontpage/CardInformationAnmoding/CardInformationAnmoding";
 import Carousel from "../../components/Frontpage/Carousel/Carousel";
+import { InstagramEmbed } from "react-social-media-embed";
 // import { withAuth } from "@okta/okta-react";
 // import { useAuth } from "../../utils/auth";
 
@@ -25,6 +26,12 @@ const App: FC = (/* { auth } */) => {
         </div>
         <div className={styles.anmoding}>
           <CardInformationAnmoding />
+        </div>
+        <div className={styles.insta}>
+          <InstagramEmbed url="https://www.instagram.com/p/CnxCRELoOaq/?utm_source=ig_web_copy_link" />
+        </div>
+        <div className={styles.insta}>
+          <InstagramEmbed url="https://www.instagram.com/p/CVDmAihsTuj/?utm_source=ig_web_copy_link" />
         </div>
       </div>
     </div>

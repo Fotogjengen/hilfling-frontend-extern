@@ -5,7 +5,6 @@ import {
   AccordionDetails,
   AccordionSummary as MuiAccordionSummary,
   Typography,
-  Grid,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 import styles from "./ArchiveBossAccordion.module.css";
@@ -31,9 +30,7 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
           <Typography> {name} </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container spacing={5}>
-            {children}
-          </Grid>
+          {children}
         </AccordionDetails>
       </Accordion>
     </div>

@@ -1,5 +1,5 @@
 import React, { FC, useContext, useState } from "react";
-import { Grid, IconButton, Menu, MenuItem } from "@mui/material";
+import { Grid, IconButton, Menu, MenuItem, Paper } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
@@ -17,14 +17,9 @@ interface Props {
   id: string;
   /** Type of Overflow menu */
   type: string;
-
 }
 
-const ArchiveBossElement: FC<Props> = ({
-  text,
-  id,
-  type,
-}: Props) => {
+const ArchiveBossElement: FC<Props> = ({ text, id, type }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
@@ -94,35 +89,28 @@ const ArchiveBossElement: FC<Props> = ({
   };
 
   return (
-    <Grid item xs={6} sm={3}>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-      >
-        <Grid item xs={6} sm={4}>
-          <div>
-            <IconButton onClick={handleClick}>
-              <MoreVert />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              keepMounted
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem key="edit" onClick={handleClose}>
-                Rediger
-              </MenuItem>
-              <MenuItem key="delete" onClick={handleBeforeDelete}>
-                Slett
-              </MenuItem>
-            </Menu>
-          </div>
-        </Grid>
-        <Grid item xs={6} sm={4} alignContent="space-around">
+    <Paper style={{ padding: 8 }}>
+      <Grid container alignItems="baseline">
+        <Grid item xs={11} sm={11}>
           {text}
+        </Grid>
+        <Grid item xs={1} sm={1}>
+          <IconButton onClick={handleClick}>
+            <MoreVert />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem key="edit" onClick={handleClose}>
+              Rediger
+            </MenuItem>
+            <MenuItem key="delete" onClick={handleBeforeDelete}>
+              Slett
+            </MenuItem>
+          </Menu>
         </Grid>
       </Grid>
       <DeleteDialog
@@ -130,7 +118,7 @@ const ArchiveBossElement: FC<Props> = ({
         onClose={handleDialogClose}
         name={text}
       />
-    </Grid>
+    </Paper>
   );
 };
 

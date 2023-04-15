@@ -3,11 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
 import MyProfile from "./views/MyProfile/MyProfile";
-import ShowMotive from "./components/ImageViewer/ShowMotive";
 import PhotoUpload from "./views/Intern/PhotoUpload/PhotoUpload";
 import Arkivsjef from "./views/Intern/Arkivsjef/ArchiveBoss";
 import NotFound from "./views/NotFound/NotFound";
-import Search from "./components/searchPage/Search";
+import Search from "./views/Search/Search";
 import CsaTester from "./views/CsaTester";
 import Motives from "./views/Intern/Motives/Motives";
 import LoggInn from "./views/Intern/LoggInn/LoggInn";
@@ -15,6 +14,7 @@ import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Expo from "./views/Intern/Expo/Expo";
 import Redirect from "./utils/Redirect/Redirect";
+import MotiveHeader from "./components/ImageViewer/MotiveHeader";
 import { Box } from "@mui/material";
 
 const AppRoutes: FC = () => {
@@ -22,8 +22,7 @@ const AppRoutes: FC = () => {
     <Box sx={{ m: "1rem" }}>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/motive" element={<ShowMotive />} />
-        <Route path="/motive/:id" element={<ShowMotive />} />
+        <Route path="/motive/:id" element={<MotiveHeader />} />
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:term" element={<Search />} />

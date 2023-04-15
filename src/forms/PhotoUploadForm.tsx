@@ -1,5 +1,12 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { Grid, MenuItem } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  Grid,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
 import DatePicker from "../components/Form/DatePicker";
 import Select from "../components/Form/Select";
 import ChipField from "../components/Form/ChipField";
@@ -25,6 +32,7 @@ import { AlbumApi } from "../utils/api/AlbumApi";
 import { PhotoApi } from "../utils/api/PhotoApi";
 import { EventOwnerApi } from "../utils/api/EventOwnerApi";
 import { AlertContext, severityEnum } from "../contexts/AlertContext";
+import { styled } from "@mui/material/styles";
 
 export interface PhotoUploadFormIV {
   album: string;
@@ -51,6 +59,9 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
@@ -104,13 +115,13 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       }),
     );
   }, [acceptedFiles]);
-
   useEffect(() => {
     console.log("categories");
     console.log(categories);
   }, [categories]);
 
   const onSubmit = (values: Record<string, any>) => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("motiveTitle", values["motive"]);
     formData.append("securityLevelId", values["securityLevel"]);
@@ -122,16 +133,25 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       "photoGangBangerId",
       "6a89444f-25f6-44d9-8a73-94587d72b839",
     ); // TODO: Use actual user Id
+    formData.append("tagList", values["tags"]);
+
     files.forEach((dragNDropFile, index) => {
       formData.append(
         "isGoodPhotoList",
         JSON.stringify(dragNDropFile.isGoodPicture),
       );
-      formData.append("tagList", values["tags"]);
+
       formData.append("photoFileList", acceptedFiles[index]);
     });
 
-    PhotoApi.batchUpload(formData)
+    const handleUploadProgress = (progressEvent: ProgressEvent) => {
+      const percentCompleted = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total,
+      );
+      setProgress(percentCompleted);
+    };
+
+    PhotoApi.batchUpload(formData, handleUploadProgress)
       .then((res) => console.log(res))
       .catch((err) => {
         setOpen(true);
@@ -140,6 +160,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       })
       .finally(() => {
         setFiles([]);
+        setIsLoading(false);
       });
   };
 
@@ -164,6 +185,11 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
       />
     </li>
   ));
+
+  const BorderLinearProgress = styled(LinearProgress)(() => ({
+    height: 40,
+    borderRadius: 5,
+  }));
 
   return (
     <div>
@@ -243,12 +269,12 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <Grid item xs={12}>
                 <Select name="eventOwner" label="Eier" fullWidth required>
                   {eventOwners.map((eventOwner, index) => (
-                      <MenuItem
-                          key={`event-owner-item-${index}`}
-                          value={eventOwner.name}
-                      >
-                        {eventOwner.name}
-                      </MenuItem>
+                    <MenuItem
+                      key={`event-owner-item-${index}`}
+                      value={eventOwner.name}
+                    >
+                      {eventOwner.name}
+                    </MenuItem>
                   ))}
                 </Select>
               </Grid>
@@ -264,12 +290,39 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
               <input {...getInputProps()} />
               <p>Dra og slipp filer her, eller klikk for å velge filer.</p>
             </div>
+
             <aside>
               <ul className={styles.noStyleUl}>{renderFilePreview}</ul>
             </aside>
           </section>
         </Grid>
       </Grid>
+      <Dialog open={isLoading}>
+        <DialogContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "20rem",
+            paddingX: 8,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "larger",
+              paddingBottom: 2,
+            }}
+          >
+            {progress === 100 ? "Velykket!" : "Send en vits til Endre 🦙"}
+          </Typography>
+          <BorderLinearProgress
+            sx={{ width: "20rem" }}
+            variant="determinate"
+            value={progress}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
