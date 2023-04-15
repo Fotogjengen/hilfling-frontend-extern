@@ -304,7 +304,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            width: "100%",
+            width: "20rem",
             paddingX: 8,
           }}
         >
@@ -317,7 +317,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
             {progress === 100 ? "Velykket!" : "Send en vits til Endre 🦙"}
           </Typography>
           <BorderLinearProgress
-            sx={{ width: "100%" }}
+            sx={{ width: "20rem" }}
             variant="determinate"
             value={progress}
           />
