@@ -58,12 +58,12 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
   });
 
   useEffect(() => {
-    // TODO: Fix response type
+    // TODO: Fix to only get good pictures
     if (id) {
       MotiveApi.getById(id)
         .then((res) => setMotiveResponse(res))
         .catch((e) => console.log(e));
-      PhotoApi.getAllGood()
+      PhotoApi.getAll()
         .then((res) => setPhotoResponse(res))
         .catch((e) => console.log(e));
     }

@@ -33,8 +33,8 @@ const Expo = () => {
   }, [photoResponse]);
 
   useEffect(() => {
-    // TODO: Fix response type
-    PhotoApi.getAllGood()
+    // TODO: fix photoResponse to only be good photos
+    PhotoApi.getAll()
       .then((res) => setPhotoResponse(res))
       .catch((e) => console.log(e));
 
