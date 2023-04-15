@@ -106,7 +106,7 @@ const Expo = () => {
   };
 
   const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
-    let key = "is-good-picture-" + index;
+    const key = `is-good-picture-${index}`;
     return (
       <Grid
         item

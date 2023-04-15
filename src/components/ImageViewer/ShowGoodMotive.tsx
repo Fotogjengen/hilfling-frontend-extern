@@ -42,7 +42,7 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
   ];
 
   const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
-    let key = "picture-" + index;
+    const key = `is-good-picture-${index}`;
     return (
       <Grid key={key} item>
         <MotiveImage
