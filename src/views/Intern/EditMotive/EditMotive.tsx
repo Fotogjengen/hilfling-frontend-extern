@@ -15,18 +15,22 @@ import {
   CategoryDto,
   EventOwnerDto,
   MotiveDto,
+  PhotoDto,
 } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
+import { PhotoApi } from "../../../utils/api/PhotoApi";
 import styles from "./EditMotive.module.css";
 import MotiveCard from "../../../components/MotiveCard/MotiveCard";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 import DeleteDialog from "../../../components/DeleteDialog/DeleteDialog";
+import MotiveView from "../../../components/MotiveView/MotiveView";
 
 const EditMotive = () => {
   const [motive, setMotive] = useState<MotiveDto>({} as MotiveDto);
+  const [photos, setPhotos] = useState<PhotoDto[]>([]);
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
   const [eventOwners, setEventOwners] = useState<EventOwnerDto[]>([]);
@@ -47,6 +51,13 @@ const EditMotive = () => {
     if (id) {
       MotiveApi.getById(id)
         .then((res) => setMotive(res))
+        .catch((e) => {
+          setOpen(true);
+          setSeverity(severityEnum.ERROR);
+          setMessage(e);
+        });
+      PhotoApi.getAllByMotiveId(id)
+        .then((res) => setPhotos(res))
         .catch((e) => {
           setOpen(true);
           setSeverity(severityEnum.ERROR);
@@ -284,6 +295,7 @@ const EditMotive = () => {
           </>
         )}
       </Grid>
+      <MotiveView photos={photos} />
       <DeleteDialog
         open={openDeleteDialog}
         onClose={handleDialogClose}
