@@ -28,12 +28,10 @@ const Expo = () => {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
-    // When `photoResponse` changes, update `isChecked` with the correct values
     setIsChecked(photoResponse.map(() => false));
   }, [photoResponse]);
 
   useEffect(() => {
-    // TODO: fix photoResponse to only be good photos
     PhotoApi.getAll()
       .then((res) => setPhotoResponse(res))
       .catch((e) => console.log(e));
