@@ -42,8 +42,9 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
   ];
 
   const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
+    let key = "is-good-picture-" + index;
     return (
-      <Grid key={index} item>
+      <Grid key={key} item>
         <MotiveImage
           id={image.photoId.id}
           image={createImgUrl(image)}

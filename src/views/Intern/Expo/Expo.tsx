@@ -108,10 +108,11 @@ const Expo = () => {
   };
 
   const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
+    let key = "is-good-picture-" + index;
     return (
       <Grid
         item
-        key={index}
+        key={key}
         sx={{
           display: "flex",
           flexDirection: "column",
