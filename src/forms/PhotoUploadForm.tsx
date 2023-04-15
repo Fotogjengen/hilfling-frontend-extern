@@ -308,7 +308,7 @@ const PhotoUploadForm: FC<Props> = ({ initialValues }) => {
           }}
         >
           <Typography sx={{ fontSize: "larger", paddingBottom: 2 }}>
-            {progress === 100 ? "Velykket!" : "Send en vits til Endre:)"}
+            {progress === 100 ? "Velykket!" : "Send en vits til Endre 🦙"}
           </Typography>
           <BorderLinearProgress
             sx={{ width: "100%" }}
