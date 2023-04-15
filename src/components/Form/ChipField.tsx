@@ -46,16 +46,13 @@ const ChipField: FC<FormFieldProps<InputProps> & WithStyles<typeof styles>> = ({
 
   const addChip = (event: KeyboardEvent) => {
     if (
-      event.key === "Enter" &&
+      event.key == "Enter" &&
       !values[name].includes(interimValue.trim()) &&
       interimValue.trim() !== ""
     ) {
       onChange(name, [interimValue.trim(), ...values[name]]);
       setInterimValue("");
-    } else if (
-      interimValue.trim() === "" ||
-      values[name].includes(interimValue.trim())
-    ) {
+    } else if (interimValue.trim() === "") {
       setInterimValue("");
     }
   };
