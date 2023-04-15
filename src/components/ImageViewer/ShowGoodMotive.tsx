@@ -50,7 +50,6 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
           image={createImgUrl(image)}
           imageListProp={photoResponse}
           index={index}
-          key={index}
           updateIndex={() => updateIndex(index)}
           title={image.motive.title}
         />
