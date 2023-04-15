@@ -57,9 +57,8 @@ const Expo = () => {
     justifyContent: "space-between",
     alignItems: "center",
     bottom: "1vw",
-    left: "50%",
-    marginLeft: "-20rem",
-    width: "40rem",
+    width: "60vw",
+    left: "20vw",
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.primary,
@@ -114,16 +113,18 @@ const Expo = () => {
         item
         key={index}
         sx={{
-          paddingRight: "16px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          boxShadow: 3,
+          boxShadow: 4,
           margin: "0.5rem",
         }}
+        xs={11.5}
+        md={5.5}
+        lg={3.5}
       >
         <Box onClick={() => updateIndex(index)} sx={{ position: "relative" }}>
-          <img src={createImgUrl(image)} height="200px" width="300px" />
+          <img src={createImgUrl(image)} height="100%" width="100%" />
         </Box>
 
         <Box
@@ -133,8 +134,7 @@ const Expo = () => {
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
-            margin: " 0.5rem 0",
-            padding: "0 0.2rem ",
+            paddingX: "0.5rem",
             bgcolor: "#f4f4f4",
           }}
         >
@@ -151,25 +151,22 @@ const Expo = () => {
 
   return (
     <>
-      <Box sx={{ p: "1rem", bgcolor: "white" }}>
+      <Box sx={{ bgcolor: "white" }}>
         <Stack spacing={1}>
           <Typography
             sx={{
-              width: "100%",
+              margin: "auto",
+              width: "90%",
               pb: "0.5rem",
-              mb: "0.5rem",
+              marginY: "0.5rem",
               textAlign: "center",
               fontSize: 28,
               borderBottom: "0.1rem solid black",
             }}
           >
-            Bra bilder!!
+            Expo
           </Typography>
-          <Grid
-            container
-            spacing={2}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
+          <Grid container sx={{ display: "flex", justifyContent: "center" }}>
             {imageItems}
           </Grid>
         </Stack>
