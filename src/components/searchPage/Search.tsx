@@ -26,7 +26,7 @@ const Search: FC = () => {
       "Finn bilder av crushet ditt 👀",
     ];
 
-    const random = Math.floor(Math.random() * placeholders.length);
+    const random = Math.floor(Math.random() * placeholders.length); // NOSONAR
 
     return placeholders[random];
   }, []);
