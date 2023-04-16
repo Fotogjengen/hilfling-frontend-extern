@@ -58,7 +58,6 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
   });
 
   useEffect(() => {
-    // TODO: Fix to only get good pictures
     if (id) {
       MotiveApi.getById(id)
         .then((res) => setMotiveResponse(res))

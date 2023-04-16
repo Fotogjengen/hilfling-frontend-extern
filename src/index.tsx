@@ -4,7 +4,6 @@ import "./index.css";
 import AppRoutes from "./AppRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Box, ThemeProvider } from "@mui/material";
-import guistyles from "./styles/utilities.module.css";
 import { GuiFooter } from "./gui-components";
 import HeaderComponent from "./components/Header/Header";
 import { theme } from "./styles/muiStyles";
