@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect, useContext } from "react";
 import MotiveImage from "./MotiveImage";
-import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { MotiveDto, PhotoDto } from "../../../generated";
 import { MotiveApi } from "../../utils/api/MotiveApi";
