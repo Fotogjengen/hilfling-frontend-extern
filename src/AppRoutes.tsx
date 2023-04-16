@@ -14,6 +14,7 @@ import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Redirect from "./utils/Redirect/Redirect";
 import MotiveHeader from "./components/ImageViewer/MotiveHeader";
+import InternSearchView from "./views/Intern/InternSearch/InternSearchView";
 
 const AppRoutes: FC = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes: FC = () => {
         <Route path="/search/:term" element={<Search />} />
         <Route path="/intern/myprofile" element={<MyProfile />} />
         <Route path="/csa-tester" element={<CsaTester />} />
+        <Route path="/intern/sok" element={<InternSearchView />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
         <Route path="/intern/motive" element={<Motives />} />

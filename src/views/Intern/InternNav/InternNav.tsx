@@ -21,7 +21,7 @@ const InternNav = () => {
   const mainLinks = [
     {
       name: "Internsøk",
-      to: "/søk",
+      to: "/intern/sok",
       icon: <ImageSearchIcon style={{ fontSize: mainIconSize }} />,
     },
     {
