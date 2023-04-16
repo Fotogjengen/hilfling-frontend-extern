@@ -31,12 +31,6 @@ const Expo = () => {
     console.log(photoResponse);
   }, []);
 
-  const images = [
-    "//placekitten.com/1500/500",
-    "//placekitten.com/4000/3000",
-    "//placekitten.com/800/1200",
-  ];
-
   const DownloadButton = styled(Paper)(({ theme }) => ({
     position: "fixed",
     display: "flex",

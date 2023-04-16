@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useContext } from "react";
 import MotiveImage from "./MotiveImage";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ImageContext } from "../../contexts/ImageContext";
 
 interface Props {
   id: string;
@@ -26,20 +27,15 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
     {} as MotiveDto,
   );
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const { setPhotos, setPhotoIndex, setIsOpen } = useContext(ImageContext);
+
   const bgcolors = ["#da7777", "#f3ee78", "#9c77da", "#BADA77", "#7793da"];
 
   const updateIndex = (index: number) => {
+    setPhotos(photoResponse);
     setPhotoIndex(index);
     setIsOpen(true);
   };
-
-  const images = [
-    "//placekitten.com/1500/500",
-    "//placekitten.com/4000/3000",
-    "//placekitten.com/800/1200",
-  ];
 
   const imageItems = photoResponse.map((image: PhotoDto, index: number) => {
     const key = `is-good-picture-${index}`;
@@ -86,28 +82,6 @@ const ShowGoodMotive: FC<Props> = ({ id, index }: Props) => {
             <Grid container>{imageItems}</Grid>
           </AccordionDetails>
         </Accordion>
-      )}
-      {isOpen && (
-        <Lightbox
-          mainSrc={createImgUrl(photoResponse[photoIndex])}
-          nextSrc={createImgUrl(
-            photoResponse[(photoIndex + 1) % photoResponse.length],
-          )}
-          prevSrc={createImgUrl(
-            photoResponse[
-              (photoIndex + images.length - 1) % photoResponse.length
-            ],
-          )}
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex(
-              (photoIndex + photoResponse.length - 1) % photoResponse.length,
-            )
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % photoResponse.length)
-          }
-        />
       )}
     </>
   );
