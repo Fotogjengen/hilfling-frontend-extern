@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import styles from "./InternSearch.module.css";
-import InternSearchForm from "./InternSearchForm";
+import InternSearchInput from "./InternSearchInput";
 import { Pagination } from "@mui/material";
 import ToggleComponent from "./ToggleComponent";
-
-const [isGrid, setIsGrid] = useState(true);
-
-const handleChange = () => {
-  setIsGrid(!isGrid);
-};
+import InternSearchGrid from "./InternSearchGrid";
 
 const InternSearchView = () => {
+  const [isGrid, setIsGrid] = useState(true);
+
+  const handleChange = () => {
+    setIsGrid(!isGrid);
+  };
   return (
     <div className={styles.internSearch}>
-      <ToggleComponent
-        value={isGrid ? "Grid" : "List"}
-        onChange={handleChange}
-      />
+      <div className={styles.gridAndToggleContainer}>
+        <div style={{ float: "right" }}>
+          <ToggleComponent
+            value={isGrid ? "Grid" : "List"}
+            onChange={handleChange}
+          />
+        </div>
+        <InternSearchGrid />
+      </div>
       <Pagination count={10} color="primary" />
-      <InternSearchForm />
+      <InternSearchInput />
     </div>
   );
 };

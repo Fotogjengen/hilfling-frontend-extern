@@ -16,10 +16,10 @@ import { DateRange } from "@mui/lab";
 
 const InternSearchForm = () => {
   const motiv = [{ label: "Kult motiv", id: 1 }];
-  const album = [{ label: "eksempelalbum", id: 1 }];
-  const kategori = [{ label: "eksempelkategori", id: 1 }];
-  const sted = [{ label: "eksempelsted", id: 1 }];
-  const securityLevel = [{ label: "eksempel", id: 1 }];
+  const album = [{ label: "eksempelalbum", id: 2 }];
+  const kategori = [{ label: "eksempelkategori", id: 3 }];
+  const sted = [{ label: "eksempelsted", id: 4 }];
+  const securityLevel = [{ label: "eksempel", id: 5 }];
   const [dateRange, setDateRange] = useState<DateRange<dayjs.Dayjs>>([
     null,
     null,

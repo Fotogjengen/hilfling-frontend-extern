@@ -5,3 +5,21 @@
 .formTextField {
   padding: 1rem;
 }
+
+.gridAndToggleContainer {
+  display: grid;
+  width: 70%;
+  float: right;
+}
+
+.gridContainer {
+  display: flex;
+  padding: 0.5rem;
+  background-color: grey;
+  border-radius: 1rem;
+}
+
+.gridBox {
+  display: flex;
+  width: 100%;
+}
