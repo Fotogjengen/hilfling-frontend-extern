@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Autocomplete,
   Button,
@@ -7,12 +8,11 @@ import {
   TextField,
 } from "@mui/material";
 import styles from "./InternSearch.module.css";
-import React, { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { DateRange } from "@mui/lab";
+import dayjs, { Dayjs } from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers";
+import { nbNO } from "@mui/x-date-pickers";
 
 const InternSearchForm = () => {
   const motiv = [{ label: "Kult motiv", id: 1 }];
@@ -20,10 +20,7 @@ const InternSearchForm = () => {
   const kategori = [{ label: "eksempelkategori", id: 3 }];
   const sted = [{ label: "eksempelsted", id: 4 }];
   const securityLevel = [{ label: "eksempel", id: 5 }];
-  const [dateRange, setDateRange] = useState<DateRange<dayjs.Dayjs>>([
-    null,
-    null,
-  ]);
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
 
   return (
     <div>
@@ -59,21 +56,26 @@ const InternSearchForm = () => {
       </div>
 
       <div className={styles.formTextField}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateRangePicker
-            localeText={{ start: "Check-in", end: "Check-out" }}
-            defaultValue={[dayjs("2022-04-17"), dayjs("2022-04-21")]}
-            value={dateRange}
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          adapterLocale={"NO"}
+          localeText={
+            nbNO.components.MuiLocalizationProvider.defaultProps.localeText
+          }
+        >
+          <DatePicker
+            label={"DatePicker"}
+            value={date}
+            onChange={(newValue) => setDate(newValue)}
+            format="DD/MM/YYYY"
             sx={{ width: 300 }}
-            onChange={(
-              newDateRange: React.SetStateAction<DateRange<dayjs.Dayjs>>,
-            ) => setDateRange(newDateRange)}
           />
         </LocalizationProvider>
       </div>
 
       <div className={styles.formTextField}>
         <Autocomplete
+          fullWidth
           disablePortal
           id="combo-box-demo"
           options={kategori}
