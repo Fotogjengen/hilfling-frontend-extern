@@ -9,10 +9,11 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import CameraswitchIcon from "@mui/icons-material/Cameraswitch";
 import ComputerIcon from "@mui/icons-material/Computer";
+import AppShortcutIcon from "@mui/icons-material/AppShortcut";
 import { Link } from "react-router-dom";
 
 import { experimentalStyled as styled } from "@mui/material/styles";
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 
 const InternNav = () => {
   const mainIconSize = 100;
@@ -43,6 +44,11 @@ const InternNav = () => {
       name: "Min profil",
       to: "/intern/myprofile",
       icon: <AccountBoxIcon style={{ fontSize: mainIconSize }} />,
+    },
+    {
+      name: "Expo",
+      to: "/intern/expo",
+      icon: <AppShortcutIcon style={{ fontSize: mainIconSize }} />,
     },
   ];
 
@@ -82,7 +88,7 @@ const InternNav = () => {
   }));
 
   return (
-    <Container>
+    <>
       <Typography variant="h4" sx={{ paddingTop: 2 }}>
         Internsider
       </Typography>
@@ -120,7 +126,7 @@ const InternNav = () => {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </>
   );
 };
 

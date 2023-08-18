@@ -12,12 +12,14 @@ import Motives from "./views/Intern/Motives/Motives";
 import LoggInn from "./views/Intern/LoggInn/LoggInn";
 import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
+import Expo from "./views/Intern/Expo/Expo";
 import Redirect from "./utils/Redirect/Redirect";
 import MotiveHeader from "./components/ImageViewer/MotiveHeader";
+import { Box } from "@mui/material";
 
 const AppRoutes: FC = () => {
   return (
-    <>
+    <Box sx={{ m: "1rem" }}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/motive/:id" element={<MotiveHeader />} />
@@ -30,8 +32,10 @@ const AppRoutes: FC = () => {
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
         <Route path="/intern/motive" element={<Motives />} />
         <Route path="/intern/motive/:id" element={<EditMotive />} />
+        <Route path="/intern/expo" element={<Expo />} />
         <Route path="/logg-inn" element={<LoggInn />} />
         <Route path="/intern" element={<InternNav />} />
+
         <Route path="*" element={<NotFound />} />
         <Route
           path="/samf-wiki"
@@ -52,7 +56,7 @@ const AppRoutes: FC = () => {
           element={<Redirect link="https://github.com/Fotogjengen/" />}
         />
       </Routes>
-    </>
+    </Box>
   );
 };
 

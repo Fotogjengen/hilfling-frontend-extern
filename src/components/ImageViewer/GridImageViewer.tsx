@@ -1,20 +1,19 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext } from "react";
 import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
-import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { PhotoDto } from "../../../generated";
 import { createImgUrl } from "../../utils/createImgUrl/createImgUrl";
+import { ImageContext } from "../../contexts/ImageContext";
 
 interface Props {
   photos: PhotoDto[];
 }
 
 const ShowMotive: FC<Props> = ({ photos }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
-
+  const { setPhotos, setPhotoIndex, setIsOpen } = useContext(ImageContext);
   const updateIndex = (index: number) => {
+    setPhotos(photos);
     setPhotoIndex(index);
     setIsOpen(true);
   };
@@ -47,22 +46,6 @@ const ShowMotive: FC<Props> = ({ photos }) => {
           </div>
         </div>
       </div>
-      {isOpen && (
-        <Lightbox
-          mainSrc={createImgUrl(photos[photoIndex])}
-          nextSrc={createImgUrl(photos[(photoIndex + 1) % photos.length])}
-          prevSrc={createImgUrl(
-            photos[(photoIndex + photos.length - 1) % photos.length],
-          )}
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex((photoIndex + photos.length - 1) % photos.length)
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % photos.length)
-          }
-        />
-      )}
     </>
   );
 };
