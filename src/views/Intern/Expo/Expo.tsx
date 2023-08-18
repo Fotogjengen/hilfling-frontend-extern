@@ -124,7 +124,7 @@ const Expo = () => {
           Expo
         </Typography>
         <Grid container sx={{ display: "flex", justifyContent: "center" }}>
-          {imageItems}
+          {imageItems ? imageItems : <div>No images</div>}
         </Grid>
         <DownloadButton>
           <Typography
