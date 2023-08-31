@@ -15,6 +15,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { nbNO } from "@mui/x-date-pickers";
 
 const InternSearchForm = () => {
+  const boxwidth = 300;
   const motiv = [{ label: "Kult motiv", id: 1 }];
   const album = [{ label: "eksempelalbum", id: 2 }];
   const kategori = [{ label: "eksempelkategori", id: 3 }];
@@ -29,18 +30,18 @@ const InternSearchForm = () => {
           disablePortal
           id="combo-box-demo"
           options={album}
-          sx={{ width: 300 }}
+          sx={{ width: boxwidth }}
           renderInput={(params) => <TextField {...params} label="Album" />}
         />
       </div>
       <div className={styles.formTextField}>
-        <TextField type="number" label="Side" sx={{ width: 300 }}>
+        <TextField type="number" label="Side" sx={{ width: boxwidth }}>
           Side
         </TextField>
       </div>
 
       <div className={styles.formTextField}>
-        <TextField type="number" label="Bildenummer" sx={{ width: 300 }}>
+        <TextField type="number" label="Bildenummer" sx={{ width: boxwidth }}>
           Bildenummer
         </TextField>
       </div>
@@ -50,7 +51,7 @@ const InternSearchForm = () => {
           disablePortal
           id="combo-box-demo"
           options={motiv}
-          sx={{ width: 300 }}
+          sx={{ width: boxwidth }}
           renderInput={(params) => <TextField {...params} label="Motiv" />}
         />
       </div>
@@ -64,11 +65,11 @@ const InternSearchForm = () => {
           }
         >
           <DatePicker
-            label={"DatePicker"}
+            label={"Dato"}
             value={date}
             onChange={(newValue) => setDate(newValue)}
             format="DD/MM/YYYY"
-            sx={{ width: 300 }}
+            sx={{ width: boxwidth }}
           />
         </LocalizationProvider>
       </div>
@@ -79,7 +80,7 @@ const InternSearchForm = () => {
           disablePortal
           id="combo-box-demo"
           options={kategori}
-          sx={{ width: 300 }}
+          sx={{ width: boxwidth }}
           renderInput={(params) => <TextField {...params} label="Kategori" />}
         />
       </div>
@@ -88,7 +89,7 @@ const InternSearchForm = () => {
           disablePortal
           id="combo-box-demo"
           options={sted}
-          sx={{ width: 300 }}
+          sx={{ width: boxwidth }}
           renderInput={(params) => <TextField {...params} label="Sted" />}
         />
       </div>
@@ -104,14 +105,14 @@ const InternSearchForm = () => {
           disablePortal
           id="combo-box-demo"
           options={securityLevel}
-          sx={{ width: 300 }}
+          sx={{ width: boxwidth }}
           renderInput={(params) => (
             <TextField {...params} label="Sikkerhetsnivå" />
           )}
         />
       </div>
       <div className={styles.formTextField}>
-        <Button variant="outlined" sx={{ width: 300 }}>
+        <Button variant="outlined" sx={{ width: boxwidth }}>
           Søk
         </Button>
       </div>

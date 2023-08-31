@@ -1,25 +1,43 @@
 .internSearch {
   background-color: white;
+  display: flex;
+  border-radius: 2rem;
   padding: 2rem;
 }
 .formTextField {
+  padding: 0.4rem;
+}
+
+.gridDivContainer {
+  display: grid;
+  width: 70%;
+  height: 30%;
+  order: 2;
+  margin-right: auto;
   padding: 1rem;
 }
 
-.gridAndToggleContainer {
-  display: grid;
-  width: 70%;
-  float: right;
-}
-
 .gridContainer {
-  display: flex;
   padding: 0.5rem;
-  background-color: grey;
+  background-color: whitesmoke;
   border-radius: 1rem;
 }
 
 .gridBox {
-  display: flex;
   width: 100%;
+}
+
+.toggleHeader {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.pagination {
+  width: 100%;
+  padding: 1rem;
+}
+
+.toggleComponent {
+  width: 15%;
+  padding: 1rem;
 }
