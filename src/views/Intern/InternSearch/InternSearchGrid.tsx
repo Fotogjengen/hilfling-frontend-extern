@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 
 const data = [
   {

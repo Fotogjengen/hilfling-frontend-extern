@@ -4,6 +4,7 @@ import InternSearchInput from "./InternSearchInput";
 import { Grid, Pagination } from "@mui/material";
 import ToggleComponent from "./ToggleComponent";
 import InternSearchGrid from "./InternSearchGrid";
+import CustomDataGrid from "./CustomTable";
 
 const InternSearchView = () => {
   const [isGrid, setIsGrid] = useState(true);
@@ -33,7 +34,7 @@ const InternSearchView = () => {
             </div>
           </div>
         </div>
-        <InternSearchGrid />
+        <CustomDataGrid />
       </div>
       <InternSearchInput />
     </div>
