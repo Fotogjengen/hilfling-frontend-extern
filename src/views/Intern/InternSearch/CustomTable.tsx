@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import styles from "./InternSearch.module.css";
+import ToggleComponent from "./ToggleComponent";
 
 const columns = [
   { id: "album", label: "Album" },
@@ -21,8 +22,6 @@ const columns = [
   { id: "bilde", label: "Bilde" },
   { id: "endre", label: "Endre" },
 ];
-
-const rowsPerPageOptions = [5, 10, 25];
 
 const rows = [
   {
@@ -106,6 +105,8 @@ const rows = [
   // ... more rows
 ];
 
+const rowsPerPageOptions = [5, 10, 25];
+
 const CustomTable = () => {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(rowsPerPageOptions[0]);
@@ -113,11 +114,31 @@ const CustomTable = () => {
   const handleChangePage = (event: any, newPage: any) => {
     setPage(newPage);
   };
+  const [isGrid, setIsGrid] = useState(true);
+  const handleChange = () => {
+    setIsGrid(!isGrid);
+  };
 
   const emptyRows = Math.max(0, page * rowsPerPage - rows.length);
 
   return (
     <Paper>
+      <div className={styles.toggleHeader}>
+        <div className={styles.pagination}>
+          <Pagination
+            count={Math.ceil(rows.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </div>
+        <div className={styles.toggleComponent}>
+          <ToggleComponent
+            value={isGrid ? "Grid" : "List"}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
       <TableContainer>
         <Table>
           <TableHead>
@@ -147,7 +168,7 @@ const CustomTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <div className={styles.pagination}>
+      <div className={styles.pagination2}>
         <Pagination
           count={Math.ceil(rows.length / rowsPerPage)}
           page={page}

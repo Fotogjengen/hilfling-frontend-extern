@@ -30,9 +30,16 @@
 .toggleHeader {
   width: 100%;
   border-radius: 1rem;
+  display: flex;
+  flex: 1;
 }
 
 .pagination {
+  width: 100%;
+  padding: 1rem;
+}
+
+.pagination2 {
   width: 100%;
   padding: 1rem;
 }
