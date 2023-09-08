@@ -3,7 +3,6 @@ import styles from "./InternSearch.module.css";
 import InternSearchInput from "./InternSearchInput";
 import { Grid, Pagination } from "@mui/material";
 import ToggleComponent from "./ToggleComponent";
-import InternSearchGrid from "./InternSearchGrid";
 import CustomDataGrid from "./CustomTable";
 
 const InternSearchView = () => {

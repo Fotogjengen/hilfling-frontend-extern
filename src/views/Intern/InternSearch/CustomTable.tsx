@@ -26,6 +26,7 @@ const rowsPerPageOptions = [5, 10, 25];
 
 const rows = [
   {
+    id: 1,
     album: "album",
     motiv: "motiv",
     dato: "dato",
@@ -34,7 +35,72 @@ const rows = [
     oppslag: "oppslag",
     rettighet: "boss",
     scannet: "nei",
-    bilde: "ja",
+    bilde: "url",
+    endre: "endre/slett",
+  },
+  {
+    id: 2,
+    album: "album",
+    motiv: "motiv",
+    dato: "dato",
+    type: "type",
+    sted: "sted",
+    oppslag: "oppslag",
+    rettighet: "boss",
+    scannet: "nei",
+    bilde: "url",
+    endre: "endre/slett",
+  },
+  {
+    id: 3,
+    album: "album",
+    motiv: "motiv",
+    dato: "dato",
+    type: "type",
+    sted: "sted",
+    oppslag: "oppslag",
+    rettighet: "boss",
+    scannet: "nei",
+    bilde: "url",
+    endre: "endre/slett",
+  },
+  {
+    id: 4,
+    album: "album",
+    motiv: "motiv",
+    dato: "dato",
+    type: "type",
+    sted: "sted",
+    oppslag: "oppslag",
+    rettighet: "boss",
+    scannet: "nei",
+    bilde: "url",
+    endre: "endre/slett",
+  },
+  {
+    id: 5,
+    album: "album",
+    motiv: "motiv",
+    dato: "dato",
+    type: "type",
+    sted: "sted",
+    oppslag: "oppslag",
+    rettighet: "boss",
+    scannet: "nei",
+    bilde: "url",
+    endre: "endre/slett",
+  },
+  {
+    id: 6,
+    album: "album",
+    motiv: "motiv",
+    dato: "dato",
+    type: "type",
+    sted: "sted",
+    oppslag: "oppslag",
+    rettighet: "boss",
+    scannet: "nei",
+    bilde: "url",
     endre: "endre/slett",
   },
   // ... more rows
@@ -67,7 +133,9 @@ const CustomTable = () => {
               .map((row) => (
                 <TableRow key={row.id}>
                   {columns.map((column) => (
-                    <TableCell key={column.id}>{row[column.id]}</TableCell>
+                    <TableCell key={column.id}>
+                      {row[column.id as keyof typeof row]}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))}
