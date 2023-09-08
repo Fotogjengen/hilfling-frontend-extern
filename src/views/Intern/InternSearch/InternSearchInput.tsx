@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Autocomplete,
   Button,
@@ -11,8 +11,7 @@ import styles from "./InternSearch.module.css";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
-import { DatePicker } from "@mui/x-date-pickers";
-import { nbNO } from "@mui/x-date-pickers";
+import { DatePicker, nbNO } from "@mui/x-date-pickers";
 
 const InternSearchForm = () => {
   const boxwidth = 300;
