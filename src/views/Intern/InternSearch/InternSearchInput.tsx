@@ -9,9 +9,8 @@ import {
 } from "@mui/material";
 import styles from "./InternSearch.module.css";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+import { LocalizationProvider,DatePicker, nbNO } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
-import { DatePicker, nbNO } from "@mui/x-date-pickers";
 
 const InternSearchForm = () => {
   const boxwidth = 300;
