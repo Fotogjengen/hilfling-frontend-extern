@@ -15,6 +15,7 @@ import InternNav from "./views/Intern/InternNav/InternNav";
 import Expo from "./views/Intern/Expo/Expo";
 import Redirect from "./utils/Redirect/Redirect";
 import MotiveHeader from "./components/ImageViewer/MotiveHeader";
+import InternSearchView from "./views/Intern/InternSearch/InternSearchView";
 import { Box } from "@mui/material";
 
 const AppRoutes: FC = () => {
@@ -28,6 +29,7 @@ const AppRoutes: FC = () => {
         <Route path="/search/:term" element={<Search />} />
         <Route path="/intern/myprofile" element={<MyProfile />} />
         <Route path="/csa-tester" element={<CsaTester />} />
+        <Route path="/intern/sok" element={<InternSearchView />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
         <Route path="/intern/motive" element={<Motives />} />
