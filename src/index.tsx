@@ -20,7 +20,6 @@ const Root: FC = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState(severityEnum.INFO);
-
   const [photos, setPhotos] = useState<PhotoDto[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);

@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./InternSearch.module.css";
 import InternSearchInput from "./InternSearchInput";
 import CustomDataGrid from "./CustomTable";
