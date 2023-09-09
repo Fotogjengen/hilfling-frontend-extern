@@ -28,18 +28,20 @@
 }
 
 .menuLink {
-    
+    padding: 0.2rem 0.5rem;
+    margin-top: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90vw;
+    width: 100%;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px 0px;
     
 }
 
-.menuLink > * {
-    margin: 0 0.5rem;
+.menuLink:hover {
+    scale: 1.01;
 }
+
 
 .navContainer {
     font-size: 1.5rem;
