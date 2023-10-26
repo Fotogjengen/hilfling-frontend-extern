@@ -3,12 +3,12 @@ import React, { FC, SyntheticEvent, useState } from "react";
 import { AppBar, Tabs, Tab } from "@mui/material";
 import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { EventOwnerDto, MotiveDto } from "../../../../generated";
+
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
+import { EventOwnerDto, MotiveDto } from "../../../../generated";
 
-import styles from "./EventCardsDisplayer.module.css";
+import EventCards from "../EventCards/EventCards";
 
 interface Props {
   title?: string;
@@ -36,51 +36,6 @@ const EventCardsDisplayer: FC<Props> = () => {
     setValue(newValue);
   };
 
-  const Cards = (props: { event: string }) => {
-    const motiveEventResponse = motiveResponse
-      .filter((motiveObject) => {
-        return motiveObject.eventOwnerDto.name === props.event;
-      })
-      .sort((a, b) => {
-        const dateA = new Date(a.dateCreated);
-        const dateB = new Date(b.dateCreated);
-        return dateB.getTime() - dateA.getTime();
-      });
-
-    return (
-      <div className={styles.cardsContainer}>
-        {motiveEventResponse.map((motiveObject, index) => {
-          const id = motiveObject.motiveId.id || "default";
-          return (
-            <Link className={styles.card} key={index} to={`/motive/${id}`}>
-              <img
-                className={styles.cardImg}
-                src="https://www.w3schools.com/css/img_lights.jpg"
-                alt="img"
-              />
-
-              <div className={styles.cardText}>
-                <div className={styles.cardTextTitle}>{motiveObject.title}</div>
-                <div>
-                  <b>Date:</b>
-                  {motiveObject.dateCreated.toString()}
-                </div>
-                <div>
-                  <b>Location:</b>
-                  {"Blåfjell"}
-                </div>
-                <div>
-                  <b>Images:</b>
-                  {"367"}
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    );
-  };
-
   return (
     <>
       <AppBar position="static" color="default">
@@ -98,13 +53,13 @@ const EventCardsDisplayer: FC<Props> = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Cards event={"Samfundet"} />
+        <EventCards event={"Samfundet"} motiveResponse={motiveResponse} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Cards event={"ISFIT"} />
+        <EventCards event={"Samfundet"} motiveResponse={motiveResponse} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Cards event={"UKA"} />
+        <EventCards event={"Samfundet"} motiveResponse={motiveResponse} />
       </TabPanel>
     </>
   );
