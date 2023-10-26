@@ -5,7 +5,6 @@ import { MotiveDto } from "../../../generated";
 import styles from "./MotiveCard.module.css";
 interface Props {
   motive: MotiveDto;
-  key: number;
   children?: ReactNode;
 }
 
