@@ -16,7 +16,7 @@ const Motives = () => {
   }, []);
 
   const mapMotives = (motivesCurrentList: MotiveDto[]) => {
-    return motivesCurrentList.map((motive: MotiveDto, index: number) => (
+    return motivesCurrentList.map((motive: MotiveDto, index) => (
       <MotiveCard key={index} motive={motive}>
         <Link
           className={styles.cardlink}

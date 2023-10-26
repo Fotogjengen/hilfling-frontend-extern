@@ -11,7 +11,7 @@ interface Props {
 
 const MotiveCard: FC<Props> = (props: Props) => {
   return (
-    <div className={styles.container} key={props?.motive?.motiveId?.id}>
+    <div className={styles.container}>
       <div>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {props?.motive?.categoryDto?.name}
