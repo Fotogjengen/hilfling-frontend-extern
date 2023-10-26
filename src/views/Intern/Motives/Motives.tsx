@@ -1,4 +1,3 @@
-import Masonry from "@mui/lab/Masonry";
 import React, { useState, useEffect } from "react";
 import { MotiveDto } from "../../../../generated";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
@@ -19,12 +18,15 @@ const Motives = () => {
   const mapMotives = (motivesCurrentList: MotiveDto[]) => {
     return motivesCurrentList.map((motive: MotiveDto, index: number) => (
       <MotiveCard key={index} motive={motive}>
-        <Link to={`/intern/motive/${motive.motiveId.id}`}>
+        <Link
+          className={styles.cardlink}
+          to={`/intern/motive/${motive.motiveId.id}`}
+        >
           <Button
             size="small"
             variant="contained"
             endIcon={<EditIcon />}
-            sx={{marginTop: 2}}
+            sx={{ marginTop: 2 }}
             fullWidth
           >
             Rediger motiv
@@ -37,9 +39,7 @@ const Motives = () => {
   return (
     <div className={styles.motives}>
       <h2> Motiv </h2>
-      <Masonry columns={4} spacing={2} sx={{ paddingTop: 2 }}>
-        {mapMotives(motives)}
-      </Masonry>
+      <div className={styles.motivesGrid}>{mapMotives(motives)}</div>
     </div>
   );
 };

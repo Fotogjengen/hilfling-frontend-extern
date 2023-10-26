@@ -1,6 +1,8 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React, { FC, ReactNode } from "react";
 import { MotiveDto } from "../../../generated";
+
+import styles from "./MotiveCard.module.css";
 interface Props {
   motive: MotiveDto;
   key: number;
@@ -9,8 +11,8 @@ interface Props {
 
 const MotiveCard: FC<Props> = (props: Props) => {
   return (
-    <Card key={props?.motive?.motiveId?.id}>
-      <CardContent>
+    <div className={styles.container} key={props?.motive?.motiveId?.id}>
+      <div>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {props?.motive?.categoryDto?.name}
         </Typography>
@@ -26,10 +28,9 @@ const MotiveCard: FC<Props> = (props: Props) => {
         <Typography variant="body2">
           Dato: {props?.motive?.dateCreated}
         </Typography>
-        <br />
-        {props.children}
-      </CardContent>
-    </Card>
+      </div>
+      {props.children}
+    </div>
   );
 };
 
