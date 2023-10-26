@@ -5,8 +5,7 @@ import TabPanel from "../../TabPanel/TabPanel";
 import { useEffect } from "react";
 
 import { MotiveApi } from "../../../utils/api/MotiveApi";
-import { EventOwnerApi } from "../../../utils/api/EventOwnerApi";
-import { EventOwnerDto, MotiveDto } from "../../../../generated";
+import { MotiveDto } from "../../../../generated";
 
 import EventCards from "../EventCards/EventCards";
 
