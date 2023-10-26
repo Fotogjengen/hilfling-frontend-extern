@@ -21,15 +21,11 @@ interface Props {
 const EventCardsDisplayer: FC<Props> = () => {
   const [value, setValue] = useState<number>(0);
   const [motiveResponse, setMotiveResponse] = useState<MotiveDto[]>([]);
-  const [eventEvent, setEventOwners] = useState<EventOwnerDto[]>([]);
 
   useEffect(() => {
     MotiveApi.getAll()
       .then((res) => setMotiveResponse(res.data.currentList))
       .catch((e) => console.log(e));
-    EventOwnerApi.getAll()
-      .then((res) => setEventOwners(res.data.currentList))
-      .catch((err) => console.error(err));
   }, []);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
