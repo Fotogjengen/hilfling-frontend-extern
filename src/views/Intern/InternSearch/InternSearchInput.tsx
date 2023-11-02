@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   Autocomplete,
   Avatar,
@@ -14,18 +13,27 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import styles from "./InternSearch.module.css";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker, nbNO } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
+import styles from "./InternSearch.module.css";
 import { Cancel } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { styled } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 interface ChipData {
   key: number;
   label: string;
 }
+
+const useStyles = makeStyles((theme) => ({
+  flexContainer: {
+    display: "flex",
+    flexWrap: "wrap", // Enable wrapping elements to the next row
+    justifyContent: "flex-start", // Start from the left
+  },
+}));
 
 const InternSearchInput: React.FC = () => {
   const boxwidth = 300;
@@ -37,13 +45,8 @@ const InternSearchInput: React.FC = () => {
   const [date, setDate] = React.useState<Dayjs | null>(dayjs());
   const [tags, setTags] = useState<string[]>([]);
   const tagRef = useRef<HTMLInputElement | null>(null);
-  const [chipData, setChipData] = useState<ChipData[]>([
-    { key: 0, label: "Angular" },
-    { key: 1, label: "jQuery" },
-    { key: 2, label: "Polymer" },
-    { key: 3, label: "React" },
-    { key: 4, label: "Vue.js" },
-  ]);
+  const [chipData, setChipData] = useState<ChipData[]>([]);
+  const classes = useStyles();
 
   const ListItem = styled("li")(({ theme }) => ({
     margin: theme.spacing(0.5),
@@ -92,10 +95,6 @@ const InternSearchInput: React.FC = () => {
     setChipData((chips: any) =>
       chips.filter((chip: any) => chip.key !== chipToDelete.key),
     );
-  };
-
-  const handleOnSubmit = () => {
-    console.log("subitted");
   };
 
   return (
@@ -179,7 +178,23 @@ const InternSearchInput: React.FC = () => {
             renderInput={(params) => <TextField {...params} label="Sted" />}
           />
         </div>
-        <form onSubmit={handleOnSubmit}>
+        <div className={styles.formTextField}>
+          <Box className={classes.flexContainer}>
+            {chipData.map((data) => {
+              return (
+                <ListItem key={data.key}>
+                  <Chip
+                    label={data.label}
+                    onDelete={handleDelete(data)}
+                    color="primary"
+                    avatar={<Avatar src="/pictures/Ole.jpg" alt="Ole" />}
+                  />
+                </ListItem>
+              );
+            })}
+          </Box>
+        </div>
+        <div className={styles.formTextField}>
           <TextField
             inputRef={tagRef}
             fullWidth
@@ -191,25 +206,14 @@ const InternSearchInput: React.FC = () => {
             InputProps={{
               startAdornment: (
                 <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }}>
-                  {chipData.map((data) => {
-                    return (
-                      <ListItem key={data.key}>
-                        <Chip
-                          label={data.label}
-                          onDelete={handleDelete(data)}
-                          color="primary"
-                          avatar={<Avatar src="/pictures/Ole.jpg" alt="Ole" />}
-                        />
-                      </ListItem>
-                    );
-                  })}
+                  {/* Display tags as chips above the textfield */}
                 </Box>
               ),
             }}
             onKeyDown={handleBackspace} // Add this event listener for backspace key
             onKeyPress={handleEnterPress} // Add this event listener for Enter key
           />
-        </form>
+        </div>
         <div className={styles.formTextField}>
           <FormGroup>
             <FormControlLabel control={<Checkbox />} label="Oppslagsbilde" />
