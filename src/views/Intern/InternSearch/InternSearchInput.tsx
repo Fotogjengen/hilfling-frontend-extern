@@ -2,11 +2,14 @@ import React from "react";
 import { useState, useRef } from "react";
 import {
   Autocomplete,
+  Avatar,
   Box,
   Button,
   Checkbox,
+  Chip,
   FormControlLabel,
   FormGroup,
+  Paper,
   Stack,
   TextField,
   Typography,
@@ -16,33 +19,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider, DatePicker, nbNO } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { Cancel } from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { styled } from "@mui/material/styles";
 
-const Tags = ({ data, handleDelete }: { data: any; handleDelete: any }) => {
-  return (
-    <Box
-      sx={{
-        background: "#283240",
-        height: "100%",
-        display: "flex",
-        padding: "0.4rem",
-        margin: "0 0.5rem 0 0",
-        justifyContent: "center",
-        alignContent: "center",
-        color: "#ffffff",
-      }}
-    >
-      <Stack direction="row" gap={1}>
-        <Typography>{data}</Typography>
-        <Cancel
-          sx={{ cursor: "pointer" }}
-          onClick={() => {
-            handleDelete(data);
-          }}
-        />
-      </Stack>
-    </Box>
-  );
-};
+interface ChipData {
+  key: number;
+  label: string;
+}
 
 const InternSearchInput: React.FC = () => {
   const boxwidth = 300;
@@ -54,25 +37,79 @@ const InternSearchInput: React.FC = () => {
   const [date, setDate] = React.useState<Dayjs | null>(dayjs());
   const [tags, setTags] = useState<string[]>([]);
   const tagRef = useRef<HTMLInputElement | null>(null);
+  const [chipData, setChipData] = useState<ChipData[]>([
+    { key: 0, label: "Angular" },
+    { key: 1, label: "jQuery" },
+    { key: 2, label: "Polymer" },
+    { key: 3, label: "React" },
+    { key: 4, label: "Vue.js" },
+  ]);
 
-  const handleDelete = (value: string) => {
-    const newTags = tags.filter((tag) => tag !== value);
-    setTags(newTags);
-  };
+  const ListItem = styled("li")(({ theme }) => ({
+    margin: theme.spacing(0.5),
+  }));
 
-  const handleOnSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (tagRef.current) {
-      const newTag = tagRef.current.value;
-      if (newTag.trim() !== "") {
-        setTags([...tags, newTag]);
-        tagRef.current.value = "";
+  const handleBackspace = (event: React.KeyboardEvent) => {
+    if (
+      event.key === "Backspace" &&
+      tagRef.current &&
+      tagRef.current.value === ""
+    ) {
+      // Check if backspace is pressed and the input is empty
+      if (chipData.length > 0) {
+        // If there are tags, remove the last one
+        const lastTag = chipData[chipData.length - 1];
+        setChipData((chips) => chips.slice(0, -1));
       }
     }
   };
 
+  const handleEnterPress = (event: React.KeyboardEvent) => {
+    if (
+      event.key === "Enter" &&
+      tagRef.current &&
+      tagRef.current.value.trim() !== ""
+    ) {
+      // Check if Enter key is pressed and the input is not empty
+      const newLabel = tagRef.current.value.trim();
+
+      // Create a new chip with a unique key
+      const newChip = {
+        key: Date.now(),
+        label: newLabel,
+      };
+
+      // Add the new chip to chipData and clear the input field
+      setChipData((chips) => [...chips, newChip]);
+      tagRef.current.value = "";
+
+      // Prevent the default behavior of the Enter key (form submission)
+      event.preventDefault();
+    }
+  };
+
+  const handleDelete = (chipToDelete: ChipData) => () => {
+    setChipData((chips: any) =>
+      chips.filter((chip: any) => chip.key !== chipToDelete.key),
+    );
+  };
+
+  const handleOnSubmit = () => {
+    console.log("subitted");
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Paper
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        listStyle: "none",
+        p: 0.5,
+        m: 0,
+      }}
+      component="ul"
+    >
       <div>
         <div className={styles.formTextField}>
           <Autocomplete
@@ -154,18 +191,23 @@ const InternSearchInput: React.FC = () => {
             InputProps={{
               startAdornment: (
                 <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }}>
-                  {tags.map((data, index) => {
+                  {chipData.map((data) => {
                     return (
-                      <Tags
-                        data={data}
-                        handleDelete={handleDelete}
-                        key={index}
-                      />
+                      <ListItem key={data.key}>
+                        <Chip
+                          label={data.label}
+                          onDelete={handleDelete(data)}
+                          color="primary"
+                          avatar={<Avatar src="/pictures/Ole.jpg" alt="Ole" />}
+                        />
+                      </ListItem>
                     );
                   })}
                 </Box>
               ),
             }}
+            onKeyDown={handleBackspace} // Add this event listener for backspace key
+            onKeyPress={handleEnterPress} // Add this event listener for Enter key
           />
         </form>
         <div className={styles.formTextField}>
@@ -195,7 +237,7 @@ const InternSearchInput: React.FC = () => {
           </Button>
         </div>
       </div>
-    </Box>
+    </Paper>
   );
 };
 
