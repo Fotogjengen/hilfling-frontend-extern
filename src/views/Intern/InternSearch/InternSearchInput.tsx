@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const InternSearchInput: React.FC = () => {
   const boxwidth = 300;
-  //variables for textfields
+  //variables for API data
   const [motives, setMotives] = useState<MotiveDto[]>([]);
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
@@ -55,12 +55,12 @@ const InternSearchInput: React.FC = () => {
   const [album, setAlbum] = useState<String>();
   const [category, setCategory] = useState<String>();
   const [place, setPlace] = useState<String>();
+  const [page, setPage] = useState<BigInt>();
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
 
   //testdata
   const securityLevel = [{ label: "eksempel", id: 5 }];
 
-  //for datefield and setting current day
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
   const tagRef = useRef<HTMLInputElement | null>(null);
 
   //for chipdata in tag component
@@ -119,11 +119,6 @@ const InternSearchInput: React.FC = () => {
     }
   };
 
-  const handleMotiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Update the motive state with the current value of the TextField
-    setMotive(event.target.value);
-  };
-
   const handleEnterPress = (event: React.KeyboardEvent) => {
     if (
       event.key === "Enter" &&
@@ -154,6 +149,38 @@ const InternSearchInput: React.FC = () => {
     );
   };
 
+  const handleMotiveChange = (
+    event: React.SyntheticEvent,
+    newValue: string | null,
+  ) => {
+    setMotive(newValue || ""); // Set the motive state to the selected value or an empty string if nothing is selected
+  };
+  const handleCategoryChange = (
+    event: React.SyntheticEvent,
+    newValue: string | null,
+  ) => {
+    setCategory(newValue || "");
+  };
+  const handlePlaceChange = (
+    event: React.SyntheticEvent,
+    newValue: string | null,
+  ) => {
+    setPlace(newValue || "");
+  };
+  const handleAlbumChange = (
+    event: React.SyntheticEvent,
+    newValue: string | null,
+  ) => {
+    setAlbum(newValue || "");
+  };
+
+  const test = () => {
+    console.log(motive);
+    console.log(album);
+    console.log(place);
+    console.log(category);
+  };
+
   return (
     <div style={{ width: "25%", margin: "0 auto" }}>
       <Paper
@@ -168,149 +195,160 @@ const InternSearchInput: React.FC = () => {
         }}
         component="ul"
       >
-        <div>
-          <div className={styles.formTextField}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={albums.map((albums) => albums.title)}
-              sx={{ width: boxwidth }}
-              renderInput={(params) => <TextField {...params} label="Album" />}
-            />
-          </div>
-          <div className={styles.formTextField}>
-            <TextField type="number" label="Side" sx={{ width: boxwidth }}>
-              Side
-            </TextField>
-          </div>
-
-          <div className={styles.formTextField}>
-            <TextField
-              type="number"
-              label="Bildenummer"
-              sx={{ width: boxwidth }}
-            >
-              Bildenummer
-            </TextField>
-          </div>
-
-          <div className={styles.formTextField}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={motives.map((motive) => motive.title)} // Use motive titles as options
-              sx={{ width: boxwidth }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Motiv"
-                  value={motive}
-                  onChange={handleMotiveChange}
-                />
-              )}
-            />
-          </div>
-
-          <div className={styles.formTextField}>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              adapterLocale={"NO"}
-              localeText={
-                nbNO.components.MuiLocalizationProvider.defaultProps.localeText
-              }
-            >
-              <DatePicker
-                label={"Dato"}
-                value={date}
-                onChange={(newValue) => setDate(newValue)}
-                format="DD/MM/YYYY"
+        <form onSubmit={test}>
+          <div>
+            <div className={styles.formTextField}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={albums.map((albums) => albums.title)}
                 sx={{ width: boxwidth }}
+                onChange={handleAlbumChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="Album" />
+                )}
               />
-            </LocalizationProvider>
-          </div>
+            </div>
+            <div className={styles.formTextField}>
+              <TextField type="number" label="Side" sx={{ width: boxwidth }}>
+                Side
+              </TextField>
+            </div>
 
-          <div className={styles.formTextField}>
-            <Autocomplete
-              fullWidth
-              disablePortal
-              id="combo-box-demo"
-              options={categories.map((category) => category.name)}
-              sx={{ width: boxwidth }}
-              renderInput={(params) => (
-                <TextField {...params} label="Kategori" />
-              )}
-            />
-          </div>
-          <div className={styles.formTextField}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={places.map((place) => place.name)}
-              sx={{ width: boxwidth }}
-              renderInput={(params) => <TextField {...params} label="Sted" />}
-            />
-          </div>
-          <div className={styles.formTextField}>
-            <Box className={classes.flexContainer}>
-              {chipData.map((data) => {
-                return (
-                  <ListItem key={data.key}>
-                    <Chip
-                      label={data.label}
-                      onDelete={handleDelete(data)}
-                      color="primary"
-                      avatar={<Avatar src="/pictures/Ole.jpg" alt="Ole" />}
-                    />
-                  </ListItem>
-                );
-              })}
-            </Box>
-          </div>
-          <div className={styles.formTextField}>
-            <TextField
-              inputRef={tagRef}
-              fullWidth
-              variant="standard"
-              size="small"
-              sx={{ margin: "1rem 0" }}
-              margin="none"
-              placeholder={"Enter tags"}
-              InputProps={{
-                startAdornment: (
-                  <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }} />
-                ),
-              }}
-              onKeyDown={handleBackspace} // Add this event listener for backspace key
-              onKeyPress={handleEnterPress} // Add this event listener for Enter key
-            />
-          </div>
-          <div className={styles.formTextField}>
-            <FormGroup>
-              <FormControlLabel control={<Checkbox />} label="Oppslagsbilde" />
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Vises på forsiden"
+            <div className={styles.formTextField}>
+              <TextField
+                type="number"
+                label="Bildenummer"
+                sx={{ width: boxwidth }}
+              >
+                Bildenummer
+              </TextField>
+            </div>
+
+            <div className={styles.formTextField}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={motives.map((motive) => motive.title)} // Use motive titles as options
+                sx={{ width: boxwidth }}
+                onChange={handleMotiveChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="Motiv" value={motive} />
+                )}
               />
-              <FormControlLabel control={<Checkbox />} label="Scannet" />
-            </FormGroup>
+            </div>
+
+            <div className={styles.formTextField}>
+              <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"NO"}
+                localeText={
+                  nbNO.components.MuiLocalizationProvider.defaultProps
+                    .localeText
+                }
+              >
+                <DatePicker
+                  label={"Dato"}
+                  value={date}
+                  onChange={(newValue) => setDate(newValue)}
+                  format="DD/MM/YYYY"
+                  sx={{ width: boxwidth }}
+                />
+              </LocalizationProvider>
+            </div>
+
+            <div className={styles.formTextField}>
+              <Autocomplete
+                fullWidth
+                disablePortal
+                id="combo-box-demo"
+                options={categories.map((category) => category.name)}
+                sx={{ width: boxwidth }}
+                onChange={handleCategoryChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="Kategori" />
+                )}
+              />
+            </div>
+            <div className={styles.formTextField}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={places.map((place) => place.name)}
+                sx={{ width: boxwidth }}
+                onChange={handlePlaceChange}
+                renderInput={(params) => <TextField {...params} label="Sted" />}
+              />
+            </div>
+            <div className={styles.formTextField}>
+              <Box className={classes.flexContainer}>
+                {chipData.map((data) => {
+                  return (
+                    <ListItem key={data.key}>
+                      <Chip
+                        label={data.label}
+                        onDelete={handleDelete(data)}
+                        color="primary"
+                        avatar={<Avatar src="/pictures/Ole.jpg" alt="Ole" />}
+                      />
+                    </ListItem>
+                  );
+                })}
+              </Box>
+            </div>
+            <div className={styles.formTextField}>
+              <TextField
+                inputRef={tagRef}
+                fullWidth
+                variant="standard"
+                size="small"
+                sx={{ margin: "1rem 0" }}
+                margin="none"
+                placeholder={"Enter tags"}
+                InputProps={{
+                  startAdornment: (
+                    <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }} />
+                  ),
+                }}
+                onKeyDown={handleBackspace} // Add this event listener for backspace key
+                onKeyPress={handleEnterPress} // Add this event listener for Enter key
+              />
+            </div>
+            <div className={styles.formTextField}>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Oppslagsbilde"
+                />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Vises på forsiden"
+                />
+                <FormControlLabel control={<Checkbox />} label="Scannet" />
+              </FormGroup>
+            </div>
+            <div className={styles.formTextField}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={securityLevel}
+                sx={{ width: boxwidth }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Sikkerhetsnivå" />
+                )}
+              />
+            </div>
+            <div className={styles.formTextField}>
+              <Button
+                variant="outlined"
+                sx={{ width: boxwidth }}
+                onClick={test}
+              >
+                Søk
+              </Button>
+            </div>
           </div>
-          <div className={styles.formTextField}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={securityLevel}
-              sx={{ width: boxwidth }}
-              renderInput={(params) => (
-                <TextField {...params} label="Sikkerhetsnivå" />
-              )}
-            />
-          </div>
-          <div className={styles.formTextField}>
-            <Button variant="outlined" sx={{ width: boxwidth }}>
-              Søk
-            </Button>
-          </div>
-        </div>
+        </form>
       </Paper>
     </div>
   );
