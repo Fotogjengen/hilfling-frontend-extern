@@ -52,11 +52,11 @@ const InternSearchInput: React.FC = () => {
 
   //variables for suggestions
   const [motive, setMotive] = useState<String>();
+  const [album, setAlbum] = useState<String>();
+  const [category, setCategory] = useState<String>();
+  const [place, setPlace] = useState<String>();
 
   //testdata
-  const album = [{ label: "eksempelalbum", id: 2 }];
-  const kategori = [{ label: "eksempelkategori", id: 3 }];
-  const sted = [{ label: "eksempelsted", id: 4 }];
   const securityLevel = [{ label: "eksempel", id: 5 }];
 
   //for datefield and setting current day
@@ -94,6 +94,11 @@ const InternSearchInput: React.FC = () => {
       });
     CategoryApi.getAll()
       .then((res) => setCategories(res.data.currentList))
+      .catch((e) => {
+        setError(e);
+      });
+    MotiveApi.getAll()
+      .then((res) => setMotives(res.data.currentList))
       .catch((e) => {
         setError(e);
       });
@@ -168,7 +173,7 @@ const InternSearchInput: React.FC = () => {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={album}
+              options={albums.map((albums) => albums.title)}
               sx={{ width: boxwidth }}
               renderInput={(params) => <TextField {...params} label="Album" />}
             />
@@ -193,7 +198,7 @@ const InternSearchInput: React.FC = () => {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={motives}
+              options={motives.map((motive) => motive.title)} // Use motive titles as options
               sx={{ width: boxwidth }}
               renderInput={(params) => (
                 <TextField
@@ -229,7 +234,7 @@ const InternSearchInput: React.FC = () => {
               fullWidth
               disablePortal
               id="combo-box-demo"
-              options={kategori}
+              options={categories.map((category) => category.name)}
               sx={{ width: boxwidth }}
               renderInput={(params) => (
                 <TextField {...params} label="Kategori" />
@@ -240,7 +245,7 @@ const InternSearchInput: React.FC = () => {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={sted}
+              options={places.map((place) => place.name)}
               sx={{ width: boxwidth }}
               renderInput={(params) => <TextField {...params} label="Sted" />}
             />
