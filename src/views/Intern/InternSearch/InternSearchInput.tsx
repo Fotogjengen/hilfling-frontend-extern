@@ -22,11 +22,13 @@ import {
   PlaceDto,
   AlbumDto,
   CategoryDto,
+  SecurityLevelDto,
 } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
+import { SecurityLevelApi } from "../../../utils/api/SecurityLevelApi";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 interface ChipData {
@@ -40,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap", // Enable wrapping elements to the next row
     justifyContent: "flex-start", // Start from the left
   },
+  datePickerContainer: {
+    padding: "0.4rem",
+  },
 }));
 
 const InternSearchInput: React.FC = () => {
@@ -49,17 +54,20 @@ const InternSearchInput: React.FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
+  const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
 
   //variables for suggestions
-  const [motive, setMotive] = useState<String>();
-  const [album, setAlbum] = useState<String>();
-  const [category, setCategory] = useState<String>();
-  const [place, setPlace] = useState<String>();
-  const [page, setPage] = useState<BigInt>();
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs());
-
-  //testdata
-  const securityLevel = [{ label: "eksempel", id: 5 }];
+  const [motive, setMotive] = useState<String>("");
+  const [album, setAlbum] = useState<String>("");
+  const [category, setCategory] = useState<String>("");
+  const [place, setPlace] = useState<String>("");
+  const [page, setPage] = useState(0);
+  const [dateFrom, setDateFrom] = React.useState<Dayjs | null>(dayjs());
+  const [dateFromChanged, setDateFromChanged] = useState(false);
+  const [dateTo, setDateTo] = React.useState<Dayjs | null>(dayjs());
+  const [isGoodPic, setIsGoodPic] = useState(false);
+  const [isAnalog, setIsAnalog] = useState(false);
+  const [securityLevel, setSecurityLevel] = useState<String>("");
 
   const tagRef = useRef<HTMLInputElement | null>(null);
 
@@ -68,6 +76,8 @@ const InternSearchInput: React.FC = () => {
 
   //styles tag component
   const classes = useStyles();
+
+  //ListItem for tags
   const ListItem = styled("li")(({ theme }) => ({
     margin: theme.spacing(0.5),
   }));
@@ -75,12 +85,14 @@ const InternSearchInput: React.FC = () => {
   //context for error handling
   const { setMessage, setSeverity, setOpen } = useContext(AlertContext);
 
+  //throw error message if Api get request fails
   const setError = (e: string) => {
     setOpen(true);
     setSeverity(severityEnum.ERROR);
     setMessage(e);
   };
 
+  //calls to backend to get suggestions for fields
   useEffect(() => {
     AlbumApi.getAll()
       .then((res) => setAlbums(res.data.currentList))
@@ -102,8 +114,14 @@ const InternSearchInput: React.FC = () => {
       .catch((e) => {
         setError(e);
       });
+    SecurityLevelApi.getAll()
+      .then((res) => setSecurityLevels(res.data.currentList))
+      .catch((e) => {
+        setError(e);
+      });
   }, []);
 
+  //handles backspace in the tags field
   const handleBackspace = (event: React.KeyboardEvent) => {
     if (
       event.key === "Backspace" &&
@@ -119,6 +137,7 @@ const InternSearchInput: React.FC = () => {
     }
   };
 
+  //handles enter in tags field
   const handleEnterPress = (event: React.KeyboardEvent) => {
     if (
       event.key === "Enter" &&
@@ -143,12 +162,14 @@ const InternSearchInput: React.FC = () => {
     }
   };
 
+  //Handles deleting chip (tag) in tags field
   const handleDelete = (chipToDelete: ChipData) => () => {
     setChipData((chips: any) =>
       chips.filter((chip: any) => chip.key !== chipToDelete.key),
     );
   };
 
+  //setter functions for useState handling in autocomplete fields
   const handleMotiveChange = (
     event: React.SyntheticEvent,
     newValue: string | null,
@@ -173,12 +194,51 @@ const InternSearchInput: React.FC = () => {
   ) => {
     setAlbum(newValue || "");
   };
+  const handleSecurityLevelChange = (
+    event: React.SyntheticEvent,
+    newValue: string | null,
+  ) => {
+    setSecurityLevel(newValue || "");
+  };
+  const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Convert the input value to a number and set 'page'
+    setPage(Number(event.target.value));
+  };
 
   const test = () => {
     console.log(motive);
     console.log(album);
     console.log(place);
     console.log(category);
+    console.log(chipData);
+    console.log(isGoodPic);
+    console.log(isAnalog);
+    console.log(dateFrom?.format("YYYY-MM-DD"));
+    console.log(dateTo?.format("YYYY-MM-DD"));
+    console.log(securityLevel);
+    console.log(page);
+  };
+
+  //build queryparams string and submit form to get results
+  const onSubmitForm = () => {
+    let string = "localhost:8080/photos?";
+    {
+      motive.trim() == "" ? null : (string += `&motive=${motive}`);
+      album.trim() == "" ? null : (string += `&album=${album}`);
+      category.trim() == "" ? null : (string += `&category=${category}`);
+      place.trim() == "" ? null : (string += `&place=${place}`);
+      page == 0 ? null : (string += `&page=${page}`);
+      !dateFromChanged
+        ? null
+        : (string += `&dateFrom=${dateFrom?.format("YYYY-MM-DD")}`);
+      string += `&dateTo=${dateTo?.format("YYYY-MM-DD")}`;
+      isGoodPic == false ? null : (string += `&isGoodPic=${isGoodPic}`);
+      isAnalog == false ? null : (string += `&isAnalog=${isAnalog}`);
+      securityLevel.trim() == ""
+        ? null
+        : (string += `&securityLevel=${securityLevel}`);
+    }
+    console.log(string);
   };
 
   return (
@@ -195,7 +255,7 @@ const InternSearchInput: React.FC = () => {
         }}
         component="ul"
       >
-        <form onSubmit={test}>
+        <form onSubmit={onSubmitForm}>
           <div>
             <div className={styles.formTextField}>
               <Autocomplete
@@ -210,18 +270,13 @@ const InternSearchInput: React.FC = () => {
               />
             </div>
             <div className={styles.formTextField}>
-              <TextField type="number" label="Side" sx={{ width: boxwidth }}>
-                Side
-              </TextField>
-            </div>
-
-            <div className={styles.formTextField}>
               <TextField
                 type="number"
-                label="Bildenummer"
+                label="Side"
+                onChange={handlePageChange}
                 sx={{ width: boxwidth }}
               >
-                Bildenummer
+                Side
               </TextField>
             </div>
 
@@ -229,7 +284,7 @@ const InternSearchInput: React.FC = () => {
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={motives.map((motive) => motive.title)} // Use motive titles as options
+                options={motives.map((motive) => motive.title)}
                 sx={{ width: boxwidth }}
                 onChange={handleMotiveChange}
                 renderInput={(params) => (
@@ -238,24 +293,35 @@ const InternSearchInput: React.FC = () => {
               />
             </div>
 
-            <div className={styles.formTextField}>
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                adapterLocale={"NO"}
-                localeText={
-                  nbNO.components.MuiLocalizationProvider.defaultProps
-                    .localeText
-                }
-              >
+            <LocalizationProvider
+              dateAdapter={AdapterDayjs}
+              adapterLocale={"NO"}
+              localeText={
+                nbNO.components.MuiLocalizationProvider.defaultProps.localeText
+              }
+            >
+              <div className={styles.formTextField}>
                 <DatePicker
-                  label={"Dato"}
-                  value={date}
-                  onChange={(newValue) => setDate(newValue)}
+                  label={"Dato fra"}
+                  value={dateFrom}
+                  onChange={(newValue) => {
+                    setDateFrom(newValue);
+                    setDateFromChanged(true);
+                  }}
                   format="DD/MM/YYYY"
                   sx={{ width: boxwidth }}
                 />
-              </LocalizationProvider>
-            </div>
+              </div>
+              <div className={styles.formTextField}>
+                <DatePicker
+                  label={"Dato til"}
+                  value={dateTo}
+                  onChange={(newValue) => setDateTo(newValue)}
+                  format="DD/MM/YYYY"
+                  sx={{ width: boxwidth }}
+                />
+              </div>
+            </LocalizationProvider>
 
             <div className={styles.formTextField}>
               <Autocomplete
@@ -317,21 +383,37 @@ const InternSearchInput: React.FC = () => {
             <div className={styles.formTextField}>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox />}
-                  label="Oppslagsbilde"
-                />
-                <FormControlLabel
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      checked={isGoodPic}
+                      onChange={() => {
+                        setIsGoodPic(!isGoodPic);
+                      }}
+                    />
+                  }
                   label="Vises på forsiden"
                 />
-                <FormControlLabel control={<Checkbox />} label="Scannet" />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={isAnalog}
+                      onChange={() => {
+                        setIsAnalog(!isAnalog);
+                      }}
+                    />
+                  }
+                  label="Analog"
+                />
               </FormGroup>
             </div>
             <div className={styles.formTextField}>
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={securityLevel}
+                options={securityLevels.map(
+                  (securityLevel) => securityLevel.securityLevelType,
+                )}
+                onChange={handleSecurityLevelChange}
                 sx={{ width: boxwidth }}
                 renderInput={(params) => (
                   <TextField {...params} label="Sikkerhetsnivå" />
@@ -340,9 +422,10 @@ const InternSearchInput: React.FC = () => {
             </div>
             <div className={styles.formTextField}>
               <Button
-                variant="outlined"
                 sx={{ width: boxwidth }}
-                onClick={test}
+                variant="contained"
+                color="primary"
+                onClick={onSubmitForm}
               >
                 Søk
               </Button>
