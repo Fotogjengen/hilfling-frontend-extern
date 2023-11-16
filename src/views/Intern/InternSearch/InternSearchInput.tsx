@@ -238,6 +238,8 @@ const InternSearchInput: React.FC = () => {
         ? null
         : (string += `&securityLevel=${securityLevel}`);
     }
+
+    //TODO add tags to queryparams string
     console.log(string);
   };
 
