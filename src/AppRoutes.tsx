@@ -9,7 +9,7 @@ import NotFound from "./views/NotFound/NotFound";
 import Search from "./views/Search/Search";
 import CsaTester from "./views/CsaTester";
 import Motives from "./views/Intern/Motives/Motives";
-import LoggInn from "./views/Intern/LoggInn/LoggInn";
+import Login from "./views/Login/Login";
 import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Expo from "./views/Intern/Expo/Expo";
@@ -35,7 +35,7 @@ const AppRoutes: FC = () => {
         <Route path="/intern/motive" element={<Motives />} />
         <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/intern/expo" element={<Expo />} />
-        <Route path="/logg-inn" element={<LoggInn />} />
+        <Route path="/logg-inn" element={<Login />} />
         <Route path="/intern" element={<InternNav />} />
 
         <Route path="*" element={<NotFound />} />
