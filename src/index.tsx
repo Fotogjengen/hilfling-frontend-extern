@@ -19,6 +19,7 @@ import { azureConfig } from "./azureconfig";
 import { AuthenticationResult } from "@azure/msal-common";
 
 const Root: FC = () => {
+
   //Msal should be instanciated outside component tree to prevent it from being re-instanciated on re-renders
   const msalInstance = new PublicClientApplication(azureConfig);
 
