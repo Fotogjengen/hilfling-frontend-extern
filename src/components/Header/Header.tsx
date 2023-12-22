@@ -1,7 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./Header.module.css";
-
-import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
 import { GuiLogo } from "../../gui-components";
 import { Grow, Collapse } from "@mui/material";
@@ -14,18 +12,25 @@ import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import LockIcon from "@mui/icons-material/Lock";
 import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmailerrorred";
 import SearchIcon from "@mui/icons-material/Search";
+import { useMsal } from "@azure/msal-react";
+import { Person } from "@microsoft/mgt-react";
+import AzureLogin from "../../views/Login/AzureLogin";
 
 const HeaderComponent: FC = () => {
-  const { isAuthenticated } = useAuth0();
   const replace = useNavigate();
-
   const [showMenu, setShowMenu] = useState(false);
   const onMenuClick = () => setShowMenu(true);
   const onCloseClick = () => setShowMenu(false);
-
   const handleResize = () => setShowMenu(false);
-
   window.addEventListener("resize", handleResize);
+
+  const { instance } = useMsal();
+  const activeAccount = instance.getActiveAccount;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(!!activeAccount);
+  }, [activeAccount]);
 
   const menuLinks = [
     {
@@ -54,7 +59,6 @@ const HeaderComponent: FC = () => {
       icon: <AccessibilityNewIcon />,
       noAuth: isAuthenticated,
     },
-
     {
       name: "Logg inn",
       to: "/logg-inn",
@@ -110,11 +114,12 @@ const HeaderComponent: FC = () => {
             <Link to="/search">SØK</Link>
           </div>
           <div className={styles.loggContainer}>
-            {isAuthenticated ? (
+            {/* {isAuthenticated ? (
               <Link to="/logg-inn"> LOGG UT </Link>
             ) : (
               <Link to="/logg-inn"> LOGG INN </Link>
-            )}
+            )} */}
+            <AzureLogin />
           </div>
         </div>
       </nav>

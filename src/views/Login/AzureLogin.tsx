@@ -6,17 +6,21 @@ import {
   useMsal,
 } from "@azure/msal-react";
 
+const loginRequest = {
+  scopes: ["User.Read"],
+};
+
 interface UserProfile {
   displayName: string;
   // Add more user profile properties as needed
 }
 
-const Login: React.FC = () => {
+const AzureLogin: React.FC = () => {
   const { instance, accounts } = useMsal();
   const activateAccount = instance.getActiveAccount();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
-  const handleRedirect = async () => {
+  const handleRedirect = async (): Promise<void> => {
     try {
       await instance.loginPopup({
         ...loginRequest,
@@ -27,7 +31,7 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     try {
       await instance.logoutRedirect({});
     } catch (error) {
@@ -35,13 +39,14 @@ const Login: React.FC = () => {
     }
   };
 
+  //makes user if logged in user has access to do so
   const createUser = async () => {
     const apiUrl = "https://graph.microsoft.com/v1.0/users";
     const newUser = {
       accountEnabled: true,
-      displayName: "John Doe",
-      mailNickname: "john.doe",
-      userPrincipalName: "john.doe@fgsamfundet.onmicrosoft.com",
+      displayName: "John Doe2",
+      mailNickname: "john.doe2",
+      userPrincipalName: "john.doe2@fgsamfundet.onmicrosoft.com",
       passwordProfile: {
         forceChangePasswordNextSignIn: true,
         password: "A_Strong_Password123",
@@ -87,6 +92,7 @@ const Login: React.FC = () => {
     }
   };
 
+  //get function call for user profile currently logged in
   useEffect(() => {
     const fetchUserProfile = async () => {
       if (activateAccount) {
@@ -110,7 +116,10 @@ const Login: React.FC = () => {
       }
     };
 
-    fetchUserProfile();
+    fetchUserProfile().catch((error) => {
+      console.error("Error fetching user profile:", error.message);
+      throw error;
+    });
   }, [activateAccount, accounts, instance]);
 
   const callGraphApi = async (accessToken: string) => {
@@ -135,25 +144,32 @@ const Login: React.FC = () => {
     }
   };
 
+  //Wrappers are here to fix linting error
+  const handleRedirectWrapper = (): void => {
+    handleRedirect().catch((error) => console.log(error));
+  };
+
+  const handleLogoutWrapper = (): void => {
+    handleLogout().catch((error) => console.log(error));
+  };
+
   return (
     <div>
       {/* This is shown when the user is not authenticated */}
       <UnauthenticatedTemplate>
-        <Button variant="outlined" onClick={handleRedirect}>
-          Login
+        <Button variant="outlined" onClick={handleRedirectWrapper}>
+          Logg inn
         </Button>
-        <Button onClick={createUser}>Create User</Button>
+        {/* <Button onClick={createUser}>Create User</Button> */}
       </UnauthenticatedTemplate>
       {/* This is shown when the user is authenticated */}
       <AuthenticatedTemplate>
         {activateAccount ? (
           <div>
-            <h1>Suksess!</h1>
             {userProfile ? (
               <div>
-                <p>Welcome, {userProfile.displayName}</p>
-                <Button onClick={handleLogout}>Logg ut</Button>
-                <Button onClick={createUser}>Create User</Button>
+                <Button onClick={handleLogoutWrapper}>Logg ut</Button>
+                {/* <Button onClick={createUser}>Create User</Button> */}
               </div>
             ) : (
               <p>Loading user profile...</p>
@@ -167,8 +183,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
-
-const loginRequest = {
-  scopes: ["User.Read"],
-};
+export default AzureLogin;

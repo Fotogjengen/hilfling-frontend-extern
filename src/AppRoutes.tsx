@@ -9,7 +9,7 @@ import NotFound from "./views/NotFound/NotFound";
 import Search from "./views/Search/Search";
 import CsaTester from "./views/CsaTester";
 import Motives from "./views/Intern/Motives/Motives";
-import Login from "./views/Login/Login";
+import Login from "./views/Login/AzureLogin";
 import EditMotive from "./views/Intern/EditMotive/EditMotive";
 import InternNav from "./views/Intern/InternNav/InternNav";
 import Expo from "./views/Intern/Expo/Expo";
