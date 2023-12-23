@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import App from "./views/App/App";
 import About from "./views/About/About";
@@ -17,8 +17,18 @@ import Redirect from "./utils/Redirect/Redirect";
 import MotiveHeader from "./components/ImageViewer/MotiveHeader";
 import InternSearchView from "./views/Intern/InternSearch/InternSearchView";
 import { Box } from "@mui/material";
+import { useMsal } from "@azure/msal-react";
 
 const AppRoutes: FC = () => {
+  const { instance } = useMsal();
+  const activeAccount = instance.getActiveAccount();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Check if there is an authenticated user
+    setIsAuthenticated(!!activeAccount);
+  }, [activeAccount]);
+
   return (
     <Box sx={{ m: "1rem" }}>
       <Routes>
@@ -36,8 +46,9 @@ const AppRoutes: FC = () => {
         <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/intern/expo" element={<Expo />} />
         <Route path="/logg-inn" element={<Login />} />
-        <Route path="/intern" element={<InternNav />} />
-
+        {isAuthenticated && 
+        <Route path="/intern" element={<InternNav />
+        } />}
         <Route path="*" element={<NotFound />} />
         <Route
           path="/samf-wiki"

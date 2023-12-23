@@ -5,10 +5,7 @@ import {
   UnauthenticatedTemplate,
   useMsal,
 } from "@azure/msal-react";
-
-const loginRequest = {
-  scopes: ["User.Read"],
-};
+import { loginRequest } from "../../azureconfig";
 
 interface UserProfile {
   displayName: string;
@@ -103,15 +100,14 @@ const AzureLogin: React.FC = () => {
               scopes: ["User.Read"],
             })
             .catch((error) => {
-              console.error("Error acquiring token silently:", error.message);
-              throw error;
+              console.log("Error acquiring token silently:", error.message);
             });
 
           if (accessToken) {
             await callGraphApi(accessToken.accessToken);
           }
         } catch (error: any) {
-          console.error("Error fetching user profile:", error.message);
+          console.log("Error fetching user profile:", error.message);
         }
       }
     };
@@ -168,7 +164,9 @@ const AzureLogin: React.FC = () => {
           <div>
             {userProfile ? (
               <div>
-                <Button onClick={handleLogoutWrapper}>Logg ut</Button>
+                <Button variant="outlined" onClick={handleLogoutWrapper}>
+                  Logg ut
+                </Button>
                 {/* <Button onClick={createUser}>Create User</Button> */}
               </div>
             ) : (

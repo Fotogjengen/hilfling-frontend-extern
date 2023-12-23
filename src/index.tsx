@@ -22,7 +22,6 @@ const Root: FC = () => {
 
   //Msal should be instanciated outside component tree to prevent it from being re-instanciated on re-renders
   const msalInstance = new PublicClientApplication(azureConfig);
-
   // Default for using the first account if no account is active on page load.
   if (
     !msalInstance.getActiveAccount() &&
