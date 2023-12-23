@@ -13,7 +13,6 @@ import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmail
 import SearchIcon from "@mui/icons-material/Search";
 import { useMsal } from "@azure/msal-react";
 import AzureLogin from "../../views/Login/AzureLogin";
-import { Person } from "@microsoft/mgt-react";
 
 const HeaderComponent: FC = () => {
   const replace = useNavigate();
