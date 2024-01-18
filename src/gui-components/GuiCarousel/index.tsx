@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState, ReactNodeArray } from "react";
+import React, { FC, useEffect, useState, ReactNode } from "react";
 import styles from "./GuiCarousel.module.css";
 import cx from "classnames";
 import { DefaultProps } from "../../types";
 
 interface GuiCarouselProps extends DefaultProps {
-  children: ReactNodeArray;
+  children: ReactNode[];
   delay: number;
   width?: number;
   height?: number;
