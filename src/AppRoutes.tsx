@@ -18,6 +18,7 @@ import MotiveHeader from "./components/ImageViewer/MotiveHeader";
 import InternSearchView from "./views/Intern/InternSearch/InternSearchView";
 import { Box } from "@mui/material";
 import { useMsal } from "@azure/msal-react";
+import ArchiveBossCreateUser from "./components/Arkivsjef/ArchiveBossCreateUser/ArchiveBossCreateUser";
 
 const AppRoutes: FC = () => {
   const { instance } = useMsal();
@@ -42,13 +43,15 @@ const AppRoutes: FC = () => {
         <Route path="/intern/sok" element={<InternSearchView />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
+        <Route
+          path="/intern/arkivsjef/createUser"
+          element={<ArchiveBossCreateUser />}
+        />
         <Route path="/intern/motive" element={<Motives />} />
         <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/intern/expo" element={<Expo />} />
         <Route path="/logg-inn" element={<Login />} />
-        {isAuthenticated && 
-        <Route path="/intern" element={<InternNav />
-        } />}
+        {isAuthenticated && <Route path="/intern" element={<InternNav />} />}
         <Route path="*" element={<NotFound />} />
         <Route
           path="/samf-wiki"
