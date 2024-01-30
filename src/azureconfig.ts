@@ -11,7 +11,7 @@ export const azureConfig = {
     // Indicated the page to navigate after logout.
     postLogoutRedirectUri: "/",
     // if "true", will navigate back to the original request location before processing the auth code response
-    navigateToLoginRequestUrl: false,
+    navigateToLoginRequestUrl: true,
   },
   cache: {
     //configures cache location. "sessionStorage" is more secure, but "localStorage" gives SSO between tabs.
