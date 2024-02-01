@@ -4,8 +4,6 @@ import { Button, FormControl, FormLabel, TextField } from "@mui/material";
 
 const ArchiveBossCreateUser = () => {
   const [displayName, setDisplayName] = useState("");
-  const [mailNickname, setMailNickname] = useState("");
-  const [userPrincipalName, setUserPrincipalName] = useState("");
   const [password, setPassword] = useState("");
 
   const { instance, accounts } = useMsal();
@@ -13,15 +11,13 @@ const ArchiveBossCreateUser = () => {
   const createUser = async () => {
     console.log("JAJAJA");
     console.log("Display Name:", displayName);
-    console.log("Mail Nickname:", mailNickname);
-    console.log("User Principal Name:", userPrincipalName);
 
     const apiUrl = "https://graph.microsoft.com/v1.0/users";
     const newUser = {
       accountEnabled: true,
       displayName: displayName,
-      mailNickname: mailNickname,
-      userPrincipalName: userPrincipalName,
+      mailNickname: `${displayName.replaceAll(" ", ".")}`,
+      userPrincipalName:`${displayName.replaceAll(" ", ".")}@fgsamfundet.onmicrosoft.com` ,
       passwordProfile: {
         forceChangePasswordNextSignIn: true,
         password: password, // legge til passord
@@ -85,17 +81,6 @@ const ArchiveBossCreateUser = () => {
         onChange={(e) => setDisplayName(e.target.value)}
       />
 
-      <FormLabel>Mail Nickname:</FormLabel>
-      <TextField
-        value={mailNickname}
-        onChange={(e) => setMailNickname(e.target.value)}
-      />
-
-      <FormLabel>User principal name:</FormLabel>
-      <TextField
-        value={userPrincipalName}
-        onChange={(e) => setUserPrincipalName(e.target.value)}
-      />
 
       <FormLabel>User password:</FormLabel>
       <TextField
