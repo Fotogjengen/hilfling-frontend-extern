@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { Button, FormControl, FormLabel, TextField } from "@mui/material";
+import styles from "./ArchiveBossCreateUser.module.css"
+import { Link } from "react-router-dom";
+
+
 
 const ArchiveBossCreateUser = () => {
   const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
+
 
   const { instance, accounts } = useMsal();
 
@@ -20,7 +25,7 @@ const ArchiveBossCreateUser = () => {
       userPrincipalName:`${displayName.replaceAll(" ", ".")}@fgsamfundet.onmicrosoft.com` ,
       passwordProfile: {
         forceChangePasswordNextSignIn: true,
-        password: password, // legge til passord
+        password: password, 
       },
     };
 
@@ -64,6 +69,9 @@ const ArchiveBossCreateUser = () => {
   };
 
   const handleButtonClick = () => {
+
+    
+
     createUser()
       .then(() => {
         // Handle completion if needed
@@ -74,25 +82,39 @@ const ArchiveBossCreateUser = () => {
   };
 
   return (
-    <FormControl>
+    <div className={styles.container}>
+    <FormControl className={styles.form}>
       <FormLabel>Display Name:</FormLabel>
       <TextField
+        className={styles.input}
         value={displayName}
         onChange={(e) => setDisplayName(e.target.value)}
       />
 
 
-      <FormLabel>User password:</FormLabel>
-      <TextField
+        <FormLabel>User password:</FormLabel>
+        <TextField
+        className={styles.input}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-      />
+        />
 
       <Button onClick={handleButtonClick} type="button" variant="outlined">
         Submit
       </Button>
+
+      <Link to="/intern/arkivsjef"><div className={styles.backButton}>Tilbake til arkivsjef</div></Link>
+      
     </FormControl>
+
+    
+
+    </div>
   );
 };
 
 export default ArchiveBossCreateUser;
+  function useErrorBoundary(): { didCatch: any; error: any; errorInfo: any; } {
+    throw new Error("Function not implemented.");
+  }
+
