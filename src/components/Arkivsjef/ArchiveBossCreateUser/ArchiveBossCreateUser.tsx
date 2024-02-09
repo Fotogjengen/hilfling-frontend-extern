@@ -1,25 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
-import { Button, FormControl, FormLabel, TextField } from "@mui/material";
+import { Button, Paper, FormControl, FormLabel, TextField } from "@mui/material";
 import styles from "./ArchiveBossCreateUser.module.css"
 import { Link } from "react-router-dom";
 
 
 
 const ArchiveBossCreateUser = () => {
-  const [displayName, setDisplayName] = useState("");
+  
+  const [givenName, setGivenName] = useState("");
+  const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
 
 
-  const { instance, accounts } = useMsal();
+
+  const { instance } = useMsal();
 
   const createUser = async () => {
+
+    const displayName = `${givenName} ${surname}`
+    
     console.log("JAJAJA");
     console.log("Display Name:", displayName);
+
+
 
     const apiUrl = "https://graph.microsoft.com/v1.0/users";
     const newUser = {
       accountEnabled: true,
+      givenName: givenName,
+      surname: surname,
       displayName: displayName,
       mailNickname: `${displayName.replaceAll(" ", ".")}`,
       userPrincipalName:`${displayName.replaceAll(" ", ".")}@fgsamfundet.onmicrosoft.com` ,
@@ -82,34 +92,49 @@ const ArchiveBossCreateUser = () => {
   };
 
   return (
-    <div className={styles.container}>
-    <FormControl className={styles.form}>
-      <FormLabel>Display Name:</FormLabel>
-      <TextField
-        className={styles.input}
-        value={displayName}
-        onChange={(e) => setDisplayName(e.target.value)}
-      />
-
-
-        <FormLabel>User password:</FormLabel>
+<Paper className={styles.container}>
+      <FormControl >
+        <FormLabel>Fornavn:</FormLabel>
         <TextField
-        className={styles.input}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+          required
+          value={givenName}
+          onChange={(e) => setGivenName(e.target.value)}
         />
 
-      <Button onClick={handleButtonClick} type="button" variant="outlined">
-        Submit
-      </Button>
+        <FormLabel>Etternavn:</FormLabel>
+        <TextField
+          className={styles.input}
+          required
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+        />
 
-      <Link to="/intern/arkivsjef"><div className={styles.backButton}>Tilbake til arkivsjef</div></Link>
-      
-    </FormControl>
+        <FormLabel>Passord:</FormLabel>
+        <TextField
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-    
 
-    </div>
+        <Button
+          onClick={handleButtonClick}
+          type="button"
+          variant="contained"
+          color="primary"
+          sx={{marginTop:"5px", margin:"5px auto"}}
+          className={styles.submitButton}
+        >
+          Lag bruker
+        </Button>
+
+        <Link to="/intern/arkivsjef" className={styles.backButton}>
+          Tilbake til arkivsjef
+        </Link>
+      </FormControl>
+    </Paper>
   );
 };
 
