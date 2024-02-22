@@ -94,12 +94,15 @@ const AzureLogin: React.FC = () => {
     const fetchUserProfile = async () => {
       if (activateAccount) {
         try {
+          
+          // Ensure MSAL is initialized
+          await instance.initialize();
           const accessToken = await instance
             .acquireTokenSilent({
               account: accounts[0],
               scopes: ["User.Read"],
             })
-            .catch((error) => {
+            .catch((error:any) => {
               console.log("Error acquiring token silently:", error.message);
             });
 
