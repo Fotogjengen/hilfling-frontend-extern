@@ -48,7 +48,7 @@ const AppRoutes: FC = () => {
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
         <Route path="/intern/arkivsjef/createUser" element={<ArchiveBossCreateUser />}/>
         <Route path="/intern/arkivsjef/editPhotoGangBangers" element = {<EditPhotoGangBangers/>}/>
-        <Route path="/intern/arkivsjef/editPhotoGangBangers/edit" element = {<EditPhotoGangBangersEdit/>}/>
+        <Route path="/intern/arkivsjef/editPhotoGangBangers/:id" element = {<EditPhotoGangBangersEdit/>}/>
         <Route path="/intern/motive" element={<Motives />} />
         <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/intern/expo" element={<Expo />} />

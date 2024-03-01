@@ -20,7 +20,7 @@ export const EditPhotoGangBangers = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        PhotoGangBangerApi.getAllActivePangsPublic()
+        PhotoGangBangerApi.getAllActivePangsPublic() //Skal egentlig stå getAllActivesPublic
           .then((res) => {setPhotoGangBanger(res); setIsLoading(false); console.log("kommer den så langt?")})
           .catch((e) => {
             setError(e);
@@ -50,7 +50,7 @@ export const EditPhotoGangBangers = () => {
                 <Grid item xs={2}><div>{photoGangBanger.samfundetUser?.phoneNumber?.value}</div></Grid>
                 <Grid item xs={1}><div>{photoGangBanger.semesterStart?.value}</div></Grid>
                 <Grid item xs={1}><div>{photoGangBanger.position?.title}</div></Grid>
-                <Grid item xs={1}><Link to="/intern/arkivsjef/editPhotoGangBangers/edit" >Rediger</Link></Grid>
+                <Grid item xs={1}><Link to={`/intern/arkivsjef/editPhotoGangBangers/${photoGangBanger.photoGangBangerId?.id}`} >Rediger</Link></Grid>
                 <Grid item xs={1}><Button variant="contained" color="secondary">Slett</Button></Grid>
                 
             </Grid>
