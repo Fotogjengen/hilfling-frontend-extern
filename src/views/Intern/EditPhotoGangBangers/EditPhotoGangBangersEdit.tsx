@@ -31,8 +31,7 @@ export const EditPhotoGangBangersEdit = () => {
         console.log("lag feilmelding her") //TODO lag feil melding
       }else {
        PhotoGangBangerApi.getById(id)
-          .then((res) => {
-            console.log(res), 
+          .then((res) => { 
             setPhotoGangBanger(res), 
             setAddress(res.address), 
             setEmail(res.samfundetUser?.email?.value), 
@@ -104,7 +103,6 @@ export const EditPhotoGangBangersEdit = () => {
           isPang: pang,
         };
 
-        console.log(updatedPhotoGangBanger);
         
         setPhotoGangBanger(updatedPhotoGangBanger);
         

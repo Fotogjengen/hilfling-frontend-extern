@@ -21,7 +21,7 @@ export const EditPhotoGangBangers = () => {
 
     useEffect(() => {
         PhotoGangBangerApi.getAllActivePangsPublic() //Skal egentlig stå getAllActivesPublic
-          .then((res) => {setPhotoGangBanger(res); setIsLoading(false); console.log("kommer den så langt?")})
+          .then((res) => {setPhotoGangBanger(res); setIsLoading(false); })
           .catch((e) => {
             setError(e);
           });
@@ -50,8 +50,9 @@ export const EditPhotoGangBangers = () => {
                 <Grid item xs={2}><div>{photoGangBanger.samfundetUser?.phoneNumber?.value}</div></Grid>
                 <Grid item xs={1}><div>{photoGangBanger.semesterStart?.value}</div></Grid>
                 <Grid item xs={1}><div>{photoGangBanger.position?.title}</div></Grid>
-                <Grid item xs={1}><Link to={`/intern/arkivsjef/editPhotoGangBangers/${photoGangBanger.photoGangBangerId?.id}`} >Rediger</Link></Grid>
+                <Grid item xs={1}><Link style={{border:"1px solid black", backgroundColor: "white", padding:"5px", borderRadius:"5px", margin: "auto", cursor: "pointer" }} to={`/intern/arkivsjef/editPhotoGangBangers/${photoGangBanger.photoGangBangerId?.id}`} >Rediger</Link></Grid>
                 <Grid item xs={1}><Button variant="contained" color="secondary">Slett</Button></Grid>
+              {/* TODO make a delete end point, and implement it to the page */}
                 
             </Grid>
             )):(
