@@ -28,7 +28,7 @@ export const EditPhotoGangBangersEdit = () => {
 
     useEffect(()=>{
       if (id == undefined) {
-        console.log("lag feilmelding her") //TODO lag feil melding
+        //TODO lag feil melding
       }else {
        PhotoGangBangerApi.getById(id)
           .then((res) => { 
@@ -68,7 +68,7 @@ export const EditPhotoGangBangersEdit = () => {
     }
 
     const handleChangeActive = (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(active)
+     
       setActive(event.target.checked);
     }
  
@@ -78,7 +78,7 @@ export const EditPhotoGangBangersEdit = () => {
 
     const editPhotoGangBanger = async () => {
       // TODO change PhotoGangBanger, 
-      console.log(active, pang)
+    
       try{
         const updatedPhotoGangBanger = {
           ...photoGangBanger,
@@ -178,6 +178,8 @@ export const EditPhotoGangBangersEdit = () => {
         >
           Oppdater bruker
         </Button>
+        {/* TODO add respons from updating a user */}
+
         <Link to="/intern/arkivsjef/editPhotoGangBangers" 
         style={{ marginTop: "0.5rem",
           textAlign: "center",
