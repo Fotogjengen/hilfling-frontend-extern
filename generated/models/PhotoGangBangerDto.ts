@@ -16,8 +16,8 @@ export type PhotoGangBangerDto = {
     city?: string;
     samfundetUser?: SamfundetUserDto;
     position?: PositionDto;
-    active?: boolean;
-    pang?: boolean;
+    isActive?: boolean;
+    isPang?: boolean;
 }
 
 export namespace PhotoGangBangerDto {

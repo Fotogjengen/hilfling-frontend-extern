@@ -31,18 +31,26 @@ export const EditPhotoGangBangersEdit = () => {
         console.log("lag feilmelding her") //TODO lag feil melding
       }else {
        PhotoGangBangerApi.getById(id)
-          .then((res) => {console.log(res), 
+          .then((res) => {
+            console.log(res), 
             setPhotoGangBanger(res), 
             setAddress(res.address), 
             setEmail(res.samfundetUser?.email?.value), 
             setEmailPosition(res.position?.email?.value), 
             setTelephon(res.samfundetUser?.phoneNumber?.value), 
-            setTitle(res.position?.title), setPang(res.pang || false), setActive(res.active || false)},
+            setTitle(res.position?.title), setPang(res.isPang || false), setActive(res.isActive || false)
+            
+          
+          },
             )
           .catch((e) => {
             setError(e);
           });} 
+
+      
     },[])
+
+    
 
     
 
@@ -61,6 +69,7 @@ export const EditPhotoGangBangersEdit = () => {
     }
 
     const handleChangeActive = (event: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(active)
       setActive(event.target.checked);
     }
  
@@ -70,6 +79,7 @@ export const EditPhotoGangBangersEdit = () => {
 
     const editPhotoGangBanger = async () => {
       // TODO change PhotoGangBanger, 
+      console.log(active, pang)
       try{
         const updatedPhotoGangBanger = {
           ...photoGangBanger,
@@ -90,9 +100,11 @@ export const EditPhotoGangBangersEdit = () => {
               value: email,
             }
           },
-          active: active,
-          pang: pang,
+          isActive: active,
+          isPang: pang,
         };
+
+        console.log(updatedPhotoGangBanger);
         
         setPhotoGangBanger(updatedPhotoGangBanger);
         
@@ -111,67 +123,73 @@ export const EditPhotoGangBangersEdit = () => {
   return (
     //TODO add correct fields for edit photoGangBanger
     //TODO fiks utseende
-    <Paper>
-      <h1>{photoGangBanger?.samfundetUser?.firstName} {photoGangBanger?.samfundetUser?.lastName}:</h1>
-      <FormControl >
+    
+    <Paper style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+      <h1>Edit {photoGangBanger?.samfundetUser?.firstName} {photoGangBanger?.samfundetUser?.lastName} bruker:</h1>
+      <FormControl fullWidth margin="normal">
         <FormLabel>Address:</FormLabel>
         <TextField
           required
+          fullWidth
           value={address}
           onChange={(e)=> setAddress(e.target.value)}
         />
-
         <FormLabel>Epost: </FormLabel>
         <TextField
           required
+          fullWidth
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
-        <FormLabel>Verv epost: </FormLabel>
+        <FormLabel>Verv Epost: </FormLabel>
         <TextField
           required
+          fullWidth
           value={emailPosition}
           onChange={(e) => setEmailPosition(e.target.value)}
         />
-        
-
         <FormLabel>Telefon: </FormLabel>
         <TextField
           required
+          fullWidth
           type='number'
           value={telephon}
           onChange={(e)=> setTelephon(e.target.value)}
         />
-
         <FormLabel>Verv: </FormLabel>
         <TextField
           required
+          fullWidth
           value={title}
           onChange={(e)=> setTitle(e.target.value)}
         />
-
-        <FormLabel>Pang: </FormLabel>
-        <Switch checked={pang} onChange={handleChangePang}/>
-
-    
-        <FormLabel>Aktiv: </FormLabel>
-        <Switch checked={active} onChange={handleChangeActive}/>
-
+        <FormControlLabel
+          control={<Switch checked={pang} onChange={handleChangePang} />}
+          label="Pang"
+        />
+        <FormControlLabel
+          control={<Switch checked={active} onChange={handleChangeActive} />}
+          label="Aktiv"
+        />
         <Button
           type="button"
           variant="contained"
           color="primary"
-          sx={{marginTop:"5px", margin:"5px auto"}}
+          style={{ marginTop: "20px" }}
           onClick={handleClick}
         >
           Oppdater bruker
         </Button>
-
-        <Link to="/intern/arkivsjef/editPhotoGangBangers" >
+        <Link to="/intern/arkivsjef/editPhotoGangBangers" 
+        style={{ marginTop: "0.5rem",
+          textAlign: "center",
+          color: "#007bff", 
+          cursor: "pointer",
+          textDecoration: "none", }}>
           Tilbake til arkivsjef
         </Link>
       </FormControl>
     </Paper>
+
   )
 }
