@@ -178,7 +178,7 @@ export const EditPhotoGangBangersEdit = () => {
         >
           Oppdater bruker
         </Button>
-        {/* TODO add respons from updating a user */}
+        {/* TODO add  respons from updating a user */}
 
         <Link to="/intern/arkivsjef/editPhotoGangBangers" 
         style={{ marginTop: "0.5rem",
