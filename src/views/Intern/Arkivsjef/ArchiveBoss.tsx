@@ -10,6 +10,7 @@ import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement
 import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
+import { Link } from "react-router-dom";
 
 const ArchiveBoss: FC = () => {
   const [albums, setAlbums] = useState<AlbumDto[]>([]);
@@ -59,6 +60,9 @@ const ArchiveBoss: FC = () => {
       >
         <div className={styles.archiveBoss}>
           <h2> Arkivsjef </h2>
+          
+          <Link to="/intern/arkivsjef/createUser"><div className={styles.createUser}>Lag ny bruker</div></Link>
+   
 
           <div className={styles.description}>
             <Grid
