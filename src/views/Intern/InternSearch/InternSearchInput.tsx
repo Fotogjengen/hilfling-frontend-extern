@@ -23,12 +23,14 @@ import {
   AlbumDto,
   CategoryDto,
   SecurityLevelDto,
+  PhotoTagDto,
 } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
 import { CategoryApi } from "../../../utils/api/CategoryApi";
 import { MotiveApi } from "../../../utils/api/MotiveApi";
 import { SecurityLevelApi } from "../../../utils/api/SecurityLevelApi";
+import { PhotoTagApi } from "../../../utils/api/PhotoTagApi";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
 
 interface ChipData {
@@ -55,6 +57,7 @@ const InternSearchInput: React.FC = () => {
   const [places, setPlaces] = useState<PlaceDto[]>([]);
   const [categories, setCategories] = useState<CategoryDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
+  const [photoTags, setPhotoTags] = useState<PhotoTagDto[]>([]);
 
   //variables for suggestions
   const [motive, setMotive] = useState<String>("");
@@ -68,6 +71,7 @@ const InternSearchInput: React.FC = () => {
   const [isGoodPic, setIsGoodPic] = useState(false);
   const [isAnalog, setIsAnalog] = useState(false);
   const [securityLevel, setSecurityLevel] = useState<String>("");
+  const [photoTag, setPhotoTag] = useState("");
 
   const tagRef = useRef<HTMLInputElement | null>(null);
 
@@ -116,6 +120,13 @@ const InternSearchInput: React.FC = () => {
       });
     SecurityLevelApi.getAll()
       .then((res) => setSecurityLevels(res.data.currentList))
+      .catch((e) => {
+        setError(e);
+      });
+    PhotoTagApi.getAll()
+      .then((res) => {
+        setPhotoTags(res.data.currentList);
+      })
       .catch((e) => {
         setError(e);
       });
@@ -217,6 +228,7 @@ const InternSearchInput: React.FC = () => {
     console.log(dateTo?.format("YYYY-MM-DD"));
     console.log(securityLevel);
     console.log(page);
+    console.log(photoTags);
   };
 
   //build queryparams string and submit form to get results
@@ -427,7 +439,7 @@ const InternSearchInput: React.FC = () => {
                 sx={{ width: boxwidth }}
                 variant="contained"
                 color="primary"
-                onClick={onSubmitForm}
+                onClick={test}
               >
                 Søk
               </Button>
