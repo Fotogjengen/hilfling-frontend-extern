@@ -18,6 +18,9 @@ import MotiveHeader from "./components/ImageViewer/MotiveHeader";
 import InternSearchView from "./views/Intern/InternSearch/InternSearchView";
 import { Box } from "@mui/material";
 import { useMsal } from "@azure/msal-react";
+import ArchiveBossCreateUser from "./components/Arkivsjef/ArchiveBossCreateUser/ArchiveBossCreateUser";
+import { EditPhotoGangBangers } from "./views/Intern/EditPhotoGangBangers/EditPhotoGangBangers";
+import { EditPhotoGangBangersEdit } from "./views/Intern/EditPhotoGangBangers/EditPhotoGangBangersEdit";
 
 const AppRoutes: FC = () => {
   const { instance } = useMsal();
@@ -31,7 +34,7 @@ const AppRoutes: FC = () => {
 
   return (
     <Box sx={{ m: "1rem" }}>
-      <Routes>
+      <Routes> 
         <Route path="/" element={<App />} />
         <Route path="/motive/:id" element={<MotiveHeader />} />
         <Route path="/about" element={<About />} />
@@ -42,13 +45,14 @@ const AppRoutes: FC = () => {
         <Route path="/intern/sok" element={<InternSearchView />} />
         <Route path="/intern/last-opp" element={<PhotoUpload />} />
         <Route path="/intern/arkivsjef" element={<Arkivsjef />} />
+        <Route path="/intern/arkivsjef/createUser" element={<ArchiveBossCreateUser />}/>
+        <Route path="/intern/arkivsjef/editPhotoGangBangers" element = {<EditPhotoGangBangers/>}/>
+        <Route path="/intern/arkivsjef/editPhotoGangBangers/:id" element = {<EditPhotoGangBangersEdit/>}/>
         <Route path="/intern/motive" element={<Motives />} />
         <Route path="/intern/motive/:id" element={<EditMotive />} />
         <Route path="/intern/expo" element={<Expo />} />
         <Route path="/logg-inn" element={<Login />} />
-        {isAuthenticated && 
-        <Route path="/intern" element={<InternNav />
-        } />}
+        {isAuthenticated && <Route path="/intern" element={<InternNav />} />}
         <Route path="*" element={<NotFound />} />
         <Route
           path="/samf-wiki"

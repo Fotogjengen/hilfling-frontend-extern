@@ -3,7 +3,7 @@ import { PhotoGangBangerDto, PhotoGangBangerPublicDto } from "../../../generated
 
 export const PhotoGangBangerApi = {
   getById: async function (id: string): Promise<PhotoGangBangerDto> {
-    return api.get(`/photo_gang_bangers/${id}`);
+    return api.get(`/photo_gang_bangers/${id}`).then(res => res.data);
   },
   getAllActivesPublic: async function (): Promise<PhotoGangBangerPublicDto[]> {
     return api.get("/photo_gang_bangers/actives").then(res => res.data.currentList);
@@ -16,5 +16,11 @@ export const PhotoGangBangerApi = {
   getAllInactivePangsPublic: async function (): Promise<PhotoGangBangerPublicDto[]> {
     return api.get("/photo_gang_bangers/inactive_pangs").then(res => res.data.currentList);
   },
+  patch: async function (photoGangBanger: PhotoGangBangerDto): Promise<PhotoGangBangerDto[]> {
+    return api.patch("/photo_gang_bangers/", photoGangBanger).then((res) => res.data)
+    .catch((e) => console.log(e));
+    
+  }
+
 };
 

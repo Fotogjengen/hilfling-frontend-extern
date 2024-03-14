@@ -9,8 +9,8 @@ import type { SamfundetUser } from './SamfundetUser';
 export type PhotoGangBanger = {
     semesterStart?: string;
     relationshipStatus?: string;
-    active?: boolean;
-    pang?: boolean;
+    isActive?: boolean;
+    isPang?: boolean;
     samfundetUser?: SamfundetUser;
     position?: Position;
     address?: string;
