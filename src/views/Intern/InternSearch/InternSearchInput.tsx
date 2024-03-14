@@ -221,7 +221,7 @@ const InternSearchInput: React.FC = () => {
 
   //build queryparams string and submit form to get results
   const onSubmitForm = () => {
-    let string = "localhost:8080/photos?";
+    let string = "localhost:8000/photos?";
     {
       motive.trim() == "" ? null : (string += `&motive=${motive}`);
       album.trim() == "" ? null : (string += `&album=${album}`);
