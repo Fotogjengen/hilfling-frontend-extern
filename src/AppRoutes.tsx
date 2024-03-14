@@ -22,7 +22,6 @@ import ArchiveBossCreateUser from "./components/Arkivsjef/ArchiveBossCreateUser/
 import { EditPhotoGangBangers } from "./views/Intern/EditPhotoGangBangers/EditPhotoGangBangers";
 import { EditPhotoGangBangersEdit } from "./views/Intern/EditPhotoGangBangers/EditPhotoGangBangersEdit";
 
-
 const AppRoutes: FC = () => {
   const { instance } = useMsal();
   const activeAccount = instance.getActiveAccount();

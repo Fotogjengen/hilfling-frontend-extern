@@ -94,7 +94,6 @@ const AzureLogin: React.FC = () => {
     const fetchUserProfile = async () => {
       if (activateAccount) {
         try {
-          
           // Ensure MSAL is initialized
           await instance.initialize();
           const accessToken = await instance
