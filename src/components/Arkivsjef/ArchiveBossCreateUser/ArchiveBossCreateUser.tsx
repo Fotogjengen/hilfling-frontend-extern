@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { Button, Paper, FormControl, FormLabel, TextField } from "@mui/material";
 import styles from "./ArchiveBossCreateUser.module.css"
@@ -139,7 +139,5 @@ const ArchiveBossCreateUser = () => {
 };
 
 export default ArchiveBossCreateUser;
-  function useErrorBoundary(): { didCatch: any; error: any; errorInfo: any; } {
-    throw new Error("Function not implemented.");
-  }
+  
 

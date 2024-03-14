@@ -35,7 +35,7 @@ const AppRoutes: FC = () => {
 
   return (
     <Box sx={{ m: "1rem" }}>
-      <Routes>
+      <Routes> 
         <Route path="/" element={<App />} />
         <Route path="/motive/:id" element={<MotiveHeader />} />
         <Route path="/about" element={<About />} />
