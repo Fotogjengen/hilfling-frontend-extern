@@ -32,12 +32,12 @@ export const EditPhotoGangBangersEdit = () => {
       }else {
        PhotoGangBangerApi.getById(id)
           .then((res) => { 
-            setPhotoGangBanger(res), 
-            setAddress(res.address), 
-            setEmail(res.samfundetUser?.email?.value), 
-            setEmailPosition(res.position?.email?.value), 
-            setTelephon(res.samfundetUser?.phoneNumber?.value), 
-            setTitle(res.position?.title), setPang(res.isPang || false), setActive(res.isActive || false)
+            setPhotoGangBanger(res); 
+            setAddress(res.address); 
+            setEmail(res.samfundetUser?.email?.value); 
+            setEmailPosition(res.position?.email?.value); 
+            setTelephon(res.samfundetUser?.phoneNumber?.value); 
+            setTitle(res.position?.title); setPang(res.isPang || false); setActive(res.isActive || false);
             
           
           },
