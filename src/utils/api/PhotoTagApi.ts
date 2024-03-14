@@ -7,13 +7,13 @@ export const PhotoTagApi = {
   getAll: async function (): Promise<PaginatedResult<PhotoTagDto>> {
     return api.get("/phototags");
   },
-  getById: function (id: number): Promise<PhotoTagDto> {
+  getById: async function (id: number): Promise<PhotoTagDto> {
     return api.get("/phototags/" + String(id));
   },
-  create: (phototag: PhotoTag): Promise<PhotoTagDto> => {
+  create: async (phototag: PhotoTag): Promise<PhotoTagDto> => {
     return api.post("/phototags/", phototag);
   },
-  update: (phototag: PhotoTag): Promise<PhotoTagDto> => {
+  update: async (phototag: PhotoTag): Promise<PhotoTagDto> => {
     return api.put("/phototags/", phototag);
   },
 };

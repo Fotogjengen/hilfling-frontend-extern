@@ -32,6 +32,7 @@ import { MotiveApi } from "../../../utils/api/MotiveApi";
 import { SecurityLevelApi } from "../../../utils/api/SecurityLevelApi";
 import { PhotoTagApi } from "../../../utils/api/PhotoTagApi";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
+import { PhotoSearch } from "../../../utils/api/PhotoApi";
 
 interface ChipData {
   key: number;
@@ -167,6 +168,7 @@ const InternSearchInput: React.FC = () => {
       // Add the new chip to chipData and clear the input field
       setChipData((chips) => [...chips, newChip]);
       tagRef.current.value = "";
+      setPhotoTag("");
 
       // Prevent the default behavior of the Enter key (form submission)
       event.preventDefault();
@@ -228,31 +230,31 @@ const InternSearchInput: React.FC = () => {
     console.log(dateTo?.format("YYYY-MM-DD"));
     console.log(securityLevel);
     console.log(page);
-    console.log(photoTags);
+    console.log(tagRef);
   };
 
   //build queryparams string and submit form to get results
   const onSubmitForm = () => {
-    let string = "localhost:8000/photos?";
-    {
-      motive.trim() == "" ? null : (string += `&motive=${motive}`);
-      album.trim() == "" ? null : (string += `&album=${album}`);
-      category.trim() == "" ? null : (string += `&category=${category}`);
-      place.trim() == "" ? null : (string += `&place=${place}`);
-      page == 0 ? null : (string += `&page=${page}`);
-      !dateFromChanged
-        ? null
-        : (string += `&dateFrom=${dateFrom?.format("YYYY-MM-DD")}`);
-      string += `&dateTo=${dateTo?.format("YYYY-MM-DD")}`;
-      isGoodPic == false ? null : (string += `&isGoodPic=${isGoodPic}`);
-      isAnalog == false ? null : (string += `&isAnalog=${isAnalog}`);
-      securityLevel.trim() == ""
-        ? null
-        : (string += `&securityLevel=${securityLevel}`);
+    const photoSearch = new PhotoSearch();
+    photoSearch.album = album.toString();
+    photoSearch.motive = motive.toString();
+    photoSearch.category = category.toString();
+    photoSearch.isAnalog = isAnalog;
+    photoSearch.isGoodPic = isGoodPic;
+    photoSearch.page = page.toString();
+    photoSearch.place = place.toString();
+    photoSearch.securityLevel = securityLevel.toString();
+    if (dateFrom?.format("YYYY/MM/DD").toString() != null) {
+      photoSearch.dateFrom = dateFrom?.format("YYYY/MM/DD").toString();
     }
+    if (dateTo?.format("YYYY/MM/DD").toString() != null) {
+      photoSearch.dateTo = dateTo?.format("YYYY/MM/DD").toString();
+    }
+    photoSearch.photoTags = photoTags
+      .filter((photoTag) => typeof photoTag.name === "string")
+      .map((photoTag) => photoTag.name!);
 
-    //TODO add tags to queryparams string
-    console.log(string);
+    //todo add gang
   };
 
   return (
@@ -369,7 +371,12 @@ const InternSearchInput: React.FC = () => {
                         label={data.label}
                         onDelete={handleDelete(data)}
                         color="primary"
-                        avatar={<Avatar src="/pictures/Ole.jpg" alt="Ole" />}
+                        avatar={
+                          <Avatar
+                            src="https://media.licdn.com/dms/image/C5603AQE2v2pQPeWZxw/profile-displayphoto-shrink_200_200/0/1637753916024?e=2147483647&v=beta&t=8RfihGiHP-vPJBaV6qCTUehBSpJjO_Y1plu0t6VtmyU"
+                            alt="Ole"
+                          />
+                        }
                       />
                     </ListItem>
                   );
@@ -377,21 +384,33 @@ const InternSearchInput: React.FC = () => {
               </Box>
             </div>
             <div className={styles.formTextField}>
-              <TextField
-                inputRef={tagRef}
-                fullWidth
-                variant="standard"
-                size="small"
-                sx={{ margin: "1rem 0" }}
-                margin="none"
-                placeholder={"Enter tags"}
-                InputProps={{
-                  startAdornment: (
-                    <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }} />
-                  ),
+              <Autocomplete
+                freeSolo
+                options={photoTags.map((tag) => tag.name)} // Assuming tagName is the property containing the tag name
+                inputValue={photoTag}
+                onInputChange={(event, newInputValue) => {
+                  setPhotoTag(newInputValue);
                 }}
-                onKeyDown={handleBackspace} // Add this event listener for backspace key
-                onKeyPress={handleEnterPress} // Add this event listener for Enter key
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    fullWidth
+                    variant="standard"
+                    inputRef={tagRef}
+                    size="small"
+                    sx={{ margin: "1rem 0" }}
+                    margin="none"
+                    placeholder={"Enter tags"}
+                    InputProps={{
+                      ...params.InputProps,
+                      startAdornment: (
+                        <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }} />
+                      ),
+                    }}
+                    onKeyDown={handleBackspace} // Add this event listener for backspace key
+                    onKeyPress={handleEnterPress} // Add this event listener for Enter key
+                  />
+                )}
               />
             </div>
             <div className={styles.formTextField}>

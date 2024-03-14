@@ -1,5 +1,6 @@
 import { api } from "./api";
 import { Photo, PhotoDto } from "../../../generated";
+import { PaginatedResult } from "./types";
 
 class PhotoPost {
   albumId = "";
@@ -13,6 +14,23 @@ class PhotoPost {
   isGoodPhotoList: boolean[] = [];
   tagList: string[][] = [];
   photoFileList: File[] = [];
+}
+
+export class PhotoSearch {
+  motive = "";
+  place = "";
+  securityLevel = "";
+  gang = "";
+  album = "";
+  category = "";
+  photoTags: string[] = [];
+  isGoodPic = false;
+  isAnalog = false;
+  //YYYY-MM-DD
+  dateFrom = "";
+  //YYYY-MM-DD
+  dateTo = "";
+  page = "";
 }
 
 export const PhotoPostDto = new PhotoPost();
@@ -36,5 +54,13 @@ export const PhotoApi = {
     return api.post("/photos/upload", photos, {
       onUploadProgress,
     });
+  },
+
+  search: async function (
+    photoSearch: PhotoSearch,
+  ): Promise<PaginatedResult<PhotoDto>> {
+    return api.get(
+      `/photos/&motive=${photoSearch.motive}&album=${photoSearch.album}&category=${photoSearch.category}&place=${photoSearch.place}&page=${photoSearch.page}&dateFrom=${photoSearch.dateFrom}&dateTo=${photoSearch.dateTo}&isGoodPic=${photoSearch.isGoodPic}&isAnalog=${photoSearch.isAnalog}&securityLevel=${photoSearch.securityLevel}`,
+    );
   },
 };
