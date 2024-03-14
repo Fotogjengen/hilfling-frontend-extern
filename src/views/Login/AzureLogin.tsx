@@ -36,58 +36,6 @@ const AzureLogin: React.FC = () => {
     }
   };
 
-  //makes user if logged in user has access to do so
-  // const createUser = async () => {
-  //   const apiUrl = "https://graph.microsoft.com/v1.0/users";
-  //   const newUser = {
-  //     accountEnabled: true,
-  //     displayName: "John Doe2",
-  //     mailNickname: "john.doe2",
-  //     userPrincipalName: "john.doe2@fgsamfundet.onmicrosoft.com",
-  //     passwordProfile: {
-  //       forceChangePasswordNextSignIn: true,
-  //       password: "A_Strong_Password123",
-  //     },
-  //   };
-
-  //   try {
-  //     const activeAccount = instance.getActiveAccount();
-
-  //     if (!activeAccount) {
-  //       console.error("No active account. Please log in.");
-  //       return;
-  //     }
-
-  //     const accessToken = await instance
-  //       .acquireTokenSilent({
-  //         account: activeAccount,
-  //         scopes: ["User.Read"],
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error acquiring token silently:", error.message);
-  //         throw error;
-  //       });
-
-  //     if (accessToken) {
-  //       const response = await fetch(apiUrl, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${accessToken.accessToken}`,
-  //         },
-  //         body: JSON.stringify(newUser),
-  //       });
-
-  //       if (response.ok) {
-  //         console.log("User created successfully");
-  //       } else {
-  //         console.error("Error creating user:", await response.text());
-  //       }
-  //     }
-  //   } catch (error: any) {
-  //     console.error("Error:", error.message);
-  //   }
-  // };
 
   //get function call for user profile currently logged in
   useEffect(() => {
