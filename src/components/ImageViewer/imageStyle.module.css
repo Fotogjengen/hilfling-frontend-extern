@@ -1,16 +1,20 @@
 
 
 .motiveImage {
-    width: 270px;
-    height: 185px;
-    box-shadow: 0px 4px 4px 0px rgba(0,0,0, 0.25);
+    width: 256px;
+    height: 172px;
+    box-shadow: 2px 4px 4px 2px rgba(0,0,0, 0.25);
     background-color: white;
+    position: relative;
 
 }
 
 .motiveImage img{
     margin: 10px auto;
-    display: block;
+    position: absolute;
+    left: 3px;
+    bottom: -7px;
+    
 }
 
 .motiveImage:hover {
@@ -115,9 +119,9 @@
 }
 
 .imageContainer {
-    position: relative;
-    bottom: 53px;
-    left: 10px;
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
     background-color: #000000;
     opacity: 0.3;
     height: 43px;
