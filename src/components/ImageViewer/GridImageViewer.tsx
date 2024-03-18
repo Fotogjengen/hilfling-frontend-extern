@@ -5,6 +5,7 @@ import "react-image-lightbox/style.css";
 import { PhotoDto } from "../../../generated";
 import { createImgUrl } from "../../utils/createImgUrl/createImgUrl";
 import { ImageContext } from "../../contexts/ImageContext";
+import { useSearchContext } from "../../views/Search/SearchProvider";
 
 interface Props {
   photos: PhotoDto[];
@@ -12,13 +13,20 @@ interface Props {
 
 const ShowMotive: FC<Props> = ({ photos }) => {
   const { setPhotos, setPhotoIndex, setIsOpen } = useContext(ImageContext);
+
+  const searchContext = useSearchContext();
+  const searchQuery = searchContext ? searchContext.searchQuery : () => {searchContext};
+  
+
+  const filteredPhotos = photos.filter((photo: PhotoDto) => photo.motive.title === searchQuery);
+
   const updateIndex = (index: number) => {
     setPhotos(photos);
     setPhotoIndex(index);
     setIsOpen(true);
   };
 
-  const imageItems = photos.map((image: PhotoDto, index: number) => {
+  const imageItems = filteredPhotos.map((image: PhotoDto, index: number) => {
     const key = `motive-image${index}`;
     return (
       <MotiveImage

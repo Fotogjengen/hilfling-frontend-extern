@@ -1,10 +1,18 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import SearchField from "../../components/SearchComponent/SearchField";
 import SearchPhotoGrid from "./SearchPhotoGrid";
 import styles from "./Searchbar.module.css";
+import SearchProvider from "./SearchProvider";
+
+
 
 const Search = () => {
+
+  
+
+
   return (
+    <SearchProvider>
     <div>
       <div className={styles.backgroundFlex} style={{backgroundColor: "white"}}>
         <SearchField />
@@ -14,6 +22,7 @@ const Search = () => {
         <SearchPhotoGrid />
       </div>
     </div>
+    </SearchProvider>
   );
 };
 
