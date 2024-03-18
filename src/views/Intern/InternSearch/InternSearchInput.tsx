@@ -24,6 +24,7 @@ import {
   CategoryDto,
   SecurityLevelDto,
   PhotoTagDto,
+  PhotoDto,
 } from "../../../../generated";
 import { AlbumApi } from "../../../utils/api/AlbumApi";
 import { PlaceApi } from "../../../utils/api/PlaceApi";
@@ -32,7 +33,7 @@ import { MotiveApi } from "../../../utils/api/MotiveApi";
 import { SecurityLevelApi } from "../../../utils/api/SecurityLevelApi";
 import { PhotoTagApi } from "../../../utils/api/PhotoTagApi";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
-import { PhotoSearch } from "../../../utils/api/PhotoApi";
+import { PhotoApi, PhotoSearch } from "../../../utils/api/PhotoApi";
 
 interface ChipData {
   key: number;
@@ -59,6 +60,7 @@ const InternSearchInput: React.FC = () => {
   const [categories, setCategories] = useState<CategoryDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
   const [photoTags, setPhotoTags] = useState<PhotoTagDto[]>([]);
+  const [photos, setPhotos] = useState<PhotoDto[]>([]);
 
   //variables for suggestions
   const [motive, setMotive] = useState<String>("");
@@ -253,8 +255,20 @@ const InternSearchInput: React.FC = () => {
     photoSearch.photoTags = photoTags
       .filter((photoTag) => typeof photoTag.name === "string")
       .map((photoTag) => photoTag.name!);
+      
+    
+    
 
     //todo add gang
+
+    PhotoApi.search(photoSearch)
+      .then((res: any) => {
+        setPhotos(res.data.currentList);
+        console.log(res.data);
+      })
+      .catch((e) => {
+        setError(e);
+      });
   };
 
   return (
@@ -458,7 +472,7 @@ const InternSearchInput: React.FC = () => {
                 sx={{ width: boxwidth }}
                 variant="contained"
                 color="primary"
-                onClick={test}
+                onClick={onSubmitForm}
               >
                 Søk
               </Button>

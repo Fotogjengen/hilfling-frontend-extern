@@ -59,8 +59,26 @@ export const PhotoApi = {
   search: async function (
     photoSearch: PhotoSearch,
   ): Promise<PaginatedResult<PhotoDto>> {
-    return api.get(
-      `/photos/&motive=${photoSearch.motive}&album=${photoSearch.album}&category=${photoSearch.category}&place=${photoSearch.place}&page=${photoSearch.page}&dateFrom=${photoSearch.dateFrom}&dateTo=${photoSearch.dateTo}&isGoodPic=${photoSearch.isGoodPic}&isAnalog=${photoSearch.isAnalog}&securityLevel=${photoSearch.securityLevel}`,
-    );
+    const queryParams = Object.entries(photoSearch)
+      .filter(([key, value]) => {
+        if (Array.isArray(value)) {
+          return value.length > 0;
+        } else {
+          return value !== "" && value !== undefined;
+        }
+      })
+      .map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return value
+            .map((tag) => `${key}=${encodeURIComponent(tag)}`)
+            .join("&");
+        } else {
+          return `${key}=${encodeURIComponent(value.toString())}`;
+        }
+      })
+      .join("&");
+    console.log(queryParams);
+
+    return api.get(`/photos/?`);
   },
 };
