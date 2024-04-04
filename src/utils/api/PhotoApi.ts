@@ -19,7 +19,8 @@ class PhotoPost {
 export class PhotoSearch {
   motive = "";
   place = "";
-  securityLevel = "";
+  //TODO when endpoint has security level implemented
+  // securityLevel = "";
   gang = "";
   album = "";
   category = "";
@@ -31,6 +32,7 @@ export class PhotoSearch {
   //YYYY-MM-DD
   dateTo = "";
   page = "";
+  [key: string]: string | string[] | boolean;
 }
 
 export const PhotoPostDto = new PhotoPost();
@@ -59,26 +61,26 @@ export const PhotoApi = {
   search: async function (
     photoSearch: PhotoSearch,
   ): Promise<PaginatedResult<PhotoDto>> {
-    const queryParams = Object.entries(photoSearch)
-      .filter(([key, value]) => {
-        if (Array.isArray(value)) {
-          return value.length > 0;
-        } else {
-          return value !== "" && value !== undefined;
-        }
-      })
-      .map(([key, value]) => {
-        if (Array.isArray(value)) {
-          return value
-            .map((tag) => `${key}=${encodeURIComponent(tag)}`)
-            .join("&");
-        } else {
-          return `${key}=${encodeURIComponent(value.toString())}`;
-        }
-      })
-      .join("&");
-    console.log(queryParams);
+    let queryString = "";
 
+    for (const key in photoSearch) {
+      if (Object.prototype.hasOwnProperty.call(photoSearch, key)) {
+        const value = photoSearch[key];
+        if (
+          value !== "" &&
+          value !== false &&
+          value !== null &&
+          value !== undefined
+        ) {
+          queryString += `${key}=${encodeURIComponent(String(value))}&`;
+        }
+      }
+    }
+
+    // Remove trailing '&' from the queryString
+    queryString = queryString.slice(0, -1);
+
+    console.log(queryString, "querystring");
     return api.get(`/photos/?`);
   },
 };

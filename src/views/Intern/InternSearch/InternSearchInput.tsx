@@ -238,14 +238,12 @@ const InternSearchInput: React.FC = () => {
   //build queryparams string and submit form to get results
   const onSubmitForm = () => {
     const photoSearch = new PhotoSearch();
-    photoSearch.album = album.toString();
-    photoSearch.motive = motive.toString();
     photoSearch.category = category.toString();
     photoSearch.isAnalog = isAnalog;
     photoSearch.isGoodPic = isGoodPic;
     photoSearch.page = page.toString();
-    photoSearch.place = place.toString();
-    photoSearch.securityLevel = securityLevel.toString();
+    //Add when security level is implemented in backend on search function
+    // photoSearch.securityLevel = securityLevel.toString();
     if (dateFrom?.format("YYYY/MM/DD").toString() != null) {
       photoSearch.dateFrom = dateFrom?.format("YYYY/MM/DD").toString();
     }
@@ -255,9 +253,24 @@ const InternSearchInput: React.FC = () => {
     photoSearch.photoTags = photoTags
       .filter((photoTag) => typeof photoTag.name === "string")
       .map((photoTag) => photoTag.name!);
-      
-    
-    
+
+    const filteredMotive = motives.filter((item) => {
+      return item.title == motive.toString();
+    });
+    const filteredAlbum = albums.filter((item) => {
+      return item.title == album.toString();
+    });
+    const filteredPlace = places.filter((item) => {
+      return item.name == place.toString();
+    });
+    photoSearch.motive =
+      filteredMotive.length > 0 ? filteredMotive[0].motiveId.id : "";
+    photoSearch.album =
+      filteredAlbum.length > 0 ? filteredAlbum[0].albumId.id : "";
+    photoSearch.place =
+      filteredPlace.length > 0 ? filteredPlace[0].placeId.id : "";
+
+    console.log(photoSearch);
 
     //todo add gang
 
