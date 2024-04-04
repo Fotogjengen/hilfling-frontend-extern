@@ -55,6 +55,16 @@ const SearchField: FC = () => {
     //Send s to a different component
   };
 
+  const enterSearch = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      console.log(search)
+      setSearchQuery(search);
+
+    }
+  }
+
+
+
   return (
     <div>
       <TextField
@@ -63,10 +73,11 @@ const SearchField: FC = () => {
         fullWidth
         variant="outlined"
         onChange={handleChange}
+        onKeyPress={enterSearch}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton>
+              <IconButton onClick={() => setSearchQuery(search)}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>

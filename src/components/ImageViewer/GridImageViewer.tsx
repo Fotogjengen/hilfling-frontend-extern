@@ -15,10 +15,12 @@ const ShowMotive: FC<Props> = ({ photos }) => {
   const { setPhotos, setPhotoIndex, setIsOpen } = useContext(ImageContext);
 
   const searchContext = useSearchContext();
-  const searchQuery = searchContext ? searchContext.searchQuery : () => {searchContext};
+  const searchQuery = searchContext ? searchContext.searchQuery : "";
   
 
-  const filteredPhotos = photos.filter((photo: PhotoDto) => photo.motive.title === searchQuery);
+  
+
+  const filteredPhotos = photos.filter((photo: PhotoDto) => searchQuery != "" ? (photo.motive.title.toLowerCase().includes(searchQuery.toLowerCase())) : photos); //Finn en bedre løsning etterhvert
 
   const updateIndex = (index: number) => {
     setPhotos(photos);
