@@ -24,13 +24,13 @@ export class PhotoSearch {
   gang = "";
   album = "";
   category = "";
-  photoTags: string[] = [];
+  tag: string[] = [];
   isGoodPic = false;
   isAnalog = false;
   //YYYY-MM-DD
-  dateFrom = "";
+  fromDate = "";
   //YYYY-MM-DD
-  dateTo = "";
+  toDate = "";
   page = "";
   [key: string]: string | string[] | boolean;
 }
@@ -66,13 +66,22 @@ export const PhotoApi = {
     for (const key in photoSearch) {
       if (Object.prototype.hasOwnProperty.call(photoSearch, key)) {
         const value = photoSearch[key];
+
+        // Check for default values based on type
         if (
+          (typeof value === "string" || typeof value === "boolean") &&
           value !== "" &&
           value !== false &&
           value !== null &&
           value !== undefined
         ) {
           queryString += `${key}=${encodeURIComponent(String(value))}&`;
+        } else if (Array.isArray(value) && value.length > 0) {
+          // Serialize array-type properties into separate query parameters
+          value.forEach((tag) => {
+            console.log(tag, "tag");
+            queryString += `${key}=${encodeURIComponent(String(tag))}&`;
+          });
         }
       }
     }
@@ -81,6 +90,6 @@ export const PhotoApi = {
     queryString = queryString.slice(0, -1);
 
     console.log(queryString, "querystring");
-    return api.get(`/photos/?`);
+    return api.get(`/photos/?${queryString}`);
   },
 };

@@ -68,7 +68,9 @@ const InternSearchInput: React.FC = () => {
   const [category, setCategory] = useState<String>("");
   const [place, setPlace] = useState<String>("");
   const [page, setPage] = useState(0);
-  const [dateFrom, setDateFrom] = React.useState<Dayjs | null>(dayjs());
+  const [dateFrom, setDateFrom] = React.useState<Dayjs | null>(
+    dayjs("1910-09-30"),
+  );
   const [dateFromChanged, setDateFromChanged] = useState(false);
   const [dateTo, setDateTo] = React.useState<Dayjs | null>(dayjs());
   const [isGoodPic, setIsGoodPic] = useState(false);
@@ -244,11 +246,11 @@ const InternSearchInput: React.FC = () => {
     photoSearch.page = page.toString();
     //Add when security level is implemented in backend on search function
     // photoSearch.securityLevel = securityLevel.toString();
-    if (dateFrom?.format("YYYY/MM/DD").toString() != null) {
-      photoSearch.dateFrom = dateFrom?.format("YYYY/MM/DD").toString();
+    if (dateFrom?.format("YYYY-MM-DD").toString() != null) {
+      photoSearch.fromDate = dateFrom?.format("YYYY-MM-DD").toString();
     }
-    if (dateTo?.format("YYYY/MM/DD").toString() != null) {
-      photoSearch.dateTo = dateTo?.format("YYYY/MM/DD").toString();
+    if (dateTo?.format("YYYY-MM-DD").toString() != null) {
+      photoSearch.toDate = dateTo?.format("YYYY-MM-DD").toString();
     }
     photoSearch.photoTags = photoTags
       .filter((photoTag) => typeof photoTag.name === "string")
@@ -269,6 +271,8 @@ const InternSearchInput: React.FC = () => {
       filteredAlbum.length > 0 ? filteredAlbum[0].albumId.id : "";
     photoSearch.place =
       filteredPlace.length > 0 ? filteredPlace[0].placeId.id : "";
+
+    photoSearch.tag = chipData.map((chip) => chip.label);
 
     console.log(photoSearch);
 
