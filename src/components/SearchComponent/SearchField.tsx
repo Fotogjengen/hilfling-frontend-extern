@@ -11,7 +11,7 @@ const SearchField: FC = () => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const searchContext = useSearchContext();
-  const setSearchQuery = searchContext ? searchContext.setSearchQuery : () => {console.error("Search context not available"); };
+  const setSearchQuery = searchContext ? searchContext.setSearchQuery : () => {console.error("Search is context not available"); };
   
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
