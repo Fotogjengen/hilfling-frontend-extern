@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import { useContext, createContext } from 'react';
 
 export interface SearchContextType {

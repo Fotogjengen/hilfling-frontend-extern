@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import SearchField from "../../components/SearchComponent/SearchField";
 import SearchPhotoGrid from "./SearchPhotoGrid";
 import styles from "./Searchbar.module.css";
