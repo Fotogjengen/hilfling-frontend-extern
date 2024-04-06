@@ -63,10 +63,10 @@ const InternSearchInput: React.FC = () => {
   const [, setPhotos] = useState<PhotoDto[]>([]);
 
   //variables for suggestions
-  const [motive, setMotive] = useState<String>("");
-  const [album, setAlbum] = useState<String>("");
-  const [category, setCategory] = useState<String>("");
-  const [place, setPlace] = useState<String>("");
+  const [motive, setMotive] = useState<string>("");
+  const [album, setAlbum] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [place, setPlace] = useState<string>("");
   const [page, setPage] = useState(0);
   const [dateFrom, setDateFrom] = React.useState<Dayjs | null>(
     dayjs("1910-09-30"),
@@ -75,7 +75,7 @@ const InternSearchInput: React.FC = () => {
   const [dateTo, setDateTo] = React.useState<Dayjs | null>(dayjs());
   const [isGoodPic, setIsGoodPic] = useState(false);
   const [isAnalog, setIsAnalog] = useState(false);
-  const [, setSecurityLevel] = useState<String>("");
+  const [, setSecurityLevel] = useState<string>("");
   const [photoTag, setPhotoTag] = useState("");
 
   //useRef for managing chip in tag component
@@ -104,38 +104,27 @@ const InternSearchInput: React.FC = () => {
 
   //calls to backend to get suggestions for fields
   useEffect(() => {
-    AlbumApi.getAll()
-      .then((res) => setAlbums(res.data.currentList))
-      .catch((e) => {
-        setError(e);
-      });
-    PlaceApi.getAll()
-      .then((res) => setPlaces(res.data.currentList))
-      .catch((e) => {
-        setError(e);
-      });
-    CategoryApi.getAll()
-      .then((res) => setCategories(res.data.currentList))
-      .catch((e) => {
-        setError(e);
-      });
-    MotiveApi.getAll()
-      .then((res) => setMotives(res.data.currentList))
-      .catch((e) => {
-        setError(e);
-      });
-    SecurityLevelApi.getAll()
-      .then((res) => setSecurityLevels(res.data.currentList))
-      .catch((e) => {
-        setError(e);
-      });
-    PhotoTagApi.getAll()
-      .then((res) => {
-        setPhotoTags(res.data.currentList);
-      })
-      .catch((e) => {
-        setError(e);
-      });
+    const apiStateMap = [
+      { api: AlbumApi.getAll, setter: setAlbums },
+      { api: PlaceApi.getAll, setter: setPlaces },
+      { api: CategoryApi.getAll, setter: setCategories },
+      { api: MotiveApi.getAll, setter: setMotives },
+      { api: SecurityLevelApi.getAll, setter: setSecurityLevels },
+      { api: PhotoTagApi.getAll, setter: setPhotoTags },
+    ];
+
+    apiStateMap.forEach(({ api, setter }) => {
+      api()
+        .then((res) => {
+          // Extract the correct type from the API response
+          const data = res.data.currentList as any[];
+          // Set the state with the extracted data
+          setter(data);
+        })
+        .catch((e) => {
+          setError(e);
+        });
+    });
   }, []);
 
   //handles backspace in the tags field
