@@ -175,37 +175,18 @@ const InternSearchInput: React.FC = () => {
     );
   };
 
-  //setter functions for useState handling in autocomplete fields
-  const handleMotiveChange = (
-    event: React.SyntheticEvent,
-    newValue: string | null,
-  ) => {
-    setMotive(newValue || ""); // Set the motive state to the selected value or an empty string if nothing is selected
-  };
-  const handleCategoryChange = (
-    event: React.SyntheticEvent,
-    newValue: string | null,
-  ) => {
-    setCategory(newValue || "");
-  };
-  const handlePlaceChange = (
-    event: React.SyntheticEvent,
-    newValue: string | null,
-  ) => {
-    setPlace(newValue || "");
-  };
-  const handleAlbumChange = (
-    event: React.SyntheticEvent,
-    newValue: string | null,
-  ) => {
-    setAlbum(newValue || "");
-  };
-  const handleSecurityLevelChange = (
-    event: React.SyntheticEvent,
-    newValue: string | null,
-  ) => {
-    setSecurityLevel(newValue || "");
-  };
+  const createStateChangeHandler =
+    (setState: React.Dispatch<React.SetStateAction<string>>) =>
+    (event: React.SyntheticEvent, newValue: string | null) => {
+      setState(newValue || "");
+    };
+
+  const handleMotiveChange = createStateChangeHandler(setMotive);
+  const handleCategoryChange = createStateChangeHandler(setCategory);
+  const handlePlaceChange = createStateChangeHandler(setPlace);
+  const handleAlbumChange = createStateChangeHandler(setAlbum);
+  const handleSecurityLevelChange = createStateChangeHandler(setSecurityLevel);
+
   const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // Convert the input value to a number and set 'page'
     setPage(Number(event.target.value));
