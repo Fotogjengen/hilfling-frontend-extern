@@ -60,7 +60,7 @@ const InternSearchInput: React.FC = () => {
   const [categories, setCategories] = useState<CategoryDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
   const [photoTags, setPhotoTags] = useState<PhotoTagDto[]>([]);
-  const [photos, setPhotos] = useState<PhotoDto[]>([]);
+  const [, setPhotos] = useState<PhotoDto[]>([]);
 
   //variables for suggestions
   const [motive, setMotive] = useState<String>("");
@@ -71,11 +71,11 @@ const InternSearchInput: React.FC = () => {
   const [dateFrom, setDateFrom] = React.useState<Dayjs | null>(
     dayjs("1910-09-30"),
   );
-  const [dateFromChanged, setDateFromChanged] = useState(false);
+  const [, setDateFromChanged] = useState(false);
   const [dateTo, setDateTo] = React.useState<Dayjs | null>(dayjs());
   const [isGoodPic, setIsGoodPic] = useState(false);
   const [isAnalog, setIsAnalog] = useState(false);
-  const [securityLevel, setSecurityLevel] = useState<String>("");
+  const [, setSecurityLevel] = useState<String>("");
   const [photoTag, setPhotoTag] = useState("");
 
   //useRef for managing chip in tag component
@@ -148,7 +148,6 @@ const InternSearchInput: React.FC = () => {
       // Check if backspace is pressed and the input is empty
       if (chipData.length > 0) {
         // If there are tags, remove the last one
-        const lastTag = chipData[chipData.length - 1];
         setChipData((chips) => chips.slice(0, -1));
       }
     }
@@ -181,7 +180,7 @@ const InternSearchInput: React.FC = () => {
   };
 
   //Handles deleting chip (tag) in tags field
-  const handleDelete = (chipToDelete: ChipData) => () => {
+  const handleDelete = (chipToDelete: ChipData) => {
     setChipData((chips: any) =>
       chips.filter((chip: any) => chip.key !== chipToDelete.key),
     );
@@ -382,7 +381,7 @@ const InternSearchInput: React.FC = () => {
                     <ListItem key={data.key}>
                       <Chip
                         label={data.label}
-                        onDelete={handleDelete(data)}
+                        onDelete={() => handleDelete(data)}
                         color="primary"
                         avatar={
                           <Avatar
