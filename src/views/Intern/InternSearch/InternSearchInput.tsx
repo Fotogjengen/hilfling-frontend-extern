@@ -210,8 +210,9 @@ const InternSearchInput: React.FC = () => {
     photoSearch.photoTags = photoTags
       .filter((photoTag) => typeof photoTag.name === "string")
       .map((photoTag) => photoTag.name)
-      .filter((name) => name !== null && name !== undefined) // Filter out null or undefined values
-      .map((name) => name!); // Map to get the array of names
+      .filter((name) => typeof name === "string") // Filter out any non-string values
+      .map((name) => name as string);
+    // Map to get the array of names
 
     const filteredMotive = motives.filter((item) => {
       return item.title == motive.toString();
