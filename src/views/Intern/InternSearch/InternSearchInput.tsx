@@ -78,6 +78,7 @@ const InternSearchInput: React.FC = () => {
   const [securityLevel, setSecurityLevel] = useState<String>("");
   const [photoTag, setPhotoTag] = useState("");
 
+  //useRef for managing chip in tag component
   const tagRef = useRef<HTMLInputElement | null>(null);
 
   //for chipdata in tag component
@@ -222,22 +223,7 @@ const InternSearchInput: React.FC = () => {
     setPage(Number(event.target.value));
   };
 
-  const test = () => {
-    console.log(motive);
-    console.log(album);
-    console.log(place);
-    console.log(category);
-    console.log(chipData);
-    console.log(isGoodPic);
-    console.log(isAnalog);
-    console.log(dateFrom?.format("YYYY-MM-DD"));
-    console.log(dateTo?.format("YYYY-MM-DD"));
-    console.log(securityLevel);
-    console.log(page);
-    console.log(tagRef);
-  };
-
-  //build queryparams string and submit form to get results
+  //build queryObject and submit form to get results
   const onSubmitForm = () => {
     const photoSearch = new PhotoSearch();
     photoSearch.category = category.toString();
@@ -273,10 +259,6 @@ const InternSearchInput: React.FC = () => {
       filteredPlace.length > 0 ? filteredPlace[0].placeId.id : "";
 
     photoSearch.tag = chipData.map((chip) => chip.label);
-
-    console.log(photoSearch);
-
-    //todo add gang
 
     PhotoApi.search(photoSearch)
       .then((res: any) => {
@@ -438,8 +420,8 @@ const InternSearchInput: React.FC = () => {
                         <Box sx={{ margin: "0 0.2rem 0 0", display: "flex" }} />
                       ),
                     }}
-                    onKeyDown={handleBackspace} // Add this event listener for backspace key
-                    onKeyPress={handleEnterPress} // Add this event listener for Enter key
+                    onKeyDown={handleBackspace}
+                    onKeyPress={handleEnterPress}
                   />
                 )}
               />
