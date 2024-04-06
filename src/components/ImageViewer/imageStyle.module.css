@@ -1,8 +1,8 @@
 
 
 .motiveImage {
-    width: 256px;
-    height: 172px;
+    width: 216px;
+    height: 146px;
     box-shadow: 2px 4px 4px 2px rgba(0,0,0, 0.25);
     background-color: white;
     position: relative;
@@ -125,7 +125,7 @@
     background-color: #000000;
     opacity: 0.3;
     height: 43px;
-    width: 250px;
+    width: 210px;
 }
 
 .imageTitle {

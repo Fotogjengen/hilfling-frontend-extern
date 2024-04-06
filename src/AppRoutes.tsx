@@ -21,6 +21,7 @@ import { useMsal } from "@azure/msal-react";
 import ArchiveBossCreateUser from "./components/Arkivsjef/ArchiveBossCreateUser/ArchiveBossCreateUser";
 import { EditPhotoGangBangers } from "./views/Intern/EditPhotoGangBangers/EditPhotoGangBangers";
 import { EditPhotoGangBangersEdit } from "./views/Intern/EditPhotoGangBangers/EditPhotoGangBangersEdit";
+import Photos from "./views/Photos/Photos";
 
 const AppRoutes: FC = () => {
   const { instance } = useMsal();
@@ -38,6 +39,7 @@ const AppRoutes: FC = () => {
         <Route path="/" element={<App />} />
         <Route path="/motive/:id" element={<MotiveHeader />} />
         <Route path="/about" element={<About />} />
+        <Route path="/photos" element={<Photos />} />
         <Route path="/search" element={<Search />} />
         <Route path="/search/:term" element={<Search />} />
         <Route path="/intern/myprofile" element={<MyProfile />} />
