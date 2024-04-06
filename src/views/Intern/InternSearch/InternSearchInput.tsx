@@ -243,7 +243,7 @@ const InternSearchInput: React.FC = () => {
   };
 
   return (
-    <div style={{ width: "25%", margin: "0 auto" }}>
+    <div>
       <Paper
         sx={{
           display: "flex",
