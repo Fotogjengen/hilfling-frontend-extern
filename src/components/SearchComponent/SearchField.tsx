@@ -2,10 +2,17 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import { IconButton, InputAdornment, MenuItem, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { SearchSuggestionsApi } from "../../utils/api/searchSuggestionsApi";
+import styles from "./Search.module.css";
+import { useSearchContext } from "../../views/Search/SearchProvider";
+
 
 const SearchField: FC = () => {
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  const searchContext = useSearchContext();
+  const setSearchQuery = searchContext ? searchContext.setSearchQuery : () => {console.error("Search is context not available"); };
+  
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -36,34 +43,48 @@ const SearchField: FC = () => {
 
   const suggestionBoxes = useMemo(() => {
     return suggestions.map((s, key) => (
-      <MenuItem value={s} key={key} color="" onClick={() => handleSearch(s)}>
+      <MenuItem  className={styles.suggestionBox} value={s} key={key} color="" onClick={() => handleSearch(s)}>
         {s}
       </MenuItem>
     ));
   }, [suggestions]);
 
   const handleSearch = (s: string) => {
-    return s;
+    setSearch(s)
+    setSearchQuery(s)
+    //Send s to a different component
   };
+
+  const enterSearch = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      console.log(search)
+      setSearchQuery(search);
+
+    }
+  }
+
+
 
   return (
     <div>
       <TextField
         label={placeholder}
+        value={search}
         fullWidth
         variant="outlined"
         onChange={handleChange}
+        onKeyPress={enterSearch}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton>
+              <IconButton onClick={() => setSearchQuery(search)}>
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
           ),
         }}
       />
-      <div>{suggestionBoxes}</div>
+      <div className={styles.suggestions}>{suggestionBoxes}</div>
     </div>
   );
 };

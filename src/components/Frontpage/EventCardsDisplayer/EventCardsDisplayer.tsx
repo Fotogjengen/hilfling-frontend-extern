@@ -51,10 +51,10 @@ const EventCardsDisplayer: FC<Props> = () => {
         <EventCards event={"Samfundet"} motiveResponse={motiveResponse} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <EventCards event={"Samfundet"} motiveResponse={motiveResponse} />
+        <EventCards event={"ISFIT"} motiveResponse={motiveResponse} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <EventCards event={"Samfundet"} motiveResponse={motiveResponse} />
+        <EventCards event={"UKA"} motiveResponse={motiveResponse} />
       </TabPanel>
     </>
   );

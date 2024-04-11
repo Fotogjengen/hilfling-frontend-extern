@@ -6,6 +6,11 @@ export const AlbumApi = {
   getAll: async function (): Promise<PaginatedResult<AlbumDto>> {
     return api.get("/albums");
   },
+
+  getById: async function (id: string): Promise<AlbumDto> {
+    return api.get(`/albums/${id}`);
+  },
+
   deleteById: async function (id: string): Promise<DeletedResult> {
     return api.delete(`/albums/${id}`);
   },
