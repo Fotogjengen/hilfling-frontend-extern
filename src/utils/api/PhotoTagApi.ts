@@ -1,22 +1,19 @@
 import { api } from "./api";
 import { PhotoTag } from "../../interfaces/PhotoTag";
-
-interface photoTag {
-  id: "/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i";
-  name: string;
-}
+import { PhotoTagDto } from "../../../generated";
+import { PaginatedResult } from "./types";
 
 export const PhotoTagApi = {
-  getAll: async function (): Promise<photoTag> {
-    return api.get("/photo_tags");
+  getAll: async function (): Promise<PaginatedResult<PhotoTagDto>> {
+    return api.get("/phototags");
   },
-  getById: function (id: number): Promise<photoTag> {
-    return api.get("/photo_tags/" + String(id));
+  getById: async function (id: number): Promise<PhotoTagDto> {
+    return api.get("/phototags/" + String(id));
   },
-  create: (phototag: PhotoTag): Promise<photoTag> => {
-    return api.post("/photo_tags/", phototag);
+  create: async (phototag: PhotoTag): Promise<PhotoTagDto> => {
+    return api.post("/phototags/", phototag);
   },
-  update: (phototag: PhotoTag): Promise<photoTag> => {
-    return api.put("/photo_tags/", phototag);
+  update: async (phototag: PhotoTag): Promise<PhotoTagDto> => {
+    return api.put("/phototags/", phototag);
   },
 };
