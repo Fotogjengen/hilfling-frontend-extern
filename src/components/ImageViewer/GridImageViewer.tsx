@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, RefObject, useContext } from "react";
 import styles from "./imageStyle.module.css";
 import MotiveImage from "./MotiveImage";
 import "react-image-lightbox/style.css";
@@ -9,9 +9,10 @@ import { useSearchContext } from "../../views/Search/SearchProvider";
 
 interface Props {
   photos: PhotoDto[];
+  containerRef?: RefObject<HTMLDivElement>;
 }
 
-const ShowMotive: FC<Props> = ({ photos }) => {
+const ShowMotive: FC<Props> = ({ photos, containerRef }) => {
   const { setPhotos, setPhotoIndex, setIsOpen } = useContext(ImageContext);
 
   const searchContext = useSearchContext();
@@ -45,7 +46,7 @@ const ShowMotive: FC<Props> = ({ photos }) => {
 
   return (
     <>
-      <div className={styles.backgroundFlex}>
+      <div className={styles.backgroundFlex} ref={containerRef}>
         
           <div className={styles.flex}>
             {imageItems}

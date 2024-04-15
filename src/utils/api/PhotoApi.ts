@@ -76,11 +76,13 @@ export const PhotoApi = {
           value !== undefined
         ) {
           queryString += `${key}=${encodeURIComponent(String(value))}&`;
+          console.log(queryString);
         } else if (Array.isArray(value) && value.length > 0) {
           // Serialize array-type properties into separate query parameters
           value.forEach((tag) => {
             console.log(tag, "tag");
             queryString += `${key}=${encodeURIComponent(String(tag))}&`;
+            console.log(queryString);
           });
         }
       }
