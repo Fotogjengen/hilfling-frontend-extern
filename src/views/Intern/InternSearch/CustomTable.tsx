@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,107 +9,30 @@ import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import styles from "./InternSearch.module.css";
 import ToggleComponent from "./ToggleComponent";
+import { PhotoDto } from "../../../../generated";
+
+interface Props {
+  photos: PhotoDto[];
+}
 
 const columns = [
-  { id: "album", label: "Album" },
-  { id: "motiv", label: "Motiv" },
-  { id: "dato", label: "Dato" },
-  { id: "type", label: "Type" },
-  { id: "sted", label: "Sted" },
-  { id: "oppslag", label: "Oppslag" },
-  { id: "rettighet", label: "Rettighet" },
-  { id: "scannet", label: "Scannet" },
-  { id: "bilde", label: "Bilde" },
-  { id: "endre", label: "Endre" },
-];
-
-const rows = [
-  {
-    id: 1,
-    album: "album",
-    motiv: "motiv",
-    dato: "dato",
-    type: "type",
-    sted: "sted",
-    oppslag: "oppslag",
-    rettighet: "boss",
-    scannet: "nei",
-    bilde: "url",
-    endre: "endre/slett",
-  },
-  {
-    id: 2,
-    album: "album",
-    motiv: "motiv",
-    dato: "dato",
-    type: "type",
-    sted: "sted",
-    oppslag: "oppslag",
-    rettighet: "boss",
-    scannet: "nei",
-    bilde: "url",
-    endre: "endre/slett",
-  },
-  {
-    id: 3,
-    album: "album",
-    motiv: "motiv",
-    dato: "dato",
-    type: "type",
-    sted: "sted",
-    oppslag: "oppslag",
-    rettighet: "boss",
-    scannet: "nei",
-    bilde: "url",
-    endre: "endre/slett",
-  },
-  {
-    id: 4,
-    album: "album",
-    motiv: "motiv",
-    dato: "dato",
-    type: "type",
-    sted: "sted",
-    oppslag: "oppslag",
-    rettighet: "boss",
-    scannet: "nei",
-    bilde: "url",
-    endre: "endre/slett",
-  },
-  {
-    id: 5,
-    album: "album",
-    motiv: "motiv",
-    dato: "dato",
-    type: "type",
-    sted: "sted",
-    oppslag: "oppslag",
-    rettighet: "boss",
-    scannet: "nei",
-    bilde: "url",
-    endre: "endre/slett",
-  },
-  {
-    id: 6,
-    album: "album",
-    motiv: "motiv",
-    dato: "dato",
-    type: "type",
-    sted: "sted",
-    oppslag: "oppslag",
-    rettighet: "boss",
-    scannet: "nei",
-    bilde: "url",
-    endre: "endre/slett",
-  },
-  // ... more rows
+  { id: "albumDto", label: "Album" },
+  { id: "motive", label: "Motiv" },
+  { id: "placeDto", label: "Place" },
+  { id: "securityLevel", label: "Security Level" },
+  { id: "gang", label: "Gang" },
+  { id: "categoryDto", label: "Category" },
+  { id: "photoGangBangerDto", label: "Photo Gang Banger" },
+  { id: "photoTags", label: "Photo Tags" },
+  { id: "isGoodPicture", label: "Good Picture" },
 ];
 
 const rowsPerPageOptions = [5, 10, 25];
 
-const CustomTable = () => {
+const CustomTable: FC<Props> = ({ photos }) => {
+  console.log(photos);
   const [page, setPage] = React.useState(1);
-  const [rowsPerPage] = React.useState(rowsPerPageOptions[0]);
+  const [rowsPerPage] = React.useState(rowsPerPageOptions[1]);
 
   const handleChangePage = (event: any, newPage: any) => {
     setPage(newPage);
@@ -119,14 +42,14 @@ const CustomTable = () => {
     setIsGrid(!isGrid);
   };
 
-  const emptyRows = Math.max(0, page * rowsPerPage - rows.length);
+  const emptyRows = Math.max(0, page * rowsPerPage - photos.length);
 
   return (
     <Paper>
       <div className={styles.toggleHeader}>
         <div className={styles.pagination}>
           <Pagination
-            count={Math.ceil(rows.length / rowsPerPage)}
+            count={Math.ceil(photos.length / rowsPerPage)}
             page={page}
             onChange={handleChangePage}
             color="primary"
@@ -149,13 +72,26 @@ const CustomTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {photos
               .slice((page - 1) * rowsPerPage, page * rowsPerPage)
-              .map((row) => (
-                <TableRow key={row.id}>
+              .map((photo) => (
+                <TableRow key={photo.photoId.id}>
                   {columns.map((column) => (
                     <TableCell key={column.id}>
-                      {row[column.id as keyof typeof row]}
+                      {/* Rendering logic based on column.id */}
+                      {column.id === "albumDto" && photo.albumDto.title}
+                      {column.id === "motive" && photo.motive.title}
+                      {column.id === "placeDto" && photo.placeDto.name}
+                      {column.id === "securityLevel" &&
+                        photo.securityLevel.securityLevelType}
+                      {column.id === "gang" && photo.gang.name}
+                      {column.id === "categoryDto" && photo.categoryDto.name}
+                      {column.id === "photoGangBangerDto" &&
+                        photo.photoGangBangerDto.samfundetUser?.firstName}
+                      {column.id === "photoTags" &&
+                        photo.photoTags.map((tag) => tag.name).join(", ")}
+                      {column.id === "isGoodPicture" &&
+                        `${photo.isGoodPicture}`}
                     </TableCell>
                   ))}
                 </TableRow>
@@ -170,7 +106,7 @@ const CustomTable = () => {
       </TableContainer>
       <div className={styles.pagination2}>
         <Pagination
-          count={Math.ceil(rows.length / rowsPerPage)}
+          count={Math.ceil(photos.length / rowsPerPage)}
           page={page}
           onChange={handleChangePage}
           color="primary"
