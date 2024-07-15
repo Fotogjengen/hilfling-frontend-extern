@@ -41,6 +41,9 @@ export const PhotoApi = {
   getAll: async function (): Promise<PhotoDto[]> {
     return api.get("/photos/").then((res) => res.data.currentList);
   },
+  getAllFromPage: async function (page: number): Promise<PhotoDto[]> {
+    return api.get(`/photos?page=${page}`).then((res) => res.data.currentList);
+  },
 
   getAllByMotiveId: async function (id: string): Promise<PhotoDto[]> {
     return api.get(`/photos/motive/${id}`).then((res) => res.data.currentList);

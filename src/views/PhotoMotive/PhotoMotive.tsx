@@ -1,4 +1,4 @@
- import { PhotoDto, MotiveDto } from "../../../generated";
+import { PhotoDto, MotiveDto } from "../../../generated";
 import React, { useState, useEffect, useRef } from "react";
 import { PhotoApi } from "../../utils/api/PhotoApi";
 import { MotiveApi } from "../../utils/api/MotiveApi";
@@ -28,6 +28,28 @@ const PhotoMotive = () => {
       console.log(res);
     }).catch((e) => console.log(e) );
   }, []);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      if (scrollTop + clientHeight >= scrollHeight) {
+        console.log("Updated ")
+      }
+    };
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 /*   useEffect(() => {
     MotiveApi.getAll()
       .then((res) => {
@@ -36,12 +58,14 @@ const PhotoMotive = () => {
       .catch((e) => console.log(e));
   }, []); */
 
-  return <ShowMotive photos={photoResponse} />;
-};
+  return <div ref={containerRef}>  <ShowMotive photos={photoResponse} /> </div>;
+}; 
 
 
 export default PhotoMotive; 
-/* import React, { useState, useEffect, useRef } from "react";
+
+/* 
+import React, { useState, useEffect, useRef } from "react";
 import { PhotoApi, PhotoSearch } from "../../utils/api/PhotoApi";
 import ShowMotive from "../../components/ImageViewer/GridImageViewer";
 import { PhotoDto } from "../../../generated";
@@ -58,18 +82,18 @@ const PhotoMotive: React.FC = () => {
     const photoSearch = new PhotoSearch();
     photoSearch.page = page.toString();
 
-    const loadPhotos = async () => {
-        setLoading(true);
-        try {
-          const res = await PhotoApi.search(photoSearch);
-          setPhotoResponse(res.data.currentList);
-          setPage((prevPage) => prevPage + 1);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
-      };
+    const loadPhotos = () => {
+      setLoading(true);
+      PhotoApi.getAllFromPage(page)
+      .then((res) => {
+        setPhotoResponse(res);
+      })
+      .catch((e) => console.log(e));
+
+      PhotoApi.search(photoSearch).then((res) => {
+        console.log(res);
+      }).catch((e) => console.log(e) );
+    };
     
       loadPhotos(); 
    
