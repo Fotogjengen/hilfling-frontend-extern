@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import { render } from "react-dom";
 import "./index.css";
 import AppRoutes from "./AppRoutes";
@@ -13,33 +13,9 @@ import Alert from "./components/Alert/Alert";
 import Lightbox from "react-image-lightbox";
 import { PhotoDto } from "../generated";
 import { createImgUrl } from "./utils/createImgUrl/createImgUrl";
-import { EventType, PublicClientApplication } from "@azure/msal-browser";
-import { MsalProvider } from "@azure/msal-react";
-import { azureConfig } from "./azureconfig";
-import { AuthenticationResult } from "@azure/msal-common";
+import { AuthenticationContext } from "./contexts/AuthenticationContext";
 
 const Root: FC = () => {
-
-  //Msal should be instanciated outside component tree to prevent it from being re-instanciated on re-renders
-  const msalInstance = new PublicClientApplication(azureConfig);
-  // Default for using the first account if no account is active on page load.
-  if (
-    !msalInstance.getActiveAccount() &&
-    msalInstance.getAllAccounts().length > 0
-  ) {
-    // Set the active account using the first account in the list
-    msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0]);
-  }
-
-  //listen for sign-in event and set active account
-  msalInstance.addEventCallback((event) => {
-    const payload = event.payload as AuthenticationResult;
-    if (event.eventType === EventType.LOGIN_SUCCESS && payload.account) {
-      const account = payload.account;
-      msalInstance.setActiveAccount(account);
-    }
-  });
-
   // Hooks for the Alert component
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -47,6 +23,26 @@ const Root: FC = () => {
   const [photos, setPhotos] = useState<PhotoDto[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+
+  //Hooks for the Authentication
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [position, setPosition] = useState("oo"); //Change maybe? verv?
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("FG-WEBSITE");
+    if (data !== null) {
+      setIsAuthenticated(JSON.parse(data).isAuthenticated);
+      setPosition(JSON.parse(data).position);
+    }
+  }, []);
+
+  useEffect(() => {
+    const data = {
+      isAuthenticated: isAuthenticated,
+      position: position,
+    };
+    window.localStorage.setItem("FG-WEBSITE", JSON.stringify(data));
+  }, [isAuthenticated]);
 
   return (
     <>
@@ -61,7 +57,14 @@ const Root: FC = () => {
             setPhotos,
           }}
         >
-          <MsalProvider instance={msalInstance}>
+          <AuthenticationContext.Provider
+            value={{
+              isAuthenticated,
+              setIsAuthenticated,
+              position,
+              setPosition,
+            }}
+          >
             <AlertContext.Provider
               value={{
                 open,
@@ -88,7 +91,7 @@ const Root: FC = () => {
               </Box>
               <GuiFooter />
             </AlertContext.Provider>
-          </MsalProvider>
+          </AuthenticationContext.Provider>
 
           {isOpen && (
             <Lightbox

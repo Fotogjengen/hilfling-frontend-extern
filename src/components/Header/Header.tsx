@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { GuiLogo } from "../../gui-components";
@@ -13,22 +13,21 @@ import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmail
 import SearchIcon from "@mui/icons-material/Search";
 import { useMsal } from "@azure/msal-react";
 import AzureLogin from "../../views/Login/AzureLogin";
+import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 
 const HeaderComponent: FC = () => {
+  const { isAuthenticated, setIsAuthenticated, setPosition } = useContext(
+    AuthenticationContext,
+  );
+
+  const [i, setI] = useState(0);
+
   const replace = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const onMenuClick = () => setShowMenu(true);
   const onCloseClick = () => setShowMenu(false);
   const handleResize = () => setShowMenu(false);
   window.addEventListener("resize", handleResize);
-
-  const { instance } = useMsal();
-  const activeAccount = instance.getActiveAccount();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setIsAuthenticated(!!activeAccount);
-  }, [activeAccount]);
 
   const menuLinks = [
     {
@@ -117,6 +116,17 @@ const HeaderComponent: FC = () => {
           </div>
           <div className={styles.loggContainer}>
             <AzureLogin />
+            <button
+              onClick={() => {
+                if (i % 2 === 0) {
+                  setIsAuthenticated(true), setPosition("FG"), setI(i + 1);
+                } else {
+                  setIsAuthenticated(false), setPosition("oo"), setI(i + 1);
+                }
+              }}
+            >
+              endre auth
+            </button>
           </div>
         </div>
       </nav>
