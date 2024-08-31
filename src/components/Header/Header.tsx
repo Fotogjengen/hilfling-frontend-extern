@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import styles from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { GuiLogo } from "../../gui-components";
@@ -11,16 +11,11 @@ import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import LockIcon from "@mui/icons-material/Lock";
 import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmailerrorred";
 import SearchIcon from "@mui/icons-material/Search";
-import { useMsal } from "@azure/msal-react";
-import AzureLogin from "../../views/Login/AzureLogin";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
+import LoginButton from "../../views/Login/LoginButton";
 
 const HeaderComponent: FC = () => {
-  const { isAuthenticated, setIsAuthenticated, setPosition } = useContext(
-    AuthenticationContext,
-  );
-
-  const [i, setI] = useState(0);
+  const { isAuthenticated } = useContext(AuthenticationContext);
 
   const replace = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
@@ -115,18 +110,7 @@ const HeaderComponent: FC = () => {
             <Link to="/search">SØK</Link>
           </div>
           <div className={styles.loggContainer}>
-            <AzureLogin />
-            <button
-              onClick={() => {
-                if (i % 2 === 0) {
-                  setIsAuthenticated(true), setPosition("FG"), setI(i + 1);
-                } else {
-                  setIsAuthenticated(false), setPosition("oo"), setI(i + 1);
-                }
-              }}
-            >
-              endre auth
-            </button>
+            <LoginButton />
           </div>
         </div>
       </nav>

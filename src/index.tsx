@@ -41,7 +41,7 @@ const Root: FC = () => {
       isAuthenticated: isAuthenticated,
       position: position,
     };
-    window.localStorage.setItem("FG-WEBSITE", JSON.stringify(data));
+    window.localStorage.setItem("FG-WEBSITE", JSON.stringify(data)); //send inn dato ? ; )
   }, [isAuthenticated]);
 
   return (
