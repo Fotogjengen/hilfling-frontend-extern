@@ -3,7 +3,6 @@ import styles from "./Login.module.css";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import {
   Button,
-  FilledInput,
   FormControl,
   Grid,
   IconButton,
@@ -12,12 +11,7 @@ import {
   InputLabel,
   TextField,
 } from "@mui/material";
-import {
-  CloseSharp,
-  Margin,
-  Visibility,
-  VisibilityOff,
-} from "@mui/icons-material";
+import { CloseSharp, Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface Props {
   setLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,7 +22,7 @@ const Login = ({ setLoginForm }: Props) => {
   const [power, setPower] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { setIsAuthenticated, setPosition } = useContext(AuthenticationContext);
-  const [exists, setExist] = useState(true);
+  //const [exists, setExist] = useState(true);
   //check authority
   //change authority
 
