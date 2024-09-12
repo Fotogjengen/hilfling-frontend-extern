@@ -1,13 +1,22 @@
+@import '../../styles/variables.css';
+
 .redBackground {
-  background: #da7777 !important;
+  background: var(--box-color-red) !important;
 }
 
 .blueBackground {
-  background: #7793da !important;
+  background: var(--box-color-blue) !important;
 }
 
 .greenBackground {
-  background: #BADA77 !important;
+  background: var(--box-color-green) !important;
+}
+
+.textOnBackground *{
+  mix-blend-mode: normal !important;
+  color: var(--color-white) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.8px !important;
 }
 
 .round {

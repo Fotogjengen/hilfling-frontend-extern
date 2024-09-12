@@ -14,18 +14,18 @@ const InfoTab: FC = () => {
       <Grid container spacing={4} padding={"0.5em"}>
         <Grid item xs={12} md={6}>
           <Typography variant="h5">
-            <b>KREDITERING</b>
+            KREDITERING
           </Typography>
           <Typography paragraph>
             Dersom du bruker bilder fra denne nettsiden skal det krediteres
             med følgende tekst:
           </Typography>
-          <Paper className={cn( styles.cardFoto,  styles.redBackground)}>
+          <Paper className={cn( styles.cardFoto,  styles.redBackground, styles.textOnBackground)}>
             <Typography>Foto: foto.samfundet.no</Typography>
           </Paper>
           <br/>
           <Typography variant="h5">
-            <b>TJENESTER OG PRISER</b>
+            TJENESTER OG PRISER
           </Typography>
           <Typography variant="h6">
              BESTILLING
@@ -37,7 +37,7 @@ const InfoTab: FC = () => {
             IKKE! Det eneste du må gjøre er å sende en mail til
             fg-salg@samfundet.no med følgende opplysninger:
           </Typography>
-          <Paper className={cn(styles.cardFoto, styles.blueBackground)}>
+          <Paper className={cn(styles.cardFoto, styles.blueBackground, styles.textOnBackground)}>
               <Grid container spacing={0}>
                 <Grid item xs={12} md={6}>
                   <div>
@@ -72,7 +72,7 @@ const InfoTab: FC = () => {
           <Typography variant="h6">
             PRISER
           </Typography>
-          <Paper className={cn(styles.cardFoto, styles.greenBackground)}>
+          <Paper className={cn(styles.cardFoto, styles.greenBackground, styles.textOnBackground)}>
               <Grid container spacing={6}>
                 <Grid item xs={12} md={6}>
                   <div>
@@ -100,7 +100,7 @@ const InfoTab: FC = () => {
           <Typography paragraph>
             Størrelsene er veiledende. Ved spesielle formatønsker, kontakt
             oss på epost. Vi kan også levere større format enn vist i
-            tabellen ved digitale utskrifer: 60cm x ubegrenset lengde.
+            tabellen ved digitale utskrifter: 60cm x ubegrenset lengde.
             Private bilder kan bestilles til samme pris.
           </Typography>
           <Typography paragraph>

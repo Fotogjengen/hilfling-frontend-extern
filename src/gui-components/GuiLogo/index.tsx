@@ -20,9 +20,7 @@ const GuiLogo: FC<Props> = ({ size, onClick, className, ...rest }: Props) => {
       {...rest}
     >
       <LogoSvg size={size} />
-      <p style={{ fontSize: size * 0.7 }} className={styles.name}>
-        fotogjengen
-      </p>
+      <h1 style={{ fontSize: size * 0.7 }} className={styles.name}>fotogjengen</h1>
     </div>
   );
 };

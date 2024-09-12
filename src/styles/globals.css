@@ -42,23 +42,31 @@ h6 {
   font-weight: normal;
 }
 
-/* h1,
+
 h1 {
+  color: var(--color-header1);
 }
 
 h2 {
+  color: var(--color-header2);
 }
 
 h3 {
+  color: var(--color-header3);
 }
 
 h4 {
+  color: var(--color-header4);
 }
 
 h5 {
+  color: var(--color-header5);
+  font-weight: 600 !important;
 }
 
 h6 {
+  color: var(--color-header6);
+  font-weight: 300 !important;
 }
 
 img {
@@ -84,6 +92,12 @@ form {
 }
 
 p {
+  color: #eae1db;
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  mix-blend-mode: exclusion;
+  text-decoration-color: #0ff; /*opposite color(on white) of underline link*/
 }
 
 ul {
@@ -93,4 +107,4 @@ i {
 }
 
 label {
-} */
+}

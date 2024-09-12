@@ -55,8 +55,20 @@
   --color-dark-gray-5: #999;
 
   --color-black: #000;
-  --color-white: #fff;
+  --color-white: #ffffff;
 
+  /*Header colors*/
+  --color-header1: #951b20;
+  --color-header2: #c2484d;
+  --color-header3: #237856;
+  --color-header4: #6d64e3;
+  --color-header5: #d4587b;
+  --color-header6: #3083DC;
+
+  /*Box colors*/
+  --box-color-red: #bc1010;
+  --box-color-green: #d4587b;
+  --box-color-blue: #3083DC;
 
   --box-shadow-1: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }

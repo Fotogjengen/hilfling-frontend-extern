@@ -16,8 +16,8 @@ const HistoryTab: FC = () => {
     <Grid container spacing={4} padding={"0.5em"}>
 
       <Grid item xs={12} md={6}>
-          <Typography variant="h6">
-              <b>HVORFOR HAR VI FOTOGJENGEN PÅ SAMF?</b>
+          <Typography variant="h5">
+              HVORFOR HAR VI FOTOGJENGEN PÅ SAMF?
           </Typography>
           <Typography paragraph>
               Fotogjengen er en gjeng ved <Link href="https://www.samfundet.no/">Studentersamfundet</Link> i Trondhjem. Vi
@@ -27,8 +27,8 @@ const HistoryTab: FC = () => {
               hvilke tjenester vi tilbyr.
           </Typography>
           <br />
-          <Typography variant="h6">
-              <b>HISTORIE</b>
+          <Typography variant="h5">
+              HISTORIE
           </Typography>
           <Typography>
               I Finansstyremøtet den 7. oktober 1958 ble det bestemt at
@@ -44,17 +44,17 @@ const HistoryTab: FC = () => {
           </Typography>
           <Grid container justifyContent="space-evenly" padding={"5vw 0"}>
             <Grid item> 
-              <div className={cn(styles.redBackground, styles.round)}>
+              <div className={cn(styles.redBackground, styles.textOnBackground, styles.round)}>
                 <b>1942</b>
               </div>
             </Grid>
             <Grid item> 
-              <div className={cn(styles.blueBackground, styles.round)}>
+              <div className={cn(styles.blueBackground, styles.textOnBackground, styles.round)}>
                 <b>FG</b>
               </div>
             </Grid>
             <Grid item> 
-              <div className={cn(styles.greenBackground, styles.round)}>
+              <div className={cn(styles.greenBackground, styles.textOnBackground, styles.round)}>
                 <b>Hilfling</b>
               </div>
             </Grid>
@@ -76,8 +76,8 @@ const HistoryTab: FC = () => {
       </Grid>
 
       <Grid item xs={12} md={6}>
-        <Typography variant="h6">
-          <b>HVEM VAR HILFLING</b>
+        <Typography variant="h5">
+          HVEM VAR HILFLING
         </Typography>
         <Typography paragraph>
           Fotograf Hilfling, senere hans sønn, Hilfling jr., var
@@ -99,8 +99,8 @@ const HistoryTab: FC = () => {
           innvilget, men det ble ikke gjort noen avtale om fotografering.
         </Typography>
         <br />
-        <Typography variant="h6">
-          <b>OPPSTART AV FG</b>
+        <Typography variant="h5">
+          OPPSTART AV FG
         </Typography>
         <Typography paragraph>
           Høsten 1946 skrev redaktør Nic. Stabell i Under Dusken (UD) et
