@@ -25,6 +25,7 @@ const ArchiveBoss: FC = () => {
     setSeverity(severityEnum.ERROR);
     setMessage(e);
   };
+  /* */
 
   useEffect(() => {
     AlbumApi.getAll()
@@ -94,7 +95,7 @@ const ArchiveBoss: FC = () => {
             </Grid>
           </div>
 
-          <ArchiveBossAccordion color="#da7777" name="Album">
+          <ArchiveBossAccordion color =  "#b62d2d" name = "Album"> {/*"#da7777" */}
             <Grid container spacing={2}>
               {albums.map((album: AlbumDto, index: number) => (
                 <Grid item key={index} xs={12} sm={4}>
@@ -102,13 +103,14 @@ const ArchiveBoss: FC = () => {
                     text={album.title}
                     id={album.albumId.id}
                     key={index}
-                    type="album"
+                    type= "album"
+            
                   />
                 </Grid>
               ))}
             </Grid>
           </ArchiveBossAccordion>
-          <ArchiveBossAccordion color="#f3ee78" name="Sted">
+          <ArchiveBossAccordion color = "lightgray" name="Sted"> {/* #f3ee78*/}
             <Grid container spacing={2}>
               {places.map((place: PlaceDto, index: number) => (
                 <Grid item key={index} xs={12} sm={4}>
@@ -122,7 +124,7 @@ const ArchiveBoss: FC = () => {
               ))}
             </Grid>
           </ArchiveBossAccordion>
-          <ArchiveBossAccordion color="#9c77da" name="Kategori">
+          <ArchiveBossAccordion color = "black" name = "Kategori"> {/* "#9c77da */}
             <Grid container spacing={2}>
               {categories.map((category: CategoryDto, index: number) => (
                 <Grid item key={index} xs={12} sm={4}>

@@ -26,10 +26,26 @@ const ArchiveBossAccordion: FC<Props> = ({ color, name, children }) => {
   return (
     <div className={styles.archiveBossAccordion}>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography> {name} </Typography>
+        <AccordionSummary expandIcon={<ExpandMore />}
+        
+        sx={{
+          backgroundColor: color, // Apply dynamic background color to the summary, chat-special
+          padding: "1rem",
+        }}
+        
+        >
+          <Typography           sx={{ 
+            color: 'white' // Change this to any color you want, or pass it as a prop
+          }}> {name} </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails
+        
+        sx={{
+          backgroundColor: color, // Apply dynamic background color to the summary
+          padding: "1rem",
+        }}>
+
+
           {children}
         </AccordionDetails>
       </Accordion>
