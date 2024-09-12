@@ -1,7 +1,7 @@
 //Encrypts and decrypts data
 import CryptoJS from 'crypto-js';
 
-const SECRET_KEY = 'IDa/Uk7sUKsRgSiJI2XKlfXENpgjlrZS599fPharwzY='; 
+const SECRET_KEY = process.env.ENCRYPTION_KEY||""; 
 
 // '
 // Encrypt function
@@ -11,6 +11,6 @@ export const encryptData = (data: string): string => {
 
 // Decrypt function
 export const decryptData = (cipherText: string): string => {
-    const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
+    const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);    
     return bytes.toString(CryptoJS.enc.Utf8);
 };
