@@ -14,8 +14,6 @@ import Lightbox from "react-image-lightbox";
 import { PhotoDto } from "../generated";
 import { createImgUrl } from "./utils/createImgUrl/createImgUrl";
 import { AuthenticationContext } from "./contexts/AuthenticationContext";
-import Cookies from "js-cookie";
-import { decryptData, encryptData } from "./utils/encryption/encrypt";
 
 const Root: FC = () => {
   // Hooks for the Alert component
@@ -30,22 +28,20 @@ const Root: FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [position, setPosition] = useState("oo"); //Change maybe? verv?
 
-  //Checks if user is loged in when page loads
   useEffect(() => {
-    const data = decryptData(Cookies.get("fgData") || "");
-    if (data !== "") {
+    const data = window.localStorage.getItem("FG-WEBSITE");
+    if (data !== null) {
       setIsAuthenticated(JSON.parse(data).isAuthenticated);
       setPosition(JSON.parse(data).position);
     }
   }, []);
 
-  //saves authentication status for user as a coockie, when authentication is changed
   useEffect(() => {
     const data = {
       isAuthenticated: isAuthenticated,
       position: position,
     };
-    Cookies.set("fgData", encryptData(JSON.stringify(data)));
+    window.localStorage.setItem("FG-WEBSITE", JSON.stringify(data)); //send inn dato ? ; )
   }, [isAuthenticated]);
 
   return (
