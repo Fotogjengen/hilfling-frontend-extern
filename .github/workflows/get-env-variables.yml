@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Build the project
         env:
@@ -18,3 +18,8 @@ jobs:
 
       - name: Get env variables
         run: echo "Getting env variables"
+
+      - name: Verify ENCRYPTION_KEY is set
+        run: echo "ENCRYPTION_KEY is $ENCRYPTION_KEY"
+        env:
+          ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
