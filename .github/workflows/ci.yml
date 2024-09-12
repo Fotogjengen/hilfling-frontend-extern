@@ -35,4 +35,13 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: npm ci
       #- run: npm run build --if-present
+
+      - name: Install dependencies (npm ci if cache exists, npm install if not)
+          run: |
+            if [ -f package-lock.json ]; then
+              npm ci
+            else
+              npm install
+            fi
+
       - run: npm test
