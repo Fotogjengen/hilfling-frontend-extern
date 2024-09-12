@@ -32,25 +32,25 @@ const Login = ({ setLoginForm }: Props) => {
   //check authority
   //change authority
 
-  const handleSubmitHusfolk = () => {
-    //check if user exists
-    //if user exists change authenticated
+  // const handleSubmitHusfolk = () => {
+  //   //check if user exists
+  //   //if user exists change authenticated
 
-    if (exists) {
-      //placeholder
-      setIsAuthenticated(true);
-      setPosition("FG"); //send in the specific posistion that the user has
-      setLoginForm(false);
-    }
-  };
+  //   if (exists) {
+  //     //placeholder
+  //     setIsAuthenticated(true);
+  //     setPosition("FG"); //send in the specific posistion that the user has
+  //     setLoginForm(false);
+  //   }
+  // };
 
-  const handleSubmitPower = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmitPower = (e: React.ChangeEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    setIsAuthenticated(true);
-    setPosition("PROFILE"); //send in the specific posistion that the user has
-    setLoginForm(false);
-  };
+  //   setIsAuthenticated(true);
+  //   setPosition("PROFILE"); //send in the specific posistion that the user has
+  //   setLoginForm(false);
+  // };
 
   return (
     <div className={styles.popup}>
