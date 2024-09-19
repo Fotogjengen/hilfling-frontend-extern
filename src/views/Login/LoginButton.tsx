@@ -1,3 +1,4 @@
+//Button for opening login pop up
 import React, { useContext, useState } from "react";
 import Login from "./Login";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
