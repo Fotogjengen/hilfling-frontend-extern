@@ -18,33 +18,52 @@ interface Props {
 }
 
 const Login = ({ setLoginForm }: Props) => {
-  const [husfolk, setHusfolk] = useState(false);
-  const [power, setPower] = useState(false);
+  const [activeForm, setActiveForm] = useState<"husfolk" | "power" | null>(
+    null,
+  );
   const [showPassword, setShowPassword] = useState(false);
   const { setIsAuthenticated, setPosition } = useContext(AuthenticationContext);
-  //const [exists, setExist] = useState(true);
-  //check authority
-  //change authority
 
-  // const handleSubmitHusfolk = () => {
-  //   //check if user exists
-  //   //if user exists change authenticated
+  const handleLogin = (position: string) => {
+    setIsAuthenticated(true);
+    setPosition(position);
+    setLoginForm(false);
+  };
 
-  //   if (exists) {
-  //     //placeholder
-  //     setIsAuthenticated(true);
-  //     setPosition("FG"); //send in the specific posistion that the user has
-  //     setLoginForm(false);
-  //   }
-  // };
-
-  // const handleSubmitPower = (e: React.ChangeEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   setIsAuthenticated(true);
-  //   setPosition("PROFILE"); //send in the specific posistion that the user has
-  //   setLoginForm(false);
-  // };
+  const renderForm = (title: string, position: string) => (
+    <Grid item xs={12} className={styles.gridItem}>
+      <h3>{title}</h3>
+      <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+        <TextField
+          id="standard-username"
+          label="Username"
+          type="text"
+          variant="standard"
+        />
+      </FormControl>
+      <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+        <InputLabel htmlFor="password">Password</InputLabel>
+        <Input
+          id="password"
+          type={showPassword ? "text" : "password"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+      <Button type="submit" onClick={() => handleLogin(position)}>
+        Logg inn
+      </Button>
+    </Grid>
+  );
 
   return (
     <div className={styles.popup}>
@@ -53,9 +72,7 @@ const Login = ({ setLoginForm }: Props) => {
           <Grid item xs={5}>
             <Button
               className={styles.gridItem}
-              onClick={() => {
-                setPower(true), setHusfolk(false);
-              }}
+              onClick={() => setActiveForm("power")}
             >
               Login PowerBruker
             </Button>
@@ -63,9 +80,7 @@ const Login = ({ setLoginForm }: Props) => {
           <Grid item xs={5}>
             <Button
               className={styles.gridItem}
-              onClick={() => {
-                setHusfolk(true), setPower(false);
-              }}
+              onClick={() => setActiveForm("husfolk")}
             >
               Login Husfolk
             </Button>
@@ -80,90 +95,8 @@ const Login = ({ setLoginForm }: Props) => {
           </Grid>
         </Grid>
 
-        {husfolk && (
-          <Grid item xs={12} className={styles.gridItem}>
-            <h3>Login husfolk</h3>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-              <TextField
-                id="standard-username"
-                label="Username"
-                type="text"
-                variant="standard"
-              />
-            </FormControl>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => setShowPassword(!showPassword)}
-                      // onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-            <Button
-              type="submit"
-              onClick={() => {
-                setIsAuthenticated(true);
-                setPosition("FG"); //send in the specific posistion that the user has
-                setLoginForm(false);
-              }}
-            >
-              Logg inn
-            </Button>
-          </Grid>
-        )}
-        {power && (
-          <Grid item xs={12} className={styles.gridItem}>
-            <h3>Login Powerbruker</h3>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-              <TextField
-                id="standard-username"
-                label="Username"
-                type="text"
-                variant="standard"
-              />
-            </FormControl>
-            <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => setShowPassword(!showPassword)}
-                      // onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-            <Button
-              type="submit"
-              onClick={() => {
-                setIsAuthenticated(true);
-                setPosition("PROFILE"); //send in the specific posistion that the user has
-                setLoginForm(false);
-              }}
-            >
-              Logg inn
-            </Button>
-          </Grid>
-        )}
+        {activeForm === "husfolk" && renderForm("Login Husfolk", "FG")}
+        {activeForm === "power" && renderForm("Login Powerbruker", "PROFILE")}
       </div>
     </div>
   );
