@@ -10,7 +10,6 @@ import ArchiveBossElement from "../../../components/Arkivsjef/ArchiveBossElement
 import { ArchiveBossContext } from "../../../contexts/ArchiveBossContext";
 import ArchiveBossAddElements from "../../../components/Arkivsjef/ArchiveBossAddElements/ArchiveBossAddElements";
 import { AlertContext, severityEnum } from "../../../contexts/AlertContext";
-import { Link } from "react-router-dom";
 import ArchiveBossCreateUsers from "../../../components/Arkivsjef/ArchiveBossCreateUser/ArchiveBossCreateUsers";
 import ArchiveBossOverView from "../../../components/Arkivsjef/ArchiveBossOverView/ArchiveBossOverView";
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SamfundetUserApi } from "../../../utils/api/SamfundetUserApi";
-import { SamfundetUser, SamfundetUserDto } from "../../../../generated";
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { SamfundetUser } from "../../../../generated";
+import { Button, Paper } from "@mui/material";
 import styles from "./ArchiveBossOverView.module.css";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Props {
   setOverview: React.Dispatch<React.SetStateAction<boolean>>;
