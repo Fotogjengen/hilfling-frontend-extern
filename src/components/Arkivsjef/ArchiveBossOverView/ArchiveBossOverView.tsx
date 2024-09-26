@@ -61,7 +61,7 @@ const ArchiveBossOverView = ({ setOverview }: Props) => {
     {
       field: "samfundetUserId",
       headerName: "ID",
-      width: 70,
+      width: 180,
       headerClassName: styles.headerCell,
     },
     {
@@ -91,25 +91,25 @@ const ArchiveBossOverView = ({ setOverview }: Props) => {
     {
       field: "email",
       headerName: "Email",
-      width: 120,
+      width: 180,
       headerClassName: styles.headerCell,
     },
-    {
-      field: "profilePicturePath",
-      headerName: "Profile Picture",
-      width: 120,
-      headerClassName: styles.headerCell,
-    },
-    {
-      field: "sex",
-      headerName: "Sex",
-      width: 120,
-      headerClassName: styles.headerCell,
-    },
+    // {
+    //   field: "profilePicturePath",
+    //   headerName: "Profile Picture",
+    //   width: 120,
+    //   headerClassName: styles.headerCell,
+    // },
+    // {
+    //   field: "sex",
+    //   headerName: "Sex",
+    //   width: 120,
+    //   headerClassName: styles.headerCell,
+    // },
     {
       field: "securityLevel",
       headerName: "Security Level",
-      width: 120,
+      width: 100,
       headerClassName: styles.headerCell,
     },
     {
@@ -119,7 +119,7 @@ const ArchiveBossOverView = ({ setOverview }: Props) => {
       headerClassName: styles.headerCell,
       renderCell: (params) => (
         <Link to={`/intern/arkivsjef/editUser/${params.row.id}`}>
-          <div>Edit</div>
+          <Button>Edit</Button>
         </Link>
       ),
     },

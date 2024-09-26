@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import styles from "./ArchiveBossEditUser.module.css";
 
 const ArchiveBossEditUser = () => {
   const [user, setUser] = useState<SamfundetUser>({});
@@ -36,9 +37,9 @@ const ArchiveBossEditUser = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {!isLoading ? (
-        <Paper /*className={styles.container}*/>
+        <Paper className={styles.form}>
           {/* <Button>sjekk</Button> */}
           <FormControl>
             <FormLabel>Fornavn:</FormLabel>
@@ -101,7 +102,9 @@ const ArchiveBossEditUser = () => {
       ) : (
         <h1>Loading...</h1>
       )}
-      <Link to={"/intern/arkivsjef"}>Tilbake</Link>
+      <Link className={styles.backButton} to={"/intern/arkivsjef"}>
+        <Button>Tilbake</Button>
+      </Link>
     </div>
   );
 };
