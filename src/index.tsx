@@ -1,4 +1,6 @@
-import React, { useState, FC, useEffect } from "react";
+
+import React, { useState, FC, useEffect, useMemo } from "react";
+
 import { render } from "react-dom";
 import "./index.css";
 import AppRoutes from "./AppRoutes";
@@ -14,6 +16,9 @@ import Lightbox from "react-image-lightbox";
 import { PhotoDto } from "../generated";
 import { createImgUrl } from "./utils/createImgUrl/createImgUrl";
 import { AuthenticationContext } from "./contexts/AuthenticationContext";
+import Cookies from "js-cookie";
+import { decryptData, encryptData } from "./utils/encryption/encrypt";
+
 
 const Root: FC = () => {
   // Hooks for the Alert component
@@ -24,65 +29,80 @@ const Root: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
-  //Hooks for the Authentication
+
+  // Hooks for Authentication
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [position, setPosition] = useState("oo"); //Change maybe? verv?
 
+  // Checks if the user is logged in when the page loads
   useEffect(() => {
-    const data = window.localStorage.getItem("FG-WEBSITE");
-    if (data !== null) {
-      setIsAuthenticated(JSON.parse(data).isAuthenticated);
-      setPosition(JSON.parse(data).position);
+    const data = decryptData(Cookies.get("fgData") || "");
+    if (data !== "") {
+      const parsedData = JSON.parse(data);
+      setIsAuthenticated(parsedData.isAuthenticated);
+      setPosition(parsedData.position);
     }
   }, []);
 
+  // Saves authentication status for the user as a cookie when authentication is changed
   useEffect(() => {
     const data = {
-      isAuthenticated: isAuthenticated,
-      position: position,
+      isAuthenticated,
+      position,
     };
-    window.localStorage.setItem("FG-WEBSITE", JSON.stringify(data)); //send inn dato ? ; )
-  }, [isAuthenticated]);
+    Cookies.set("fgData", encryptData(JSON.stringify(data)));
+  }, [isAuthenticated, position]);
+
+  // Memoized context values to avoid unnecessary re-renders
+  const alertContextValue = useMemo(
+    () => ({
+      open,
+      setOpen,
+      setMessage,
+      message,
+      setSeverity,
+      severity,
+    }),
+    [open, message, severity],
+  );
+
+  const authContextValue = useMemo(
+    () => ({
+      isAuthenticated,
+      setIsAuthenticated,
+      position,
+      setPosition,
+    }),
+    [isAuthenticated, position],
+  );
+
+  const imageContextValue = useMemo(
+    () => ({
+      isOpen,
+      setIsOpen,
+      photoIndex,
+      setPhotoIndex,
+      photos,
+      setPhotos,
+    }),
+    [isOpen, photoIndex, photos],
+  );
+
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <ImageContext.Provider
-          value={{
-            isOpen,
-            setIsOpen,
-            photoIndex,
-            setPhotoIndex,
-            photos,
-            setPhotos,
-          }}
-        >
-          <AuthenticationContext.Provider
-            value={{
-              isAuthenticated,
-              setIsAuthenticated,
-              position,
-              setPosition,
-            }}
-          >
-            <AlertContext.Provider
-              value={{
-                open,
-                setOpen,
-                setMessage,
-                message,
-                setSeverity,
-                severity,
-              }}
-            >
-              {open ? (
+        <ImageContext.Provider value={imageContextValue}>
+          <AuthenticationContext.Provider value={authContextValue}>
+            <AlertContext.Provider value={alertContextValue}>
+              {open && (
                 <Alert
                   open={open}
                   setOpen={setOpen}
                   message={message}
                   severity={severity}
                 />
-              ) : null}
+              )}
               <Box sx={{ m: "2rem" }}>
                 <Router>
                   <HeaderComponent />
