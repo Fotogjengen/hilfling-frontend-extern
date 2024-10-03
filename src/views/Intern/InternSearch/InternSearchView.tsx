@@ -13,12 +13,18 @@ const InternSearchView = () => {
       .then((res) => setPhotos(res))
       .catch((e) => console.log(e));
   }, []);
+
+
+  const handleSearchPhotos= (photos: PhotoDto[]) => {
+    setPhotos(photos);
+  }
+
   return (
     <div className={styles.internSearch}>
       <div className={styles.gridDivContainer}>
         <CustomDataGrid photos={photos} />
       </div>
-      <InternSearchInput />
+      <InternSearchInput handleSearch = {handleSearchPhotos}/>
     </div>
   );
 };

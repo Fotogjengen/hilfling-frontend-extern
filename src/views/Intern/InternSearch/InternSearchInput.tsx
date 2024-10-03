@@ -40,6 +40,11 @@ interface ChipData {
   label: string;
 }
 
+interface internSearchInputprop {
+  handleSearch: (photos: PhotoDto[]) => void;
+}
+
+
 const useStyles = makeStyles(() => ({
   flexContainer: {
     display: "flex",
@@ -51,7 +56,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const InternSearchInput: React.FC = () => {
+const InternSearchInput: React.FC<internSearchInputprop> = ({handleSearch}) => {
   const boxwidth = 300;
   //variables for API data
   const [motives, setMotives] = useState<MotiveDto[]>([]);
@@ -60,7 +65,6 @@ const InternSearchInput: React.FC = () => {
   const [categories, setCategories] = useState<CategoryDto[]>([]);
   const [securityLevels, setSecurityLevels] = useState<SecurityLevelDto[]>([]);
   const [photoTags, setPhotoTags] = useState<PhotoTagDto[]>([]);
-  const [, setPhotos] = useState<PhotoDto[]>([]);
 
   //variables for suggestions
   const [motive, setMotive] = useState<string>("");
@@ -234,7 +238,7 @@ const InternSearchInput: React.FC = () => {
 
     PhotoApi.search(photoSearch)
       .then((res: any) => {
-        setPhotos(res.data.currentList);
+        handleSearch(res.data.currentList);
         console.log(res.data);
       })
       .catch((e) => {
@@ -276,6 +280,7 @@ const InternSearchInput: React.FC = () => {
                 label="Side"
                 onChange={handlePageChange}
                 sx={{ width: boxwidth }}
+                inputProps={{ min: 1, max: 5 }} 
               >
                 Side
               </TextField>
