@@ -81,6 +81,7 @@ const InternSearchInput: React.FC<internSearchInputprop> = ({handleSearch}) => {
   const [isAnalog, setIsAnalog] = useState(false);
   const [, setSecurityLevel] = useState<string>("");
   const [photoTag, setPhotoTag] = useState("");
+  const [photos, setPhotos] = useState<PhotoDto[]>([]);
 
   //useRef for managing chip in tag component
   const tagRef = useRef<HTMLInputElement | null>(null);
@@ -239,6 +240,7 @@ const InternSearchInput: React.FC<internSearchInputprop> = ({handleSearch}) => {
     PhotoApi.search(photoSearch)
       .then((res: any) => {
         handleSearch(res.data.currentList);
+        setPhotos(res.data.currentList)
         console.log(res.data);
       })
       .catch((e) => {
@@ -280,7 +282,7 @@ const InternSearchInput: React.FC<internSearchInputprop> = ({handleSearch}) => {
                 label="Side"
                 onChange={handlePageChange}
                 sx={{ width: boxwidth }}
-                inputProps={{ min: 1, max: 5 }} 
+                inputProps={{ min: 1, max: photos.length }} 
               >
                 Side
               </TextField>

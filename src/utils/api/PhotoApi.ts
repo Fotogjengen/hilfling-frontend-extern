@@ -32,6 +32,7 @@ export class PhotoSearch {
   //YYYY-MM-DD
   toDate = "";
   page = "";
+  pageSize = "";
   [key: string]: string | string[] | boolean;
 }
 
