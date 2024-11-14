@@ -13,6 +13,7 @@ import NoEncryptionGmailerrorredIcon from "@mui/icons-material/NoEncryptionGmail
 import SearchIcon from "@mui/icons-material/Search";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import LoginButton from "../../views/Login/LoginButton";
+import DeNyeSiden from "../../views/DeNyeSiden/DeNyeSiden";
 
 const HeaderComponent: FC = () => {
   const { isAuthenticated } = useContext(AuthenticationContext);
@@ -45,6 +46,9 @@ const HeaderComponent: FC = () => {
       noAuth: true,
     },
 
+
+
+
     ...(isAuthenticated
       ? [
           {
@@ -53,6 +57,13 @@ const HeaderComponent: FC = () => {
             icon: <AccessibilityNewIcon />,
             noAuth: true,
           },
+          {
+            name: "DeNyeSiden",
+            to: "/intern/DeNyeSiden",
+            // icon: <SearchIcon />,
+            noAuth: true,
+          },
+ 
         ]
       : []),
     {
@@ -108,6 +119,7 @@ const HeaderComponent: FC = () => {
             <Link to="/about">OM OSS</Link>
             {isAuthenticated ? <Link to="/intern/">INTERN</Link> : <></>}
             <Link to="/search">SØK</Link>
+            <Link to = "intern/DeNyeSiden"> DeNyeSiden </Link>
           </div>
           <div className={styles.loggContainer}>
             <LoginButton />
