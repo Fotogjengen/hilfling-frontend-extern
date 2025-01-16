@@ -122,7 +122,7 @@ const HeaderComponent: FC = () => {
             <Link to="/search">BILDER</Link>
             <Link to="/about">OM OSS</Link>
             {isAuthenticated ? <> <Link to="/intern/">INTERN</Link> 
-              {position == "FG" ? <Link to = "intern/DeNyeSiden"> DeNyeSiden </Link> : <></> } </>
+              {position == "FG" ? <Link to = "intern/DeNyeSiden"> DeNye </Link> : <></> } </>
               : <></>}
             <Link to="/search">SØK</Link>
             
